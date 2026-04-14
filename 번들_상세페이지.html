@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>전자책 + 템플릿 올인원 번들 세트</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#111;font-family:'Noto Sans KR',sans-serif;}
+.slide{width:860px;overflow:hidden;position:relative;}
+.bg-black{background:#050505;}
+.bg-dark{background:#0a0a0a;}
+.pad{padding:80px 72px;}
+.center{text-align:center;}
+.spacer{height:40px;}
+.spacer-sm{height:20px;}
+.spacer-lg{height:60px;}
+img.full{width:100%;display:block;}
+
+/* 반짝이 효과 */
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+.shimmer{background:linear-gradient(90deg,#FFD700 0%,#fff 40%,#FFD700 60%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite;}
+
+@keyframes glow{0%,100%{text-shadow:0 0 20px rgba(229,57,53,0.5),0 0 40px rgba(229,57,53,0.2);}50%{text-shadow:0 0 30px rgba(229,57,53,0.8),0 0 60px rgba(229,57,53,0.4);}}
+.glow{animation:glow 2s ease-in-out infinite;}
+
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+.pulse{animation:pulse 2s ease-in-out infinite;}
+
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* 카드 */
+.card{background:#111;border:1px solid #222;border-radius:14px;padding:28px 28px;margin-bottom:14px;transition:border-color 0.3s;}
+.card:hover{border-color:#E53935;}
+.card-num{font-size:16px;font-weight:900;color:#E53935;margin-bottom:4px;letter-spacing:1px;}
+.card-title{font-size:28px;font-weight:900;color:#fff;margin-bottom:8px;}
+.card-arrow{font-size:18px;color:#FFD700;margin-bottom:4px;}
+.card-desc{font-size:20px;color:#888;line-height:1.6;}
+
+/* 후기 */
+.review{background:#0e0e0e;border-radius:14px;padding:24px 28px;border-left:4px solid #FFD700;margin-bottom:14px;}
+.review-stars{color:#FFD700;font-size:26px;margin-bottom:8px;}
+.review-text{font-size:24px;color:#ccc;line-height:1.7;}
+.review-author{font-size:18px;color:#666;margin-top:6px;}
+
+/* 스탯 */
+.stats{display:flex;gap:16px;margin:32px 0;}
+.stat{flex:1;background:#111;border:2px solid #E53935;border-radius:14px;padding:24px;text-align:center;}
+.stat-num{font-size:40px;font-weight:900;color:#E53935;}
+.stat-label{font-size:18px;color:#888;margin-top:4px;}
+
+/* 가격 */
+.price-box{background:linear-gradient(135deg,#3fb950,#00b894);border-radius:20px;padding:48px;text-align:center;}
+.cta{background:linear-gradient(135deg,#E53935,#FF7B00);border-radius:20px;padding:48px 40px;text-align:center;margin-top:24px;}
+
+/* 후기이벤트 */
+.event-box{background:#111;border:3px solid #FFD700;border-radius:16px;padding:36px;text-align:center;margin-bottom:28px;}
+.event-badge{display:inline-block;background:#FFD700;color:#111;font-size:22px;font-weight:900;padding:8px 24px;border-radius:24px;margin-bottom:16px;}
+
+/* 페인포인트 */
+.pain{font-size:30px;color:#bbb;padding:14px 0;border-bottom:1px solid #1a1a1a;}
+.pain::before{content:'"';color:#E53935;font-weight:900;}
+.pain::after{content:'"';color:#E53935;font-weight:900;}
+
+/* 영상 카드 */
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.video-card{background:#111;border-radius:14px;overflow:hidden;border:2px solid #222;}
+.video-icon{background:#1a1a2e;height:100px;display:flex;align-items:center;justify-content:center;font-size:42px;}
+.video-body{padding:14px 16px;}
+.video-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:4px;}
+.video-desc{font-size:16px;color:#888;}
+
+/* 비교 */
+.compare-row{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid #1a1a1a;}
+.compare-name{flex:1;font-size:26px;color:#ccc;font-weight:700;}
+.compare-price{font-size:26px;color:#E53935;font-weight:900;text-decoration:line-through;width:160px;text-align:right;}
+</style>
+</head>
+<body>
+
+<!-- ═══ S1. 히어로 — GIF 배경 ═══ -->
+<div class="slide" style="position:relative;">
+  <img src="img/trainer_frustration.png" style="width:860px;height:960px;object-fit:cover;display:block;filter:brightness(0.2);">
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:60px 56px;">
+    <p style="font-size:22px;font-weight:700;color:#3fb950;letter-spacing:4px;margin-bottom:20px;text-shadow:0 2px 10px rgba(0,0,0,0.8);">BEST VALUE BUNDLE</p>
+    <p style="font-size:48px;font-weight:900;color:#fff;line-height:1.3;margin-bottom:24px;text-shadow:0 3px 20px rgba(0,0,0,0.9);">시스템도 없고<br>도구도 없으면<br><span class="glow" style="color:#E53935;">뭘로 싸우실 건가요?</span></p>
+    <div class="spacer-sm"></div>
+    <p style="font-size:34px;font-weight:500;color:rgba(255,255,255,0.85);line-height:1.7;text-shadow:0 2px 16px rgba(0,0,0,0.9);">매출을 만드는 <span style="color:#FFD700;font-weight:900;">시스템</span><br>상담을 바꾸는 <span style="color:#FFD700;font-weight:900;">도구</span><br>둘 다 한번에 가져가세요.</p>
+  </div>
+</div>
+
+<!-- ═══ S2. 공감 페인포인트 ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:42px;font-weight:900;color:#fff;margin-bottom:28px;">혹시 이런 상황 아닌가요?</p>
+  <div class="pain">매달 1일마다 매출 0원. 이 공포 끝이 없음</div>
+  <div class="pain">OT 10번 잡아도 등록 1명</div>
+  <div class="pain">재등록은 항상 부탁하고 초라해짐</div>
+  <div class="pain">상담할 때 보여줄 게 아무것도 없음</div>
+  <div class="pain">통증 호소 회원한테 바로 대응 못 함</div>
+  <div class="pain">SNS 해야 하는 건 아는데 뭘 해야 할지 모름</div>
+  <div class="spacer"></div>
+  <p style="font-size:40px;font-weight:900;color:#fff;">열심히 하는 트레이너는 많은데<br><span style="color:#E53935;">잘 버는 트레이너</span>는 왜 없을까요.</p>
+  <div class="spacer-sm"></div>
+  <p style="font-size:32px;font-weight:500;color:#bbb;">단순히 실력 문제가 아닙니다.<br><span style="color:#fff;font-weight:900;">"시스템"과 "도구"</span>가 없는 겁니다.</p>
+</div>
+
+<!-- ═══ S3. 스토리 GIF 3종 (전자책) ═══ -->
+<div class="slide">
+  <img class="full" src="img/story_6.gif" alt="불안해서 배우러 다녔습니다">
+</div>
+
+<!-- ═══ S4. 전자책 소개 + 커리큘럼 ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:22px;font-weight:700;color:#FFD700;letter-spacing:3px;margin-bottom:12px;">📘 THE SYSTEM</p>
+  <p style="font-size:44px;font-weight:900;color:#fff;line-height:1.3;margin-bottom:12px;">트레이너 월 1,000만원<br><span class="shimmer" style="font-size:48px;">매출 자동화 시스템</span></p>
+  <p style="font-size:26px;font-weight:500;color:#888;margin-bottom:36px;">수백 명 트레이너의 월급 앞자리를 바꿔놓은<br>그 전자책입니다.</p>
+
+  <div class="card">
+    <div class="card-num">1장</div>
+    <div class="card-title">OT → 등록률 급상승</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">"생각해볼게요" 그 자리에서 등록하게 만드는 설계.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">2장</div>
+    <div class="card-title">재등록 → 장기회원 전환</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">회원이 알아서 다시 등록하는 구조.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">3장</div>
+    <div class="card-title">소개가 끊이지 않는 셋팅</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">회원이 자발적으로 주변 사람을 데려오는 시스템.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">4장</div>
+    <div class="card-title">SNS 자동 유입 (AI 활용)</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">블로그 상위노출, 인스타 300만 조회, 당근, 다짐 유입.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">5장</div>
+    <div class="card-title">매출 1,000만원 자동화 시스템</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">한 번 잡아놓으면 수업만 해도 굴러가는 구조.</div>
+  </div>
+</div>
+
+<!-- ═══ S5. 템플릿 GIF (사용자 제작) ═══ -->
+<div class="slide">
+  <img class="full" src="img/template_hero.gif" alt="히어로 GIF">
+</div>
+
+<!-- ═══ S6. 템플릿 구성 + 교정영상 ═══ -->
+<div class="slide bg-black pad">
+  <p style="font-size:22px;font-weight:700;color:#E53935;letter-spacing:3px;margin-bottom:12px;">📋 THE TOOLS</p>
+  <p style="font-size:44px;font-weight:900;color:#fff;line-height:1.3;margin-bottom:32px;">상위 트레이너들의 도구<br><span class="shimmer" style="font-size:48px;">템플릿 패키지</span></p>
+
+  <div class="card">
+    <div class="card-num">01</div>
+    <div class="card-title">PT 세일즈북 템플릿</div>
+    <div class="card-desc">영업 못해도 넘기면서 따라가면 상담이 됩니다.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">02</div>
+    <div class="card-title">세일즈북 활용 예시 (PDF)</div>
+    <div class="card-desc">실제로 어떻게 쓰는지 정리. 그냥 따라하세요.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">03</div>
+    <div class="card-title">회원관리파일 템플릿</div>
+    <div class="card-desc">관리받는 느낌 들면 회원이 알아서 재등록해요.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">04</div>
+    <div class="card-title">트레이너 AI 프롬프트 모음</div>
+    <div class="card-desc">릴스·블로그·쓰레드·이미지·영상 자동 생성 가이드.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">05~09</div>
+    <div class="card-title">교정운동 영상 5편 (VOD)</div>
+    <div class="card-desc">거북목/골반/무릎/어깨/허리 — 통증 호소 즉시 대응.</div>
+  </div>
+</div>
+
+<!-- ═══ S7. Before / After ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:42px;font-weight:900;color:#fff;text-align:center;margin-bottom:32px;">이 세트 하나면 뭐가 달라지는데?</p>
+  <div style="display:flex;gap:20px;margin-bottom:24px;">
+    <div style="flex:1;background:#1a0000;border:2px solid #E53935;border-radius:14px;padding:28px;">
+      <p style="font-size:24px;font-weight:900;color:#E53935;margin-bottom:14px;">BEFORE</p>
+      <p style="font-size:22px;color:#888;line-height:2;">
+        매달 1일 매출 0원 시작<br>
+        OT 잡아도 등록 안 됨<br>
+        재등록 부탁하기 초라함<br>
+        상담할 때 보여줄 게 없음<br>
+        SNS 뭘 해야 하는지 모름<br>
+        통증 회원한테 막힘
+      </p>
+    </div>
+    <div style="flex:1;background:#001a00;border:2px solid #3fb950;border-radius:14px;padding:28px;">
+      <p style="font-size:24px;font-weight:900;color:#3fb950;margin-bottom:14px;">AFTER</p>
+      <p style="font-size:22px;color:#ccc;line-height:2;">
+        이미 굴러가는 매출에 올라탐<br>
+        OT 전환율 2배 이상<br>
+        회원이 알아서 재등록<br>
+        세일즈북 넘기면 상담 완료<br>
+        SNS에서 매달 신규 유입<br>
+        교정영상으로 즉시 대응
+      </p>
+    </div>
+  </div>
+  <p style="font-size:32px;font-weight:900;color:#fff;text-align:center;">의지력의 차이가 아닙니다.<br><span style="color:#3fb950;">시스템과 도구를 가졌느냐의 차이.</span></p>
+</div>
+
+<!-- ═══ S8. 사회적 증거 ═══ -->
+<div class="slide bg-black pad">
+  <p style="font-size:42px;font-weight:900;color:#fff;text-align:center;margin-bottom:28px;">이미 수백 명이 증명했습니다</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">434건+</div><div class="stat-label">누적 거래</div></div>
+    <div class="stat"><div class="stat-num">4.88★</div><div class="stat-label">평균 평점</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">만족도</div></div>
+  </div>
+  <div class="review">
+    <div class="review-stars">★★★★★</div>
+    <div class="review-text">"3년차인데 월 300이 한계였어요.<br>이거 읽고 구조 바꿨더니 3개월 만에 1000 넘었습니다."</div>
+    <div class="review-author">— PT 3년차 위탁 트레이너</div>
+  </div>
+  <div class="review">
+    <div class="review-stars">★★★★★</div>
+    <div class="review-text">"세일즈북 넘기면서 상담하니까<br>회원님 눈빛이 달라져요. OT 등록수가 확 올랐습니다."</div>
+    <div class="review-author">— PT 5년차 관리자</div>
+  </div>
+  <div class="review">
+    <div class="review-stars">★★★★★</div>
+    <div class="review-text">"교정운동 영상 보고 바로 수업에 적용했는데<br>회원님께 제가 신이 됬어요 ㅋㅋㅋ"</div>
+    <div class="review-author">— 위탁 트레이너</div>
+  </div>
+  <div class="review">
+    <div class="review-stars">★★★★★</div>
+    <div class="review-text">"솔직히 이 가격에 이 구성이요?<br>세미나 한 번 갈 돈이면 다 받는 건데 안 살 이유가 없죠."</div>
+    <div class="review-author">— 신규 트레이너</div>
+  </div>
+</div>
+
+<!-- ═══ S9. 가격 앵커링 + 후기이벤트 + CTA ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:42px;font-weight:900;color:#fff;text-align:center;margin-bottom:28px;">따로 사면 이만큼 듭니다</p>
+
+  <div class="compare-row"><span class="compare-name">전자책 (매출 자동화 시스템)</span><span class="compare-price">198,000원</span></div>
+  <div class="compare-row"><span class="compare-name">템플릿 풀패키지</span><span class="compare-price">198,000원</span></div>
+  <div class="compare-row" style="border-bottom:3px solid #E53935;"><span class="compare-name" style="color:#fff;font-size:30px;">정가 합계</span><span class="compare-price" style="font-size:30px;">396,000원</span></div>
+
+  <div class="spacer"></div>
+
+  <div class="price-box pulse">
+    <p style="font-size:28px;color:rgba(255,255,255,0.8);margin-bottom:8px;">올인원 번들 세트</p>
+    <p style="font-size:72px;font-weight:900;color:#fff;">88,000원</p>
+    <p style="font-size:32px;color:rgba(255,255,255,0.7);text-decoration:line-through;margin-top:4px;">정가 396,000원</p>
+    <p style="font-size:28px;color:rgba(255,255,255,0.9);font-weight:700;margin-top:8px;">78% 할인 · 시스템 + 도구 한번에</p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="event-box">
+    <div class="event-badge">🎁 후기 이벤트</div>
+    <p style="font-size:34px;font-weight:900;color:#fff;margin-bottom:12px;">별 ★5개 + 300자 이상 후기 남기면</p>
+    <p style="font-size:24px;color:#aaa;line-height:1.8;">
+      「상위 1% 트레이너 성장 커뮤니티」톡방 초대<br>
+      후기 캡처 → 인스타 DM → <span style="color:#fff;font-weight:700;">@pt_zerocoach7</span>
+    </p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <p style="font-size:44px;font-weight:900;color:#fff;text-align:center;line-height:1.35;">매달 1일,<br>또 0원에서 시작하실 건가요?</p>
+  <div class="spacer-sm"></div>
+  <p style="font-size:30px;font-weight:500;color:#bbb;text-align:center;line-height:1.7;">옆 센터 트레이너는 시스템 돌리고<br>세일즈북 들고 상담하고 있어요.</p>
+  <div class="spacer-sm"></div>
+  <p style="font-size:36px;font-weight:900;color:#fff;text-align:center;">당신만 아직 맨주먹이에요.</p>
+
+  <div class="spacer"></div>
+
+  <div class="cta pulse">
+    <p style="font-size:44px;font-weight:900;color:#fff;line-height:1.4;margin-bottom:16px;">시스템 + 도구<br>둘 다 가져가세요</p>
+    <p class="shimmer" style="font-size:56px;font-weight:900;margin:16px 0;">88,000원</p>
+    <p style="font-size:32px;font-weight:900;color:#FFD700;margin-top:12px;">PT 2회도 안 되는 가격으로<br>매출 구조가 바뀝니다.</p>
+  </div>
+  <div style="font-size:28px;color:#E53935;text-align:center;margin-top:24px;font-weight:900;">⚠ 얼리버드 종료 후 정가로 올라갑니다</div>
+  <div class="spacer"></div>
+  <p style="font-size:20px;color:#555;text-align:center;">인스타 문의: @pt_zerocoach7</p>
+</div>
+
+</body>
+</html>
