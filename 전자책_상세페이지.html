@@ -7,240 +7,187 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:#111;font-family:'Noto Sans KR',sans-serif;}
-.slide{width:860px;overflow:hidden;position:relative;}
-.bg-black{background:#111111;}
-.bg-dark{background:#141414;}
-.pad{padding:80px 72px;}
-.center{text-align:center;}
-.spacer{height:40px;}
-.spacer-sm{height:20px;}
-.spacer-lg{height:60px;}
-.red{color:#E53935;}
-.gold{color:#FFD700;}
-.white{color:#e8e8e8;}
+body{background:#111;font-family:'Noto Sans KR',sans-serif;overflow-x:hidden;}
+.s{width:860px;max-width:100%;margin:0 auto;overflow:hidden;position:relative;}
+.bg1{background:#111111;} .bg2{background:#141414;} .bg3{background:#0e0e0e;}
+.p{padding:80px 64px;}
+.tc{text-align:center;}
+:root{--t1:#e8e8e8;--t2:#bbb;--t3:#888;--t4:#555;--acc:#E53935;--gold:#FFD700;--green:#3fb950;}
+.t1{font-size:48px;font-weight:900;color:var(--t1);line-height:1.3;letter-spacing:-1px;}
+.t2{font-size:38px;font-weight:900;color:var(--t1);line-height:1.35;}
+.t3{font-size:30px;font-weight:700;color:var(--t1);line-height:1.4;}
+.tb{font-size:26px;font-weight:500;color:var(--t2);line-height:1.8;}
+.ts{font-size:22px;font-weight:400;color:var(--t3);line-height:1.75;}
+.tc2{font-size:18px;color:var(--t4);}
+.sp{height:40px;} .sp-s{height:20px;} .sp-l{height:60px;}
 img.full{width:100%;display:block;}
-
-/* ── 후기 ── */
-.review{background:#0e0e0e;border-radius:14px;padding:28px 32px;border-left:4px solid #FFD700;margin-bottom:16px;}
-.review-stars{color:#FFD700;font-size:26px;margin-bottom:8px;}
-.review-text{font-size:26px;color:#ccc;line-height:1.7;}
-.review-author{font-size:18px;color:#666;margin-top:8px;}
-
-/* ── 스탯 ── */
-.stats{display:flex;gap:16px;margin:32px 0;}
-.stat{flex:1;background:#111;border:2px solid #E53935;border-radius:14px;padding:24px;text-align:center;}
-.stat-num{font-size:40px;font-weight:900;color:#E53935;}
-.stat-label{font-size:18px;color:#888;margin-top:4px;}
-
-/* ── 커리큘럼 ── */
-.cur{background:#111;border:1px solid #222;border-radius:14px;padding:28px;margin-bottom:14px;}
-.cur-num{font-size:16px;font-weight:900;color:#E53935;margin-bottom:4px;letter-spacing:1px;}
-.cur-title{font-size:30px;font-weight:900;color:#e8e8e8;margin-bottom:8px;}
-.cur-arrow{font-size:20px;color:#FFD700;margin-bottom:4px;}
-.cur-desc{font-size:22px;color:#888;line-height:1.6;}
-
-/* ── 가격 ── */
+img.ri{width:100%;border-radius:12px;border:1px solid #222;display:block;margin-bottom:16px;}
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+.shimmer{background:linear-gradient(90deg,var(--gold) 0%,#fff 40%,var(--gold) 60%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite;}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(229,57,53,0.3);}50%{box-shadow:0 0 40px rgba(229,57,53,0.6),0 0 80px rgba(229,57,53,0.2);}}
+.glow-box{animation:glow 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
+.pulse{animation:pulse 2.5s ease-in-out infinite;}
+@keyframes borderGlow{0%,100%{border-color:rgba(255,215,0,0.3);}50%{border-color:rgba(255,215,0,0.8);}}
+.border-glow{animation:borderGlow 2s ease-in-out infinite;}
+.card{background:#181818;border:1px solid #252525;border-radius:16px;padding:28px;margin-bottom:14px;transition:all 0.3s;}
+.card:hover{border-color:var(--acc);transform:translateY(-2px);}
+.card-num{font-size:15px;font-weight:900;color:var(--acc);letter-spacing:1px;margin-bottom:6px;}
+.card-title{font-size:28px;font-weight:900;color:var(--t1);margin-bottom:8px;}
+.card-desc{font-size:20px;color:var(--t3);line-height:1.6;}
+.rv{background:#161616;border-radius:16px;padding:28px 32px;border-left:4px solid var(--gold);margin-bottom:16px;}
+.rv-stars{color:var(--gold);font-size:24px;margin-bottom:8px;}
+.rv-text{font-size:24px;color:#ccc;line-height:1.7;}
+.rv-who{font-size:16px;color:#666;margin-top:8px;}
+.stats{display:flex;gap:16px;margin:32px 0;flex-wrap:wrap;}
+.stat{flex:1;min-width:120px;background:#181818;border:2px solid var(--acc);border-radius:16px;padding:24px;text-align:center;}
+.stat b{font-size:36px;font-weight:900;color:var(--acc);display:block;}
+.stat span{font-size:16px;color:var(--t3);margin-top:4px;display:block;}
 .price-box{background:linear-gradient(135deg,#E53935,#FF7B00);border-radius:20px;padding:48px;text-align:center;}
-
-/* ── 후기이벤트 ── */
-.event-box{background:#111;border:3px solid #FFD700;border-radius:16px;padding:36px;text-align:center;margin-bottom:28px;}
-.event-badge{display:inline-block;background:#FFD700;color:#111;font-size:22px;font-weight:900;padding:8px 24px;border-radius:24px;margin-bottom:16px;}
-
-/* ── CTA ── */
-.cta{background:linear-gradient(135deg,#E53935,#FF7B00);border-radius:20px;padding:56px 48px;text-align:center;margin-top:24px;}
-
-/* ── 반응형 (모바일/태블릿) ── */
-@media(max-width:860px){
-  .slide{width:100%!important;}
-  .pad{padding:48px 28px!important;}
-  .h1{font-size:36px!important;}
-  .h2{font-size:30px!important;}
-  .h3{font-size:26px!important;}
-  .body{font-size:22px!important;}
-  .body-sm{font-size:18px!important;}
-  .caption{font-size:16px!important;}
-  .stats{flex-wrap:wrap;}
-  .stat{min-width:45%;}
-  .video-grid{grid-template-columns:1fr!important;}
-  .compare-row{flex-direction:column;gap:4px;}
-  .compare-price{width:auto!important;text-align:left!important;}
-  img.full{width:100%!important;height:auto!important;}
-}
-@media(max-width:480px){
-  .pad{padding:32px 20px!important;}
-  .h1{font-size:28px!important;}
-  .h2{font-size:24px!important;}
-  .body{font-size:18px!important;}
-  .card-title,.cur-title{font-size:22px!important;}
-  .card-desc,.cur-desc{font-size:16px!important;}
-  .review-text{font-size:20px!important;}
-  .price-main{font-size:48px!important;}
-  .pain{font-size:22px!important;}
-  .stat-num{font-size:28px!important;}
-}
-
+.cta-box{background:linear-gradient(135deg,#E53935,#FF7B00);border-radius:20px;padding:56px 48px;text-align:center;margin-top:24px;}
+.event-box{background:#181818;border:3px solid var(--gold);border-radius:16px;padding:36px;text-align:center;margin-bottom:28px;}
+.event-badge{display:inline-block;background:var(--gold);color:#111;font-size:20px;font-weight:900;padding:8px 24px;border-radius:24px;margin-bottom:16px;}
+.pain{font-size:28px;color:var(--t2);padding:16px 0;border-bottom:1px solid #1e1e1e;}
+.pain::before{content:'"';color:var(--acc);font-weight:900;font-size:32px;}
+.pain::after{content:'"';color:var(--acc);font-weight:900;font-size:32px;}
+.divider{width:60px;height:4px;background:var(--acc);margin:28px auto;border-radius:2px;}
+.tag{display:inline-block;font-size:14px;font-weight:700;padding:4px 14px;border-radius:8px;letter-spacing:1px;}
+.tag-red{background:rgba(229,57,53,0.15);color:var(--acc);}
+.tag-gold{background:rgba(255,215,0,0.12);color:var(--gold);}
+@media(max-width:860px){.s{width:100%!important;}.p{padding:48px 28px!important;}.t1{font-size:34px!important;}.t2{font-size:28px!important;}.t3{font-size:24px!important;}.tb{font-size:22px!important;}.ts{font-size:18px!important;}.stats{gap:10px;}.stat{min-width:45%;}.stat b{font-size:28px!important;}.pain{font-size:22px!important;}}
+@media(max-width:480px){.p{padding:32px 20px!important;}.t1{font-size:28px!important;}.t2{font-size:24px!important;}.tb{font-size:18px!important;}.card-title{font-size:22px!important;}.card-desc{font-size:16px!important;}.rv-text{font-size:20px!important;}}
 </style>
 </head>
 <body>
 
-<!-- ═══ S1. 히어로 — 좌절 배경 ═══ -->
-<div class="slide" style="position:relative;">
-  <img src="img/trainer_frustration.png" style="width:860px;height:960px;object-fit:cover;display:block;filter:brightness(0.25);">
+<!-- S1. 히어로 -->
+<div class="s" style="position:relative;">
+  <img src="img/trainer_frustration.png" style="width:100%;height:auto;max-height:960px;object-fit:cover;display:block;filter:brightness(0.2);">
   <div style="position:absolute;top:0;left:0;right:0;bottom:0;padding:60px 56px;display:flex;flex-direction:column;justify-content:center;">
-    <p style="font-size:48px;font-weight:700;color:rgba(255,255,255,0.9);line-height:1.7;margin-bottom:36px;text-shadow:0 3px 24px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.7);">매달 1일.<br>매출 0원에서 다시 시작.<br>이번 달은 또 매출을<br>어떻게 해야할까</p>
-    <p style="font-size:46px;font-weight:700;color:#e8e8e8;line-height:1.7;text-shadow:0 3px 24px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.7);">그 불안감, 저도 알아요.<br>지겹도록 매달 겪었으니까.</p>
+    <p style="font-size:44px;font-weight:700;color:rgba(255,255,255,0.85);line-height:1.65;margin-bottom:32px;text-shadow:0 3px 24px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.7);">매달 1일.<br>매출 0원에서 다시 시작.<br>이번 달은 또 매출을<br>어떻게 해야할까</p>
+    <p style="font-size:42px;font-weight:700;color:#e8e8e8;line-height:1.65;text-shadow:0 3px 24px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.7);">그 불안감, 저도 알아요.<br>지겹도록 매달 겪었으니까.</p>
   </div>
 </div>
 
-<!-- ═══ S2. 착각 → 세일즈 ═══ -->
-<div class="slide bg-black pad">
-  <p style="font-size:44px;font-weight:900;color:#e8e8e8;line-height:1.4;margin-bottom:24px;">제가 <span class="red">"착각"</span> 했었어요</p>
-  <p style="font-size:34px;font-weight:500;color:#bbb;line-height:1.8;margin-bottom:40px;">트레이너는 수업만 잘하면<br>다 되는거라고</p>
-
-  <p style="font-size:36px;font-weight:700;color:#e8e8e8;line-height:1.6;margin-bottom:8px;">수업 잘하는 트레이너</p>
-  <p style="font-size:48px;font-weight:900;color:#FFD700;margin-bottom:48px;">너무 많아요</p>
-
-  <p style="font-size:36px;font-weight:500;color:#bbb;line-height:1.7;margin-bottom:40px;">근데 회원님은 선생님이<br>얼마나 잘하는지 <span style="font-size:44px;font-weight:900;color:#e8e8e8;">몰라요</span></p>
-
-  <p style="font-size:36px;font-weight:700;color:#e8e8e8;line-height:1.7;margin-bottom:8px;">그걸 알게 하는게 마케팅이고</p>
-  <p style="font-size:48px;font-weight:900;color:#FFD700;margin-bottom:48px;">세일즈에요.</p>
-
-  <p style="font-size:34px;font-weight:500;color:#bbb;line-height:1.8;">느낀다면 안 할 이유가<br>없는게 PT 니까요.</p>
+<!-- S2. 착각 → 세일즈 -->
+<div class="s bg1 p">
+  <p class="t1" style="margin-bottom:24px;">제가 <span style="color:var(--acc);">"착각"</span> 했었어요</p>
+  <p class="tb" style="margin-bottom:40px;">트레이너는 수업만 잘하면<br>다 되는거라고</p>
+  <p class="t3" style="margin-bottom:8px;">수업 잘하는 트레이너</p>
+  <p style="font-size:46px;font-weight:900;color:var(--gold);margin-bottom:48px;">너무 많아요</p>
+  <p class="tb" style="margin-bottom:40px;">근데 회원님은 선생님이<br>얼마나 잘하는지 <span style="font-size:42px;font-weight:900;color:var(--t1);">몰라요</span></p>
+  <p class="t3" style="margin-bottom:8px;">그걸 알게 하는게 마케팅이고</p>
+  <p style="font-size:46px;font-weight:900;color:var(--gold);margin-bottom:48px;">세일즈에요.</p>
+  <p class="tb">느낀다면 안 할 이유가<br>없는게 PT 니까요.</p>
 </div>
 
-<!-- ═══ S3. 스토리 GIF 1 (6.gif) ═══ -->
-<div class="slide">
-  <img class="full" src="img/story_6.gif" alt="불안해서 배우러 다녔습니다">
+<!-- S3~S5. 스토리 GIF -->
+<div class="s"><img class="full" src="img/story_6.gif" alt="불안해서 배우러 다녔습니다"></div>
+<div class="s"><img class="full" src="img/story_7.gif" alt="매출이 쉬워지는게"></div>
+<div class="s"><img class="full" src="img/story_8.gif" alt="500명이 넘게 효과"></div>
+
+<!-- S6. 전자책 커리큘럼 -->
+<div class="s bg2 p">
+  <span class="tag tag-red" style="margin-bottom:12px;display:inline-block;">THE SYSTEM</span>
+  <p class="t1" style="margin-bottom:12px;">트레이너 월 1,000만원<br><span class="shimmer" style="font-size:48px;">매출 자동화 시스템</span></p>
+  <p class="tb" style="margin-bottom:12px;">수백 명 트레이너의 월급 앞자리를 바꿔놓은<br>그 전자책입니다.</p>
+  <div class="sp"></div>
+  <p class="t2" style="margin-bottom:32px;">그 시스템이 도대체 뭐냐구요?</p>
+  <div class="card"><div class="card-num">1장</div><div class="card-title">OT → 등록률 급상승</div><div class="card-desc">"생각해볼게요" 그 자리에서 등록하게 만드는 설계.</div></div>
+  <div class="card"><div class="card-num">2장</div><div class="card-title">재등록 → 장기회원 전환</div><div class="card-desc">재등록 유도 안 해도 회원이 알아서 다시 등록하는 구조.</div></div>
+  <div class="card"><div class="card-num">3장</div><div class="card-title">소개가 끊이지 않는 셋팅</div><div class="card-desc">회원이 자발적으로 주변 사람을 데려오는 시스템.</div></div>
+  <div class="card"><div class="card-num">4장</div><div class="card-title">SNS 자동 유입 (AI 활용)</div><div class="card-desc">블로그 상위노출, 인스타 300만 조회, 당근, 다짐 유입.</div></div>
+  <div class="card"><div class="card-num">5장</div><div class="card-title">매출 1,000만원 자동화 시스템</div><div class="card-desc">한 번 잡아놓으면 수업만 해도 굴러가는 구조.</div></div>
 </div>
 
-<!-- ═══ S4. 스토리 GIF 2 (7.gif) ═══ -->
-<div class="slide">
-  <img class="full" src="img/story_7.gif" alt="매출이 쉬워지는게">
+<!-- S7. Before / After -->
+<div class="s bg1 p">
+  <p class="t2 tc" style="margin-bottom:32px;">읽기 전과 후, 뭐가 달라지는데?</p>
+  <div style="display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;background:#1a0000;border:2px solid var(--acc);border-radius:14px;padding:28px;">
+      <p style="font-size:22px;font-weight:900;color:var(--acc);margin-bottom:14px;">BEFORE</p>
+      <p style="font-size:20px;color:#888;line-height:2;">매달 1일 매출 0원 시작<br>OT 잡아도 등록 안 됨<br>재등록 부탁하기 초라함<br>SNS 뭘 해야 하는지 모름<br>월 300만원 벽 못 넘음</p>
+    </div>
+    <div style="flex:1;min-width:280px;background:#001a00;border:2px solid var(--green);border-radius:14px;padding:28px;">
+      <p style="font-size:22px;font-weight:900;color:var(--green);margin-bottom:14px;">AFTER</p>
+      <p style="font-size:20px;color:#ccc;line-height:2;">이미 굴러가는 매출에 올라탐<br>OT 전환율 2배 이상<br>회원이 알아서 재등록<br>SNS에서 매달 신규 유입<br>월 1,000만원 자동화 구조 완성</p>
+    </div>
+  </div>
+  <p class="tb tc">의지력의 차이가 아닙니다.<br><span style="color:var(--t1);font-weight:900;">시스템을 알고 있느냐, 모르느냐의 차이.</span></p>
 </div>
 
-<!-- ═══ S5. 스토리 GIF 3 (8.gif) ═══ -->
-<div class="slide">
-  <img class="full" src="img/story_8.gif" alt="500명이 넘게 효과">
-</div>
-
-<!-- ═══ S6. 전자책 소개 + 커리큘럼 ═══ -->
-<div class="slide bg-dark pad">
-  <p style="font-size:22px;font-weight:700;color:#E53935;letter-spacing:3px;margin-bottom:12px;">THE SYSTEM</p>
-  <p style="font-size:44px;font-weight:900;color:#e8e8e8;line-height:1.35;margin-bottom:16px;">"트레이너 월 1,000만원<br><span class="gold">매출 자동화 시스템"</span></p>
-  <p style="font-size:28px;font-weight:500;color:#bbb;line-height:1.7;margin-bottom:36px;">수백 명 트레이너의 월급 앞자리를 바꿔놓은<br>그 전자책입니다.</p>
-
-  <p style="font-size:40px;font-weight:900;color:#e8e8e8;margin-bottom:32px;">그 시스템이 도대체 뭐냐구요?</p>
-
-  <div class="cur">
-    <div class="cur-num">1장</div>
-    <div class="cur-title">OT → 등록률 급상승 자료</div>
-    <div class="cur-arrow">→</div>
-    <div class="cur-desc">"생각해볼게요" 그 자리에서 등록하게 만드는 설계.</div>
-  </div>
-  <div class="cur">
-    <div class="cur-num">2장</div>
-    <div class="cur-title">재등록 명분셋팅 → 장기회원 전환</div>
-    <div class="cur-arrow">→</div>
-    <div class="cur-desc">재등록 유도 안 해도 회원이 알아서 다시 등록하는 구조.</div>
-  </div>
-  <div class="cur">
-    <div class="cur-num">3장</div>
-    <div class="cur-title">소개가 끊이지 않는 셋팅</div>
-    <div class="cur-arrow">→</div>
-    <div class="cur-desc">회원이 자발적으로 주변 사람을 데려오는 시스템.</div>
-  </div>
-  <div class="cur">
-    <div class="cur-num">4장</div>
-    <div class="cur-title">SNS 자동 유입 (AI 활용)</div>
-    <div class="cur-arrow">→</div>
-    <div class="cur-desc">블로그 상위노출, 인스타 300만 조회, 당근마켓, 다짐 유입.</div>
-  </div>
-  <div class="cur">
-    <div class="cur-num">5장</div>
-    <div class="cur-title">매출 1000만원 자동화 시스템</div>
-    <div class="cur-arrow">→</div>
-    <div class="cur-desc">한 번 잡아놓으면 수업만 해도 알아서 굴러가는 구조.</div>
-  </div>
-</div>
-
-<!-- ═══ S7. 후기 ═══ -->
-<div class="slide bg-black pad">
-  <p style="font-size:44px;font-weight:900;color:#e8e8e8;margin-bottom:12px;text-align:center;">이게 진짜냐구요?</p>
-  <p style="font-size:28px;font-weight:500;color:#888;margin-bottom:36px;text-align:center;">이미 수백개가 넘는 리뷰가 쌓여있습니다.</p>
-
+<!-- S8. 실적 + 크몽 프로필 -->
+<div class="s bg3 p">
+  <p class="t2 tc" style="margin-bottom:12px;">이게 진짜냐구요?</p>
+  <p class="ts tc" style="margin-bottom:28px;">이미 수백개가 넘는 리뷰가 쌓여있습니다.</p>
   <div class="stats">
-    <div class="stat"><div class="stat-num">434건+</div><div class="stat-label">누적 거래</div></div>
-    <div class="stat"><div class="stat-num">4.88★</div><div class="stat-label">평균 평점</div></div>
-    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">만족도</div></div>
+    <div class="stat glow-box"><b>434건+</b><span>누적 거래</span></div>
+    <div class="stat glow-box"><b>4.88★</b><span>평균 평점</span></div>
+    <div class="stat glow-box"><b>98%</b><span>만족도</span></div>
+    <div class="stat glow-box"><b>4.4억</b><span>누적 매출</span></div>
   </div>
-
-  <div class="review">
-    <div class="review-stars">★★★★★</div>
-    <div class="review-text">"3년차인데 월 300이 한계였어요.<br>이거 읽고 구조를 바꿨더니 3개월 만에 1000 넘었습니다.<br>진짜 하면 됩니다 여러분."</div>
-  </div>
-  <div class="review">
-    <div class="review-stars">★★★★★</div>
-    <div class="review-text">"솔직히 반신반의 했었는데 세일즈북 넘기면서 상담하니까 회원님 눈빛이 다르네요<br>OT 등록수가 확 올랐습니다."</div>
-  </div>
-  <div class="review">
-    <div class="review-stars">★★★★★</div>
-    <div class="review-text">"교정운동 영상 보고 바로 수업에 적용했는데<br>회원님께 제가 신이 됬어요 ㅋㅋㅋ"</div>
-  </div>
-  <div class="review">
-    <div class="review-stars">★★★★★</div>
-    <div class="review-text">"솔직히 이 가격에 이 구성이요?<br>세미나 한 번 갈 돈이면 이거 다 받는 건데 안 살 이유가 없죠."</div>
-  </div>
+  <div class="sp-s"></div>
+  <img class="ri" src="img/review_profile.png" alt="크몽 프로필">
 </div>
 
-<!-- ═══ S8. 가격 + 후기이벤트 ═══ -->
-<div class="slide bg-dark pad">
-  <p style="font-size:30px;font-weight:500;color:#888;line-height:1.7;text-align:center;margin-bottom:16px;">아직도 제 인스타에는<br>좋은 PT 선생님 찾기가 힘들다는<br>회원들의 고민이 많이 들려옵니다</p>
-  <p style="font-size:34px;font-weight:700;color:#e8e8e8;text-align:center;margin-bottom:40px;">어서 그들에게 진짜 PT의 가치를<br>배울 수 있도록 해주세요.</p>
+<!-- S9. 크몽 후기 캡처 -->
+<div class="s bg1 p">
+  <p class="t2 tc" style="margin-bottom:8px;">실제 구매자 후기</p>
+  <p class="ts tc" style="margin-bottom:28px;">크몽에서 직접 받은 후기입니다.</p>
+  <div class="divider"></div>
+  <img class="ri" src="img/review_kmong1.jpg" alt="크몽 후기 1">
+  <img class="ri" src="img/review_kmong2.jpg" alt="크몽 후기 2">
+  <img class="ri" src="img/review_kmong3.jpg" alt="크몽 후기 3">
+</div>
 
-  <div class="price-box">
-    <p style="font-size:28px;color:#FFE0E0;margin-bottom:8px;">얼리버드 특별가</p>
-    <p style="font-size:72px;font-weight:900;color:#e8e8e8;">49,000원</p>
-    <p style="font-size:32px;color:#FFCCCC;text-decoration:line-through;margin-top:4px;">정가 198,000원</p>
-    <p style="font-size:28px;color:#FFD700;font-weight:900;margin-top:8px;">75% 할인 — 얼리버드 끝나면 이 가격 바로 올라갑니다.</p>
+<!-- S10. 카톡 + 전문가Pick -->
+<div class="s bg2 p">
+  <p class="t2 tc" style="margin-bottom:8px;">카카오톡 실시간 후기</p>
+  <p class="ts tc" style="margin-bottom:28px;">구매 후 직접 보내주신 메시지입니다.</p>
+  <div class="divider"></div>
+  <img class="ri" src="img/review_katalk.jpg" alt="카톡 후기">
+  <div class="sp"></div>
+  <p class="tag tag-gold tc" style="display:block;margin-bottom:16px;">크몽 전문가 Pick 선정</p>
+  <img class="ri border-glow" src="img/review_pick.png" alt="전문가Pick" style="border:2px solid var(--gold);">
+</div>
+
+<!-- S11. 가격 + 후기이벤트 -->
+<div class="s bg3 p">
+  <p class="tb tc" style="margin-bottom:16px;">아직도 제 인스타에는<br>좋은 PT 선생님 찾기가 힘들다는<br>회원들의 고민이 많이 들려옵니다</p>
+  <p class="t3 tc" style="margin-bottom:40px;">어서 그들에게 진짜 PT의 가치를<br>배울 수 있도록 해주세요.</p>
+  <div class="price-box pulse">
+    <p style="font-size:26px;color:#FFE0E0;margin-bottom:8px;">얼리버드 특별가</p>
+    <p style="font-size:68px;font-weight:900;color:#fff;">49,000원</p>
+    <p style="font-size:28px;color:#FFCCCC;text-decoration:line-through;margin-top:4px;">정가 198,000원</p>
+    <p style="font-size:26px;color:var(--gold);font-weight:900;margin-top:8px;">75% 할인 — 얼리버드 끝나면 가격이 올라갑니다.</p>
   </div>
-
-  <div class="spacer"></div>
-
-  <div class="event-box">
+  <div class="sp"></div>
+  <div class="event-box border-glow">
     <div class="event-badge">🎁 후기 이벤트</div>
-    <p style="font-size:36px;font-weight:900;color:#e8e8e8;margin-bottom:16px;line-height:1.4;">구매 후 별 ★5개 + 300자 이상 후기 남기면</p>
-    <p style="font-size:26px;color:#aaa;line-height:1.8;">
-      혜택. 「상위 1% 트레이너 성장 커뮤니티」톡방 초대<br>
-      <span style="color:#FFD700;">→ 최신 마케팅 정보 공유 + 질문 무제한. 혼자 고민하지 마세요.</span><br><br>
-      후기 캡처 → 인스타 DM 보내주세요<br>
-      → <span style="color:#e8e8e8;font-weight:700;">@pt_zerocoach7</span>
-    </p>
+    <p style="font-size:32px;font-weight:900;color:var(--t1);margin-bottom:12px;line-height:1.4;">별 ★5개 + 300자 이상 후기 남기면</p>
+    <p style="font-size:22px;color:#aaa;line-height:1.8;">「상위 1% 트레이너 성장 커뮤니티」톡방 초대<br><span style="color:var(--gold);">→ 최신 마케팅 정보 공유 + 질문 무제한</span><br><br>후기 캡처 → 인스타 DM → <span style="color:var(--t1);font-weight:700;">@pt_zerocoach7</span></p>
   </div>
 </div>
 
-<!-- ═══ S9. 최종 CTA ═══ -->
-<div class="slide bg-black pad">
-  <p style="font-size:48px;font-weight:900;color:#e8e8e8;text-align:center;line-height:1.35;margin-bottom:24px;">매달 1일,<br>또 0원에서 시작하실 건가요?</p>
-  <div class="spacer-sm"></div>
-  <p style="font-size:30px;font-weight:500;color:#bbb;text-align:center;line-height:1.8;margin-bottom:16px;">이번 달도 OT 잡아서 등록 안 되면<br>다음 달도 똑같아요.</p>
-  <p style="font-size:30px;font-weight:500;color:#888;text-align:center;line-height:1.8;margin-bottom:32px;">3개월 뒤에도 똑같고.<br>1년 뒤에도 똑같습니다.</p>
-
-  <p style="font-size:32px;font-weight:500;color:#bbb;text-align:center;line-height:1.8;margin-bottom:8px;">지금 이 순간에도<br>옆 센터 트레이너는 시스템을 돌리고 있어요</p>
-  <p style="font-size:36px;font-weight:900;color:#FFD700;text-align:center;margin-bottom:32px;">지금 이 순간에 용기낸 사람만이 성공합니다.</p>
-
-  <p style="font-size:30px;font-weight:700;color:#ccc;text-align:center;margin-bottom:8px;">매출 상위권 트레이너들은 이미 다 쓰고 있습니다.</p>
-  <p style="font-size:38px;font-weight:900;color:#e8e8e8;text-align:center;margin-bottom:40px;">당신만 아직 맨주먹이에요.</p>
-
-  <div class="cta">
-    <p style="font-size:56px;font-weight:900;color:#e8e8e8;margin-bottom:16px;">49,000원.</p>
-    <p style="font-size:40px;font-weight:900;color:#FFD700;line-height:1.4;margin-bottom:20px;">PT 1회도 안되는 값으로<br>월급 앞자리가 바뀝니다.</p>
-    <p style="font-size:32px;font-weight:700;color:#FFE0E0;margin-bottom:20px;">오늘도 고민만 하실 건가요?</p>
-    <p style="font-size:30px;color:#FFE0E0;line-height:1.7;">변화가 필요할땐 <span style="font-weight:900;color:#e8e8e8;">"시작"</span> 이 가장 중요합니다.</p>
+<!-- S12. 최종 CTA -->
+<div class="s bg1 p">
+  <p class="t1 tc" style="margin-bottom:24px;">매달 1일,<br>또 0원에서 시작하실 건가요?</p>
+  <div class="sp-s"></div>
+  <p class="tb tc" style="margin-bottom:16px;">이번 달도 OT 잡아서 등록 안 되면<br>다음 달도 똑같아요.</p>
+  <p class="ts tc" style="margin-bottom:32px;">3개월 뒤에도 똑같고. 1년 뒤에도 똑같습니다.</p>
+  <p class="tb tc" style="margin-bottom:8px;">지금 이 순간에도<br>옆 센터 트레이너는 시스템을 돌리고 있어요</p>
+  <p style="font-size:34px;font-weight:900;color:var(--gold);text-align:center;margin-bottom:32px;">지금 이 순간에 용기낸 사람만이 성공합니다.</p>
+  <p class="tb tc" style="margin-bottom:8px;">매출 상위권 트레이너들은 이미 다 쓰고 있습니다.</p>
+  <p class="t2 tc" style="margin-bottom:40px;">당신만 아직 맨주먹이에요.</p>
+  <div class="cta-box pulse">
+    <p class="shimmer" style="font-size:52px;font-weight:900;margin-bottom:16px;">49,000원.</p>
+    <p style="font-size:38px;font-weight:900;color:var(--gold);line-height:1.4;margin-bottom:20px;">PT 1회도 안되는 값으로<br>월급 앞자리가 바뀝니다.</p>
+    <p style="font-size:28px;font-weight:700;color:#FFE0E0;margin-bottom:16px;">오늘도 고민만 하실 건가요?</p>
+    <p style="font-size:26px;color:#FFE0E0;">변화가 필요할땐 <span style="font-weight:900;color:#fff;">"시작"</span>이 가장 중요합니다.</p>
   </div>
-  <div style="font-size:36px;color:#e8e8e8;text-align:center;margin-top:32px;font-weight:900;">→ 지금 바로 구매하기</div>
-  <div class="spacer"></div>
-  <p style="font-size:22px;color:#555;text-align:center;">인스타 문의: @pt_zerocoach7</p>
+  <div style="font-size:32px;color:var(--t1);text-align:center;margin-top:32px;font-weight:900;">→ 지금 바로 구매하기</div>
+  <div class="sp"></div>
+  <p class="tc2 tc">인스타 문의: @pt_zerocoach7</p>
 </div>
 
 </body>
