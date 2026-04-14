@@ -50,6 +50,7 @@ img.ri{width:100%;border-radius:12px;border:1px solid #222;display:block;margin-
 .pain{font-size:28px;color:var(--t2);padding:16px 0;border-bottom:1px solid #1e1e1e;}
 .pain::before{content:'"';color:var(--acc);font-weight:900;font-size:32px;}
 .pain::after{content:'"';color:var(--acc);font-weight:900;font-size:32px;}
+.hl{background:linear-gradient(transparent 55%,rgba(63,185,80,0.35) 55%);padding:0 4px;font-weight:700;color:var(--t1);}
 .divider{width:60px;height:4px;background:var(--acc);margin:28px auto;border-radius:2px;}
 .tag{display:inline-block;font-size:14px;font-weight:700;padding:4px 14px;border-radius:8px;letter-spacing:1px;}
 .tag-red{background:rgba(229,57,53,0.15);color:var(--acc);}
@@ -87,7 +88,7 @@ img.ri{width:100%;border-radius:12px;border:1px solid #222;display:block;margin-
 <!-- S6. 전자책 커리큘럼 -->
 <div class="s bg2 p">
   <span class="tag tag-red" style="margin-bottom:12px;display:inline-block;">THE SYSTEM</span>
-  <p class="t1" style="margin-bottom:12px;">트레이너 월 1,000만원<br><span class="shimmer" style="font-size:48px;">매출 자동화 시스템</span></p>
+  <p class="t1" style="margin-bottom:12px;">트레이너 월 1,000만원<br><span style="color:var(--gold);font-size:48px;">매출 자동화 시스템</span></p>
   <p class="tb" style="margin-bottom:12px;">수백 명 트레이너의 월급 앞자리를 바꿔놓은<br>그 전자책입니다.</p>
   <div class="sp"></div>
   <p class="t2" style="margin-bottom:32px;">그 시스템이 도대체 뭐냐구요?</p>
@@ -114,16 +115,19 @@ img.ri{width:100%;border-radius:12px;border:1px solid #222;display:block;margin-
   <p class="tb tc">의지력의 차이가 아닙니다.<br><span style="color:var(--t1);font-weight:900;">시스템을 알고 있느냐, 모르느냐의 차이.</span></p>
 </div>
 
-<!-- S8. 실적 + 크몽 프로필 -->
+<!-- S8. 매출 증거 -->
 <div class="s bg3 p">
   <p class="t2 tc" style="margin-bottom:12px;">이게 진짜냐구요?</p>
-  <p class="ts tc" style="margin-bottom:28px;">이미 수백개가 넘는 리뷰가 쌓여있습니다.</p>
+  <p class="ts tc" style="margin-bottom:28px;">숫자로 증명합니다.</p>
   <div class="stats">
     <div class="stat glow-box"><b>434건+</b><span>누적 거래</span></div>
     <div class="stat glow-box"><b>4.88★</b><span>평균 평점</span></div>
     <div class="stat glow-box"><b>98%</b><span>만족도</span></div>
     <div class="stat glow-box"><b>4.4억</b><span>누적 매출</span></div>
   </div>
+  <div class="sp-s"></div>
+  <img class="ri" src="img/proof_revenue.jpg" alt="3년 누적 매출 4.4억 인증">
+  <img class="ri" src="img/proof_trophy.jpg" alt="스포짐 매출상 트로피">
   <div class="sp-s"></div>
   <img class="ri" src="img/review_profile.png" alt="크몽 프로필">
 </div>
@@ -133,20 +137,28 @@ img.ri{width:100%;border-radius:12px;border:1px solid #222;display:block;margin-
   <p class="t2 tc" style="margin-bottom:8px;">실제 구매자 후기</p>
   <p class="ts tc" style="margin-bottom:28px;">크몽에서 직접 받은 후기입니다.</p>
   <div class="divider"></div>
-  <img class="ri" src="img/review_kmong1.jpg" alt="크몽 후기 1">
-  <img class="ri" src="img/review_kmong2.jpg" alt="크몽 후기 2">
-  <img class="ri" src="img/review_kmong3.jpg" alt="크몽 후기 3">
+  <img class="ri" src="img/review_kmong1.jpg" alt="크몽 후기 — 대형센터 팀장님도 읽고 가신">
+  <img class="ri" src="img/review_kmong2.jpg" alt="크몽 후기 — 지금도 누군가는 앞서는중">
+  <img class="ri" src="img/review_kmong3.jpg" alt="크몽 후기 — 매출 변화 후기">
+  <img class="ri" src="img/review_able.jpg" alt="크몽 후기 — 에이블짐 팀장 6년차">
 </div>
 
-<!-- S10. 카톡 + 전문가Pick -->
+<!-- S10. 카톡 후기 + 매출 인증 -->
 <div class="s bg2 p">
   <p class="t2 tc" style="margin-bottom:8px;">카카오톡 실시간 후기</p>
-  <p class="ts tc" style="margin-bottom:28px;">구매 후 직접 보내주신 메시지입니다.</p>
+  <p class="ts tc" style="margin-bottom:28px;">구매 후 직접 보내주신 메시지와 매출 인증입니다.</p>
   <div class="divider"></div>
-  <img class="ri" src="img/review_katalk.jpg" alt="카톡 후기">
-  <div class="sp"></div>
+  <img class="ri" src="img/review_junghwan.jpg" alt="정환인 선생님 카톡 후기 + 매출 인증">
+  <img class="ri" src="img/review_shinyong.jpg" alt="신용준 선생님 매출 인증">
+  <img class="ri" src="img/review_jongin.png" alt="종인샘 카톡 후기 — 매출 1000 달성">
+  <img class="ri" src="img/review_katalk2.jpg" alt="크몽 카톡 후기 — 필드에서 바로 적용">
+</div>
+
+<!-- S11. 베스트 후기 -->
+<div class="s bg1 p">
   <p class="tag tag-gold tc" style="display:block;margin-bottom:16px;">베스트 후기</p>
   <img class="ri border-glow" src="img/review_best.jpg" alt="베스트 후기" style="border:2px solid var(--gold);">
+  <img class="ri" src="img/review_katalk.jpg" alt="카톡 후기">
 </div>
 
 <!-- S11. 가격 + 후기이벤트 -->
@@ -178,7 +190,7 @@ img.ri{width:100%;border-radius:12px;border:1px solid #222;display:block;margin-
   <p class="tb tc" style="margin-bottom:8px;">매출 상위권 트레이너들은 이미 다 쓰고 있습니다.</p>
   <p class="t2 tc" style="margin-bottom:40px;">당신만 아직 맨주먹이에요.</p>
   <div class="cta-box pulse">
-    <p class="shimmer" style="font-size:52px;font-weight:900;margin-bottom:16px;">49,000원.</p>
+    <p style="color:var(--gold);font-size:52px;font-weight:900;margin-bottom:16px;">49,000원.</p>
     <p style="font-size:38px;font-weight:900;color:var(--gold);line-height:1.4;margin-bottom:20px;">PT 1회도 안되는 값으로<br>월급 앞자리가 바뀝니다.</p>
     <p style="font-size:28px;font-weight:700;color:#FFE0E0;margin-bottom:16px;">오늘도 고민만 하실 건가요?</p>
     <p style="font-size:26px;color:#FFE0E0;">변화가 필요할땐 <span style="font-weight:900;color:#fff;">"시작"</span>이 가장 중요합니다.</p>
