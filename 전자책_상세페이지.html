@@ -3,108 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>트레이너 월 1,000만원 매출 자동화 시스템</title>
+<title>트레이너 매출 자동화 시스템</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#111;font-family:'Noto Sans KR',sans-serif;overflow-x:hidden;}
-.s{width:860px;max-width:100%;margin:0 auto;overflow:hidden;position:relative;}
-.bg1{background:#111111;} .bg2{background:#141414;} .bg3{background:#0e0e0e;}
-.p{padding:80px 64px;}
-.tc{text-align:center;}
-:root{--t1:#e8e8e8;--t2:#bbb;--t3:#888;--t4:#555;--acc:#E53935;--gold:#FFD700;--green:#3fb950;}
-.t1{font-size:48px;font-weight:900;color:var(--t1);line-height:1.3;letter-spacing:-1px;}
-.t2{font-size:38px;font-weight:900;color:var(--t1);line-height:1.35;}
-.t3{font-size:30px;font-weight:700;color:var(--t1);line-height:1.4;}
-.tb{font-size:26px;font-weight:500;color:var(--t2);line-height:1.8;}
-.ts{font-size:22px;font-weight:400;color:var(--t3);line-height:1.75;}
-.tc2{font-size:18px;color:var(--t4);}
-.sp{height:40px;} .sp-s{height:20px;} .sp-l{height:60px;}
+.s{width:860px;max-width:100%;margin:0 auto;overflow:hidden;}
 img.full{width:100%;display:block;}
+
+/* 여백 섹션 */
+.gap{background:#111;padding:80px 64px;text-align:center;}
+.spacer{background:#111;height:60px;}
+.gap p{line-height:1.5;}
+
+/* 색상 */
+:root{--t1:#e8e8e8;--t2:#999;--acc:#E53935;--gold:#FFD700;--mint:#5BEAD6;}
+
+/* 후기 이미지 */
 img.ri{width:100%;border-radius:12px;border:1px solid #222;display:block;margin-bottom:16px;}
-@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
-.shimmer{background:linear-gradient(90deg,var(--gold) 0%,#fff 40%,var(--gold) 60%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite;}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(229,57,53,0.3);}50%{box-shadow:0 0 40px rgba(229,57,53,0.6),0 0 80px rgba(229,57,53,0.2);}}
-.glow-box{animation:glow 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
-.pulse{animation:pulse 2.5s ease-in-out infinite;}
-@keyframes borderGlow{0%,100%{border-color:rgba(255,215,0,0.3);}50%{border-color:rgba(255,215,0,0.8);}}
-.border-glow{animation:borderGlow 2s ease-in-out infinite;}
-.card{background:#181818;border:1px solid #252525;border-radius:16px;padding:28px;margin-bottom:14px;transition:all 0.3s;}
-.card:hover{border-color:var(--acc);transform:translateY(-2px);}
-.card-num{font-size:15px;font-weight:900;color:var(--acc);letter-spacing:1px;margin-bottom:6px;}
-.card-title{font-size:28px;font-weight:900;color:var(--t1);margin-bottom:8px;}
-.card-desc{font-size:20px;color:var(--t3);line-height:1.6;}
-.rv{background:#161616;border-radius:16px;padding:28px 32px;border-left:4px solid var(--gold);margin-bottom:16px;}
-.rv-stars{color:var(--gold);font-size:24px;margin-bottom:8px;}
-.rv-text{font-size:24px;color:#ccc;line-height:1.7;}
-.rv-who{font-size:16px;color:#666;margin-top:8px;}
-.stats{display:flex;gap:16px;margin:32px 0;flex-wrap:wrap;}
-.stat{flex:1;min-width:120px;background:#181818;border:2px solid var(--acc);border-radius:16px;padding:24px;text-align:center;}
-.stat b{font-size:36px;font-weight:900;color:var(--acc);display:block;}
-.stat span{font-size:16px;color:var(--t3);margin-top:4px;display:block;}
-.price-box{background:linear-gradient(135deg,#E53935,#FF7B00);border-radius:20px;padding:48px;text-align:center;}
-.cta-box{background:linear-gradient(135deg,#E53935,#FF7B00);border-radius:20px;padding:56px 48px;text-align:center;margin-top:24px;}
-.event-box{background:#181818;border:3px solid var(--gold);border-radius:16px;padding:36px;text-align:center;margin-bottom:28px;}
-.event-badge{display:inline-block;background:var(--gold);color:#111;font-size:20px;font-weight:900;padding:8px 24px;border-radius:24px;margin-bottom:16px;}
-.pain{font-size:28px;color:var(--t2);padding:16px 0;border-bottom:1px solid #1e1e1e;}
-.pain::before{content:'"';color:var(--acc);font-weight:900;font-size:32px;}
-.pain::after{content:'"';color:var(--acc);font-weight:900;font-size:32px;}
-.hl{background:linear-gradient(transparent 55%,rgba(63,185,80,0.35) 55%);padding:0 4px;font-weight:700;color:var(--t1);}
-.divider{width:60px;height:4px;background:var(--acc);margin:28px auto;border-radius:2px;}
-.tag{display:inline-block;font-size:14px;font-weight:700;padding:4px 14px;border-radius:8px;letter-spacing:1px;}
-.tag-red{background:rgba(229,57,53,0.15);color:var(--acc);}
-.tag-gold{background:rgba(255,215,0,0.12);color:var(--gold);}
-@media(max-width:860px){.s{width:100%!important;}.p{padding:48px 28px!important;}.t1{font-size:34px!important;}.t2{font-size:28px!important;}.t3{font-size:24px!important;}.tb{font-size:22px!important;}.ts{font-size:18px!important;}.stats{gap:10px;}.stat{min-width:45%;}.stat b{font-size:28px!important;}.pain{font-size:22px!important;}}
-@media(max-width:480px){.p{padding:32px 20px!important;}.t1{font-size:28px!important;}.t2{font-size:24px!important;}.tb{font-size:18px!important;}.card-title{font-size:22px!important;}.card-desc{font-size:16px!important;}.rv-text{font-size:20px!important;}}
+
+/* 깜빡이 효과 (CTA용) */
+@keyframes borderPulse{0%,100%{border-color:rgba(255,120,0,0.2);}50%{border-color:rgba(255,120,0,0.9);}}
+
+/* 반응형 */
+@media(max-width:860px){.s{width:100%!important;}.gap{padding:36px 28px!important;}}
+@media(max-width:480px){.gap{padding:28px 20px!important;}}
 </style>
 </head>
 <body>
 
-<!-- S1. 히어로 GIF (직접 제작) -->
-<div class="s"><img class="full" src="img/ebook_v2/hero.gif" alt="억대 연봉 트레이너들의 시스템"></div>
+<!-- 히어로 GIF -->
+<div class="s"><img class="full" src="img/ebook_v2/제목 추가 (2).gif" alt="억대 연봉 트레이너들의 시스템"></div>
 
-<!-- S2. 스토리 GIF 3종 -->
+<div class="s spacer"></div>
+
+<!-- 스토리 GIF -->
 <div class="s"><img class="full" src="img/story_6.gif" alt="불안해서 배우러 다녔습니다"></div>
-<div class="s"><img class="full" src="img/story_7.gif" alt="매출이 쉬워지는게"></div>
-<div class="s"><img class="full" src="img/story_8.gif" alt="500명이 넘게 효과"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/story_7.gif" alt="되더군요 매출이 쉬워지는게"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/story_8.gif" alt="500명이 넘게 효과를 보고 있어요"></div>
 
-<!-- S3. 공감 포인트 (ESR 자기관련성 강화) -->
-<div class="s bg1 p tc">
-  <p class="t1" style="margin-bottom:24px;"><span style="color:var(--acc);">수업만 열심히 하면</span> 될 줄 알았습니다.</p>
-  <p class="tb">근데 매출은 실력이 아니라 <span style="color:var(--gold);font-weight:900;">구조</span>가 만듭니다.</p>
+<!-- 여백 + 전환 카피 -->
+<div class="s gap">
+  <p style="font-size:36px;font-weight:900;color:var(--mint);">그 시스템, 도대체 뭔데?</p>
 </div>
 
-<!-- S4~S11. 수정본 GIF/JPG (직접 제작) -->
+<!-- 수정본 GIF 순서대로 -->
 <div class="s"><img class="full" src="img/ebook_v2/6.gif" alt="커리큘럼"></div>
+<div class="s spacer"></div>
 <div class="s"><img class="full" src="img/ebook_v2/7.gif" alt="상세 내용"></div>
+<div class="s spacer"></div>
 <div class="s"><img class="full" src="img/ebook_v2/8.gif" alt="상세 내용"></div>
-<div class="s"><img class="full" src="img/ebook_v2/9.gif" alt="후기"></div>
+
+<!-- 여백 + 증거 전환 -->
+<div class="s gap">
+  <p style="font-size:36px;font-weight:900;color:var(--t1);">진짜냐구요? <span style="color:var(--acc);">숫자</span>로 증명합니다.</p>
+</div>
+
+<div class="s"><img class="full" src="img/ebook_v2/9.gif" alt="후기/실적"></div>
+<div class="s spacer"></div>
 <div class="s"><img class="full" src="img/ebook_v2/9.jpg" alt="후기 상세"></div>
-<div class="s"><img class="full" src="img/ebook_v2/10.gif" alt="가격"></div>
-<div class="s"><img class="full" src="img/ebook_v2/11.gif" alt="CTA"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/ebook_v2/10.gif" alt="가격/혜택"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/ebook_v2/11.gif" alt="추가 혜택"></div>
+<div class="s spacer"></div>
 <div class="s"><img class="full" src="img/ebook_v2/12.gif" alt="마무리"></div>
-<div class="s"><img class="full" src="img/ebook_v2/13.gif" alt="추가"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/ebook_v2/13.gif" alt="추가 내용"></div>
 
-<!-- S12. 전환 유도 (ESR 해결연결성 강화) -->
-<div class="s bg2 p tc">
-  <p class="t2" style="margin-bottom:16px;">지금도 <span style="color:var(--acc);">옆 센터 트레이너</span>는</p>
-  <p class="t2">이 시스템을 돌리고 있습니다.</p>
+<!-- 여백 + 긴급성 -->
+<div class="s gap">
+  <p style="font-size:34px;font-weight:900;color:var(--acc);">얼리버드는 곧 종료됩니다.</p>
+  <p style="font-size:22px;color:var(--t2);margin-top:12px;">지금 이 가격에 살 수 있는 마지막 기회입니다.</p>
 </div>
 
-<!-- S13. 후기 캡처 (사회적 증거) -->
-<div class="s bg1 p">
-  <p class="t2 tc" style="margin-bottom:28px;">실제 구매자 후기</p>
-  <img class="ri" src="img/review_kmong1.jpg" alt="크몽 후기">
-  <img class="ri" src="img/review_able.jpg" alt="에이블짐 후기">
-  <img class="ri" src="img/review_junghwan.jpg" alt="정환인 매출 인증">
-  <img class="ri" src="img/review_jongin.png" alt="종인샘 후기">
-  <p class="tag tag-gold tc" style="display:block;margin-bottom:16px;">베스트 후기</p>
-  <img class="ri border-glow" src="img/review_best.jpg" alt="베스트 후기" style="border:2px solid var(--gold);">
-</div>
-
-<!-- S14. 최종 CTA (깜빡이 GIF) -->
-<div class="s"><img class="full" src="img/ebook_v2/cta_blink.gif" alt="CTA — 49,000원"></div>
+<!-- CTA 깜빡이 GIF -->
+<div class="s"><img class="full" src="img/ebook_v2/cta_blink.gif" alt="49,000원 — 지금 바로 구매하기"></div>
 
 </body>
 </html>
