@@ -11,21 +11,145 @@ body{background:#111;font-family:'Noto Sans KR',sans-serif;overflow-x:hidden;}
 .s{width:860px;max-width:100%;margin:0 auto;overflow:hidden;}
 img.full{width:100%;display:block;}
 .spacer{background:#111;height:60px;}
-.gap{background:#111;padding:80px 64px;text-align:center;}
-.gap p{line-height:1.5;}
-:root{--t1:#e8e8e8;--t2:#999;--acc:#E53935;--mint:#5BEAD6;--gold:#FFD700;}
-@media(max-width:860px){.s{width:100%!important;}.gap{padding:60px 28px!important;}}
-@media(max-width:480px){.gap{padding:48px 20px!important;}}
+:root{--t1:#e8e8e8;--t2:#999;--acc:#E53935;--mint:#5BEAD6;--gold:#FFD700;--bg:#111;--card:#1a1a2e;--bd:#2a2d3e;}
+
+/* ===== 신뢰 대시보드 ===== */
+.trust-dash{background:var(--bg);padding:64px 48px 56px;text-align:center;}
+.trust-dash .label{font-size:14px;font-weight:700;color:var(--acc);letter-spacing:6px;margin-bottom:12px;}
+.trust-dash .headline{font-size:28px;font-weight:900;color:var(--t1);margin-bottom:36px;line-height:1.4;}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:780px;margin:0 auto;}
+.trust-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:28px 12px;text-align:center;}
+.trust-card .num{font-size:42px;font-weight:900;line-height:1;margin-bottom:8px;}
+.trust-card .unit{font-size:16px;font-weight:700;color:var(--t2);margin-top:4px;}
+.trust-card:nth-child(1) .num{color:var(--acc);}
+.trust-card:nth-child(2) .num{color:var(--gold);}
+.trust-card:nth-child(3) .num{color:var(--mint);}
+.trust-card:nth-child(4) .num{color:#FF6F61;}
+.trust-badge{margin-top:28px;display:inline-block;background:linear-gradient(135deg,var(--acc),#FF6F61);border-radius:40px;padding:12px 36px;font-size:16px;font-weight:900;color:#fff;letter-spacing:1px;}
+
+/* ===== 구성품 시각화 ===== */
+.pkg-section{background:var(--bg);padding:72px 48px 56px;text-align:center;}
+.pkg-section .label{font-size:14px;font-weight:700;color:var(--mint);letter-spacing:6px;margin-bottom:12px;}
+.pkg-section .headline{font-size:30px;font-weight:900;color:var(--t1);margin-bottom:40px;line-height:1.4;}
+.pkg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:760px;margin:0 auto;}
+.pkg-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:28px 24px;text-align:left;position:relative;overflow:hidden;}
+.pkg-card .icon-wrap{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:28px;}
+.pkg-card .icon-wrap.pptx{background:rgba(229,57,53,0.15);}
+.pkg-card .icon-wrap.mov{background:rgba(91,234,214,0.15);}
+.pkg-card .icon-wrap.ai{background:rgba(255,215,0,0.15);}
+.pkg-card .icon-wrap.pdf{background:rgba(255,111,97,0.15);}
+.pkg-card .name{font-size:18px;font-weight:900;color:var(--t1);margin-bottom:6px;}
+.pkg-card .desc{font-size:13px;color:var(--t2);line-height:1.5;}
+.pkg-card .format-badge{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--t2);letter-spacing:1px;}
+.pkg-bonus{margin-top:24px;max-width:760px;margin-left:auto;margin-right:auto;background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,111,97,0.08));border:1px dashed var(--gold);border-radius:14px;padding:22px 28px;display:flex;align-items:center;gap:16px;}
+.pkg-bonus .icon-wrap{width:48px;height:48px;border-radius:10px;background:rgba(255,215,0,0.15);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.pkg-bonus .txt .name{font-size:16px;font-weight:900;color:var(--gold);margin-bottom:2px;}
+.pkg-bonus .txt .desc{font-size:13px;color:var(--t2);line-height:1.4;}
+
+/* ===== 성과 전환 타이틀 ===== */
+.result-bridge{background:var(--bg);padding:72px 48px;text-align:center;}
+.result-bridge .top-line{width:60px;height:3px;background:var(--acc);margin:0 auto 20px;border-radius:2px;}
+.result-bridge .kicker{font-size:15px;color:var(--acc);font-weight:700;letter-spacing:3px;margin-bottom:14px;}
+.result-bridge .headline{font-size:32px;font-weight:900;color:var(--t1);line-height:1.4;margin-bottom:12px;}
+.result-bridge .sub{font-size:16px;color:var(--t2);line-height:1.6;}
+
+/* ===== 후기이벤트 ===== */
+.evt-section{padding:100px 64px;text-align:center;background:var(--bg);}
+
+/* ===== 반응형 ===== */
+@media(max-width:860px){
+  .s{width:100%!important;}
+  .trust-dash,.pkg-section,.result-bridge,.evt-section{padding-left:28px!important;padding-right:28px!important;}
+  .trust-grid{grid-template-columns:repeat(2,1fr);}
+  .pkg-grid{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .trust-dash,.pkg-section,.result-bridge,.evt-section{padding-left:20px!important;padding-right:20px!important;}
+  .trust-card .num{font-size:32px;}
+  .pkg-section .headline{font-size:24px;}
+  .result-bridge .headline{font-size:26px;}
+}
 </style>
 </head>
 <body>
 
+<!-- ===== 1. 히어로 인트로 (기존 GIF) ===== -->
 <div class="s"><img class="full" src="img/template_v2/1.gif"></div>
+
+<!-- ===== 2. 신뢰 대시보드 (NEW — 와디즈 스타일) ===== -->
+<div class="s trust-dash">
+  <p class="label">VERIFIED RESULTS</p>
+  <p class="headline">수백 명의 트레이너가<br>이미 검증한 시스템</p>
+  <div class="trust-grid">
+    <div class="trust-card">
+      <p class="num">434<span style="font-size:20px;">건</span></p>
+      <p class="unit">누적 거래</p>
+    </div>
+    <div class="trust-card">
+      <p class="num">4.88</p>
+      <p class="unit">평균 평점</p>
+    </div>
+    <div class="trust-card">
+      <p class="num">98<span style="font-size:20px;">%</span></p>
+      <p class="unit">구매 만족도</p>
+    </div>
+    <div class="trust-card">
+      <p class="num">219</p>
+      <p class="unit">실사용 리뷰</p>
+    </div>
+  </div>
+  <div class="trust-badge">크몽 전문가 Pick 선정</div>
+</div>
+
 <div class="s spacer"></div>
+
+<!-- ===== 3. 공감 섹션 (기존 GIF) ===== -->
 <div class="s"><img class="full" src="img/template_v2/2.gif"></div>
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/3.gif"></div>
+
+<!-- ===== 4. 구성품 시각화 (NEW — 아이템 아이콘) ===== -->
+<div class="s pkg-section">
+  <p class="label">FULL PACKAGE</p>
+  <p class="headline">이 안에 전부 들어있습니다</p>
+  <div class="pkg-grid">
+    <div class="pkg-card">
+      <span class="format-badge">PPTX</span>
+      <div class="icon-wrap pptx">📊</div>
+      <p class="name">상담 필승 세일즈북</p>
+      <p class="desc">OT 상담부터 등록 전환까지<br>그대로 따라하면 되는 상담 스크립트</p>
+    </div>
+    <div class="pkg-card">
+      <span class="format-badge">PPTX</span>
+      <div class="icon-wrap pptx">📋</div>
+      <p class="name">회원 관리 파일</p>
+      <p class="desc">재등록 타이밍, 컨디션 체크<br>회원별 맞춤 관리 시스템</p>
+    </div>
+    <div class="pkg-card">
+      <span class="format-badge">MOV · 5종</span>
+      <div class="icon-wrap mov">🎬</div>
+      <p class="name">교정운동 드릴 VOD</p>
+      <p class="desc">거북목 / 골반 / 무릎 / 어깨 / 허리<br>부위별 실전 교정 영상</p>
+    </div>
+    <div class="pkg-card">
+      <span class="format-badge">AI PROMPT</span>
+      <div class="icon-wrap ai">🤖</div>
+      <p class="name">외부유입 AI 치트키</p>
+      <p class="desc">블로그 상위노출, 인스타 릴스<br>당근마켓 자동 유입 프롬프트</p>
+    </div>
+  </div>
+  <div class="pkg-bonus">
+    <div class="icon-wrap">🎁</div>
+    <div class="txt">
+      <p class="name">BONUS — 매출 자동화 전자책 (선착순 20명)</p>
+      <p class="desc">별5개 + 300자 후기 작성 시, 정가 198,000원 전자책 무료 증정</p>
+    </div>
+  </div>
+</div>
+
 <div class="s spacer"></div>
+
+<!-- ===== 5. 아이템 상세 (기존 GIF) ===== -->
 <div class="s"><img class="full" src="img/template_v2/4.gif"></div>
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/5.gif"></div>
@@ -33,13 +157,22 @@ img.full{width:100%;display:block;}
 <div class="s"><img class="full" src="img/template_v2/6.gif"></div>
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/7.gif"></div>
-<div class="s spacer"></div>
+
+<!-- ===== 6. 성과 전환 브릿지 (NEW) ===== -->
+<div class="s result-bridge">
+  <div class="top-line"></div>
+  <p class="kicker">REAL RESULTS</p>
+  <p class="headline">이 시스템을 적용한 트레이너들의<br>실제 매출이 바뀌었습니다</p>
+  <p class="sub">상장도, 후기도, 매출표도<br>전부 실제 데이터입니다.</p>
+</div>
+
+<!-- ===== 7. 신뢰 증거 (기존 GIF) ===== -->
 <div class="s"><img class="full" src="img/template_v2/8.gif"></div>
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/9.gif"></div>
 
-<!-- 후기이벤트 혜택 증정 안내 -->
-<div class="s gap" style="padding:100px 64px;">
+<!-- ===== 8. 후기이벤트 (기존) ===== -->
+<div class="s evt-section">
   <p style="font-size:24px;font-weight:700;color:var(--acc);letter-spacing:3px;margin-bottom:16px;">🔥 선착순 20명 한정!</p>
   <p style="font-size:42px;font-weight:900;color:var(--mint);line-height:1.35;margin-bottom:20px;">월 1,000만 매출 자동화 시스템<br>전자책 증정 이벤트</p>
   <p style="font-size:28px;font-weight:700;color:var(--t1);">선착순 20명에게만 드립니다.</p>
@@ -49,7 +182,7 @@ img.full{width:100%;display:block;}
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/11.gif"></div>
 
-<!-- CTA -->
+<!-- ===== 9. CTA ===== -->
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/ebook_v2/cta_blink.gif"></div>
 
