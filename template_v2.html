@@ -56,64 +56,54 @@ img.full{width:100%;display:block;}
 /* ===== 후기이벤트 ===== */
 .evt-section{padding:100px 64px;text-align:center;background:var(--bg);}
 
-/* ===== 성과 히어로 배너 (와디즈 스타일) ===== */
-.achieve-hero{
-  background:linear-gradient(180deg,#d6eef5 0%,#b8dce8 40%,#a3cfe0 100%);
-  padding:72px 48px 0;text-align:center;position:relative;overflow:hidden;
+/* ===== 히어로 (와디즈 100% 클론) ===== */
+.wz-hero{
+  background:linear-gradient(180deg,#c9e4f0 0%,#aed6e8 50%,#96c8de 100%);
+  padding:56px 0 0;text-align:center;position:relative;overflow:hidden;
 }
-.achieve-hero::before{
-  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-  background:radial-gradient(ellipse at 50% 20%,rgba(255,255,255,0.5) 0%,transparent 60%);
+.wz-hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:200px;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.55) 0%,transparent 70%);
   pointer-events:none;
 }
-.achieve-hero .stars{font-size:18px;letter-spacing:6px;color:#c8a84e;margin-bottom:16px;position:relative;z-index:1;}
-.achieve-hero .lead{font-size:22px;font-weight:700;color:#3a5a6a;margin-bottom:4px;position:relative;z-index:1;line-height:1.5;}
-.achieve-hero .lead small{font-size:24px;font-weight:900;color:#2a4a5a;}
-.achieve-hero .big-wrap{position:relative;z-index:1;margin-top:12px;}
-.achieve-hero .yr{font-size:22px;font-weight:700;color:#5a8a9a;margin-bottom:6px;}
-.achieve-hero .yr .yr-num{font-size:36px;font-weight:900;color:#1a3040;}
-.achieve-hero .big-num{font-size:32px;font-weight:900;color:#1a3040;line-height:1.1;letter-spacing:-1px;}
-.achieve-hero .big-num .accent{color:#E53935;font-size:100px;letter-spacing:-3px;}
-.achieve-hero .big-num .unit{font-size:52px;font-weight:900;color:#2a4a5a;}
+.wz-hero .stars{font-size:14px;letter-spacing:8px;color:#bfa84e;margin-bottom:24px;position:relative;z-index:1;}
+.wz-hero .sub-lead{font-size:20px;font-weight:700;color:#4a7a8a;position:relative;z-index:1;line-height:1.6;margin-bottom:20px;}
+.wz-hero .sub-lead strong{font-size:22px;font-weight:900;color:#2a5060;}
+.wz-hero .main-title{position:relative;z-index:1;margin-bottom:8px;}
+.wz-hero .main-title .label{font-size:28px;font-weight:900;color:#2a5060;display:block;margin-bottom:4px;}
+.wz-hero .main-title .big{font-size:86px;font-weight:900;color:#E53935;line-height:1;letter-spacing:-3px;}
+.wz-hero .main-title .unit{font-size:52px;font-weight:900;color:#1a3545;}
 
-/* ===== 목업 + 성과 수치 (레퍼런스 스타일) ===== */
-.hero-mockup{position:relative;z-index:1;margin-top:40px;}
-.hero-mockup .number-badge{
+/* 01 뱃지 + 목업 */
+.wz-hero .badge-num{
   display:inline-flex;align-items:center;justify-content:center;
-  width:48px;height:48px;border-radius:50%;
-  background:#1a3040;color:#fff;font-size:20px;font-weight:900;
-  margin-bottom:20px;box-shadow:0 4px 16px rgba(0,0,0,0.2);
+  width:44px;height:44px;border-radius:50%;
+  background:#1a3545;color:#fff;font-size:18px;font-weight:900;
+  margin:32px auto 20px;position:relative;z-index:1;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
-.hero-mockup .mockup-img{
-  max-width:400px;width:70%;border-radius:16px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.25);display:block;margin:0 auto;
+.wz-hero .mockup-wrap{position:relative;z-index:1;padding:0 60px;}
+.wz-hero .mockup-wrap img{
+  width:100%;max-width:480px;display:block;margin:0 auto;
+  border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,0.2);
 }
-.hero-stats{
-  position:relative;z-index:1;
-  background:linear-gradient(180deg,#a3cfe0 0%,#8fc4d8 100%);
+
+/* 하단 수치 */
+.wz-stats{
+  background:linear-gradient(180deg,#96c8de 0%,#7eb8d0 100%);
   padding:48px 48px 56px;text-align:center;
 }
-.hero-stats .stat-row{
-  display:flex;justify-content:center;align-items:baseline;gap:12px;
-  margin-bottom:14px;flex-wrap:wrap;
+.wz-stats .row{margin-bottom:16px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;}
+.wz-stats .big-num{font-size:42px;font-weight:900;color:#1a3040;letter-spacing:-1px;}
+.wz-stats .label-txt{font-size:18px;font-weight:700;color:#3a6a7a;}
+.wz-stats .badge{
+  display:inline-block;background:#1a3545;color:#5BEAD6;
+  border-radius:20px;padding:5px 16px;font-size:12px;font-weight:700;letter-spacing:1px;
 }
-.hero-stats .stat-big{font-size:48px;font-weight:900;color:#1a3040;letter-spacing:-1px;}
-.hero-stats .stat-label{font-size:20px;font-weight:700;color:#3a5a6a;}
-.hero-stats .stat-badge{
-  display:inline-block;background:#1a3040;color:#5BEAD6;
-  border-radius:20px;padding:4px 14px;font-size:12px;font-weight:700;
-  letter-spacing:1px;margin-left:8px;vertical-align:middle;
-}
-.hero-stats .stat-sub{font-size:16px;color:#4a7a8a;margin-top:4px;}
-.hero-stats .stat-row-sm{
-  display:flex;justify-content:center;align-items:baseline;gap:8px;
-  margin-bottom:10px;
-}
-.hero-stats .stat-row-sm .num{font-size:32px;font-weight:900;color:#1a3040;}
-.hero-stats .stat-row-sm .txt{font-size:16px;font-weight:700;color:#3a5a6a;}
-.hero-stats .stat-participants{
-  margin-top:16px;font-size:15px;font-weight:700;color:#5a8a9a;
-}
+.wz-stats .row-sm{margin-bottom:12px;display:flex;justify-content:center;align-items:baseline;gap:8px;}
+.wz-stats .row-sm .num{font-size:30px;font-weight:900;color:#1a3040;}
+.wz-stats .row-sm .txt{font-size:16px;font-weight:700;color:#3a6a7a;}
+.wz-stats .foot{font-size:14px;font-weight:700;color:#5a8a9a;margin-top:12px;}
 
 /* ===== 반응형 ===== */
 @media(max-width:860px){
@@ -121,57 +111,52 @@ img.full{width:100%;display:block;}
   .trust-dash,.pkg-section,.result-bridge,.evt-section,.achieve-hero{padding-left:28px!important;padding-right:28px!important;}
   .trust-grid{grid-template-columns:repeat(2,1fr);}
   .pkg-grid{grid-template-columns:1fr;}
-  .achieve-hero .big-num .accent{font-size:80px;}
-  .achieve-hero .yr .yr-num{font-size:30px;}
-  .hero-stats{padding-left:28px!important;padding-right:28px!important;}
-  .hero-stats .stat-big{font-size:40px;}
+  .wz-hero .main-title .big{font-size:68px;}
+  .wz-hero .main-title .unit{font-size:42px;}
+  .wz-hero .mockup-wrap{padding:0 40px;}
+  .wz-stats{padding-left:28px!important;padding-right:28px!important;}
 }
 @media(max-width:480px){
-  .trust-dash,.pkg-section,.result-bridge,.evt-section,.achieve-hero{padding-left:20px!important;padding-right:20px!important;}
+  .trust-dash,.pkg-section,.result-bridge,.evt-section{padding-left:20px!important;padding-right:20px!important;}
   .trust-card .num{font-size:32px;}
   .pkg-section .headline{font-size:24px;}
   .result-bridge .headline{font-size:26px;}
-  .achieve-hero .big-num .accent{font-size:60px;}
-  .achieve-hero .big-num .unit{font-size:36px;}
-  .achieve-hero .yr .yr-num{font-size:26px;}
-  .hero-stats{padding-left:20px!important;padding-right:20px!important;}
-  .hero-stats .stat-big{font-size:32px;}
-  .hero-stats .stat-row-sm .num{font-size:26px;}
-  .hero-mockup .mockup-img{width:80%;}
+  .wz-hero .main-title .big{font-size:54px;}
+  .wz-hero .main-title .unit{font-size:34px;}
+  .wz-hero .main-title .label{font-size:22px;}
+  .wz-hero .mockup-wrap{padding:0 24px;}
+  .wz-stats{padding-left:20px!important;padding-right:20px!important;}
+  .wz-stats .big-num{font-size:32px;}
+  .wz-stats .row-sm .num{font-size:22px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== 1. 성과 히어로 배너 (와디즈 스타일 — 맨 첫 섹션) ===== -->
-<div class="s achieve-hero">
+<!-- ===== 1. 히어로 (와디즈 클론 — 맨 첫 섹션) ===== -->
+<div class="s wz-hero">
   <p class="stars">★ ★ ★ ★ ★</p>
-  <p class="lead"><small>시스템</small> 셋팅하고</p>
-  <div class="big-wrap">
-    <p class="yr"><span class="yr-num">3년</span> 누적 매출</p>
-    <p class="big-num"><span class="accent">4.4</span><span class="unit">억 달성</span></p>
+  <p class="sub-lead"><strong>시스템</strong> 셋팅하고</p>
+  <div class="main-title">
+    <span class="label">3년 누적 매출</span>
+    <span class="big">4.4</span><span class="unit">억 달성</span>
   </div>
-  <!-- 전자책 목업 -->
-  <div class="hero-mockup">
-    <div class="number-badge">01</div>
-    <img class="mockup-img" src="img/ebook_cover.jpg" alt="제로코치 전자책">
+  <div class="badge-num">01</div>
+  <div class="mockup-wrap">
+    <img src="img/ebook_cover.jpg" alt="제로코치 전자책">
   </div>
 </div>
-<!-- 성과 수치 -->
-<div class="s hero-stats">
-  <div class="stat-row">
-    <span class="stat-big">434건</span>
-    <span class="stat-label">달성</span>
-    <span class="stat-badge">크몽 전문가 Pick</span>
+<div class="s wz-stats">
+  <div class="row">
+    <span class="big-num">434건</span>
+    <span class="label-txt">달성</span>
+    <span class="badge">크몽 전문가 Pick</span>
   </div>
-  <div class="stat-sub">트레이너 전자책 카테고리 누적 판매 1위</div>
-  <div style="height:24px;"></div>
-  <div class="stat-row-sm">
-    <span class="num">4.88</span>
-    <span class="txt">평균 평점 · 만족도</span>
-    <span class="num" style="margin-left:20px;">98%</span>
+  <div class="row-sm">
+    <span class="num">440,000,000원</span>
+    <span class="txt">달성</span>
   </div>
-  <p class="stat-participants">219개 실사용 리뷰 · 수백 명의 트레이너가 검증</p>
+  <div class="foot">219개 실사용 리뷰 · 평점 4.88 · 만족도 98%</div>
 </div>
 
 <!-- ===== 1-1. 히어로 인트로 GIF ===== -->
