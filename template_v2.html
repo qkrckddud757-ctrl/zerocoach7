@@ -59,7 +59,7 @@ img.full{width:100%;display:block;}
 /* ===== 성과 히어로 배너 (와디즈 스타일) ===== */
 .achieve-hero{
   background:linear-gradient(180deg,#d6eef5 0%,#b8dce8 40%,#a3cfe0 100%);
-  padding:72px 48px 64px;text-align:center;position:relative;overflow:hidden;
+  padding:72px 48px 0;text-align:center;position:relative;overflow:hidden;
 }
 .achieve-hero::before{
   content:'';position:absolute;top:0;left:0;right:0;bottom:0;
@@ -75,7 +75,45 @@ img.full{width:100%;display:block;}
 .achieve-hero .big-num{font-size:32px;font-weight:900;color:#1a3040;line-height:1.1;letter-spacing:-1px;}
 .achieve-hero .big-num .accent{color:#E53935;font-size:100px;letter-spacing:-3px;}
 .achieve-hero .big-num .unit{font-size:52px;font-weight:900;color:#2a4a5a;}
-.achieve-hero .big-sub{font-size:26px;font-weight:700;color:#3a5a6a;margin-top:8px;}
+
+/* ===== 목업 + 성과 수치 (레퍼런스 스타일) ===== */
+.hero-mockup{position:relative;z-index:1;margin-top:40px;}
+.hero-mockup .number-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:48px;height:48px;border-radius:50%;
+  background:#1a3040;color:#fff;font-size:20px;font-weight:900;
+  margin-bottom:20px;box-shadow:0 4px 16px rgba(0,0,0,0.2);
+}
+.hero-mockup .mockup-img{
+  max-width:400px;width:70%;border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25);display:block;margin:0 auto;
+}
+.hero-stats{
+  position:relative;z-index:1;
+  background:linear-gradient(180deg,#a3cfe0 0%,#8fc4d8 100%);
+  padding:48px 48px 56px;text-align:center;
+}
+.hero-stats .stat-row{
+  display:flex;justify-content:center;align-items:baseline;gap:12px;
+  margin-bottom:14px;flex-wrap:wrap;
+}
+.hero-stats .stat-big{font-size:48px;font-weight:900;color:#1a3040;letter-spacing:-1px;}
+.hero-stats .stat-label{font-size:20px;font-weight:700;color:#3a5a6a;}
+.hero-stats .stat-badge{
+  display:inline-block;background:#1a3040;color:#5BEAD6;
+  border-radius:20px;padding:4px 14px;font-size:12px;font-weight:700;
+  letter-spacing:1px;margin-left:8px;vertical-align:middle;
+}
+.hero-stats .stat-sub{font-size:16px;color:#4a7a8a;margin-top:4px;}
+.hero-stats .stat-row-sm{
+  display:flex;justify-content:center;align-items:baseline;gap:8px;
+  margin-bottom:10px;
+}
+.hero-stats .stat-row-sm .num{font-size:32px;font-weight:900;color:#1a3040;}
+.hero-stats .stat-row-sm .txt{font-size:16px;font-weight:700;color:#3a5a6a;}
+.hero-stats .stat-participants{
+  margin-top:16px;font-size:15px;font-weight:700;color:#5a8a9a;
+}
 
 /* ===== 반응형 ===== */
 @media(max-width:860px){
@@ -85,6 +123,8 @@ img.full{width:100%;display:block;}
   .pkg-grid{grid-template-columns:1fr;}
   .achieve-hero .big-num .accent{font-size:80px;}
   .achieve-hero .yr .yr-num{font-size:30px;}
+  .hero-stats{padding-left:28px!important;padding-right:28px!important;}
+  .hero-stats .stat-big{font-size:40px;}
 }
 @media(max-width:480px){
   .trust-dash,.pkg-section,.result-bridge,.evt-section,.achieve-hero{padding-left:20px!important;padding-right:20px!important;}
@@ -94,6 +134,10 @@ img.full{width:100%;display:block;}
   .achieve-hero .big-num .accent{font-size:60px;}
   .achieve-hero .big-num .unit{font-size:36px;}
   .achieve-hero .yr .yr-num{font-size:26px;}
+  .hero-stats{padding-left:20px!important;padding-right:20px!important;}
+  .hero-stats .stat-big{font-size:32px;}
+  .hero-stats .stat-row-sm .num{font-size:26px;}
+  .hero-mockup .mockup-img{width:80%;}
 }
 </style>
 </head>
@@ -110,6 +154,27 @@ img.full{width:100%;display:block;}
     <p class="yr"><span class="yr-num">3년</span> 누적 매출</p>
     <p class="big-num"><span class="accent">4.4</span><span class="unit">억 달성</span></p>
   </div>
+  <!-- 전자책 목업 -->
+  <div class="hero-mockup">
+    <div class="number-badge">01</div>
+    <img class="mockup-img" src="img/ebook_cover.jpg" alt="제로코치 전자책">
+  </div>
+</div>
+<!-- 성과 수치 (레퍼런스 스타일) -->
+<div class="s hero-stats">
+  <div class="stat-row">
+    <span class="stat-big">434건</span>
+    <span class="stat-label">달성</span>
+    <span class="stat-badge">크몽 전문가 Pick</span>
+  </div>
+  <div class="stat-sub">트레이너 전자책 카테고리 누적 판매 1위</div>
+  <div style="height:24px;"></div>
+  <div class="stat-row-sm">
+    <span class="num">4.88</span>
+    <span class="txt">평균 평점 · 만족도</span>
+    <span class="num" style="margin-left:20px;">98%</span>
+  </div>
+  <p class="stat-participants">219개 실사용 리뷰 · 수백 명의 트레이너가 검증</p>
 </div>
 
 <!-- ===== 2. 신뢰 대시보드 ===== -->
