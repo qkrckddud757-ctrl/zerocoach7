@@ -56,18 +56,43 @@ img.full{width:100%;display:block;}
 /* ===== 후기이벤트 ===== */
 .evt-section{padding:100px 64px;text-align:center;background:var(--bg);}
 
+/* ===== 성과 히어로 배너 (와디즈 스타일) ===== */
+.achieve-hero{
+  background:linear-gradient(180deg,#d6eef5 0%,#b8dce8 40%,#a3cfe0 100%);
+  padding:72px 48px 64px;text-align:center;position:relative;overflow:hidden;
+}
+.achieve-hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at 50% 20%,rgba(255,255,255,0.5) 0%,transparent 60%);
+  pointer-events:none;
+}
+.achieve-hero .stars{font-size:18px;letter-spacing:6px;color:#c8a84e;margin-bottom:16px;position:relative;z-index:1;}
+.achieve-hero .lead{font-size:18px;font-weight:700;color:#3a5a6a;margin-bottom:8px;position:relative;z-index:1;line-height:1.5;}
+.achieve-hero .lead small{font-size:20px;font-weight:900;color:#2a4a5a;}
+.achieve-hero .big-wrap{position:relative;z-index:1;margin-top:20px;}
+.achieve-hero .big-num{font-size:80px;font-weight:900;color:#1a3040;line-height:1.1;letter-spacing:-2px;}
+.achieve-hero .big-num .accent{color:#E53935;font-size:88px;}
+.achieve-hero .big-num .unit{font-size:48px;font-weight:900;color:#2a4a5a;}
+.achieve-hero .big-sub{font-size:26px;font-weight:700;color:#3a5a6a;margin-top:8px;}
+.achieve-hero .yr{font-size:16px;font-weight:400;color:#5a8a9a;}
+
 /* ===== 반응형 ===== */
 @media(max-width:860px){
   .s{width:100%!important;}
-  .trust-dash,.pkg-section,.result-bridge,.evt-section{padding-left:28px!important;padding-right:28px!important;}
+  .trust-dash,.pkg-section,.result-bridge,.evt-section,.achieve-hero{padding-left:28px!important;padding-right:28px!important;}
   .trust-grid{grid-template-columns:repeat(2,1fr);}
   .pkg-grid{grid-template-columns:1fr;}
+  .achieve-hero .big-num{font-size:60px;}
+  .achieve-hero .big-num .accent{font-size:68px;}
 }
 @media(max-width:480px){
-  .trust-dash,.pkg-section,.result-bridge,.evt-section{padding-left:20px!important;padding-right:20px!important;}
+  .trust-dash,.pkg-section,.result-bridge,.evt-section,.achieve-hero{padding-left:20px!important;padding-right:20px!important;}
   .trust-card .num{font-size:32px;}
   .pkg-section .headline{font-size:24px;}
   .result-bridge .headline{font-size:26px;}
+  .achieve-hero .big-num{font-size:48px;}
+  .achieve-hero .big-num .accent{font-size:54px;}
+  .achieve-hero .big-num .unit{font-size:36px;}
 }
 </style>
 </head>
@@ -76,7 +101,17 @@ img.full{width:100%;display:block;}
 <!-- ===== 1. 히어로 인트로 (기존 GIF) ===== -->
 <div class="s"><img class="full" src="img/template_v2/1.gif"></div>
 
-<!-- ===== 2. 신뢰 대시보드 (NEW — 와디즈 스타일) ===== -->
+<!-- ===== 1-1. 성과 히어로 배너 (와디즈 스타일) ===== -->
+<div class="s achieve-hero">
+  <p class="stars">★ ★ ★ ★ ★</p>
+  <p class="lead"><small>시스템</small> 셋팅하고</p>
+  <div class="big-wrap">
+    <p class="yr">3년 누적 매출</p>
+    <p class="big-num"><span class="accent">4.4</span><span class="unit">억 달성</span></p>
+  </div>
+</div>
+
+<!-- ===== 2. 신뢰 대시보드 ===== -->
 <div class="s trust-dash">
   <p class="label">VERIFIED RESULTS</p>
   <p class="headline">수백 명의 트레이너가<br>이미 검증한 시스템</p>
