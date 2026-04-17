@@ -13,6 +13,138 @@ img.full{width:100%;display:block;}
 .spacer{background:#111;height:60px;}
 :root{--t1:#e8e8e8;--t2:#999;--acc:#E53935;--mint:#5BEAD6;--gold:#FFD700;--bg:#111;--card:#1a1a2e;--bd:#2a2d3e;}
 
+/* ===== 와디즈 스타일 PAGE 1 ===== */
+
+/* 긴급 바 */
+.wz-urgent{
+  background:linear-gradient(90deg,#E53935,#FF6F61);
+  padding:14px 20px;text-align:center;
+  animation:urgentPulse 2s ease-in-out infinite;
+}
+@keyframes urgentPulse{0%,100%{opacity:1;}50%{opacity:0.85;}}
+.wz-urgent span{font-size:15px;font-weight:900;color:#fff;letter-spacing:2px;}
+
+/* 히어로 */
+.wz-hero{
+  background:linear-gradient(180deg,#0d1117 0%,#161b22 100%);
+  padding:64px 48px 0;text-align:center;position:relative;overflow:hidden;
+}
+.wz-hero::before{
+  content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(229,57,53,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.wz-hero .tag{
+  display:inline-block;background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.4);
+  border-radius:20px;padding:6px 18px;font-size:13px;font-weight:700;color:var(--acc);
+  letter-spacing:2px;margin-bottom:24px;
+}
+.wz-hero .main-copy{font-size:20px;font-weight:700;color:var(--t2);line-height:1.6;margin-bottom:16px;}
+.wz-hero .main-copy strong{color:var(--t1);font-weight:900;}
+.wz-hero .big-title{font-size:44px;font-weight:900;color:#fff;line-height:1.3;margin-bottom:8px;letter-spacing:-1px;}
+.wz-hero .big-title em{font-style:normal;color:var(--acc);position:relative;}
+.wz-hero .big-title em::after{
+  content:'';position:absolute;bottom:2px;left:0;right:0;height:3px;
+  background:var(--acc);border-radius:2px;opacity:0.5;
+}
+.wz-hero .sub-copy{font-size:16px;color:var(--t2);line-height:1.6;margin-bottom:40px;}
+
+/* 메인 비주얼 (목업) */
+.wz-visual{
+  background:#0d1117;padding:0 60px 48px;text-align:center;
+}
+.wz-visual img{
+  width:100%;max-width:440px;display:block;margin:0 auto;
+  border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* 성과 수치 바 */
+.wz-stats-bar{
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  padding:40px 48px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.wz-stat{text-align:center;}
+.wz-stat .val{font-size:36px;font-weight:900;line-height:1;}
+.wz-stat .lbl{font-size:13px;font-weight:700;color:var(--t2);margin-top:6px;}
+.wz-stat:nth-child(1) .val{color:var(--acc);}
+.wz-stat:nth-child(2) .val{color:var(--gold);}
+.wz-stat:nth-child(3) .val{color:var(--mint);}
+.wz-stat:nth-child(4) .val{color:#FF6F61;}
+
+/* 핵심 3가치 */
+.wz-values{
+  background:var(--bg);padding:72px 48px;text-align:center;
+}
+.wz-values .section-tag{
+  font-size:13px;font-weight:700;color:var(--mint);letter-spacing:6px;margin-bottom:14px;
+}
+.wz-values .section-title{
+  font-size:30px;font-weight:900;color:var(--t1);line-height:1.4;margin-bottom:48px;
+}
+.wz-val-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  max-width:780px;margin:0 auto;
+}
+.wz-val-item{
+  background:var(--card);border:1px solid var(--bd);border-radius:16px;
+  padding:36px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.wz-val-item::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+}
+.wz-val-item:nth-child(1)::before{background:var(--acc);}
+.wz-val-item:nth-child(2)::before{background:var(--mint);}
+.wz-val-item:nth-child(3)::before{background:var(--gold);}
+.wz-val-item .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;
+  font-size:16px;font-weight:900;color:#fff;margin-bottom:16px;
+}
+.wz-val-item:nth-child(1) .num{background:var(--acc);}
+.wz-val-item:nth-child(2) .num{background:var(--mint);color:#111;}
+.wz-val-item:nth-child(3) .num{background:var(--gold);color:#111;}
+.wz-val-item .icon{font-size:40px;margin-bottom:14px;}
+.wz-val-item .name{font-size:19px;font-weight:900;color:var(--t1);margin-bottom:10px;line-height:1.4;}
+.wz-val-item .desc{font-size:14px;color:var(--t2);line-height:1.6;}
+
+/* 타겟 메시지 */
+.wz-target{
+  background:linear-gradient(180deg,#111 0%,#0d1117 100%);
+  padding:64px 48px;text-align:center;
+}
+.wz-target .q{
+  font-size:24px;font-weight:900;color:var(--t1);line-height:1.5;margin-bottom:32px;
+}
+.wz-target .q em{font-style:normal;color:var(--acc);}
+.wz-checklist{
+  max-width:600px;margin:0 auto;text-align:left;
+}
+.wz-checklist li{
+  list-style:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);
+  font-size:17px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:12px;
+}
+.wz-checklist li::before{
+  content:'✓';display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;background:rgba(229,57,53,0.15);
+  color:var(--acc);font-size:14px;font-weight:900;flex-shrink:0;
+}
+.wz-target .bottom-msg{
+  margin-top:36px;font-size:18px;font-weight:900;color:var(--mint);
+}
+
+/* 크몽뱃지 */
+.wz-badge-row{
+  background:var(--bg);padding:0 48px 20px;text-align:center;
+}
+.wz-badge-row .badge{
+  display:inline-block;background:linear-gradient(135deg,var(--acc),#FF6F61);
+  border-radius:40px;padding:12px 36px;font-size:16px;font-weight:900;color:#fff;letter-spacing:1px;
+}
+
 /* ===== 신뢰 대시보드 ===== */
 .trust-dash{background:var(--bg);padding:64px 48px 56px;text-align:center;}
 .trust-dash .label{font-size:14px;font-weight:700;color:var(--acc);letter-spacing:6px;margin-bottom:12px;}
@@ -56,113 +188,123 @@ img.full{width:100%;display:block;}
 /* ===== 후기이벤트 ===== */
 .evt-section{padding:100px 64px;text-align:center;background:var(--bg);}
 
-/* ===== 히어로 (와디즈 100% 클론) ===== */
-.wz-hero{
-  background:linear-gradient(180deg,#c9e4f0 0%,#aed6e8 50%,#96c8de 100%);
-  padding:56px 0 0;text-align:center;position:relative;overflow:hidden;
-}
-.wz-hero::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:200px;
-  background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.55) 0%,transparent 70%);
-  pointer-events:none;
-}
-.wz-hero .stars{font-size:14px;letter-spacing:8px;color:#bfa84e;margin-bottom:24px;position:relative;z-index:1;}
-.wz-hero .sub-lead{font-size:20px;font-weight:700;color:#4a7a8a;position:relative;z-index:1;line-height:1.6;margin-bottom:20px;}
-.wz-hero .sub-lead strong{font-size:22px;font-weight:900;color:#2a5060;}
-.wz-hero .main-title{position:relative;z-index:1;margin-bottom:8px;}
-.wz-hero .main-title .label{font-size:28px;font-weight:900;color:#2a5060;display:block;margin-bottom:4px;}
-.wz-hero .main-title .big{font-size:86px;font-weight:900;color:#E53935;line-height:1;letter-spacing:-3px;}
-.wz-hero .main-title .unit{font-size:52px;font-weight:900;color:#1a3545;}
-
-/* 01 뱃지 + 목업 */
-.wz-hero .badge-num{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:44px;height:44px;border-radius:50%;
-  background:#1a3545;color:#fff;font-size:18px;font-weight:900;
-  margin:32px auto 20px;position:relative;z-index:1;
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
-}
-.wz-hero .mockup-wrap{position:relative;z-index:1;padding:0 60px;}
-.wz-hero .mockup-wrap img{
-  width:100%;max-width:480px;display:block;margin:0 auto;
-  border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,0.2);
-}
-
-/* 하단 수치 */
-.wz-stats{
-  background:linear-gradient(180deg,#96c8de 0%,#7eb8d0 100%);
-  padding:48px 48px 56px;text-align:center;
-}
-.wz-stats .row{margin-bottom:16px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;}
-.wz-stats .big-num{font-size:42px;font-weight:900;color:#1a3040;letter-spacing:-1px;}
-.wz-stats .label-txt{font-size:18px;font-weight:700;color:#3a6a7a;}
-.wz-stats .badge{
-  display:inline-block;background:#1a3545;color:#5BEAD6;
-  border-radius:20px;padding:5px 16px;font-size:12px;font-weight:700;letter-spacing:1px;
-}
-.wz-stats .row-sm{margin-bottom:12px;display:flex;justify-content:center;align-items:baseline;gap:8px;}
-.wz-stats .row-sm .num{font-size:30px;font-weight:900;color:#1a3040;}
-.wz-stats .row-sm .txt{font-size:16px;font-weight:700;color:#3a6a7a;}
-.wz-stats .foot{font-size:14px;font-weight:700;color:#5a8a9a;margin-top:12px;}
-
 /* ===== 반응형 ===== */
 @media(max-width:860px){
   .s{width:100%!important;}
-  .trust-dash,.pkg-section,.result-bridge,.evt-section,.achieve-hero{padding-left:28px!important;padding-right:28px!important;}
+  .wz-hero,.wz-visual,.wz-stats-bar,.wz-values,.wz-target,.wz-badge-row,
+  .trust-dash,.pkg-section,.result-bridge,.evt-section{padding-left:28px!important;padding-right:28px!important;}
   .trust-grid{grid-template-columns:repeat(2,1fr);}
   .pkg-grid{grid-template-columns:1fr;}
-  .wz-hero .main-title .big{font-size:68px;}
-  .wz-hero .main-title .unit{font-size:42px;}
-  .wz-hero .mockup-wrap{padding:0 40px;}
-  .wz-stats{padding-left:28px!important;padding-right:28px!important;}
+  .wz-stats-bar{grid-template-columns:repeat(2,1fr);gap:20px;}
+  .wz-val-grid{grid-template-columns:1fr;gap:16px;}
+  .wz-hero .big-title{font-size:34px;}
+  .wz-visual{padding-left:40px!important;padding-right:40px!important;}
 }
 @media(max-width:480px){
+  .wz-hero,.wz-visual,.wz-stats-bar,.wz-values,.wz-target,.wz-badge-row,
   .trust-dash,.pkg-section,.result-bridge,.evt-section{padding-left:20px!important;padding-right:20px!important;}
   .trust-card .num{font-size:32px;}
   .pkg-section .headline{font-size:24px;}
   .result-bridge .headline{font-size:26px;}
-  .wz-hero .main-title .big{font-size:54px;}
-  .wz-hero .main-title .unit{font-size:34px;}
-  .wz-hero .main-title .label{font-size:22px;}
-  .wz-hero .mockup-wrap{padding:0 24px;}
-  .wz-stats{padding-left:20px!important;padding-right:20px!important;}
-  .wz-stats .big-num{font-size:32px;}
-  .wz-stats .row-sm .num{font-size:22px;}
+  .wz-hero .big-title{font-size:28px;}
+  .wz-hero .main-copy{font-size:17px;}
+  .wz-stat .val{font-size:28px;}
+  .wz-values .section-title{font-size:24px;}
+  .wz-target .q{font-size:20px;}
+  .wz-checklist li{font-size:15px;}
+  .wz-visual{padding-left:24px!important;padding-right:24px!important;}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== 1. 히어로 (와디즈 클론 — 맨 첫 섹션) ===== -->
-<div class="s wz-hero">
-  <p class="stars">★ ★ ★ ★ ★</p>
-  <p class="sub-lead"><strong>시스템</strong> 셋팅하고</p>
-  <div class="main-title">
-    <span class="label">3년 누적 매출</span>
-    <span class="big">4.4</span><span class="unit">억 달성</span>
-  </div>
-  <div class="badge-num">01</div>
-  <div class="mockup-wrap">
-    <img src="img/ebook_cover.jpg" alt="제로코치 전자책">
-  </div>
-</div>
-<div class="s wz-stats">
-  <div class="row">
-    <span class="big-num">434건</span>
-    <span class="label-txt">달성</span>
-    <span class="badge">크몽 전문가 Pick</span>
-  </div>
-  <div class="row-sm">
-    <span class="num">440,000,000원</span>
-    <span class="txt">달성</span>
-  </div>
-  <div class="foot">219개 실사용 리뷰 · 평점 4.88 · 만족도 98%</div>
+<!-- ========================================== -->
+<!-- ===== PAGE 1: 와디즈 스타일 인트로 ===== -->
+<!-- ========================================== -->
+
+<!-- 긴급 바 -->
+<div class="s wz-urgent">
+  <span>🚨 지금 구매하면 정가 대비 75% 할인 🚨</span>
 </div>
 
-<!-- ===== 1-1. 히어로 인트로 GIF ===== -->
+<!-- 히어로 -->
+<div class="s wz-hero">
+  <p class="tag">TRAINER'S SECRET WEAPON</p>
+  <p class="main-copy">매출 상위 트레이너는<br><strong>이미 다 쓰고 있습니다</strong></p>
+  <p class="big-title">상담만 하면 <em>등록</em>되는<br>세일즈 시스템 풀패키지</p>
+  <p class="sub-copy">영업 못해도 괜찮습니다.<br>이 구조를 따라가기만 하면 됩니다.</p>
+</div>
+
+<!-- 메인 비주얼 -->
+<div class="s wz-visual">
+  <img src="img/ebook_cover.gif" alt="제로코치 템플릿 패키지">
+</div>
+
+<!-- 성과 수치 바 -->
+<div class="s wz-stats-bar">
+  <div class="wz-stat">
+    <p class="val">434<span style="font-size:18px;">건</span></p>
+    <p class="lbl">누적 거래</p>
+  </div>
+  <div class="wz-stat">
+    <p class="val">4.88</p>
+    <p class="lbl">평균 평점</p>
+  </div>
+  <div class="wz-stat">
+    <p class="val">98<span style="font-size:18px;">%</span></p>
+    <p class="lbl">구매 만족도</p>
+  </div>
+  <div class="wz-stat">
+    <p class="val">219</p>
+    <p class="lbl">실사용 리뷰</p>
+  </div>
+</div>
+
+<!-- 핵심 3가치 -->
+<div class="s wz-values">
+  <p class="section-tag">WHY THIS PACKAGE</p>
+  <p class="section-title">이 패키지가<br>다른 자료와 다른 이유</p>
+  <div class="wz-val-grid">
+    <div class="wz-val-item">
+      <div class="num">1</div>
+      <p class="icon">📊</p>
+      <p class="name">세일즈 구조가<br>설계되어 있다</p>
+      <p class="desc">단순 자료가 아닙니다.<br>상담 흐름을 따라가면<br>등록이 되는 마케팅 구조입니다.</p>
+    </div>
+    <div class="wz-val-item">
+      <div class="num">2</div>
+      <p class="icon">🎬</p>
+      <p class="name">통증케어로<br>신뢰가 잡힌다</p>
+      <p class="desc">수업 중 막히는 순간이 없습니다.<br>교정운동 VOD 5종으로<br>회원 신뢰 즉시 형성.</p>
+    </div>
+    <div class="wz-val-item">
+      <div class="num">3</div>
+      <p class="icon">🔄</p>
+      <p class="name">재등록까지<br>자동으로 잡힌다</p>
+      <p class="desc">회원관리 파일로<br>재등록 타이밍을 놓치지 않습니다.<br>소개 유도까지 자동화.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 이런 분에게 필요합니다 -->
+<div class="s wz-target">
+  <p class="q">혹시 지금 이런 상황이라면<br><em>이 패키지가 답입니다</em></p>
+  <ul class="wz-checklist">
+    <li>OT 10번 잡아도 등록이 1~2명뿐인 트레이너</li>
+    <li>상담할 때 뭘 말해야 할지 모르겠는 트레이너</li>
+    <li>재등록률이 낮아서 매달 0원부터 시작하는 트레이너</li>
+    <li>통증 호소하는 회원 앞에서 자신 없는 트레이너</li>
+    <li>SNS 해야 하는 건 아는데 방법을 모르는 트레이너</li>
+  </ul>
+  <p class="bottom-msg">434명의 트레이너가 이미 선택했습니다.</p>
+</div>
+
+<!-- ========================================== -->
+<!-- ===== PAGE 2: 기존 히어로 인트로 GIF ===== -->
+<!-- ========================================== -->
 <div class="s"><img class="full" src="img/template_v2/1.gif"></div>
 
-<!-- ===== 2. 신뢰 대시보드 ===== -->
+<!-- ===== 신뢰 대시보드 ===== -->
 <div class="s trust-dash">
   <p class="label">VERIFIED RESULTS</p>
   <p class="headline">수백 명의 트레이너가<br>이미 검증한 시스템</p>
@@ -189,12 +331,12 @@ img.full{width:100%;display:block;}
 
 <div class="s spacer"></div>
 
-<!-- ===== 3. 공감 섹션 (기존 GIF) ===== -->
+<!-- ===== 공감 섹션 (기존 GIF) ===== -->
 <div class="s"><img class="full" src="img/template_v2/2.gif"></div>
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/3.gif"></div>
 
-<!-- ===== 4. 구성품 시각화 (NEW — 아이템 아이콘) ===== -->
+<!-- ===== 구성품 시각화 ===== -->
 <div class="s pkg-section">
   <p class="label">FULL PACKAGE</p>
   <p class="headline">이 안에 전부 들어있습니다</p>
@@ -235,7 +377,7 @@ img.full{width:100%;display:block;}
 
 <div class="s spacer"></div>
 
-<!-- ===== 5. 아이템 상세 (기존 GIF) ===== -->
+<!-- ===== 아이템 상세 (기존 GIF) ===== -->
 <div class="s"><img class="full" src="img/template_v2/4.gif"></div>
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/5.gif"></div>
@@ -244,7 +386,7 @@ img.full{width:100%;display:block;}
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/7.gif"></div>
 
-<!-- ===== 6. 성과 전환 브릿지 (NEW) ===== -->
+<!-- ===== 성과 전환 브릿지 ===== -->
 <div class="s result-bridge">
   <div class="top-line"></div>
   <p class="kicker">REAL RESULTS</p>
@@ -252,12 +394,12 @@ img.full{width:100%;display:block;}
   <p class="sub">상장도, 후기도, 매출표도<br>전부 실제 데이터입니다.</p>
 </div>
 
-<!-- ===== 7. 신뢰 증거 (기존 GIF) ===== -->
+<!-- ===== 신뢰 증거 (기존 GIF) ===== -->
 <div class="s"><img class="full" src="img/template_v2/8.gif"></div>
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/9.gif"></div>
 
-<!-- ===== 8. 후기이벤트 (기존) ===== -->
+<!-- ===== 후기이벤트 ===== -->
 <div class="s evt-section">
   <p style="font-size:24px;font-weight:700;color:var(--acc);letter-spacing:3px;margin-bottom:16px;">🔥 선착순 20명 한정!</p>
   <p style="font-size:42px;font-weight:900;color:var(--mint);line-height:1.35;margin-bottom:20px;">월 1,000만 매출 자동화 시스템<br>전자책 증정 이벤트</p>
@@ -268,7 +410,7 @@ img.full{width:100%;display:block;}
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/template_v2/11.gif"></div>
 
-<!-- ===== 9. CTA ===== -->
+<!-- ===== CTA ===== -->
 <div class="s spacer"></div>
 <div class="s"><img class="full" src="img/ebook_v2/cta_blink.gif"></div>
 
