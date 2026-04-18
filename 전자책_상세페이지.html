@@ -13,18 +13,23 @@ img.full{width:100%;display:block;}
 .spacer{background:#111;height:60px;}
 @media(max-width:860px){.s{width:100%!important;}}
 
-/* ===== 파랑 인트로 히어로 + 번쩍 애니메이션 ===== */
+/* ===== 파랑 인트로 히어로 (860×1200 섹션 규격 통일) ===== */
 .intro-hero{
-  position:relative;width:100%;overflow:hidden;background:#0a0f2a;
+  position:relative;width:100%;
+  aspect-ratio:860/1200; /* 다른 gif들과 동일 비율 */
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse at 50% 50%, #1a2d5a 0%, #0a1328 60%, #050814 100%);
 }
 .intro-hero img.bg{
-  width:100%;display:block;position:relative;z-index:1;
+  display:block;position:relative;z-index:1;
+  height:100%;width:auto;max-width:none;
   animation:heroZoom 6s ease-in-out infinite alternate;
 }
 
 /* 주기적 플래시 (번쩍) */
 .intro-hero::before{
-  content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
+  content:'';position:absolute;inset:0;z-index:4;pointer-events:none;
   background:#fff;opacity:0;
   animation:flashBurst 4s ease-in-out infinite;
 }
@@ -32,7 +37,7 @@ img.full{width:100%;display:block;}
 /* 대각선 라이트 스윕 */
 .intro-hero::after{
   content:'';position:absolute;top:-50%;left:-60%;width:50%;height:200%;
-  z-index:2;pointer-events:none;transform:rotate(18deg);
+  z-index:3;pointer-events:none;transform:rotate(18deg);
   background:linear-gradient(90deg,
     transparent 0%,
     rgba(255,255,255,0) 40%,
