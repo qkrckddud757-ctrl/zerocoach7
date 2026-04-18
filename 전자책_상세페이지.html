@@ -6,15 +6,50 @@
 <title>트레이너 매출 자동화 시스템</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box;word-break:keep-all;overflow-wrap:break-word;}
 body{background:#111;font-family:'Noto Sans KR',sans-serif;overflow-x:hidden;}
 .s{width:860px;max-width:100%;margin:0 auto;overflow:hidden;}
 img.full{width:100%;display:block;}
 .spacer{background:#111;height:60px;}
 @media(max-width:860px){.s{width:100%!important;}}
+
+/* ═══ S0: 파랑 인트로 히어로 (번쩍 애니메이션) ═══ */
+.intro-hero{
+  position:relative;overflow:hidden;background:#0a1328;
+}
+.intro-hero .bg-img{
+  position:relative;z-index:1;width:100%;height:auto;display:block;
+  animation:heroZoom 6s ease-in-out infinite alternate;
+}
+.intro-hero::before{
+  content:'';position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:#fff;opacity:0;animation:flashBurst 4s ease-in-out infinite;
+}
+.intro-hero::after{
+  content:'';position:absolute;top:-50%;left:-60%;width:50%;height:200%;
+  z-index:3;pointer-events:none;transform:rotate(18deg);
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,0.55) 50%,rgba(255,255,255,0) 60%,transparent 100%);
+  animation:lightSweep 4s ease-in-out infinite;
+}
+.intro-hero .glow{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  box-shadow:inset 0 0 80px rgba(100,180,255,0.5),inset 0 0 160px rgba(60,130,255,0.25);
+  animation:glowPulse 2.4s ease-in-out infinite;
+}
+@keyframes flashBurst{0%,90%,100%{opacity:0;}93%{opacity:0.85;}96%{opacity:0.35;}}
+@keyframes lightSweep{0%{left:-60%;opacity:0;}15%{opacity:1;}60%{left:120%;opacity:0.2;}100%{left:120%;opacity:0;}}
+@keyframes glowPulse{0%,100%{box-shadow:inset 0 0 60px rgba(100,180,255,0.35),inset 0 0 140px rgba(60,130,255,0.15);}50%{box-shadow:inset 0 0 120px rgba(120,200,255,0.7),inset 0 0 220px rgba(80,160,255,0.45);}}
+@keyframes heroZoom{0%{transform:scale(1);}100%{transform:scale(1.06);}}
 </style>
 </head>
 <body>
+
+<!-- ═══ S0: 파랑 인트로 히어로 ═══ -->
+<div class="s intro-hero">
+  <img class="bg-img" src="img/ebook_v2/파랑인트로7.png" alt="제로코치 전자책 인트로">
+  <div class="glow"></div>
+</div>
+<div class="s spacer"></div>
 
 <div class="s"><img class="full" src="img/ebook_v2/1.gif"></div>
 <div class="s spacer"></div>
