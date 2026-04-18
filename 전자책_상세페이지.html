@@ -16,10 +16,15 @@ img.full{width:100%;display:block;}
 /* ===== 파랑 인트로 히어로 (860×1200 섹션 규격 통일) ===== */
 .intro-hero{
   position:relative;
+  width:860px;max-width:100%;
   aspect-ratio:860/1200; /* 다른 gif들과 동일 비율 (860x1200) */
-  overflow:hidden;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
   background:
     radial-gradient(ellipse at 50% 50%, #1a2d5a 0%, #0a1328 60%, #050814 100%);
+}
+.intro-hero .img-wrap{
+  position:absolute;inset:0;z-index:1;
+  display:flex;align-items:center;justify-content:center;
 }
 .intro-hero img.bg{
   display:block;position:relative;z-index:1;
@@ -81,7 +86,9 @@ img.full{width:100%;display:block;}
 
 <!-- ===== 1. 파랑 인트로 히어로 (번쩍 애니메이션) ===== -->
 <div class="s intro-hero">
-  <img class="bg full" src="img/ebook_v2/파랑인트로.jpeg" alt="전자책 메인 인트로">
+  <div class="img-wrap">
+    <img class="bg" src="img/ebook_v2/파랑인트로.jpeg" alt="전자책 메인 인트로">
+  </div>
   <div class="glow"></div>
 </div>
 <div class="s spacer"></div>
