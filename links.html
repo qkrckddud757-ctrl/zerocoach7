@@ -3,46 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>제로코치 | 링크</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>제로코치 @zerocoach7 | 링크</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#0d1117;font-family:'Noto Sans KR',sans-serif;min-height:100vh;display:flex;justify-content:center;padding:40px 20px;}
-.wrap{width:420px;max-width:100%;}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;word-break:keep-all;overflow-wrap:break-word;}
+body{
+  background:linear-gradient(180deg,#070f2e 0%,#0b1028 30%,#0a1328 70%,#050814 100%);
+  font-family:'Noto Sans KR',sans-serif;min-height:100vh;
+  display:flex;justify-content:center;padding:40px 20px;
+}
+.wrap{width:440px;max-width:100%;}
 
 /* 프로필 */
-.profile{text-align:center;margin-bottom:32px;}
-.profile h1{font-size:22px;font-weight:900;color:#fff;margin-bottom:4px;}
-.profile p{font-size:14px;color:#888;line-height:1.5;}
+.profile{text-align:center;margin-bottom:26px;}
+.profile .avatar{
+  width:92px;height:92px;border-radius:50%;margin:0 auto 14px;
+  background:linear-gradient(135deg,#5CDAFF,#10367D);
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;font-weight:900;color:#fff;letter-spacing:-1px;
+  box-shadow:0 8px 30px rgba(92,218,255,0.35);
+}
+.profile h1{font-size:24px;font-weight:900;color:#fff;margin-bottom:4px;letter-spacing:-0.5px;}
+.profile .handle{font-size:14px;color:#5CDAFF;font-weight:700;margin-bottom:10px;}
+.profile p{font-size:13.5px;color:#AEDDFF;line-height:1.6;}
+.profile p b{color:#fff;}
 
-/* 링크 버튼 */
-.link{display:block;background:#161b22;border:1px solid #30363d;border-radius:14px;padding:18px 24px;margin-bottom:12px;text-decoration:none;color:#fff;transition:all 0.2s;text-align:center;}
-.link:hover{border-color:#E53935;transform:translateY(-2px);box-shadow:0 4px 20px rgba(229,57,53,0.2);}
-.link .title{font-size:17px;font-weight:700;}
-.link .desc{font-size:13px;color:#888;margin-top:4px;}
+/* 실적 바 */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:26px;}
+.stat{background:rgba(255,255,255,0.05);border:1px solid rgba(174,221,255,0.2);border-radius:12px;padding:14px 6px;text-align:center;}
+.stat b{font-size:19px;font-weight:900;color:#5CDAFF;display:block;margin-bottom:2px;}
+.stat span{font-size:11px;color:#8a9ec0;font-weight:700;}
 
-/* 특별 링크 (강조) */
-.link-hot{background:linear-gradient(135deg,#E53935,#FF7B00);border:none;}
-.link-hot:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(229,57,53,0.4);}
-.link-hot .desc{color:rgba(255,255,255,0.8);}
+/* 섹션 라벨 */
+.section-lbl{
+  font-size:11px;font-weight:900;color:#5CDAFF;letter-spacing:4px;
+  margin:22px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.section-lbl::before,.section-lbl::after{
+  content:'';flex:1;height:1px;background:rgba(174,221,255,0.2);
+}
 
-.link-green{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #3fb950;}
-.link-green:hover{border-color:#3fb950;box-shadow:0 4px 20px rgba(63,185,80,0.2);}
+/* 링크 공통 */
+.link{
+  display:block;border-radius:14px;padding:18px 22px;margin-bottom:12px;
+  text-decoration:none;transition:all 0.2s;
+  position:relative;overflow:hidden;
+}
+.link .title{font-size:17px;font-weight:900;margin-bottom:4px;letter-spacing:-0.3px;}
+.link .desc{font-size:13px;line-height:1.5;opacity:0.85;}
+.link .price-badge{
+  position:absolute;top:12px;right:14px;
+  font-size:11px;font-weight:900;padding:4px 10px;border-radius:20px;letter-spacing:0.5px;
+}
 
-/* 스피어핏 링크 (로고 포함) */
-.link-spearfit{display:flex;align-items:center;gap:16px;text-align:left;background:#161b22;border:1px solid #1a2744;}
-.link-spearfit:hover{border-color:#1a3a6e;box-shadow:0 4px 20px rgba(26,55,110,0.3);}
-.link-spearfit img{width:48px;height:48px;border-radius:8px;object-fit:contain;background:#fff;padding:4px;}
+/* 전자책 카드 */
+.link-ebook{
+  background:linear-gradient(135deg,#10367D,#1a4a9c);
+  color:#fff;box-shadow:0 4px 16px rgba(16,54,125,0.3);
+}
+.link-ebook:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(92,218,255,0.45);}
+.link-ebook .price-badge{background:#5CDAFF;color:#0a1328;}
+.link-ebook .desc{color:#aeddff;}
+
+/* 템플릿 카드 */
+.link-template{
+  background:linear-gradient(135deg,#1a4a4a,#0f3939);
+  color:#fff;border:1px solid rgba(91,234,214,0.4);
+  box-shadow:0 4px 16px rgba(91,234,214,0.15);
+}
+.link-template:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(91,234,214,0.4);}
+.link-template .price-badge{background:#5BEAD6;color:#0a1328;}
+.link-template .desc{color:#a0ddd3;}
+
+/* 번들 · BEST */
+.link-bundle{
+  background:linear-gradient(135deg,#FF6B3A,#FF3A3A);
+  color:#fff;box-shadow:0 4px 20px rgba(255,107,58,0.4);
+}
+.link-bundle:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(255,107,58,0.55);}
+.link-bundle .price-badge{background:#FFD85E;color:#7a1a00;}
+.link-bundle .desc{color:rgba(255,255,255,0.9);}
+.link-bundle::before{
+  content:'🔥 BEST';position:absolute;top:-1px;left:16px;
+  background:#FFD85E;color:#7a1a00;font-size:11px;font-weight:900;
+  padding:3px 12px;border-radius:0 0 8px 8px;letter-spacing:1px;
+}
+.link-bundle .title{padding-top:10px;}
+
+/* 기본 링크 */
+.link-basic{
+  background:#161b22;border:1px solid #30363d;color:#fff;
+}
+.link-basic:hover{border-color:#5CDAFF;transform:translateY(-2px);}
+.link-basic .desc{color:#8a9ec0;}
+
+/* 스피어핏 */
+.link-spearfit{
+  display:flex;align-items:center;gap:14px;text-align:left;padding:14px 18px;
+  background:linear-gradient(135deg,#0a1020,#1a1e3a);
+  border:1px solid rgba(255,255,255,0.1);color:#fff;
+}
+.link-spearfit:hover{border-color:#5CDAFF;transform:translateY(-2px);}
+.link-spearfit .logo{
+  width:48px;height:48px;border-radius:10px;
+  background:linear-gradient(135deg,#1a3a6e,#0a1f3e);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;color:#5CDAFF;
+}
 .link-spearfit .info{flex:1;}
+.link-spearfit .title{margin-bottom:2px;font-size:16px;}
+.link-spearfit .soon-badge{
+  background:#FFD85E;color:#7a5a00;font-size:10px;font-weight:900;
+  padding:3px 8px;border-radius:20px;letter-spacing:0.5px;margin-left:6px;
+}
 
-/* 실적 */
-.stats{display:flex;gap:8px;margin-bottom:24px;}
-.stat{flex:1;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:12px;text-align:center;}
-.stat b{font-size:18px;font-weight:900;color:#E53935;display:block;}
-.stat span{font-size:11px;color:#666;}
+/* SNS 아이콘 버튼 */
+.sns-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
+.sns{background:#161b22;border:1px solid #30363d;color:#fff;border-radius:12px;padding:14px;text-align:center;text-decoration:none;font-size:14px;font-weight:700;transition:all 0.2s;}
+.sns:hover{transform:translateY(-2px);border-color:#5CDAFF;}
+.sns .ic{font-size:18px;margin-right:6px;}
 
 /* 하단 */
-.footer{text-align:center;margin-top:24px;font-size:12px;color:#444;}
+.footer{text-align:center;margin-top:28px;font-size:11.5px;color:#555;}
+.footer p{margin-bottom:4px;}
 </style>
 </head>
 <body>
@@ -50,53 +134,77 @@ body{background:#0d1117;font-family:'Noto Sans KR',sans-serif;min-height:100vh;d
 <div class="wrap">
   <!-- 프로필 -->
   <div class="profile">
-    <h1>제로코치 @zerocoach7</h1>
-    <p>수백명의 트레이너 월급을 바꿔준 그 시스템.</p>
+    <div class="avatar">ZC</div>
+    <h1>제로코치</h1>
+    <p class="handle">@zerocoach7</p>
+    <p>수백 명 트레이너의 월급을 바꿔준 <b>매출 자동화 시스템</b></p>
   </div>
 
   <!-- 실적 -->
   <div class="stats">
     <div class="stat"><b>434건+</b><span>누적 거래</span></div>
     <div class="stat"><b>4.88★</b><span>평점</span></div>
-    <div class="stat"><b>98%</b><span>만족도</span></div>
+    <div class="stat"><b>500명+</b><span>증명 후기</span></div>
   </div>
 
-  <!-- 링크들 -->
-  <a class="link link-hot" href="https://zerocoach.imweb.me" target="_blank">
-    <span class="title">📘 트레이너 매출 자동화 전자책</span>
-    <div class="desc">OT전환 · 재등록 · 소개유도 · SNS유입 전부 이 안에</div>
+  <!-- ═════ 상품 섹션 ═════ -->
+  <p class="section-lbl">TRAINER SALES PRODUCTS</p>
+
+  <!-- 1. 전자책 -->
+  <a class="link link-ebook" href="https://zerocoach.imweb.me/?product=ebook" target="_blank">
+    <span class="price-badge">49,000원</span>
+    <div class="title">📘 트레이너 매출 자동화 전자책</div>
+    <div class="desc">OT전환 · 재등록 · 소개유도 · SNS유입 설계서</div>
   </a>
 
-  <a class="link" href="https://zerocoach.imweb.me" target="_blank">
-    <span class="title">🔧 트레이너 도구 템플릿 패키지</span>
-    <div class="desc">세일즈북 + 회원관리 + AI프롬프트 + 교정영상 5편</div>
+  <!-- 2. 템플릿 -->
+  <a class="link link-template" href="https://zerocoach.imweb.me/?product=template" target="_blank">
+    <span class="price-badge">49,000원</span>
+    <div class="title">🔧 트레이너 도구 템플릿 풀세트</div>
+    <div class="desc">세일즈북 · 회원관리 · 교정 VOD 5편 · AI 프롬프트</div>
   </a>
 
-  <a class="link link-green" href="https://zerocoach.imweb.me" target="_blank">
-    <span class="title">🎁 상위 1% 트레이너 시스템 풀패키지</span>
-    <div class="desc">(매출자동화 전자책 + 세일즈북 템플릿) 세트 88,000원</div>
+  <!-- 3. 번들세트 -->
+  <a class="link link-bundle" href="https://zerocoach.imweb.me/?product=bundle" target="_blank">
+    <span class="price-badge">88,000원 · 78% OFF</span>
+    <div class="title">🎁 전자책 + 템플릿 풀세트</div>
+    <div class="desc">시스템 + 도구 한번에 · 따로 사면 396,000원</div>
   </a>
 
-  <a class="link" href="https://instagram.com/pt_zerocoach7" target="_blank">
-    <span class="title">🏋️ PT 무료 체험 문의 (DM)</span>
-    <div class="desc">스포짐 홍대서교점</div>
-  </a>
+  <!-- ═════ 브랜드 섹션 ═════ -->
+  <p class="section-lbl">BRANDS</p>
 
-  <a class="link link-spearfit" href="https://spearfit.co.kr" target="_blank">
-    <img src="img/spearfit_logo.jpg" alt="SPEARFIT">
+  <!-- 스피어핏 (예정) -->
+  <a class="link link-spearfit" href="#" onclick="alert('곧 오픈 예정입니다!'); return false;">
+    <div class="logo">🏋️</div>
     <div class="info">
-      <span class="title">SPEARFIT 짐웨어</span>
-      <div class="desc">옷 잘입는 헬창들이 만든 프리미엄 짐웨어</div>
+      <div class="title">SPEARFIT 짐웨어 <span class="soon-badge">COMING SOON</span></div>
+      <div class="desc" style="color:#8a9ec0;font-size:12.5px;">옷 잘 입는 헬창들이 만든 프리미엄 짐웨어</div>
     </div>
   </a>
 
-  <a class="link" href="https://instagram.com/zerocoach7" target="_blank">
-    <span class="title">📸 인스타그램</span>
+  <!-- ═════ PT 문의 ═════ -->
+  <p class="section-lbl">PT CONSULTATION</p>
+
+  <a class="link link-basic" href="https://instagram.com/zerocoach7" target="_blank">
+    <div class="title">🏋️ PT 무료 체험 상담</div>
+    <div class="desc">스포짐 서교점 · 인스타 DM으로 연락주세요</div>
   </a>
+
+  <!-- ═════ SNS ═════ -->
+  <div class="sns-row">
+    <a class="sns" href="https://instagram.com/zerocoach7" target="_blank">
+      <span class="ic">📸</span>인스타그램
+    </a>
+    <a class="sns" href="https://kmong.com/gig/692436" target="_blank">
+      <span class="ic">🛒</span>크몽
+    </a>
+  </div>
 
   <!-- 하단 -->
   <div class="footer">
     <p>제로코치 세일즈랩 | 대표 박창영</p>
+    <p>@zerocoach7 · 스포짐 서교점</p>
   </div>
 </div>
 
