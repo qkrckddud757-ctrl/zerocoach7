@@ -51,11 +51,17 @@ body{
   position:relative;overflow:hidden;
 }
 .link .title{font-size:17px;font-weight:900;margin-bottom:4px;letter-spacing:-0.3px;}
-.link .desc{font-size:13px;line-height:1.5;opacity:0.85;}
+.link .desc{font-size:13px;line-height:1.5;opacity:0.85;margin-bottom:14px;}
 .link .price-badge{
   position:absolute;top:12px;right:14px;
   font-size:11px;font-weight:900;padding:4px 10px;border-radius:20px;letter-spacing:0.5px;
 }
+.link .cta{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:900;padding:8px 16px;border-radius:20px;
+  letter-spacing:0.3px;transition:transform 0.2s;
+}
+.link:hover .cta{transform:translateX(3px);}
 
 /* 전자책 카드 */
 .link-ebook{
@@ -65,6 +71,7 @@ body{
 .link-ebook:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(92,218,255,0.45);}
 .link-ebook .price-badge{background:#5CDAFF;color:#0a1328;}
 .link-ebook .desc{color:#aeddff;}
+.link-ebook .cta{background:#5CDAFF;color:#0a1328;}
 
 /* 템플릿 카드 */
 .link-template{
@@ -75,6 +82,7 @@ body{
 .link-template:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(91,234,214,0.4);}
 .link-template .price-badge{background:#5BEAD6;color:#0a1328;}
 .link-template .desc{color:#a0ddd3;}
+.link-template .cta{background:#5BEAD6;color:#0a1328;}
 
 /* 번들 · BEST */
 .link-bundle{
@@ -84,6 +92,7 @@ body{
 .link-bundle:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(255,107,58,0.55);}
 .link-bundle .price-badge{background:#FFD85E;color:#7a1a00;}
 .link-bundle .desc{color:rgba(255,255,255,0.9);}
+.link-bundle .cta{background:#FFD85E;color:#7a1a00;}
 .link-bundle::before{
   content:'🔥 BEST';position:absolute;top:-1px;left:16px;
   background:#FFD85E;color:#7a1a00;font-size:11px;font-weight:900;
@@ -151,44 +160,27 @@ body{
   <p class="section-lbl">TRAINER SALES PRODUCTS</p>
 
   <!-- 1. 전자책 -->
-  <a class="link link-ebook" href="https://zerocoach.imweb.me/?product=ebook" target="_blank">
+  <a class="link link-ebook" href="https://zerocoach.imweb.me/shop_view/?idx=80" target="_blank">
     <span class="price-badge">49,000원</span>
     <div class="title">📘 트레이너 매출 자동화 전자책</div>
     <div class="desc">OT전환 · 재등록 · 소개유도 · SNS유입 설계서</div>
+    <span class="cta">바로가기 →</span>
   </a>
 
   <!-- 2. 템플릿 -->
-  <a class="link link-template" href="https://zerocoach.imweb.me/?product=template" target="_blank">
+  <a class="link link-template" href="https://zerocoach.imweb.me/shop_view/?idx=81" target="_blank">
     <span class="price-badge">49,000원</span>
     <div class="title">🔧 트레이너 도구 템플릿 풀세트</div>
     <div class="desc">세일즈북 · 회원관리 · 교정 VOD 5편 · AI 프롬프트</div>
+    <span class="cta">바로가기 →</span>
   </a>
 
   <!-- 3. 번들세트 -->
-  <a class="link link-bundle" href="https://zerocoach.imweb.me/?product=bundle" target="_blank">
+  <a class="link link-bundle" href="https://zerocoach.imweb.me/shop_view/?idx=82" target="_blank">
     <span class="price-badge">88,000원 · 78% OFF</span>
     <div class="title">🎁 전자책 + 템플릿 풀세트</div>
     <div class="desc">시스템 + 도구 한번에 · 따로 사면 396,000원</div>
-  </a>
-
-  <!-- ═════ 브랜드 섹션 ═════ -->
-  <p class="section-lbl">BRANDS</p>
-
-  <!-- 스피어핏 (예정) -->
-  <a class="link link-spearfit" href="#" onclick="alert('곧 오픈 예정입니다!'); return false;">
-    <div class="logo">🏋️</div>
-    <div class="info">
-      <div class="title">SPEARFIT 짐웨어 <span class="soon-badge">COMING SOON</span></div>
-      <div class="desc" style="color:#8a9ec0;font-size:12.5px;">옷 잘 입는 헬창들이 만든 프리미엄 짐웨어</div>
-    </div>
-  </a>
-
-  <!-- ═════ PT 문의 ═════ -->
-  <p class="section-lbl">PT CONSULTATION</p>
-
-  <a class="link link-basic" href="https://instagram.com/zerocoach7" target="_blank">
-    <div class="title">🏋️ PT 무료 체험 상담</div>
-    <div class="desc">스포짐 서교점 · 인스타 DM으로 연락주세요</div>
+    <span class="cta">최대할인 바로가기 →</span>
   </a>
 
   <!-- ═════ SNS ═════ -->
@@ -196,8 +188,8 @@ body{
     <a class="sns" href="https://instagram.com/zerocoach7" target="_blank">
       <span class="ic">📸</span>인스타그램
     </a>
-    <a class="sns" href="https://kmong.com/gig/692436" target="_blank">
-      <span class="ic">🛒</span>크몽
+    <a class="sns" href="https://zerocoach.imweb.me/" target="_blank">
+      <span class="ic">🛒</span>제로코치 스토어
     </a>
   </div>
 
