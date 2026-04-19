@@ -44,14 +44,19 @@ img.full{width:100%;display:block;}
 .ih-partlabel{display:flex;gap:2%;margin-bottom:3%;}
 .ih-partlabel .lb{flex:1;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,216,94,0.4);border-radius:30px;padding:1.2% 2%;text-align:center;font-size:1.6vw;font-weight:900;color:#FFD85E;letter-spacing:1px;}
 
-/* 번들 콤보 카드 (책 + 도구 그리드) */
-.ih-combo{display:grid;grid-template-columns:1fr 5% 1fr;gap:1.5%;align-items:center;margin-bottom:4%;}
-.ih-combo .book-side img{width:100%;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.55);display:block;}
-.ih-combo .plus-ic{font-size:6vw;font-weight:900;color:#FFD85E;text-align:center;}
-.ih-combo .tools-mini{display:grid;grid-template-columns:1fr 1fr;gap:4%;}
-.ih-combo .tcard{background:#2a1815;border:1.5px solid rgba(255,216,94,0.5);border-radius:12px;padding:8% 4%;text-align:center;position:relative;overflow:hidden;}
-.ih-combo .tcard .ic{font-size:3.3vw;margin-bottom:4%;}
-.ih-combo .tcard .n{font-size:1.5vw;font-weight:900;color:#FFD85E;line-height:1.2;letter-spacing:-0.3px;}
+/* 번들 콤보 카드 (책 + 도구 그리드) · 높이 비율 맞춤 */
+.ih-combo{display:grid;grid-template-columns:1fr 5% 1fr;gap:1.5%;align-items:stretch;margin-bottom:4%;}
+.ih-combo .book-side{display:flex;align-items:stretch;}
+.ih-combo .book-side img{width:100%;object-fit:cover;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.55);display:block;}
+.ih-combo .plus-ic{font-size:6vw;font-weight:900;color:#FFD85E;text-align:center;display:flex;align-items:center;justify-content:center;}
+.ih-combo .tools-mini{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4%;}
+.ih-combo .tcard{
+  background:#2a1815;border:1.5px solid rgba(255,216,94,0.5);border-radius:12px;
+  padding:6% 4%;text-align:center;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6%;
+}
+.ih-combo .tcard .ic{font-size:4.5vw;}
+.ih-combo .tcard .n{font-size:1.7vw;font-weight:900;color:#FFD85E;line-height:1.2;letter-spacing:-0.3px;}
 
 .intro-hero-html .ih-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,216,94,0.3);border-radius:16px;padding:2.8% 2%;margin-top:3%;}
 .intro-hero-html .ih-stats .stat{text-align:center;}
@@ -78,8 +83,8 @@ img.full{width:100%;display:block;}
   .intro-hero-html .ih-title{font-size:48px;letter-spacing:-2px;}
   .ih-partlabel .lb{font-size:14px;}
   .ih-combo .plus-ic{font-size:54px;}
-  .ih-combo .tcard .ic{font-size:28px;}
-  .ih-combo .tcard .n{font-size:13px;}
+  .ih-combo .tcard .ic{font-size:38px;}
+  .ih-combo .tcard .n{font-size:15px;}
   .intro-hero-html .ih-stats .n{font-size:26px;}
   .intro-hero-html .ih-stats .l{font-size:12px;}
   .intro-hero-html .ih-brand{font-size:42px;}
