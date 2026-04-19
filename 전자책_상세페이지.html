@@ -22,10 +22,10 @@ img.full{width:100%;display:block;}
 .intro-hero-html .ih-tag{display:inline-block;background:#5CDAFF;color:#0a1328;font-size:2.1vw;font-weight:900;padding:1.2% 3%;border-radius:40px;letter-spacing:3px;margin-bottom:4%;}
 .intro-hero-html .ih-pre{font-size:2.8vw;font-weight:700;color:#AEDDFF;text-align:center;margin-bottom:2%;}
 .intro-hero-html .ih-pre b{color:#5CDAFF;font-weight:900;}
-.intro-hero-html .ih-num{text-align:center;margin:2% 0;animation:hhPulse 2.2s ease-in-out infinite;}
-.intro-hero-html .ih-num .big{font-size:23vw;font-weight:900;color:#5CDAFF;line-height:0.95;letter-spacing:-0.6vw;}
+.intro-hero-html .ih-num{text-align:center;margin:2% 0;animation:hhPulse 0.7s ease-in-out infinite;}
+.intro-hero-html .ih-num .big{font-size:23vw;font-weight:900;color:#5CDAFF;line-height:0.95;letter-spacing:-0.6vw;animation:hhBlink 0.7s ease-in-out infinite;}
 .intro-hero-html .ih-num .unit{font-size:10vw;font-weight:900;color:#fff;}
-.intro-hero-html .ih-num .ex{font-size:14vw;font-weight:900;color:#FFD85E;display:inline-block;animation:hhBounce 2.2s ease-in-out infinite;}
+.intro-hero-html .ih-num .ex{font-size:14vw;font-weight:900;color:#FFD85E;display:inline-block;animation:hhBounce 0.5s ease-in-out infinite;}
 .intro-hero-html .ih-sub{font-size:3.7vw;font-weight:900;color:#AEDDFF;text-align:center;margin:1% 0 5%;letter-spacing:2px;}
 .intro-hero-html .ih-title{font-size:6.7vw;font-weight:900;color:#fff;text-align:center;line-height:1.2;letter-spacing:-0.25vw;margin-bottom:6%;}
 .intro-hero-html .ih-title b{color:#5CDAFF;}
@@ -39,8 +39,9 @@ img.full{width:100%;display:block;}
 .intro-hero-html .ih-stats .l{font-size:1.4vw;color:#8a9ec0;font-weight:700;margin-top:6%;}
 .intro-hero-html .ih-brand{margin-top:4%;text-align:center;font-size:4.9vw;font-weight:900;letter-spacing:4px;color:#5CDAFF;}
 .intro-hero-html .ih-brand-sub{text-align:center;font-size:1.6vw;color:#AEDDFF;margin-top:0.5%;letter-spacing:2px;font-weight:700;}
-@keyframes hhPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
-@keyframes hhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-1.2vw);}}
+@keyframes hhPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+@keyframes hhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-1.5vw);}}
+@keyframes hhBlink{0%,100%{color:#5CDAFF;}50%{color:#AEF0FF;}}
 @media(min-width:860px){
   .intro-hero-html .ih-tag{font-size:18px;}
   .intro-hero-html .ih-pre{font-size:24px;}
