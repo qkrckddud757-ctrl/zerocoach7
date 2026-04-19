@@ -77,5 +77,29 @@ img.full{width:100%;display:block;}
 <!-- ═══ FINAL CTA (가장 마지막) ═══ -->
 <div class="s"><img class="full" src="img/ebook_v3/11.gif"></div>
 
+<!-- ═══ 부모 iframe 자동 높이 조절 ═══ -->
+<script>
+(function(){
+  function sendHeight(){
+    try{
+      var h = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight
+      );
+      if(window.parent && window.parent.postMessage){
+        window.parent.postMessage({type:'zc-height',height:h},'*');
+      }
+    }catch(e){}
+  }
+  window.addEventListener('load',function(){setTimeout(sendHeight,300);setTimeout(sendHeight,1500);});
+  window.addEventListener('resize',function(){setTimeout(sendHeight,100);});
+  document.querySelectorAll('img').forEach(function(img){
+    if(!img.complete){img.addEventListener('load',sendHeight);}
+  });
+  setInterval(sendHeight,3000);
+})();
+</script>
+
 </body>
 </html>
