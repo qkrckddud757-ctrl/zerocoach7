@@ -13,22 +13,75 @@ img.full{width:100%;display:block;}
 .spacer{background:#111;height:60px;}
 @media(max-width:860px){.s{width:100%!important;}}
 
-/* ═══ S0: 파랑 인트로 히어로 (고화질 · 효과 최소화) ═══ */
-.intro-hero{position:relative;overflow:hidden;background:#0a1328;}
-.intro-hero .bg-img{
-  position:relative;z-index:1;width:100%;height:auto;display:block;
-  image-rendering:-webkit-optimize-contrast;
-  image-rendering:crisp-edges;
-  -webkit-backface-visibility:hidden;
-  transform:translateZ(0);
+/* ═══ S0: 파랑 인트로 히어로 (HTML 네이티브 · 선명도 최대) ═══ */
+.intro-hero-html{
+  width:860px;max-width:100%;margin:0 auto;position:relative;overflow:hidden;
+  padding:8% 7% 7%;color:#fff;box-sizing:border-box;
+  background:linear-gradient(180deg,#0b1028 0%,#110a35 30%,#0d1a48 70%,#070f2e 100%);
+}
+.intro-hero-html .ih-tag{display:inline-block;background:#5CDAFF;color:#0a1328;font-size:2.1vw;font-weight:900;padding:1.2% 3%;border-radius:40px;letter-spacing:3px;margin-bottom:4%;}
+.intro-hero-html .ih-pre{font-size:2.8vw;font-weight:700;color:#AEDDFF;text-align:center;margin-bottom:2%;}
+.intro-hero-html .ih-pre b{color:#5CDAFF;font-weight:900;}
+.intro-hero-html .ih-num{text-align:center;margin:2% 0;animation:hhPulse 2.2s ease-in-out infinite;}
+.intro-hero-html .ih-num .big{font-size:23vw;font-weight:900;color:#5CDAFF;line-height:0.95;letter-spacing:-0.6vw;}
+.intro-hero-html .ih-num .unit{font-size:10vw;font-weight:900;color:#fff;}
+.intro-hero-html .ih-num .ex{font-size:14vw;font-weight:900;color:#FFD85E;display:inline-block;animation:hhBounce 2.2s ease-in-out infinite;}
+.intro-hero-html .ih-sub{font-size:3.7vw;font-weight:900;color:#AEDDFF;text-align:center;margin:1% 0 5%;letter-spacing:2px;}
+.intro-hero-html .ih-title{font-size:6.7vw;font-weight:900;color:#fff;text-align:center;line-height:1.2;letter-spacing:-0.25vw;margin-bottom:6%;}
+.intro-hero-html .ih-title b{color:#5CDAFF;}
+.intro-hero-html .ih-book{text-align:center;margin:4% auto;}
+.intro-hero-html .ih-book img{width:45%;max-width:380px;display:block;margin:0 auto;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+.intro-hero-html .ih-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5%;margin:4% 0;}
+.intro-hero-html .ih-chip{background:rgba(92,218,255,0.15);border:1.5px solid rgba(92,218,255,0.4);border-radius:40px;padding:1.2% 2.4%;font-size:1.75vw;font-weight:700;color:#5CDAFF;}
+.intro-hero-html .ih-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(174,221,255,0.3);border-radius:16px;padding:2.8% 2%;margin-top:4%;}
+.intro-hero-html .ih-stats .stat{text-align:center;}
+.intro-hero-html .ih-stats .n{font-size:3.3vw;font-weight:900;color:#5CDAFF;line-height:1;}
+.intro-hero-html .ih-stats .l{font-size:1.4vw;color:#8a9ec0;font-weight:700;margin-top:6%;}
+.intro-hero-html .ih-brand{margin-top:4%;text-align:center;font-size:4.9vw;font-weight:900;letter-spacing:4px;color:#5CDAFF;}
+.intro-hero-html .ih-brand-sub{text-align:center;font-size:1.6vw;color:#AEDDFF;margin-top:0.5%;letter-spacing:2px;font-weight:700;}
+@keyframes hhPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+@keyframes hhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-1.2vw);}}
+@media(min-width:860px){
+  .intro-hero-html .ih-tag{font-size:18px;}
+  .intro-hero-html .ih-pre{font-size:24px;}
+  .intro-hero-html .ih-num .big{font-size:200px;letter-spacing:-6px;}
+  .intro-hero-html .ih-num .unit{font-size:90px;}
+  .intro-hero-html .ih-num .ex{font-size:120px;}
+  .intro-hero-html .ih-sub{font-size:32px;}
+  .intro-hero-html .ih-title{font-size:58px;letter-spacing:-2px;}
+  .intro-hero-html .ih-chip{font-size:15px;}
+  .intro-hero-html .ih-stats .n{font-size:28px;}
+  .intro-hero-html .ih-stats .l{font-size:12px;}
+  .intro-hero-html .ih-brand{font-size:42px;}
+  .intro-hero-html .ih-brand-sub{font-size:14px;}
+  @keyframes hhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ 0. 파랑 인트로 히어로 ═══ -->
-<div class="s intro-hero">
-  <img class="bg-img" src="img/ebook_v3/new_ebook_hero.gif" alt="4.4억 매출! 트레이너 매출 자동화 시스템">
+<!-- ═══ 0. 파랑 인트로 히어로 (HTML 네이티브 · 최고 화질) ═══ -->
+<div class="intro-hero-html">
+  <div style="text-align:center;"><span class="ih-tag">TRAINER SALES BIBLE</span></div>
+  <p class="ih-pre">억대 연봉 트레이너의 <b>실전 매출 공식</b></p>
+  <div class="ih-num"><span class="big">4.4</span><span class="unit">억</span><span class="ex">!</span></div>
+  <p class="ih-sub">3년 누적 매출 달성</p>
+  <h1 class="ih-title">트레이너<br><b>매출 자동화 시스템</b></h1>
+  <div class="ih-book"><img src="img/template_v3/10_newbook.jpeg" alt="전자책 표지"></div>
+  <div class="ih-chips">
+    <span class="ih-chip">📚 PDF 120p</span>
+    <span class="ih-chip">♾️ 평생 피드백권</span>
+    <span class="ih-chip">🤖 AI 마케팅</span>
+    <span class="ih-chip">💎 커뮤니티 톡방</span>
+  </div>
+  <div class="ih-stats">
+    <div class="stat"><p class="n">434건</p><p class="l">누적 거래</p></div>
+    <div class="stat"><p class="n">4.88</p><p class="l">평균 평점</p></div>
+    <div class="stat"><p class="n">98%</p><p class="l">구매 만족도</p></div>
+    <div class="stat"><p class="n">219</p><p class="l">실사용 리뷰</p></div>
+  </div>
+  <p class="ih-brand">ZEROCOACH</p>
+  <p class="ih-brand-sub">자동화가 되는 시스템을 셋팅하라</p>
 </div>
 <div class="s spacer"></div>
 
