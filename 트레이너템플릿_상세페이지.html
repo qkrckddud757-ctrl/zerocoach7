@@ -30,18 +30,19 @@ img.full{width:100%;display:block;}
 .intro-hero-html .ih-title{font-size:6.7vw;font-weight:900;color:#fff;text-align:center;line-height:1.2;letter-spacing:-0.25vw;margin-bottom:5%;}
 .intro-hero-html .ih-title b{color:#5BEAD6;}
 
-/* ── 업그레이드 카드: 미니 미리보기 포함 ── */
-.ih-tools{display:grid;grid-template-columns:1fr 1fr;gap:2%;margin:4% 0;}
+/* ── 업그레이드 카드: 미니 미리보기 포함 · 간결 · 크게 ── */
+.ih-tools{display:grid;grid-template-columns:1fr 1fr;gap:2%;margin:3% 0;}
 .ih-tools .tcard{
   background:linear-gradient(160deg,#162452 0%,#0f1a3d 100%);
   border:1.5px solid rgba(91,234,214,0.45);
-  border-radius:16px;padding:4% 3.5%;position:relative;overflow:hidden;
+  border-radius:16px;padding:4% 4% 4.5%;position:relative;overflow:hidden;
 }
 .ih-tools .tcard::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:#5BEAD6;}
-.ih-tools .tcard .top{display:flex;align-items:center;gap:3%;margin-bottom:5%;}
-.ih-tools .tcard .ic{width:18%;aspect-ratio:1;background:rgba(91,234,214,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:4vw;flex-shrink:0;}
-.ih-tools .tcard .fmt-chip{background:rgba(91,234,214,0.15);border:1px solid rgba(91,234,214,0.45);color:#5BEAD6;font-size:1.2vw;font-weight:900;padding:0.8% 1.8%;border-radius:6px;letter-spacing:1.5px;margin-left:auto;}
-.ih-tools .tcard .name{font-size:2.6vw;font-weight:900;color:#fff;margin-bottom:5%;line-height:1.2;letter-spacing:-0.5px;}
+.ih-tools .tcard .top{display:flex;align-items:center;gap:3%;margin-bottom:3.5%;}
+.ih-tools .tcard .ic{width:18%;aspect-ratio:1;background:rgba(91,234,214,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:4.5vw;flex-shrink:0;}
+.ih-tools .tcard .fmt-chip{background:rgba(91,234,214,0.15);border:1px solid rgba(91,234,214,0.45);color:#5BEAD6;font-size:1.35vw;font-weight:900;padding:0.8% 1.8%;border-radius:6px;letter-spacing:1.5px;margin-left:auto;}
+.ih-tools .tcard .name{font-size:2.9vw;font-weight:900;color:#fff;margin-bottom:3.5%;line-height:1.25;letter-spacing:-0.5px;min-height:7vw;}
+.ih-tools .tcard .name .hl{color:#5BEAD6;}
 
 /* 미니 미리보기 공통 */
 .ih-tools .preview{
@@ -113,11 +114,9 @@ img.full{width:100%;display:block;}
   .intro-hero-html .ih-num .ex{font-size:120px;}
   .intro-hero-html .ih-sub{font-size:28px;}
   .intro-hero-html .ih-title{font-size:58px;letter-spacing:-2px;}
-  .ih-tools .tcard .ic{font-size:34px;}
-  .ih-tools .tcard .fmt-chip{font-size:10px;}
-  .ih-tools .tcard .name{font-size:20px;}
-  .ih-tools .tcard .desc{font-size:13px;}
-  .ih-tools .tcard .result{font-size:13px;}
+  .ih-tools .tcard .ic{font-size:38px;}
+  .ih-tools .tcard .fmt-chip{font-size:11px;}
+  .ih-tools .tcard .name{font-size:24px;min-height:60px;}
   .preview.p-slides .bar-num{font-size:12px;min-width:26px;}
   .preview.p-slides .bar-fill{height:10px;}
   .preview.p-check .row{font-size:12px;gap:12px;}
@@ -157,7 +156,7 @@ img.full{width:100%;display:block;}
         <div class="ic">📊</div>
         <span class="fmt-chip">PPTX</span>
       </div>
-      <p class="name">상담 세일즈북</p>
+      <p class="name"><span class="hl">등록률 급상승</span><br>상담 구조</p>
       <div class="preview p-slides">
         <div class="slide-bar s1"><span class="bar-num">STEP 1</span><span class="bar-fill"></span></div>
         <div class="slide-bar s2"><span class="bar-num">STEP 2</span><span class="bar-fill"></span></div>
@@ -172,7 +171,7 @@ img.full{width:100%;display:block;}
         <div class="ic">📋</div>
         <span class="fmt-chip">PPTX</span>
       </div>
-      <p class="name">회원 관리 파일</p>
+      <p class="name"><span class="hl">재등록률 90%</span><br>장기고객 셋팅</p>
       <div class="preview p-check">
         <div class="row"><span class="chk">✓</span><span>회원 A · 재등록 D-3</span></div>
         <div class="row"><span class="chk">✓</span><span>회원 B · 목표 달성</span></div>
@@ -186,7 +185,7 @@ img.full{width:100%;display:block;}
         <div class="ic">🎬</div>
         <span class="fmt-chip">VIDEO · 5편</span>
       </div>
-      <p class="name">교정운동 VOD</p>
+      <p class="name"><span class="hl">막힘 없는</span><br>수업 실력</p>
       <div class="preview p-vod">
         <div class="thumbs">
           <div class="thumb"></div>
@@ -207,7 +206,7 @@ img.full{width:100%;display:block;}
         <div class="ic">🤖</div>
         <span class="fmt-chip">PROMPT</span>
       </div>
-      <p class="name">AI 외부유입 치트키</p>
+      <p class="name"><span class="hl">PT 유입</span><br>컨텐츠 자동화</p>
       <div class="preview p-ai">
         <div class="ai-box input">Prompt<br>입력</div>
         <span class="arrow">▶</span>
