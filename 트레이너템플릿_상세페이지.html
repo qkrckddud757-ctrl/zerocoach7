@@ -13,14 +13,17 @@ img.full{width:100%;display:block;}
 .spacer{background:#111;height:60px;}
 @media(max-width:860px){.s{width:100%!important;}}
 
-/* ═══ S0: 파랑 인트로 히어로 (고화질 · 효과 최소화) ═══ */
+/* ═══ S0: 파랑 인트로 히어로 (HD · 모바일/PC 모두 선명) ═══ */
 .intro-hero{position:relative;overflow:hidden;background:#0a1328;}
 .intro-hero .bg-img{
   position:relative;z-index:1;width:100%;height:auto;display:block;
+  image-rendering:auto;
   image-rendering:-webkit-optimize-contrast;
-  image-rendering:crisp-edges;
   -webkit-backface-visibility:hidden;
-  transform:translateZ(0);
+  -webkit-transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 </style>
 </head>
@@ -28,7 +31,7 @@ img.full{width:100%;display:block;}
 
 <!-- ═══ 0. 파랑 인트로 히어로 ═══ -->
 <div class="s intro-hero">
-  <img class="bg-img" src="img/template_v3/템플릿파랑인트로.jpeg" alt="제로코치 트레이너 템플릿 인트로">
+  <img class="bg-img" src="img/template_v3/템플릿파랑인트로_HD.png" alt="제로코치 트레이너 템플릿 인트로">
 </div>
 <div class="s spacer"></div>
 
