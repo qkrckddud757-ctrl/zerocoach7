@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>상위 1% 트레이너의 도구 템플릿 패키지</title>
+<style>
+.zc-spacer{display:block;height:max(0px,calc(17354px - 4020vw));width:100%;background:transparent;margin:0;padding:0;overflow:hidden;}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;word-break:keep-all;overflow-wrap:break-word;}
+html,body{background:transparent !important;font-family:'Noto Sans KR',sans-serif;overflow-x:hidden;margin:0;padding:0;}
+.s{width:860px;max-width:100%;margin:0 auto;overflow:hidden;}
+img.full{width:100%;display:block;}
+.spacer{background:#111;height:60px;}
+@media(max-width:860px){.s{width:100%!important;}}
+
+/* ═══ S0: 템플릿 히어로 (HTML 네이티브 · 업그레이드 카드) ═══ */
+.intro-hero-html{
+  width:860px;max-width:100%;margin:0 auto;position:relative;overflow:hidden;
+  padding:7% 5.5%;color:#fff;box-sizing:border-box;
+  background:linear-gradient(180deg,#0b1028 0%,#110a35 30%,#0d1a48 70%,#070f2e 100%);
+}
+.intro-hero-html .ih-tag{display:inline-block;background:#5BEAD6;color:#0a1328;font-size:2.1vw;font-weight:900;padding:1.2% 3%;border-radius:40px;letter-spacing:3px;margin-bottom:4%;}
+.intro-hero-html .ih-pre{font-size:2.8vw;font-weight:700;color:#AEDDFF;text-align:center;margin-bottom:2%;}
+.intro-hero-html .ih-pre b{color:#5BEAD6;font-weight:900;}
+.intro-hero-html .ih-num{text-align:center;margin:2% 0;animation:hhPulse 0.4s ease-in-out infinite;}
+.intro-hero-html .ih-num .big{font-size:23vw;font-weight:900;color:#5BEAD6;line-height:0.95;letter-spacing:-0.6vw;animation:hhBlink 0.4s steps(2) infinite;}
+.intro-hero-html .ih-num .unit{font-size:10vw;font-weight:900;color:#fff;animation:hhBlink 0.4s steps(2) infinite;}
+.intro-hero-html .ih-num .ex{font-size:14vw;font-weight:900;color:#FFD85E;display:inline-block;animation:hhBounce 0.3s ease-in-out infinite, hhFlash 0.4s steps(2) infinite;}
+.intro-hero-html .ih-sub{font-size:3.2vw;font-weight:900;color:#AEDDFF;text-align:center;margin:1% 0 5%;letter-spacing:2px;}
+.intro-hero-html .ih-title{font-size:6.7vw;font-weight:900;color:#fff;text-align:center;line-height:1.2;letter-spacing:-0.25vw;margin-bottom:5%;}
+.intro-hero-html .ih-title b{color:#5BEAD6;}
+
+/* ── 업그레이드 카드: 미니 미리보기 포함 · 간결 · 크게 ── */
+.ih-tools{display:grid;grid-template-columns:1fr 1fr;gap:2%;margin:3% 0;}
+.ih-tools .tcard{
+  background:linear-gradient(160deg,#162452 0%,#0f1a3d 100%);
+  border:1.5px solid rgba(91,234,214,0.45);
+  border-radius:16px;padding:4% 4% 4.5%;position:relative;overflow:hidden;
+}
+.ih-tools .tcard::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:#5BEAD6;}
+.ih-tools .tcard .top{display:flex;align-items:center;gap:3%;margin-bottom:3.5%;}
+.ih-tools .tcard .ic{width:18%;aspect-ratio:1;background:rgba(91,234,214,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:4.5vw;flex-shrink:0;}
+.ih-tools .tcard .fmt-chip{background:rgba(91,234,214,0.15);border:1px solid rgba(91,234,214,0.45);color:#5BEAD6;font-size:1.35vw;font-weight:900;padding:0.8% 1.8%;border-radius:6px;letter-spacing:1.5px;margin-left:auto;}
+.ih-tools .tcard .name{font-size:2.6vw;font-weight:900;color:#fff;margin-bottom:3.5%;line-height:1.3;letter-spacing:-0.5px;min-height:8vw;}
+.ih-tools .tcard .name .hl{color:#5BEAD6;font-size:1.8vw;font-weight:700;display:block;margin-top:2%;}
+
+/* 미니 미리보기 공통 */
+.ih-tools .preview{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(91,234,214,0.25);
+  border-radius:10px;padding:4%;min-height:14vw;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* 미리보기 1: 세일즈북 (슬라이드 목업) */
+.preview.p-slides{flex-direction:column;gap:1.5vw;}
+.preview.p-slides .slide-bar{display:flex;gap:0.8vw;align-items:center;width:100%;}
+.preview.p-slides .bar-num{font-size:1.3vw;font-weight:900;color:#5BEAD6;min-width:3vw;}
+.preview.p-slides .bar-fill{flex:1;height:1.2vw;background:rgba(91,234,214,0.15);border-radius:3px;position:relative;overflow:hidden;}
+.preview.p-slides .bar-fill::after{content:'';position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,#5BEAD6,#3BA99C);border-radius:3px;}
+.preview.p-slides .s1 .bar-fill::after{width:40%;}
+.preview.p-slides .s2 .bar-fill::after{width:65%;}
+.preview.p-slides .s3 .bar-fill::after{width:85%;}
+.preview.p-slides .s4 .bar-fill::after{width:100%;background:linear-gradient(90deg,#FFD85E,#FF9D3A);}
+
+/* 미리보기 2: 회원관리 (체크리스트 캘린더) */
+.preview.p-check{flex-direction:column;gap:1.2vw;width:100%;}
+.preview.p-check .row{display:flex;align-items:center;gap:1.5vw;font-size:1.35vw;color:#AEDDFF;font-weight:700;}
+.preview.p-check .chk{width:1.8vw;height:1.8vw;border-radius:5px;background:#5BEAD6;color:#0a1328;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2vw;flex-shrink:0;}
+.preview.p-check .chk.empty{background:transparent;border:2px solid rgba(91,234,214,0.4);}
+
+/* 미리보기 3: VOD (5 썸네일) */
+.preview.p-vod{flex-direction:column;gap:1vw;width:100%;}
+.preview.p-vod .thumbs{display:flex;gap:1vw;}
+.preview.p-vod .thumb{flex:1;aspect-ratio:1;background:linear-gradient(135deg,#1a3550,#0d1a2f);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#5BEAD6;font-size:1.6vw;position:relative;}
+.preview.p-vod .thumb::after{content:'▶';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(91,234,214,0.8);font-size:1.2vw;}
+.preview.p-vod .labels{display:flex;gap:0.8vw;justify-content:space-between;}
+.preview.p-vod .lab{font-size:1.1vw;color:#5BEAD6;font-weight:900;flex:1;text-align:center;}
+
+/* 미리보기 4: AI 프롬프트 (전환 시각) */
+.preview.p-ai{gap:2vw;width:100%;}
+.preview.p-ai .ai-box{flex:1;padding:2.5% 2%;border-radius:8px;text-align:center;font-size:1.3vw;font-weight:900;}
+.preview.p-ai .ai-box.input{background:rgba(174,221,255,0.1);border:1px dashed rgba(174,221,255,0.45);color:#AEDDFF;}
+.preview.p-ai .ai-box.output{background:rgba(91,234,214,0.2);border:1px solid #5BEAD6;color:#5BEAD6;}
+.preview.p-ai .arrow{font-size:2.5vw;color:#FFD85E;font-weight:900;}
+
+
+.intro-hero-html .ih-bonus{
+  background:rgba(255,107,58,0.18);border:2px dashed #FFD85E;
+  border-radius:16px;padding:3% 4%;display:flex;align-items:center;gap:3%;margin:3% 0;
+}
+.intro-hero-html .ih-bonus .bic{font-size:4vw;}
+.intro-hero-html .ih-bonus .btx{flex:1;}
+.intro-hero-html .ih-bonus .btx .bn{font-size:2vw;font-weight:900;color:#FFD85E;margin-bottom:0.5%;}
+.intro-hero-html .ih-bonus .btx .bd{font-size:1.4vw;color:#D4C8A8;line-height:1.4;}
+.intro-hero-html .ih-bonus .bb{background:#FF3A3A;color:#fff;font-size:1.4vw;font-weight:900;padding:1% 2.2%;border-radius:20px;letter-spacing:1px;flex-shrink:0;}
+
+.intro-hero-html .ih-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(174,221,255,0.3);border-radius:16px;padding:2.8% 2%;margin-top:3%;}
+.intro-hero-html .ih-stats .stat{text-align:center;}
+.intro-hero-html .ih-stats .n{font-size:3.3vw;font-weight:900;color:#5BEAD6;line-height:1;}
+.intro-hero-html .ih-stats .l{font-size:1.4vw;color:#8a9ec0;font-weight:700;margin-top:6%;}
+.intro-hero-html .ih-brand{margin-top:4%;text-align:center;font-size:4.9vw;font-weight:900;letter-spacing:4px;color:#5BEAD6;}
+.intro-hero-html .ih-brand-sub{text-align:center;font-size:1.6vw;color:#AEDDFF;margin-top:0.5%;letter-spacing:2px;font-weight:700;}
+
+@keyframes hhPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+@keyframes hhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-2vw);}}
+@keyframes hhBlink{0%{color:inherit;}50%{opacity:0.75;}}
+@keyframes hhFlash{0%{color:#FFD85E;}50%{color:#FF6B3A;}}
+
+@media(min-width:860px){
+  .intro-hero-html .ih-tag{font-size:18px;}
+  .intro-hero-html .ih-pre{font-size:24px;}
+  .intro-hero-html .ih-num .big{font-size:200px;letter-spacing:-6px;}
+  .intro-hero-html .ih-num .unit{font-size:90px;}
+  .intro-hero-html .ih-num .ex{font-size:120px;}
+  .intro-hero-html .ih-sub{font-size:28px;}
+  .intro-hero-html .ih-title{font-size:58px;letter-spacing:-2px;}
+  .ih-tools .tcard .ic{font-size:38px;}
+  .ih-tools .tcard .fmt-chip{font-size:11px;}
+  .ih-tools .tcard .name{font-size:22px;min-height:70px;}
+  .ih-tools .tcard .name .hl{font-size:15px;}
+  .preview.p-slides .bar-num{font-size:12px;min-width:26px;}
+  .preview.p-slides .bar-fill{height:10px;}
+  .preview.p-check .row{font-size:12px;gap:12px;}
+  .preview.p-check .chk{width:15px;height:15px;font-size:10px;}
+  .preview.p-vod .thumb{font-size:14px;}
+  .preview.p-vod .thumb::after{font-size:10px;}
+  .preview.p-vod .lab{font-size:9px;}
+  .preview.p-ai .ai-box{font-size:11px;}
+  .preview.p-ai .arrow{font-size:22px;}
+  .intro-hero-html .ih-bonus .bic{font-size:32px;}
+  .intro-hero-html .ih-bonus .btx .bn{font-size:17px;}
+  .intro-hero-html .ih-bonus .btx .bd{font-size:13px;}
+  .intro-hero-html .ih-bonus .bb{font-size:12px;}
+  .intro-hero-html .ih-stats .n{font-size:28px;}
+  .intro-hero-html .ih-stats .l{font-size:12px;}
+  .intro-hero-html .ih-brand{font-size:42px;}
+  .intro-hero-html .ih-brand-sub{font-size:14px;}
+  @keyframes hhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ 0. 템플릿 히어로 (HTML 네이티브 · 업그레이드 카드) ═══ -->
+<div class="intro-hero-html">
+  <div style="text-align:center;"><span class="ih-tag">TRAINER SALES TOOLKIT</span></div>
+  <p class="ih-pre">상위 1% 트레이너의 <b>실전 도구</b> 모음</p>
+  <div class="ih-num"><span class="big">4.4</span><span class="unit">억</span><span class="ex">!</span></div>
+  <p class="ih-sub">매출을 만든 그 도구들</p>
+  <h1 class="ih-title">트레이너 매출<br><b>도구 풀세트</b></h1>
+
+  <!-- ▼ 업그레이드된 4개 도구 카드 · 미니 미리보기 포함 ▼ -->
+  <div class="ih-tools">
+    <!-- Card 1: 세일즈북 -->
+    <div class="tcard">
+      <div class="top">
+        <div class="ic">📊</div>
+        <span class="fmt-chip">PPTX</span>
+      </div>
+      <p class="name">세일즈북<br><span class="hl">등록률 급상승 상담 구조</span></p>
+    </div>
+
+    <!-- Card 2: 회원관리 -->
+    <div class="tcard">
+      <div class="top">
+        <div class="ic">📋</div>
+        <span class="fmt-chip">PPTX</span>
+      </div>
+      <p class="name">회원관리 파일<br><span class="hl">재등록률 90%·장기고객 전환 셋팅</span></p>
+    </div>
+
+    <!-- Card 3: 교정 VOD -->
+    <div class="tcard">
+      <div class="top">
+        <div class="ic">🎬</div>
+        <span class="fmt-chip">VIDEO · 5편</span>
+      </div>
+      <p class="name">교정운동 VOD<br><span class="hl">막힘 없는 수업 실력</span></p>
+    </div>
+
+    <!-- Card 4: AI 치트키 -->
+    <div class="tcard">
+      <div class="top">
+        <div class="ic">🤖</div>
+        <span class="fmt-chip">PROMPT</span>
+      </div>
+      <p class="name">AI 외부유입 치트키<br><span class="hl">PT 유입 컨텐츠 자동화</span></p>
+    </div>
+  </div>
+
+  <!-- BONUS 선착순 -->
+  <div class="ih-bonus">
+    <div class="bic">🎁</div>
+    <div class="btx">
+      <p class="bn">BONUS · 매출 자동화 전자책 증정</p>
+      <p class="bd">별5개+300자 후기 작성 시 198,000원 전자책 무료</p>
+    </div>
+    <span class="bb">선착순 20명</span>
+  </div>
+
+  <div class="ih-stats">
+    <div class="stat"><p class="n">434건</p><p class="l">누적 거래</p></div>
+    <div class="stat"><p class="n">4.88</p><p class="l">평균 평점</p></div>
+    <div class="stat"><p class="n">98%</p><p class="l">구매 만족도</p></div>
+    <div class="stat"><p class="n">219</p><p class="l">실사용 리뷰</p></div>
+  </div>
+  <p class="ih-brand">ZEROCOACH</p>
+  <p class="ih-brand-sub">실전 도구로 매출을 설계하라</p>
+</div>
+<div class="s spacer"></div>
+
+<!-- ═══ 1~12. 상세페이지 본문 ═══ -->
+<div class="s"><img class="full" src="img/template_v3/1.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/2.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/3.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/4.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/5.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/6.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/7.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/8.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/9.gif"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/10_newbook.jpeg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/11.gif"></div>
+<div class="s spacer"></div>
+
+<!-- ═══ EXTRA: 제품 설명 상세 (9섹션) ═══ -->
+<div class="s"><img class="full" src="img/template_v3/template_extra_01.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/template_extra_02.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/template_extra_03.jpg"></div>
+<div class="s spacer"></div>
+
+<!-- ═══ REVIEW SECTION: 선착순 20명 증정 페이지 직후 삽입 (200+ 생생 후기) ═══ -->
+<div class="s"><img class="full" src="img/ebook_v3/review_01.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/ebook_v3/review_02.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/ebook_v3/review_03.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/ebook_v3/review_04.jpg"></div>
+<div class="s spacer"></div>
+
+<div class="s"><img class="full" src="img/template_v3/template_extra_04.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/template_extra_05.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/template_extra_06.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/template_extra_07.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/template_extra_08.jpg"></div>
+<div class="s spacer"></div>
+<div class="s"><img class="full" src="img/template_v3/template_extra_09.jpg"></div>
+<div class="s spacer"></div>
+
+<!-- ═══ ACTUAL FILES REVEAL (FINAL CTA 바로 앞) ═══ -->
+<style>
+.s.actual-files{
+  padding:7% 5.5% 8%;color:#fff;box-sizing:border-box;
+  background:linear-gradient(180deg,#0a1328 0%,#0f1a3d 50%,#0a1328 100%);
+  position:relative;overflow:hidden;
+}
+/* 최신화 뱃지 */
+.af-version-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(90deg,#FF6B3A 0%,#FFD85E 100%);
+  color:#0a1328;font-weight:900;padding:1.2% 3.2%;
+  border-radius:40px;font-size:1.9vw;letter-spacing:1.5px;
+  box-shadow:0 8px 24px rgba(255,107,58,0.35);
+  margin-bottom:3.5%;
+}
+.af-head{text-align:center;margin-bottom:5%;}
+.af-head .af-tag{
+  display:inline-block;background:#5BEAD6;color:#0a1328;
+  font-size:1.8vw;font-weight:900;padding:1% 3%;border-radius:30px;
+  letter-spacing:2.5px;margin-bottom:2.5%;
+}
+.af-head h2{
+  font-size:6.2vw;font-weight:900;color:#fff;line-height:1.2;
+  letter-spacing:-0.25vw;margin-bottom:3%;
+}
+.af-head h2 b{color:#5BEAD6;}
+.af-head .af-sub{
+  font-size:2.1vw;color:#AEDDFF;font-weight:700;line-height:1.55;
+}
+
+/* ── 시각적 이미지 카드 ── */
+.af-cards{display:flex;flex-direction:column;gap:4%;margin:5% 0;}
+.af-imgcard{
+  background:linear-gradient(160deg,#162452 0%,#0c1432 100%);
+  border:2px solid rgba(91,234,214,0.3);border-radius:20px;
+  overflow:hidden;position:relative;
+  box-shadow:0 20px 50px rgba(0,0,0,0.45);
+}
+.af-imgcard .card-top{
+  background:rgba(91,234,214,0.12);
+  border-bottom:1.5px solid rgba(91,234,214,0.28);
+  padding:3% 4%;display:flex;align-items:center;gap:2.5%;
+}
+.af-imgcard .card-top .ic{
+  font-size:4.5vw;background:rgba(91,234,214,0.22);
+  width:9%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:14px;flex-shrink:0;
+}
+.af-imgcard .card-top .txt{flex:1;}
+.af-imgcard .card-top .name{font-size:2.8vw;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1.2;}
+.af-imgcard .card-top .fmt{
+  display:inline-block;background:#5BEAD6;color:#0a1328;
+  font-size:1.3vw;font-weight:900;letter-spacing:1.5px;
+  padding:0.5% 1.6%;border-radius:6px;margin-top:1%;
+}
+.af-imgcard .card-top .tagline{
+  font-size:1.7vw;color:#AEDDFF;font-weight:700;margin-top:1.2%;line-height:1.45;
+}
+.af-imgcard .card-preview{padding:3% 4% 4%;}
+.af-imgcard .card-preview img{
+  width:100%;border-radius:12px;display:block;
+  box-shadow:0 12px 32px rgba(0,0,0,0.45);
+  border:1px solid rgba(91,234,214,0.2);
+}
+.af-imgcard .card-reaction{
+  background:linear-gradient(90deg,rgba(91,234,214,0.12) 0%,rgba(91,234,214,0.05) 100%);
+  padding:3% 4% 3.5%;border-top:1px solid rgba(91,234,214,0.2);
+  display:flex;align-items:flex-start;gap:2%;
+}
+.af-imgcard .card-reaction .quote-ic{font-size:2.8vw;color:#FFD85E;flex-shrink:0;line-height:1;}
+.af-imgcard .card-reaction .quote{
+  font-size:1.9vw;font-weight:900;color:#fff;line-height:1.45;letter-spacing:-0.3px;
+}
+.af-imgcard .card-reaction .quote b{color:#5BEAD6;}
+
+/* ── 인쇄 강조 배너 ── */
+.af-print-banner{
+  background:linear-gradient(135deg,#FF6B3A 0%,#E94B1E 100%);
+  border-radius:22px;padding:5% 5%;margin:5% 0;
+  box-shadow:0 16px 40px rgba(233,75,30,0.5);position:relative;overflow:hidden;
+}
+.af-print-banner::before{
+  content:'🖨️';position:absolute;top:-15%;right:-4%;font-size:22vw;
+  opacity:0.12;transform:rotate(-12deg);
+}
+.af-print-banner .pb-tag{
+  display:inline-block;background:#0a1328;color:#FFD85E;
+  font-size:1.5vw;font-weight:900;padding:0.7% 2%;border-radius:20px;
+  letter-spacing:2px;margin-bottom:2%;
+}
+.af-print-banner h3{
+  font-size:4.4vw;font-weight:900;color:#fff;line-height:1.4;
+  letter-spacing:-0.2vw;margin-bottom:2.8%;position:relative;z-index:1;
+}
+.af-print-banner h3 .pb-line{
+  display:block;white-space:nowrap;margin-bottom:2.2%;
+}
+.af-print-banner h3 .pb-line:last-child{margin-bottom:0;}
+.af-print-banner h3 b{
+  display:inline-block;white-space:nowrap;
+  background:#FFD85E;color:#E94B1E;padding:0 2%;border-radius:6px;
+}
+.af-print-banner .pb-body{
+  font-size:2vw;color:#fff;font-weight:700;line-height:1.6;position:relative;z-index:1;
+}
+.af-print-banner .pb-body b{color:#FFD85E;}
+
+/* ── 커뮤니티 업데이트 ── */
+.af-community{
+  background:linear-gradient(135deg,#1a0b35 0%,#2a1458 100%);
+  border:2px solid rgba(255,216,94,0.5);border-radius:22px;
+  padding:5% 5%;margin-top:5%;position:relative;overflow:hidden;
+}
+.af-community::before{
+  content:'💬';position:absolute;top:-8%;left:-4%;font-size:20vw;
+  opacity:0.08;transform:rotate(-15deg);
+}
+.af-community .cm-tag{
+  display:inline-block;background:#FFD85E;color:#1a0b35;
+  font-size:1.5vw;font-weight:900;padding:0.7% 2%;border-radius:20px;
+  letter-spacing:2px;margin-bottom:2%;
+}
+.af-community h3{
+  font-size:4.8vw;font-weight:900;color:#fff;line-height:1.25;
+  letter-spacing:-0.2vw;margin-bottom:3%;position:relative;z-index:1;
+}
+.af-community h3 b{color:#FFD85E;}
+.af-community .cm-body{
+  font-size:1.85vw;color:#E8DAFF;font-weight:700;line-height:1.65;
+  position:relative;z-index:1;
+}
+.af-community .cm-body strong{color:#FFD85E;}
+.af-community .cm-cond{
+  background:rgba(0,0,0,0.35);border-left:4px solid #FFD85E;
+  border-radius:12px;padding:2.5% 3%;margin-top:3%;
+  font-size:1.55vw;color:#cab8f0;line-height:1.7;
+}
+
+/* ── 하이라이트 박스 ── */
+.af-highlight{
+  background:rgba(91,234,214,0.1);border:2px dashed #5BEAD6;
+  border-radius:18px;padding:4% 5%;display:flex;align-items:center;gap:3.5%;
+  margin-top:5%;
+}
+.af-highlight .ah-icon{font-size:5.5vw;flex-shrink:0;}
+.af-highlight .ah-title{
+  font-size:2.8vw;font-weight:900;color:#5BEAD6;margin-bottom:1.2%;line-height:1.3;
+}
+.af-highlight .ah-sub{
+  font-size:1.8vw;color:#D4F1EC;font-weight:700;line-height:1.55;
+}
+
+@media(min-width:860px){
+  .s.actual-files .af-version-badge{font-size:16px;}
+  .s.actual-files .af-head .af-tag{font-size:15px;}
+  .s.actual-files .af-head h2{font-size:52px;letter-spacing:-2px;}
+  .s.actual-files .af-head .af-sub{font-size:18px;}
+  .s.actual-files .af-imgcard .card-top .ic{font-size:38px;}
+  .s.actual-files .af-imgcard .card-top .name{font-size:24px;}
+  .s.actual-files .af-imgcard .card-top .fmt{font-size:11px;}
+  .s.actual-files .af-imgcard .card-top .tagline{font-size:14.5px;}
+  .s.actual-files .af-imgcard .card-reaction .quote-ic{font-size:24px;}
+  .s.actual-files .af-imgcard .card-reaction .quote{font-size:16px;}
+  .s.actual-files .af-print-banner .pb-tag{font-size:13px;}
+  .s.actual-files .af-print-banner h3{font-size:38px;letter-spacing:-1.5px;}
+  .s.actual-files .af-print-banner .pb-body{font-size:17px;}
+  .s.actual-files .af-community .cm-tag{font-size:13px;}
+  .s.actual-files .af-community h3{font-size:40px;letter-spacing:-1.5px;}
+  .s.actual-files .af-community .cm-body{font-size:16px;}
+  .s.actual-files .af-community .cm-cond{font-size:13.5px;}
+  .s.actual-files .af-highlight .ah-icon{font-size:46px;}
+  .s.actual-files .af-highlight .ah-title{font-size:24px;}
+  .s.actual-files .af-highlight .ah-sub{font-size:15px;}
+}
+</style>
+<div class="s actual-files">
+  <!-- 최신화 뱃지 -->
+  <div style="text-align:center;">
+    <span class="af-version-badge">🆕 26년 4월 최신화 완료 버전</span>
+  </div>
+
+  <!-- 헤더 -->
+  <div class="af-head">
+    <span class="af-tag">📂 FULL REVEAL · 실제 파일 공개</span>
+    <h2>이런 실제 도구들이<br><b>여러분 손에 들어옵니다</b></h2>
+    <p class="af-sub">설명만이 아니라 <b style="color:#5BEAD6;">실제 화면</b>을 보여드립니다.<br>이거 쓰면 <b style="color:#FFD85E;">상담 등록률이 얼마나 쉬워질지</b> 한눈에.</p>
+  </div>
+
+  <div class="af-cards">
+    <!-- 1. OT용 관리파일 -->
+    <div class="af-imgcard">
+      <div class="card-top">
+        <div class="ic">📋</div>
+        <div class="txt">
+          <div class="name">OT용 회원관리파일</div>
+          <span class="fmt">HTML</span>
+          <div class="tagline">OT2 시작 10분 전 브리핑용 · 체형분석·근기능테스트·맞춤운동 7개 슬라이드</div>
+        </div>
+      </div>
+      <div class="card-preview">
+        <img src="img/file_reveal/preview_ot.jpg" alt="OT용 회원관리파일 미리보기">
+      </div>
+      <div class="card-reaction">
+        <span class="quote-ic">💬</span>
+        <p class="quote">"와 이런 분석을 회원님 한 명만을 위해 만들었다고요?" <b>→ 신뢰 확보 끝. 가격 얘기 꺼내기 전에 이미 회원은 결제를 원하고 있음.</b></p>
+      </div>
+    </div>
+
+    <!-- 2. 재등록용 관리파일 -->
+    <div class="af-imgcard">
+      <div class="card-top">
+        <div class="ic">🔄</div>
+        <div class="txt">
+          <div class="name">재등록용 관리파일</div>
+          <span class="fmt">HTML</span>
+          <div class="tagline">Before/After · 체중·골격근량 그래프 · 30회 로드맵 · 재등록 확정 리포트</div>
+        </div>
+      </div>
+      <div class="card-preview">
+        <img src="img/file_reveal/preview_renew.jpg" alt="재등록용 관리파일 미리보기">
+      </div>
+      <div class="card-reaction">
+        <span class="quote-ic">💬</span>
+        <p class="quote">체중·근육량 변화 그래프까지 <b>숫자로 증명</b>. "이 정도면 계속 해야죠" 소리 절로 나옴.</p>
+      </div>
+    </div>
+
+    <!-- 3. 수업 복습 양식 -->
+    <div class="af-imgcard">
+      <div class="card-top">
+        <div class="ic">📝</div>
+        <div class="txt">
+          <div class="name">수업 복습 양식</div>
+          <span class="fmt">HTML</span>
+          <div class="tagline">매 수업 직후 회원에게 전달 · 운동 기록·자세·컨디션·다음 수업 예고</div>
+        </div>
+      </div>
+      <div class="card-preview">
+        <img src="img/file_reveal/preview_review.jpg" alt="수업 복습 양식 미리보기">
+      </div>
+      <div class="card-reaction">
+        <span class="quote-ic">💬</span>
+        <p class="quote">매 수업마다 이 자료 받는 회원은 <b>장기고객 전환율이 다릅니다.</b> 꼼꼼함의 증거.</p>
+      </div>
+    </div>
+
+    <!-- 4. 세일즈북 활용 예시 -->
+    <div class="af-imgcard">
+      <div class="card-top">
+        <div class="ic">💼</div>
+        <div class="txt">
+          <div class="name">세일즈북 + 활용 예시</div>
+          <span class="fmt">PPTX + PDF</span>
+          <div class="tagline">OT2 운동 종료 직후 결제 유도용 · 가격·커리큘럼·환불정책 완성본 + 실제 말하기 대본</div>
+        </div>
+      </div>
+      <div class="card-preview">
+        <img src="img/file_reveal/preview_salesbook.jpg" alt="세일즈북 활용 예시 미리보기">
+      </div>
+      <div class="card-reaction">
+        <span class="quote-ic">💬</span>
+        <p class="quote">"이 구조면 <b>회원님 눈빛이 빛나서 계약서 달라고 하고있음.</b>" 활용 예시 PDF에 실제 말하기 대본까지 공개.</p>
+      </div>
+    </div>
+
+    <!-- 5. 시작하기 안내서 -->
+    <div class="af-imgcard">
+      <div class="card-top">
+        <div class="ic">📕</div>
+        <div class="txt">
+          <div class="name">시작하기 안내서</div>
+          <span class="fmt">PDF</span>
+          <div class="tagline">파일 여는 법부터 OT1 → OT2 → 세일즈 → 재등록까지 전체 플로우를 초등학생도 이해하게 정리</div>
+        </div>
+      </div>
+      <div class="card-preview">
+        <img src="img/file_reveal/preview_guide.jpg" alt="시작하기 안내서 미리보기">
+      </div>
+      <div class="card-reaction">
+        <span class="quote-ic">💬</span>
+        <p class="quote">"이거 그냥 따라만 하면 되네?" <b>실수 없이 바로 실전 투입 가능</b>한 매뉴얼.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 인쇄 강조 배너 ── -->
+  <div class="af-print-banner">
+    <span class="pb-tag">🖨️ NO iPAD? NO PROBLEM!</span>
+    <h3>
+      <span class="pb-line">태블릿·아이패드 <b>없어도 전혀 OK!</b></span>
+      <span class="pb-line">오히려 <b>인쇄해서 쓰는 게 더 좋을 수도</b></span>
+    </h3>
+    <p class="pb-body">
+      A4 <b>가로</b>로 인쇄해서 회원님 앞에서 <b>실제 종이</b>로 짚어가며 설명 → 디지털보다 더 고급스러운 느낌!<br>
+      수업 복습 양식도 <b>인쇄해서 손에 직접 쥐여주기</b> → "우리 선생님 진짜 꼼꼼하다" 느낌 배가.<br>
+      재등록 리포트도 종이로 마주앉아 하나씩 짚어주면 <b>결정률 확 상승</b>.
+    </p>
+  </div>
+
+  <!-- ── 후기 이벤트 · 커뮤니티 업데이트 ── -->
+  <div class="af-community">
+    <span class="cm-tag">💬 REVIEW EVENT · LIVE UPDATE</span>
+    <h3>후기 남기면 <b>상위 1% 톡방 초대</b><br>원하는 툴은 <b>최신화해서 재제공</b></h3>
+    <p class="cm-body">
+      후기 이벤트 참여시 <strong>상위 1% 트레이너 비공개 톡방</strong>에 초대됩니다.<br>
+      톡방에서 "이런 도구도 필요해요" <strong>요청하시면 반영</strong>해서 <strong>최신화 버전을 재제공</strong>해드립니다.<br>
+      <strong>평생 같이 업그레이드</strong>되는 상품입니다.
+    </p>
+    <div class="cm-cond">
+      ✅ 참여 조건 (동일) : 자사몰 ⭐5개 + 300자 이상 성과 후기 + 인스타 스토리 @zerocoach7 태그<br>
+      🎁 특전 : 198,000원 전자책 증정 + 상위 1% 톡방 초대 + 제로코치 피드백 무제한 + 톡방 요청 툴 업데이트 평생<br>
+      ⏰ 선착순 20명 한정!
+    </div>
+  </div>
+
+  <!-- ── 하이라이트 ── -->
+  <div class="af-highlight">
+    <div class="ah-icon">✨</div>
+    <div>
+      <p class="ah-title">OT1에서 사진 몇 장만 찍어 놓으면,</p>
+      <p class="ah-sub">나머지는 이 파일 안에서 전부 해결됩니다. 포토샵 · 일러스트 <b>필요 없음</b>.</p>
+    </div>
+  </div>
+</div>
+<div class="s spacer"></div>
+
+<!-- ═══ FINAL CTA (가장 마지막) ═══ -->
+<div class="s"><img class="full" src="img/template_v3/12.gif"></div>
+
+<!-- ═══ 부모 iframe 자동 높이 조절 ═══ -->
+<div class="zc-spacer"></div></body>
+</html>
