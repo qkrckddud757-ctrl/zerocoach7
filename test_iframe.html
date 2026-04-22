@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iframe 테스트</title>
+<style>
+body{margin:0;padding:0;background:#eaeaea;font-family:sans-serif;}
+.info{position:fixed;top:0;left:0;right:0;background:#000;color:#0f0;padding:6px;font-size:12px;z-index:999;}
+.wrap{margin-top:30px;padding:10px;background:#fff;}
+.mark{position:absolute;right:5px;background:red;color:#fff;padding:2px 8px;font-size:10px;font-weight:900;z-index:998;}
+iframe{display:block;margin:0 auto;border:2px dashed red;}
+#end{background:#ff0;text-align:center;padding:20px;font-weight:900;font-size:16px;}
+</style>
+</head>
+<body>
+<div class="info" id="info">측정 중...</div>
+<div class="wrap">
+  <div class="mark" id="mark">iframe 영역</div>
+  <iframe id="if" src="트레이너템플릿_상세페이지.html" width="430" height="19350" style="max-width:100%;display:block;margin:0 auto;border:2px dashed red;" scrolling="no" frameborder="0"></iframe>
+</div>
+<div id="end">⬆️ 위가 iframe 끝. 아래는 iframe 바깥</div>
+
+<script>
+const iframe = document.getElementById('if');
+function measure(){
+  try{
+    const doc = iframe.contentDocument;
+    const body = doc.body;
+    const html = doc.documentElement;
+    const bodyH = body ? body.scrollHeight : 0;
+    const htmlH = html.scrollHeight;
+    const vp = doc.querySelector('meta[name=viewport]')?.content || 'none';
+    const info = document.getElementById('info');
+    info.textContent = `device:${innerWidth}, iframe:${iframe.offsetWidth}x${iframe.offsetHeight}, content: html=${htmlH} body=${bodyH}, vp="${vp}", 여백:${iframe.offsetHeight - htmlH}px`;
+  }catch(e){
+    document.getElementById('info').textContent = 'err: ' + e.message;
+  }
+}
+iframe.onload = () => { setTimeout(measure, 500); setTimeout(measure, 1500); };
+window.addEventListener('resize', measure);
+</script>
+</body>
+</html>
