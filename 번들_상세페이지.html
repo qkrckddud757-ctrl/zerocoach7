@@ -8,6 +8,7 @@
 <meta http-equiv="Expires" content="0">
 <title>전자책 + 템플릿 올인원 번들 세트</title>
 <style>
+.zc-spacer{display:block;height:max(0px,calc(18072px - 4205vw));width:100%;background:transparent;margin:0;padding:0;overflow:hidden;}
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;word-break:keep-all;overflow-wrap:break-word;}
 html,body{background:transparent !important;font-family:'Noto Sans KR',sans-serif;overflow-x:hidden;margin:0;padding:0;}
@@ -590,37 +591,5 @@ img.full{width:100%;display:block;}
 <div class="s"><img class="full" src="img/cta_bundle.gif"></div>
 
 <!-- ═══ 부모 iframe 자동 높이 조절 ═══ -->
-<script>
-(function(){
-  function sendHeight(){
-    try{
-      var h = Math.max(document.body.scrollHeight,document.documentElement.scrollHeight,document.body.offsetHeight);
-      if(window.parent && window.parent.postMessage){window.parent.postMessage({type:'zc-height',height:h},'*');}
-    }catch(e){}
-  }
-  window.addEventListener('load',function(){setTimeout(sendHeight,300);setTimeout(sendHeight,1500);});
-  window.addEventListener('resize',function(){setTimeout(sendHeight,100);});
-  document.querySelectorAll('img').forEach(function(img){if(!img.complete){img.addEventListener('load',sendHeight);}});
-  setInterval(sendHeight,3000);
-})();
-</script>
-
-
-<script>
-/* iframe 자동 높이 동기화 — 부모(aimweb)에게 body 높이 postMessage */
-(function(){
-  function report(){
-    try{
-      var h = Math.max(document.body.scrollHeight, document.body.offsetHeight,
-                        document.documentElement.scrollHeight, document.documentElement.offsetHeight);
-      window.parent.postMessage({zcFrameHeight: h, frame: 'zerocoach'}, '*');
-    }catch(e){}
-  }
-  window.addEventListener('load', function(){ setTimeout(report, 200); setTimeout(report, 1000); setTimeout(report, 2500); });
-  window.addEventListener('resize', report);
-  if(window.ResizeObserver){ new ResizeObserver(report).observe(document.body); }
-  window.addEventListener('DOMContentLoaded', report);
-})();
-</script>
-</body>
+<div class="zc-spacer"></div></body>
 </html>
