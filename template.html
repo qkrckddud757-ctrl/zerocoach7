@@ -774,12 +774,28 @@ img.full{width:100%;display:block;}
 <!-- ═══ FINAL CTA (가장 마지막) ═══ -->
 <div class="s"><img class="full" src="img/template_v3/12.gif"></div>
 
-<!-- ═══ 안전 스페이서 — iframe height=22000 fix · 모바일 짤림 방지 ═══ -->
-<style>
-.zc-spacer{display:block;height:max(0px, calc(19828px - 4515vw));background:transparent;}
-</style>
-<div class="zc-spacer"></div>
-
-<!-- ═══ 부모 iframe 자동 높이 조절 ═══ -->
+<!-- ═══ 부모 iframe 자동 높이 조절 (postMessage) — 모든 모바일 폭 여백 0 ═══ -->
+<script>
+(function(){
+  function send(){
+    var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({type:'zcHeight', height: h, src:'template'}, '*');
+    }
+  }
+  window.addEventListener('load', send);
+  window.addEventListener('resize', send);
+  setTimeout(send, 100);
+  setTimeout(send, 500);
+  setTimeout(send, 1500);
+  setTimeout(send, 3000);
+  if (window.ResizeObserver) {
+    new ResizeObserver(send).observe(document.body);
+  }
+  document.querySelectorAll('img').forEach(function(img){
+    img.addEventListener('load', send);
+  });
+})();
+</script>
 </body>
 </html>
