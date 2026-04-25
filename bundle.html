@@ -587,6 +587,229 @@ img.full{width:100%;display:block;}
 </div>
 <div class="s spacer"></div>
 
+<!-- ═══ NEW · 케이스별 솔루션 PDF 6편 + 트레이너 전략 + 미친가격 (2026.04.26 추가) ═══ -->
+<style>
+.s.case-add{
+  padding:7% 5.5% 8%;color:#fff;box-sizing:border-box;
+  background:linear-gradient(180deg,#0a1328 0%,#0f1a3d 50%,#0a1328 100%);
+  position:relative;overflow:hidden;
+}
+.s.case-add .ca-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(90deg,#FFD85E 0%,#FF6B3A 100%);
+  color:#0a1328;font-weight:900;padding:1.2% 3.2%;
+  border-radius:40px;font-size:1.9vw;letter-spacing:1.5px;
+  box-shadow:0 8px 24px rgba(255,216,94,0.35);
+  margin-bottom:3.5%;
+}
+.s.case-add .ca-head{text-align:center;margin-bottom:5%;}
+.s.case-add .ca-head .ca-tag{
+  display:inline-block;background:#5BEAD6;color:#0a1328;
+  font-size:1.8vw;font-weight:900;padding:1% 3%;border-radius:30px;
+  letter-spacing:2.5px;margin-bottom:2.5%;
+}
+.s.case-add .ca-head h2{
+  font-size:6.2vw;font-weight:900;color:#fff;line-height:1.2;
+  letter-spacing:-0.25vw;margin-bottom:3%;
+}
+.s.case-add .ca-head h2 b{color:#FFD85E;}
+.s.case-add .ca-head .ca-sub{
+  font-size:2.1vw;color:#AEDDFF;font-weight:700;line-height:1.55;
+}
+.s.case-add .case-grid{display:grid;grid-template-columns:1fr 1fr;gap:3%;margin:5% 0;}
+.s.case-add .case-card{
+  background:linear-gradient(160deg,#162452 0%,#0c1432 100%);
+  border:2px solid rgba(91,234,214,0.3);border-radius:18px;
+  overflow:hidden;position:relative;
+  box-shadow:0 14px 32px rgba(0,0,0,0.45);
+}
+.s.case-add .case-card .case-img{width:100%;display:block;border-bottom:1px solid rgba(91,234,214,0.2);}
+.s.case-add .case-card .case-body{padding:4% 5% 5%;}
+.s.case-add .case-card .case-num{
+  display:inline-block;background:#FFD85E;color:#0a1328;
+  font-size:1.3vw;font-weight:900;letter-spacing:2px;
+  padding:0.5% 1.6%;border-radius:6px;margin-bottom:3%;
+}
+.s.case-add .case-card .case-title{
+  font-size:2.6vw;font-weight:900;color:#fff;line-height:1.25;letter-spacing:-0.5px;margin-bottom:2%;
+}
+.s.case-add .case-card .case-desc{font-size:1.55vw;color:#AEDDFF;line-height:1.55;font-weight:500;}
+.s.case-add .ca-note{
+  background:rgba(91,234,214,0.1);border:2px dashed #5BEAD6;
+  border-radius:18px;padding:4% 5%;text-align:center;margin-top:4%;
+}
+.s.case-add .ca-note p{font-size:2.2vw;font-weight:900;color:#5BEAD6;line-height:1.4;}
+.s.case-add .ca-note p b{color:#fff;}
+
+.s.case-add .extra-tools{
+  background:linear-gradient(135deg,#1a0b35 0%,#2a1458 100%);
+  border:2px solid rgba(255,216,94,0.5);border-radius:22px;
+  padding:5% 5%;margin-top:5%;position:relative;overflow:hidden;
+}
+.s.case-add .extra-tools .et-tag{
+  display:inline-block;background:#FFD85E;color:#1a0b35;
+  font-size:1.5vw;font-weight:900;padding:0.7% 2%;border-radius:20px;
+  letter-spacing:2px;margin-bottom:2.5%;
+}
+.s.case-add .extra-tools h3{
+  font-size:4.2vw;font-weight:900;color:#fff;line-height:1.25;
+  letter-spacing:-0.18vw;margin-bottom:3%;
+}
+.s.case-add .extra-tools h3 b{color:#FFD85E;}
+.s.case-add .extra-tools .et-list{display:flex;flex-direction:column;gap:2.5%;margin-top:3%;}
+.s.case-add .extra-tools .et-item{
+  background:rgba(0,0,0,0.35);border-left:4px solid #FFD85E;
+  border-radius:10px;padding:3% 3.5%;
+}
+.s.case-add .extra-tools .et-item .et-name{
+  font-size:2.2vw;font-weight:900;color:#FFD85E;margin-bottom:1.2%;letter-spacing:-0.3px;
+}
+.s.case-add .extra-tools .et-item .et-desc{
+  font-size:1.65vw;color:#E8DAFF;font-weight:500;line-height:1.55;
+}
+.s.case-add .extra-tools .et-item .et-desc b{color:#fff;}
+
+.s.case-add .crazy-price{
+  background:linear-gradient(135deg,#FF3A3A 0%,#E94B1E 50%,#FF6B3A 100%);
+  border-radius:22px;padding:6% 5%;margin-top:5%;
+  box-shadow:0 18px 40px rgba(233,75,30,0.55);
+  position:relative;overflow:hidden;text-align:center;
+}
+.s.case-add .crazy-price::before{
+  content:'🔥';position:absolute;top:-8%;right:-3%;font-size:18vw;
+  opacity:0.12;transform:rotate(-15deg);
+}
+.s.case-add .crazy-price .cp-tag{
+  display:inline-block;background:#0a1328;color:#FFD85E;
+  font-size:1.6vw;font-weight:900;padding:0.8% 2.2%;border-radius:20px;
+  letter-spacing:2px;margin-bottom:3%;
+}
+.s.case-add .crazy-price h3{
+  font-size:5.3vw;font-weight:900;color:#fff;line-height:1.25;
+  letter-spacing:-0.22vw;margin-bottom:2.5%;
+}
+.s.case-add .crazy-price h3 b{
+  display:inline-block;background:#FFD85E;color:#E94B1E;padding:0 2%;border-radius:6px;
+}
+.s.case-add .crazy-price .cp-msg{
+  font-size:2.5vw;color:#FFD85E;font-weight:900;line-height:1.5;margin-top:3%;
+}
+.s.case-add .crazy-price .cp-msg b{color:#fff;font-size:3vw;}
+.s.case-add .crazy-price .cp-warn{
+  background:#0a1328;color:#FFD85E;font-size:1.85vw;font-weight:900;
+  padding:2% 3%;border-radius:12px;margin-top:3.5%;letter-spacing:0.5px;
+}
+
+@media(min-width:860px){
+  .s.case-add .ca-badge{font-size:16px;}
+  .s.case-add .ca-head .ca-tag{font-size:15px;}
+  .s.case-add .ca-head h2{font-size:52px;letter-spacing:-2px;}
+  .s.case-add .ca-head .ca-sub{font-size:18px;}
+  .s.case-add .case-card .case-num{font-size:11px;}
+  .s.case-add .case-card .case-title{font-size:22px;}
+  .s.case-add .case-card .case-desc{font-size:13.5px;}
+  .s.case-add .ca-note p{font-size:19px;}
+  .s.case-add .extra-tools .et-tag{font-size:13px;}
+  .s.case-add .extra-tools h3{font-size:36px;letter-spacing:-1.4px;}
+  .s.case-add .extra-tools .et-item .et-name{font-size:19px;}
+  .s.case-add .extra-tools .et-item .et-desc{font-size:14.5px;}
+  .s.case-add .crazy-price .cp-tag{font-size:14px;}
+  .s.case-add .crazy-price h3{font-size:46px;letter-spacing:-1.9px;}
+  .s.case-add .crazy-price .cp-msg{font-size:21px;}
+  .s.case-add .crazy-price .cp-msg b{font-size:26px;}
+  .s.case-add .crazy-price .cp-warn{font-size:16px;}
+}
+</style>
+<div class="s case-add">
+  <div style="text-align:center;">
+    <span class="ca-badge">🆕 26년 4월 케이스 솔루션 PDF 6편 추가</span>
+  </div>
+
+  <div class="ca-head">
+    <span class="ca-tag">📂 CASE SOLUTION PDF · 6편</span>
+    <h2>회원이 어떤 상태로 와도<br><b>막히지 않습니다</b></h2>
+    <p class="ca-sub">상담실로 들어오는 회원 95%는 이 6가지 중 하나.<br><b style="color:#5BEAD6;">진단부터 처방까지</b> 그대로 따라하면 끝.</p>
+  </div>
+
+  <div class="case-grid">
+    <div class="case-card">
+      <img class="case-img" src="img/case/01_neck.jpg" alt="거북목 케이스">
+      <div class="case-body">
+        <span class="case-num">CASE 01</span>
+        <p class="case-title">거북목 케이스</p>
+        <p class="case-desc">상부교차증후군 완벽 교정 가이드 · 무너진 인체 설계도 재건</p>
+      </div>
+    </div>
+    <div class="case-card">
+      <img class="case-img" src="img/case/02_shoulder.jpg" alt="어깨통증 케이스">
+      <div class="case-body">
+        <span class="case-num">CASE 02</span>
+        <p class="case-title">어깨통증 케이스</p>
+        <p class="case-desc">라운드숄더·충돌증후군 진단부터 처방까지</p>
+      </div>
+    </div>
+    <div class="case-card">
+      <img class="case-img" src="img/case/03_back.jpg" alt="허리통증 케이스">
+      <div class="case-body">
+        <span class="case-num">CASE 03</span>
+        <p class="case-title">허리통증 케이스</p>
+        <p class="case-desc">디스크·협착증 안전 루틴과 회복 시퀀스</p>
+      </div>
+    </div>
+    <div class="case-card">
+      <img class="case-img" src="img/case/04_yoyo.jpg" alt="요요/다이어트 케이스">
+      <div class="case-body">
+        <span class="case-num">CASE 04</span>
+        <p class="case-title">요요/다이어트 케이스</p>
+        <p class="case-desc">대사 재건 청사진 · 고장난 인체 엔진 수리법</p>
+      </div>
+    </div>
+    <div class="case-card">
+      <img class="case-img" src="img/case/05_muscle.jpg" alt="근육량증가 케이스">
+      <div class="case-body">
+        <span class="case-num">CASE 05</span>
+        <p class="case-title">근육량증가 케이스</p>
+        <p class="case-desc">정체기 돌파 · 효율적 벌크업 시스템</p>
+      </div>
+    </div>
+    <div class="case-card">
+      <img class="case-img" src="img/case/06_diet.jpg" alt="다이어트 케이스">
+      <div class="case-body">
+        <span class="case-num">CASE 06</span>
+        <p class="case-title">다이어트 케이스</p>
+        <p class="case-desc">근손실 없는 과학적 다이어트 · 체지방만 깎는 법</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ca-note">
+    <p>✅ 상담실 어떤 회원이 와도 <b>즉답 가능</b>한 트레이너로 만들어드립니다</p>
+  </div>
+
+  <div class="extra-tools">
+    <span class="et-tag">+ ADD-ON · NEW</span>
+    <h3>트레이너 전략 가이드<br>+ <b>인스타 그래픽 11장</b></h3>
+    <div class="et-list">
+      <div class="et-item">
+        <p class="et-name">📑 트레이너 전략 PDF</p>
+        <p class="et-desc">매출 상위권 트레이너가 어떻게 <b>회원·시간·매출</b>을 다루는지 정리한 운영 전략집.</p>
+      </div>
+      <div class="et-item">
+        <p class="et-name">📱 인스타 그래픽 11장</p>
+        <p class="et-desc">바로 업로드 가능한 SNS 콘텐츠 <b>카드뉴스 11장</b>.<br>그대로 게시하면 SNS 유입이 시작됩니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="crazy-price">
+    <span class="cp-tag">🔥 FINAL CHANCE · 선착순 20명</span>
+    <h3>전자책 + 20개 넘는 템플릿이<br><b>8만 8천원?</b></h3>
+    <p class="cp-msg"><b>그냥 미친 가격입니다.</b><br>20명까지만 풀고 → 정가 396,000원으로 인상</p>
+    <div class="cp-warn">⚠ 마감되면 다시 이 가격으로 돌아오지 않습니다</div>
+  </div>
+</div>
+<div class="s spacer"></div>
+
 <!-- ═══ FINAL CTA (가장 마지막 · 깜빡이 GIF) ═══ -->
 <div class="s"><img class="full" src="img/cta_bundle.gif"></div>
 
