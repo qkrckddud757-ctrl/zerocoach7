@@ -554,6 +554,169 @@ img.full{width:100%;display:block;}
     </div>
   </div>
 
+  <!-- ═══ 케이스별 솔루션 PDF 6종 (NEW) ═══ -->
+  <style>
+  .af-cases-header{text-align:center;margin:8% 0 5%;}
+  .af-cases-header .case-tag{
+    display:inline-block;background:#FF6B3A;color:#fff;
+    font-size:1.8vw;font-weight:900;padding:1% 3%;border-radius:30px;
+    letter-spacing:2px;margin-bottom:2.5%;
+  }
+  .af-cases-header h3{
+    font-size:5.5vw;font-weight:900;color:#fff;line-height:1.25;
+    letter-spacing:-0.25vw;margin-bottom:2.5%;
+  }
+  .af-cases-header h3 b{color:#FFD85E;}
+  .af-cases-header .case-sub{
+    font-size:2vw;color:#AEDDFF;font-weight:700;line-height:1.55;
+  }
+  .af-cases-header .case-sub b{color:#5BEAD6;}
+  .af-cases-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:3%;margin-bottom:5%;
+  }
+  .case-card{
+    background:linear-gradient(160deg,#1a2855 0%,#0c1432 100%);
+    border:2px solid rgba(255,107,58,0.35);border-radius:18px;
+    overflow:hidden;position:relative;
+    box-shadow:0 16px 40px rgba(0,0,0,0.45);
+    display:flex;flex-direction:column;
+  }
+  .case-card::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:5px;
+    background:linear-gradient(90deg,#FF6B3A,#FFD85E);
+  }
+  .case-card .case-num{
+    position:absolute;top:3%;right:4%;
+    background:#FF6B3A;color:#fff;font-size:1.4vw;font-weight:900;
+    padding:0.6% 1.4%;border-radius:6px;letter-spacing:1px;z-index:2;
+  }
+  .case-card .case-img{
+    width:100%;aspect-ratio:1.79/1;
+    background:#000;display:flex;align-items:center;justify-content:center;
+    overflow:hidden;border-bottom:2px solid rgba(255,107,58,0.25);
+  }
+  .case-card .case-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .case-card .case-body{padding:5% 6% 6%;flex:1;display:flex;flex-direction:column;}
+  .case-card .case-name{
+    font-size:3vw;font-weight:900;color:#fff;letter-spacing:-0.5px;
+    line-height:1.2;margin-bottom:3%;
+  }
+  .case-card .case-name b{color:#FFD85E;}
+  .case-card .case-tagline{
+    font-size:1.7vw;color:#AEDDFF;font-weight:700;line-height:1.5;
+    margin-bottom:auto;padding-bottom:4%;
+  }
+  .case-card .case-tagline b{color:#5BEAD6;}
+  .case-card .case-fmt{
+    display:inline-flex;align-items:center;gap:1.5%;
+    background:rgba(255,107,58,0.15);border:1px solid rgba(255,107,58,0.45);
+    color:#FF6B3A;font-size:1.4vw;font-weight:900;letter-spacing:1.5px;
+    padding:1.2% 2.5%;border-radius:6px;align-self:flex-start;
+  }
+  .case-card .case-fmt::before{content:'📄';font-size:1.6vw;}
+
+  .af-cases-bottom{
+    background:linear-gradient(135deg,#FF6B3A 0%,#FFD85E 100%);
+    color:#0a1328;border-radius:18px;padding:4% 5%;text-align:center;
+    margin-top:4%;
+  }
+  .af-cases-bottom h4{
+    font-size:3.5vw;font-weight:900;letter-spacing:-0.2vw;line-height:1.3;margin-bottom:1.5%;
+  }
+  .af-cases-bottom p{font-size:1.7vw;font-weight:700;line-height:1.5;}
+  .af-cases-bottom p b{background:#0a1328;color:#FFD85E;padding:0 2%;border-radius:4px;}
+
+  @media(min-width:860px){
+    .s.actual-files .af-cases-header .case-tag{font-size:14px;}
+    .s.actual-files .af-cases-header h3{font-size:46px;letter-spacing:-2px;}
+    .s.actual-files .af-cases-header .case-sub{font-size:17px;}
+    .s.actual-files .case-card .case-num{font-size:11px;}
+    .s.actual-files .case-card .case-name{font-size:24px;}
+    .s.actual-files .case-card .case-tagline{font-size:14.5px;}
+    .s.actual-files .case-card .case-fmt{font-size:11px;}
+    .s.actual-files .case-card .case-fmt::before{font-size:13px;}
+    .s.actual-files .af-cases-bottom h4{font-size:30px;letter-spacing:-1.5px;}
+    .s.actual-files .af-cases-bottom p{font-size:14.5px;}
+  }
+  @media(max-width:600px){
+    .af-cases-grid{grid-template-columns:1fr;gap:5%;}
+  }
+  </style>
+
+  <div class="af-cases-header">
+    <span class="case-tag">📚 BONUS · 케이스별 솔루션 PDF 6종</span>
+    <h3>회원 통증·고민 들어오면<br><b>바로 꺼내 쓰는</b> 솔루션 PDF</h3>
+    <p class="case-sub">"이 회원 거북목인데…" → 거기서 끝.<br>바로 <b>케이스 PDF 꺼내서 보여주며 짚어주면</b> 신뢰 폭발 + 등록률 ↑</p>
+  </div>
+
+  <div class="af-cases-grid">
+    <!-- 1. 거북목 -->
+    <div class="case-card">
+      <span class="case-num">CASE 01</span>
+      <div class="case-img"><img src="img/file_reveal/preview_case_neck.jpg" alt="거북목 케이스 PDF"></div>
+      <div class="case-body">
+        <p class="case-name">거북목 / <b>일자목</b> 케이스</p>
+        <p class="case-tagline">하루 8시간 책상 앞 회원 → <b>3주 이내 자세 변화</b> 만들어내는 단계별 솔루션</p>
+        <span class="case-fmt">PDF · 솔루션 시트</span>
+      </div>
+    </div>
+    <!-- 2. 어깨통증 -->
+    <div class="case-card">
+      <span class="case-num">CASE 02</span>
+      <div class="case-img"><img src="img/file_reveal/preview_case_shoulder.jpg" alt="어깨통증 케이스 PDF"></div>
+      <div class="case-body">
+        <p class="case-name">어깨 / <b>회전근개</b> 통증</p>
+        <p class="case-tagline">"오십견인가요?" 묻는 회원 즉시 안심 + <b>맞춤 운동 처방</b>으로 PT 신뢰 형성</p>
+        <span class="case-fmt">PDF · 솔루션 시트</span>
+      </div>
+    </div>
+    <!-- 3. 허리통증 -->
+    <div class="case-card">
+      <span class="case-num">CASE 03</span>
+      <div class="case-img"><img src="img/file_reveal/preview_case_back.jpg" alt="허리통증 케이스 PDF"></div>
+      <div class="case-body">
+        <p class="case-name">허리 / <b>디스크·요추</b> 통증</p>
+        <p class="case-tagline">디스크 의심 회원 — <b>안전한 운동 가이드</b> + 병원 연계 시점까지 명확하게 안내</p>
+        <span class="case-fmt">PDF · 솔루션 시트</span>
+      </div>
+    </div>
+    <!-- 4. 요요/다이어트 -->
+    <div class="case-card">
+      <span class="case-num">CASE 04</span>
+      <div class="case-img"><img src="img/file_reveal/preview_case_yoyo.jpg" alt="요요 케이스 PDF"></div>
+      <div class="case-body">
+        <p class="case-name">요요 / <b>위고비 후</b> 케어</p>
+        <p class="case-tagline">감량 후 처진살·근손실 회원 → <b>탄력 회복 + 체력 재구축</b> 12주 로드맵</p>
+        <span class="case-fmt">PDF · 솔루션 시트</span>
+      </div>
+    </div>
+    <!-- 5. 근육량 증가 -->
+    <div class="case-card">
+      <span class="case-num">CASE 05</span>
+      <div class="case-img"><img src="img/file_reveal/preview_case_muscle.jpg" alt="근육량 증가 케이스 PDF"></div>
+      <div class="case-body">
+        <p class="case-name">근육량 증가 / <b>벌크업</b></p>
+        <p class="case-tagline">마른 체형 회원 → <b>주차별 부피 변화 만드는</b> 분할 + 영양 가이드</p>
+        <span class="case-fmt">PDF · 솔루션 시트</span>
+      </div>
+    </div>
+    <!-- 6. 다이어트 -->
+    <div class="case-card">
+      <span class="case-num">CASE 06</span>
+      <div class="case-img"><img src="img/file_reveal/preview_case_diet.jpg" alt="다이어트 케이스 PDF"></div>
+      <div class="case-body">
+        <p class="case-name">다이어트 / <b>체지방 감량</b></p>
+        <p class="case-tagline">"진짜 빠질까요?" 의심하는 회원 → <b>주차별 변화 예측</b> + 식단 처방까지 한 장에</p>
+        <span class="case-fmt">PDF · 솔루션 시트</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="af-cases-bottom">
+    <h4>OT 상담 때 이거 한 장 펼치면<br>등록 안 할 수가 없습니다</h4>
+    <p>"제 통증/고민에 <b>이미 답이 있구나</b>" → 가격 안 묻고 시작합니다.</p>
+  </div>
+
   <!-- ── 인쇄 강조 배너 ── -->
   <div class="af-print-banner">
     <span class="pb-tag">🖨️ NO iPAD? NO PROBLEM!</span>
