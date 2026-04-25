@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>트레이너 템플릿 대표이미지</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:1080px;height:1080px;overflow:hidden;font-family:'Noto Sans KR',sans-serif;word-break:keep-all;}
+body{
+  position:relative;color:#fff;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(91,234,214,0.42), transparent 42%),
+    radial-gradient(circle at 78% 82%, rgba(255,216,94,0.3), transparent 48%),
+    linear-gradient(135deg,#0a1328 0%,#0f1a3d 45%,#1a0b35 100%);
+}
+/* 그리드 노이즈 + 라이트 빔 */
+body::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(91,234,214,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91,234,214,0.05) 1px, transparent 1px);
+  background-size:72px 72px;
+  pointer-events:none;
+}
+body::after{
+  content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%) rotate(15deg);
+  width:200px;height:1500px;
+  background:linear-gradient(180deg, transparent 0%, rgba(255,216,94,0.08) 50%, transparent 100%);
+  filter:blur(40px);pointer-events:none;
+}
+.wrap{
+  position:relative;width:100%;height:100%;
+  padding:90px 80px 80px;display:flex;flex-direction:column;justify-content:space-between;
+}
+
+/* 상단 */
+.top-row{display:flex;justify-content:space-between;align-items:center;}
+.brand{
+  display:flex;align-items:center;gap:14px;
+  font-weight:900;letter-spacing:4px;font-size:22px;color:#5BEAD6;
+}
+.brand .dot{width:14px;height:14px;border-radius:50%;background:#5BEAD6;box-shadow:0 0 22px #5BEAD6;}
+.discount-badge{
+  background:linear-gradient(135deg,#FF3A3A 0%,#E94B1E 50%,#FF6B3A 100%);
+  color:#fff;font-weight:900;font-size:22px;letter-spacing:2px;
+  padding:14px 24px;border-radius:50px;
+  box-shadow:0 14px 32px rgba(233,75,30,0.55);
+  border:2px solid rgba(255,216,94,0.55);
+}
+
+/* 메인 타이틀 */
+.title-block{margin-top:50px;}
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#FFD85E;color:#0a1328;
+  font-weight:900;font-size:24px;letter-spacing:2.5px;
+  padding:11px 24px;border-radius:8px;margin-bottom:34px;
+  box-shadow:0 10px 24px rgba(255,216,94,0.35);
+}
+.big-num-row{display:flex;align-items:flex-start;gap:20px;}
+.big-num{
+  font-size:280px;line-height:0.85;font-weight:900;letter-spacing:-16px;
+  background:linear-gradient(180deg,#FFE889 0%,#FFD85E 35%,#FF8B3A 75%,#E94B1E 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 0 60px rgba(255,216,94,0.35);
+  filter:drop-shadow(0 18px 24px rgba(0,0,0,0.5));
+}
+.big-num-row .plus{
+  font-size:96px;font-weight:900;color:#5BEAD6;
+  line-height:1;margin-top:30px;text-shadow:0 0 30px rgba(91,234,214,0.55);
+}
+.big-label{
+  font-size:64px;line-height:1.1;font-weight:900;letter-spacing:-3px;color:#fff;
+  margin-top:6px;
+}
+.big-label b{
+  background:linear-gradient(90deg,#5BEAD6 0%,#A8FFE8 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  text-shadow:0 0 24px rgba(91,234,214,0.4);
+}
+
+/* 서브 카피 */
+.sub-line{
+  margin-top:34px;font-size:28px;line-height:1.45;color:#AEDDFF;font-weight:700;
+  border-left:5px solid #5BEAD6;padding-left:24px;
+  box-shadow:-10px 0 30px -10px rgba(91,234,214,0.4);
+}
+.sub-line b{color:#fff;}
+
+/* 가격 박스 */
+.bottom-stack{}
+.price-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(24px);
+  border:1px solid rgba(91,234,214,0.35);border-radius:22px;
+  padding:30px 38px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+.price-left .original{
+  font-size:24px;color:#8BA9D6;text-decoration:line-through;font-weight:700;letter-spacing:0.5px;
+}
+.price-left .now{
+  font-size:84px;font-weight:900;letter-spacing:-4px;color:#fff;line-height:1;
+  margin-top:4px;display:flex;align-items:baseline;gap:6px;
+}
+.price-left .now .num{
+  background:linear-gradient(180deg,#FFE889 0%,#FFD85E 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.price-left .now .won{font-size:42px;color:#fff;}
+.price-right{text-align:right;}
+.price-right .stars{color:#FFD85E;font-size:30px;letter-spacing:4px;text-shadow:0 0 15px rgba(255,216,94,0.5);}
+.price-right .reviews{font-size:22px;color:#AEDDFF;margin-top:8px;font-weight:700;}
+.price-right .reviews b{color:#fff;font-size:24px;}
+
+/* 하단 라인 */
+.bottom-line{
+  display:flex;justify-content:center;align-items:center;gap:36px;
+  margin-top:18px;font-size:22px;color:#5BEAD6;font-weight:900;letter-spacing:1.5px;
+}
+.bottom-line span{display:flex;align-items:center;gap:10px;}
+.bottom-line .pip{width:6px;height:6px;border-radius:50%;background:#FFD85E;box-shadow:0 0 10px #FFD85E;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top-row">
+    <div class="brand"><span class="dot"></span>ZEROCOACH · TEMPLATE</div>
+    <div class="discount-badge">⚡ 75% OFF · 선착순 20명</div>
+  </div>
+
+  <div class="title-block">
+    <span class="kicker">⚡ 매출 자동화 시스템</span>
+    <div class="big-num-row">
+      <span class="big-num">20</span>
+      <span class="plus">+</span>
+    </div>
+    <div class="big-label">트레이너 <b>매출 템플릿</b><br>풀패키지</div>
+    <div class="sub-line">세일즈북 · 회원관리 · 케이스 솔루션 PDF<br><b>지금 바로 쓸 수 있는 20+ 자료</b></div>
+  </div>
+
+  <div class="bottom-stack">
+    <div class="price-row">
+      <div class="price-left">
+        <div class="original">정상가 198,000원</div>
+        <div class="now"><span class="num">49,000</span><span class="won">원</span></div>
+      </div>
+      <div class="price-right">
+        <div class="stars">★★★★★</div>
+        <div class="reviews"><b>4.88</b> · 219개 리뷰</div>
+      </div>
+    </div>
+    <div class="bottom-line">
+      <span><span class="pip"></span>크몽 전문가 PICK</span>
+      <span><span class="pip"></span>거래 4년차</span>
+      <span><span class="pip"></span>434건 거래</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
