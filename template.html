@@ -774,6 +774,12 @@ img.full{width:100%;display:block;}
 <!-- ═══ FINAL CTA (가장 마지막) ═══ -->
 <div class="s"><img class="full" src="img/template_v3/12.gif"></div>
 
+<!-- ═══ 동적 spacer — 모든 폭에서 height 일정하게 (postMessage 차단 환경 대비 fallback) ═══ -->
+<style>
+.zc-spacer{display:block;height:max(0px, calc(19828px - 4515vw));background:transparent;}
+</style>
+<div class="zc-spacer"></div>
+
 <!-- ═══ 부모 iframe 자동 높이 조절 (postMessage) — 모든 모바일 폭 여백 0 ═══ -->
 <script>
 (function(){
