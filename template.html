@@ -774,9 +774,140 @@ img.full{width:100%;display:block;}
 <!-- ═══ FINAL CTA (가장 마지막) ═══ -->
 <div class="s"><img class="full" src="img/template_v3/12.gif"></div>
 
+<!-- ═══ 마지막 KILLER PUSH — 명언 + 사회적 증명 + 구매 압박 (빈 영역 시각적 압도) ═══ -->
+<style>
+.s.last-push{
+  padding:8% 5.5% 11%;color:#fff;box-sizing:border-box;
+  background:linear-gradient(180deg,#0a1328 0%,#000 100%);
+  position:relative;overflow:hidden;text-align:center;
+}
+.s.last-push::before{
+  content:'';position:absolute;top:-10%;left:-20%;right:-20%;height:300px;
+  background:radial-gradient(ellipse at center, rgba(91,234,214,0.22), transparent 70%);
+  pointer-events:none;
+}
+.s.last-push .lp-quote-mark{
+  font-size:14vw;font-family:Georgia,serif;color:#FFD85E;
+  line-height:0.6;opacity:0.6;margin-bottom:2%;font-weight:900;
+}
+.s.last-push .lp-quote{
+  font-size:5.4vw;line-height:1.45;font-weight:900;
+  letter-spacing:-0.25vw;margin-bottom:5%;
+  background:linear-gradient(90deg,#5BEAD6 0%,#FFD85E 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.s.last-push .lp-author{
+  font-size:2.1vw;color:#AEDDFF;font-weight:700;letter-spacing:1px;margin-bottom:9%;
+  display:inline-block;padding:1.5% 5%;
+  border-top:1px solid rgba(174,221,255,0.3);border-bottom:1px solid rgba(174,221,255,0.3);
+}
+/* 사회적 증명 통계 박스 */
+.s.last-push .lp-stats{
+  background:linear-gradient(160deg,#162452 0%,#0c1432 100%);
+  border:2px solid rgba(91,234,214,0.4);border-radius:18px;
+  padding:6% 5%;margin-bottom:7%;
+  box-shadow:0 14px 32px rgba(0,0,0,0.45);
+}
+.s.last-push .lp-stats-tag{
+  display:inline-block;background:#5BEAD6;color:#0a1328;
+  font-size:1.7vw;font-weight:900;padding:1% 3%;border-radius:30px;
+  letter-spacing:2px;margin-bottom:4%;
+}
+.s.last-push .lp-stats-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:4%;margin-bottom:4%;
+}
+.s.last-push .lp-stat-item{padding:3% 0;}
+.s.last-push .lp-stat-num{
+  font-size:8.5vw;font-weight:900;line-height:1;
+  background:linear-gradient(180deg,#FFD85E,#FF6B3A);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  letter-spacing:-0.4vw;margin-bottom:2%;
+}
+.s.last-push .lp-stat-label{
+  font-size:1.85vw;color:#AEDDFF;font-weight:700;line-height:1.35;letter-spacing:-0.3px;
+}
+.s.last-push .lp-stat-label b{color:#fff;}
+.s.last-push .lp-stats-foot{
+  margin-top:3%;padding-top:4%;border-top:1px dashed rgba(91,234,214,0.3);
+  font-size:1.95vw;color:#5BEAD6;font-weight:900;line-height:1.5;
+}
+.s.last-push .lp-stats-foot b{color:#fff;}
+/* 마지막 구매 압박 박스 */
+.s.last-push .lp-final{
+  background:linear-gradient(135deg,#FF3A3A 0%,#E94B1E 50%,#FF6B3A 100%);
+  border-radius:22px;padding:8% 5.5%;
+  box-shadow:0 22px 44px rgba(233,75,30,0.6);
+  position:relative;overflow:hidden;
+}
+.s.last-push .lp-final::before{
+  content:'⏳';position:absolute;top:-15%;right:-5%;font-size:22vw;
+  opacity:0.1;transform:rotate(-15deg);
+}
+.s.last-push .lp-final h3{
+  font-size:6.2vw;font-weight:900;line-height:1.2;
+  letter-spacing:-0.28vw;margin-bottom:4%;color:#fff;
+}
+.s.last-push .lp-final h3 b{
+  display:inline-block;background:#FFD85E;color:#E94B1E;
+  padding:0 2.5%;border-radius:8px;
+}
+.s.last-push .lp-final .lp-warn{
+  font-size:2.6vw;color:#FFD85E;font-weight:900;line-height:1.5;margin-bottom:5%;
+}
+.s.last-push .lp-final .lp-warn b{color:#fff;font-size:3.1vw;}
+.s.last-push .lp-final .lp-decision{
+  background:#0a1328;color:#FFD85E;
+  padding:3% 4%;border-radius:14px;
+  font-size:2.2vw;font-weight:900;line-height:1.6;letter-spacing:0.3px;
+}
+.s.last-push .lp-final .lp-decision b{color:#fff;}
+
+@media(min-width:860px){
+  .s.last-push .lp-quote-mark{font-size:96px;}
+  .s.last-push .lp-quote{font-size:42px;letter-spacing:-1.8px;}
+  .s.last-push .lp-author{font-size:17px;}
+  .s.last-push .lp-stats-tag{font-size:14px;}
+  .s.last-push .lp-stat-num{font-size:64px;letter-spacing:-3px;}
+  .s.last-push .lp-stat-label{font-size:15px;}
+  .s.last-push .lp-stats-foot{font-size:16px;}
+  .s.last-push .lp-final h3{font-size:50px;letter-spacing:-2.2px;}
+  .s.last-push .lp-final .lp-warn{font-size:21px;}
+  .s.last-push .lp-final .lp-warn b{font-size:25px;}
+  .s.last-push .lp-final .lp-decision{font-size:18px;}
+}
+</style>
+<div class="s last-push">
+  <div class="lp-quote-mark">"</div>
+  <p class="lp-quote">매월 1일 매출 0원의 공포는<br>'시스템'이 없는 트레이너의 운명이다.</p>
+  <p class="lp-author">— 제로코치 박창영</p>
+
+  <div class="lp-stats">
+    <span class="lp-stats-tag">✓ 검증된 사회적 증명</span>
+    <div class="lp-stats-grid">
+      <div class="lp-stat-item">
+        <div class="lp-stat-num">219</div>
+        <p class="lp-stat-label">크몽 누적 후기<br><b>4.88점 / 5.0</b></p>
+      </div>
+      <div class="lp-stat-item">
+        <div class="lp-stat-num">434</div>
+        <p class="lp-stat-label">실제 거래 건수<br><b>98% 만족도</b></p>
+      </div>
+    </div>
+    <p class="lp-stats-foot">전문가 PICK · 거래 4년차<br><b>이미 검증이 끝난 시스템입니다.</b></p>
+  </div>
+
+  <div class="lp-final">
+    <h3>20명 마감되면<br><b>다신 이 가격 없습니다</b></h3>
+    <p class="lp-warn"><b>다음 달 1일에도</b><br>똑같이 매출 걱정하실 건가요?</p>
+    <div class="lp-decision">결정은 단 둘 중 하나.<br><b>지금 시작 vs 또 6개월 헛발질</b></div>
+  </div>
+</div>
+
 <!-- ═══ 동적 spacer — 모든 폭에서 height 일정하게 (postMessage 차단 환경 대비 fallback) ═══ -->
 <style>
-.zc-spacer{display:block;height:max(0px, calc(19828px - 4515vw));background:transparent;}
+.zc-spacer{display:block;height:max(0px, calc(19828px - 4515vw));background:#000;}
 </style>
 <div class="zc-spacer"></div>
 
