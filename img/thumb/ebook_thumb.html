@@ -3,187 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;word-break:keep-all;overflow-wrap:break-word;font-family:'Noto Sans KR',sans-serif;}
-body{background:#0a1328;}
-
-.book{
+*{margin:0;padding:0;box-sizing:border-box;}
+body{margin:0;padding:0;}
+.wrap{
   width:1080px;height:1080px;position:relative;overflow:hidden;
-  background:
-    radial-gradient(ellipse at 50% 0%,rgba(138,100,220,0.5) 0%,transparent 55%),
-    radial-gradient(ellipse at 30% 50%,rgba(88,165,230,0.3) 0%,transparent 50%),
-    linear-gradient(180deg,#120733 0%,#1A0B3D 20%,#0A1850 55%,#070F2E 100%);
-  padding:18px 22px;
-}
-
-/* 선착순 리본 */
-.limited-ribbon{
-  position:absolute;top:48px;right:-72px;z-index:20;
-  width:300px;padding:14px 0;
-  background:linear-gradient(135deg,#FF3A3A,#FF6B3A);
-  color:#fff;text-align:center;font-size:22px;font-weight:900;
-  letter-spacing:2px;
-  transform:rotate(45deg);
-  box-shadow:0 6px 20px rgba(255,58,58,0.5);
-}
-.limited-ribbon::before{content:'★';margin-right:8px;color:#FFD85E;}
-.limited-ribbon::after{content:'★';margin-left:8px;color:#FFD85E;}
-
-/* 사이드 라벨 */
-.book::before,
-.book::after{
-  content:'PDF BOOK  TRAINER  TRAINER BIBLE  ZEROCOACH';
-  position:absolute;top:0;height:100%;
-  writing-mode:vertical-rl;text-orientation:mixed;
-  font-size:18px;font-weight:700;color:rgba(255,255,255,0.28);
-  letter-spacing:5px;padding:30px 0;white-space:nowrap;
-  overflow:hidden;
-}
-.book::before{left:8px;}
-.book::after{right:8px;transform:rotate(180deg);}
-
-/* 상단 라벨 */
-.book .top-label{
-  text-align:center;margin-bottom:12px;
-  font-size:32px;font-weight:700;color:#AEDDFF;letter-spacing:1.5px;
-  padding-top:18px;
-}
-
-/* 메인 타이틀 (크게) */
-.book .title{
-  text-align:center;font-size:78px;font-weight:900;color:#FFFFFF;
-  line-height:1.18;letter-spacing:-2.5px;margin-bottom:24px;
-  padding:0 30px;
-  text-shadow:0 4px 20px rgba(174,221,255,0.4);
-}
-
-/* 다이아 영역 */
-.book .diamond-wrap{
-  position:relative;width:100%;height:380px;
+  background:linear-gradient(180deg,#0a0a14 0%,#1a1530 100%);
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:8px;
 }
-
-.diamond{
-  width:340px;height:340px;position:relative;
-  transform:rotate(45deg);
-  background:
-    linear-gradient(135deg,rgba(174,221,255,0.95) 0%,rgba(120,180,230,0.7) 40%,rgba(60,120,200,0.85) 70%,rgba(140,200,240,0.95) 100%);
-  box-shadow:
-    0 0 100px rgba(174,221,255,0.6),
-    inset 0 0 70px rgba(255,255,255,0.3);
-  border-radius:18px;
+.wrap img{
+  height:100%;width:auto;display:block;
+  /* 콘텐츠 가능한 한 크게 — 세로 가득 */
 }
-.diamond::before{
-  content:'';position:absolute;top:10%;left:10%;right:10%;bottom:10%;
-  background:linear-gradient(225deg,rgba(255,255,255,0.45) 0%,transparent 50%);
-  border-radius:10px;
-}
-.diamond::after{
-  content:'';position:absolute;top:14px;left:14px;width:60px;height:60px;
-  background:rgba(255,255,255,0.65);border-radius:50%;filter:blur(10px);
-}
-
-/* 4방향 뱃지 (크기↑) */
-.badge{
-  position:absolute;width:200px;height:110px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;font-weight:800;z-index:2;
-}
-.badge::before{
-  content:'★★★★★';position:absolute;top:8px;left:0;right:0;
-  font-size:14px;color:rgba(174,221,255,0.85);letter-spacing:5px;
-}
-.badge .t{font-size:24px;color:#FFFFFF;line-height:1.25;margin-top:18px;padding:0 6px;font-weight:900;
-  text-shadow:0 2px 10px rgba(0,0,0,0.5);}
-
-.badge.tl{top:-10px;left:30px;}
-.badge.tr{top:-10px;right:30px;}
-.badge.bl{bottom:-10px;left:30px;}
-.badge.br{bottom:-10px;right:30px;}
-
-/* 하단 영역 (트레이너 영역) */
-.book .bottom-section{
-  position:absolute;bottom:0;left:0;right:0;height:280px;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,0.97),#F8F6F2);
-  padding:36px 50px 28px;
-  display:flex;flex-direction:column;justify-content:space-between;align-items:center;
-}
-.bottom-section .slogan{
-  text-align:center;font-size:30px;font-weight:700;color:#1a1a1a;line-height:1.4;
-}
-.bottom-section .zero{
-  text-align:center;font-size:108px;font-weight:900;color:#D2BFE8;
-  letter-spacing:-3px;line-height:1;
-  background:linear-gradient(135deg,#D2BFE8 30%,#8A64DC 100%);
-  -webkit-background-clip:text;background-clip:text;
-  color:transparent;
-}
-.bottom-section .badge-right{
-  position:absolute;bottom:24px;right:36px;width:120px;height:120px;
-  background:linear-gradient(135deg,#fff,#E8E4F5);
-  border:2.5px solid #C7BAD6;border-radius:50%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-size:15px;font-weight:800;color:#2a1a4a;text-align:center;line-height:1.25;
-  box-shadow:0 6px 18px rgba(138,100,220,0.25);
-}
-.bottom-section .badge-right::before{
-  content:'★★★★★';font-size:11px;color:#8A64DC;letter-spacing:2px;display:block;margin-bottom:6px;
-}
-
-/* 좌측 하단 stat 4개 */
-.bottom-section .stats{
-  position:absolute;bottom:24px;left:36px;display:flex;gap:10px;
-}
-.bottom-section .stats .stat{
-  background:#1a1535;color:#fff;border-radius:8px;padding:8px 12px;text-align:center;min-width:62px;
-}
-.bottom-section .stats .stat .n{font-size:18px;font-weight:900;color:#FFD85E;display:block;line-height:1;}
-.bottom-section .stats .stat .l{font-size:10px;color:#aaa;margin-top:3px;display:block;}
 </style>
 </head>
 <body>
-
-<div class="book">
-
-  <div class="limited-ribbon">선착순 20명 한정</div>
-
-  <p class="top-label">트레이너 수익 극대화 고수들의 비밀</p>
-  <h1 class="title">억대 연봉 트레이너의<br>매출 시스템 비밀문서</h1>
-
-  <div class="diamond-wrap">
-    <div class="diamond"></div>
-
-    <div class="badge tl">
-      <p class="t">트레이너<br>브랜딩</p>
-    </div>
-    <div class="badge tr">
-      <p class="t">등록률<br>급상승 질문법</p>
-    </div>
-    <div class="badge bl">
-      <p class="t">PT 유입<br>자동화 구조</p>
-    </div>
-    <div class="badge br">
-      <p class="t">수백 명의 월급<br>앞자리를 바꾼<br>그 시스템</p>
-    </div>
-  </div>
-
-  <div class="bottom-section">
-    <p class="slogan">자동화가 되는 시스템을 셋팅하라.</p>
-    <p class="zero">ZEROCOACH</p>
-    <div class="stats">
-      <div class="stat"><span class="n">434</span><span class="l">누적 거래</span></div>
-      <div class="stat"><span class="n">4.88</span><span class="l">평점</span></div>
-      <div class="stat"><span class="n">98%</span><span class="l">만족</span></div>
-      <div class="stat"><span class="n">219</span><span class="l">리뷰</span></div>
-    </div>
-    <div class="badge-right">
-      트레이너 및<br>필라테스강사<br><b style="font-size:16px;color:#8A64DC;">필독서!</b>
-    </div>
-  </div>
-
+<div class="wrap">
+  <img src="../ebook_cover.jpg" alt="전자책 표지">
 </div>
-
 </body>
 </html>
