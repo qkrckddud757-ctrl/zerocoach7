@@ -3,825 +3,407 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <title>전자책 + 템플릿 올인원 번들 세트</title>
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;word-break:keep-all;overflow-wrap:break-word;}
-html,body{background:transparent !important;font-family:'Noto Sans KR',sans-serif;overflow-x:hidden;margin:0;padding:0;}
-.s{width:860px;max-width:100%;margin:0 auto;overflow:hidden;}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{overflow-x:hidden!important;max-width:100vw!important;width:100%;}
+body{background:#111;font-family:'Noto Sans KR',sans-serif;}
+img,video,iframe{max-width:100%!important;height:auto;display:block;}
+.slide{width:860px;max-width:100%;overflow:hidden;position:relative;}
+.bg-black{background:#111111;}
+.bg-dark{background:#141414;}
+.pad{padding:80px 72px;}
+.center{text-align:center;}
+.spacer{height:40px;}
+.spacer-sm{height:20px;}
+.spacer-lg{height:60px;}
 img.full{width:100%;display:block;}
-.spacer{background:#111;height:60px;}
-.gap{background:#111;padding:80px 64px;text-align:center;}
-.gap p{line-height:1.5;}
-:root{--t1:#e8e8e8;--t2:#999;--acc:#E53935;--mint:#5BEAD6;--green:#3fb950;--gold:#FFD700;}
-@media(max-width:860px){.s{width:100%!important;}.gap{padding:60px 28px!important;}}
-@media(max-width:480px){.gap{padding:48px 20px!important;}}
 
-/* ═══ S0: 번들 히어로 (HTML 네이티브) ═══ */
-.intro-hero-html{
-  width:860px;max-width:100%;margin:0 auto;position:relative;overflow:hidden;
-  padding:7% 5.5%;color:#fff;box-sizing:border-box;
-  background:linear-gradient(180deg,#1a0b1a 0%,#2a0e14 30%,#1a0815 70%,#0a0610 100%);
+/* 반짝이 효과 */
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+.shimmer{background:linear-gradient(90deg,#FFD700 0%,#fff 40%,#FFD700 60%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite;}
+
+@keyframes glow{0%,100%{text-shadow:0 0 20px rgba(229,57,53,0.5),0 0 40px rgba(229,57,53,0.2);}50%{text-shadow:0 0 30px rgba(229,57,53,0.8),0 0 60px rgba(229,57,53,0.4);}}
+.glow{animation:glow 2s ease-in-out infinite;}
+
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+.pulse{animation:pulse 2s ease-in-out infinite;}
+
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* 카드 */
+.card{background:#111;border:1px solid #222;border-radius:14px;padding:28px 28px;margin-bottom:14px;transition:border-color 0.3s;}
+.card:hover{border-color:#E53935;}
+.card-num{font-size:16px;font-weight:900;color:#E53935;margin-bottom:4px;letter-spacing:1px;}
+.card-title{font-size:28px;font-weight:900;color:#e8e8e8;margin-bottom:8px;}
+.card-arrow{font-size:18px;color:#FFD700;margin-bottom:4px;}
+.card-desc{font-size:20px;color:#888;line-height:1.6;}
+
+/* 후기 */
+.review{background:#0e0e0e;border-radius:14px;padding:24px 28px;border-left:4px solid #FFD700;margin-bottom:14px;}
+.review-stars{color:#FFD700;font-size:26px;margin-bottom:8px;}
+.review-text{font-size:24px;color:#ccc;line-height:1.7;}
+.review-author{font-size:18px;color:#666;margin-top:6px;}
+
+/* 스탯 */
+.stats{display:flex;gap:16px;margin:32px 0;}
+.stat{flex:1;background:#111;border:2px solid #E53935;border-radius:14px;padding:24px;text-align:center;}
+.stat-num{font-size:40px;font-weight:900;color:#E53935;}
+.stat-label{font-size:18px;color:#888;margin-top:4px;}
+
+/* 가격 */
+.price-box{background:linear-gradient(135deg,#3fb950,#00b894);border-radius:20px;padding:48px;text-align:center;}
+.cta{background:linear-gradient(135deg,#E53935,#FF7B00);border-radius:20px;padding:48px 40px;text-align:center;margin-top:24px;}
+
+/* 후기이벤트 */
+.event-box{background:#111;border:3px solid #FFD700;border-radius:16px;padding:36px;text-align:center;margin-bottom:28px;}
+.event-badge{display:inline-block;background:#FFD700;color:#111;font-size:22px;font-weight:900;padding:8px 24px;border-radius:24px;margin-bottom:16px;}
+
+/* 페인포인트 */
+.pain{font-size:30px;color:#bbb;padding:14px 0;border-bottom:1px solid #1a1a1a;}
+.pain::before{content:'"';color:#E53935;font-weight:900;}
+.pain::after{content:'"';color:#E53935;font-weight:900;}
+
+/* 영상 카드 */
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.video-card{background:#111;border-radius:14px;overflow:hidden;border:2px solid #222;}
+.video-icon{background:#1a1a2e;height:100px;display:flex;align-items:center;justify-content:center;font-size:42px;}
+.video-body{padding:14px 16px;}
+.video-title{font-size:22px;font-weight:900;color:#e8e8e8;margin-bottom:4px;}
+.video-desc{font-size:16px;color:#888;}
+
+/* 비교 */
+.compare-row{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid #1a1a1a;}
+.compare-name{flex:1;font-size:26px;color:#ccc;font-weight:700;}
+.compare-price{font-size:26px;color:#E53935;font-weight:900;text-decoration:line-through;width:160px;text-align:right;}
+
+/* ── 반응형 (모바일/태블릿) ── */
+@media(max-width:860px){
+  .slide{width:100%!important;}
+  .pad{padding:48px 28px!important;}
+  .h1{font-size:36px!important;}
+  .h2{font-size:30px!important;}
+  .h3{font-size:26px!important;}
+  .body{font-size:22px!important;}
+  .body-sm{font-size:18px!important;}
+  .caption{font-size:16px!important;}
+  .stats{flex-wrap:wrap;}
+  .stat{min-width:45%;}
+  .video-grid{grid-template-columns:1fr!important;}
+  .compare-row{flex-direction:column;gap:4px;}
+  .compare-price{width:auto!important;text-align:left!important;}
+  img.full{width:100%!important;height:auto!important;}
 }
-.intro-hero-html .ih-tag{display:inline-block;background:#FF6B3A;color:#fff;font-size:2.1vw;font-weight:900;padding:1.2% 3%;border-radius:40px;letter-spacing:3px;margin-bottom:4%;}
-.intro-hero-html .ih-pre{font-size:2.6vw;font-weight:700;color:#FFD85E;text-align:center;margin-bottom:2%;}
-.intro-hero-html .ih-pre b{color:#fff;font-weight:900;}
-.intro-hero-html .ih-num{text-align:center;margin:2% 0;animation:hhPulse 0.4s ease-in-out infinite;}
-.intro-hero-html .ih-num .big{font-size:23vw;font-weight:900;color:#FFD85E;line-height:0.95;letter-spacing:-0.6vw;animation:hhBlink 0.4s steps(2) infinite;}
-.intro-hero-html .ih-num .unit{font-size:10vw;font-weight:900;color:#fff;animation:hhBlink 0.4s steps(2) infinite;}
-.intro-hero-html .ih-num .ex{font-size:14vw;font-weight:900;color:#FF6B3A;display:inline-block;animation:hhBounce 0.3s ease-in-out infinite;}
-.intro-hero-html .ih-sub{font-size:3vw;font-weight:900;color:#FFD85E;text-align:center;margin:1% 0 4%;letter-spacing:2px;}
-
-.ih-price{display:flex;align-items:center;justify-content:center;gap:2%;margin-bottom:4%;flex-wrap:wrap;}
-.ih-price .pstrike{font-size:2.5vw;color:#888;font-weight:900;text-decoration:line-through;text-decoration-color:#FF3A3A;text-decoration-thickness:3px;}
-.ih-price .parrow{font-size:2.8vw;color:#FFD85E;font-weight:900;}
-.ih-price .pnow{background:#FFD85E;color:#1a0815;font-size:3.3vw;font-weight:900;padding:1.2% 3%;border-radius:40px;letter-spacing:-1px;}
-.ih-price .pnow em{font-style:normal;color:#8B0000;font-size:2.6vw;margin-right:4px;}
-
-.intro-hero-html .ih-title{font-size:5.6vw;font-weight:900;color:#fff;text-align:center;line-height:1.2;letter-spacing:-0.25vw;margin-bottom:4%;}
-.intro-hero-html .ih-title b{color:#FFD85E;}
-
-.ih-partlabel{display:flex;gap:2%;margin-bottom:3%;}
-.ih-partlabel .lb{flex:1;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,216,94,0.4);border-radius:30px;padding:1.2% 2%;text-align:center;font-size:1.6vw;font-weight:900;color:#FFD85E;letter-spacing:1px;}
-
-/* 번들 콤보 카드 (책 + 도구 그리드) · 높이 비율 맞춤 */
-.ih-combo{display:grid;grid-template-columns:1fr 5% 1fr;gap:1.5%;align-items:stretch;margin-bottom:4%;}
-.ih-combo .book-side{display:flex;align-items:stretch;}
-.ih-combo .book-side img{width:100%;object-fit:cover;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.55);display:block;}
-.ih-combo .plus-ic{font-size:6vw;font-weight:900;color:#FFD85E;text-align:center;display:flex;align-items:center;justify-content:center;}
-.ih-combo .tools-mini{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4%;}
-.ih-combo .tcard{
-  background:#2a1815;border:1.5px solid rgba(255,216,94,0.5);border-radius:12px;
-  padding:5% 3.5%;text-align:center;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3%;
-}
-.ih-combo .tcard .ic{font-size:4vw;}
-.ih-combo .tcard .n{font-size:1.8vw;font-weight:900;color:#fff;line-height:1.25;letter-spacing:-0.3px;}
-.ih-combo .tcard .hl{font-size:1.35vw;color:#FFD85E;font-weight:700;line-height:1.35;display:block;margin-top:4%;}
-
-.intro-hero-html .ih-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,216,94,0.3);border-radius:16px;padding:2.8% 2%;margin-top:3%;}
-.intro-hero-html .ih-stats .stat{text-align:center;}
-.intro-hero-html .ih-stats .n{font-size:3vw;font-weight:900;color:#FFD85E;line-height:1;}
-.intro-hero-html .ih-stats .l{font-size:1.4vw;color:#cab8a0;font-weight:700;margin-top:6%;}
-.intro-hero-html .ih-brand{margin-top:4%;text-align:center;font-size:4.9vw;font-weight:900;letter-spacing:4px;color:#FFD85E;}
-.intro-hero-html .ih-brand-sub{text-align:center;font-size:1.6vw;color:#FFD85E;margin-top:0.5%;letter-spacing:2px;font-weight:700;}
-
-@keyframes hhPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
-@keyframes hhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-2vw);}}
-@keyframes hhBlink{0%{opacity:1;}50%{opacity:0.75;}}
-
-@media(min-width:860px){
-  .intro-hero-html .ih-tag{font-size:18px;}
-  .intro-hero-html .ih-pre{font-size:22px;}
-  .intro-hero-html .ih-num .big{font-size:200px;letter-spacing:-6px;}
-  .intro-hero-html .ih-num .unit{font-size:90px;}
-  .intro-hero-html .ih-num .ex{font-size:120px;}
-  .intro-hero-html .ih-sub{font-size:26px;}
-  .ih-price .pstrike{font-size:22px;}
-  .ih-price .parrow{font-size:24px;}
-  .ih-price .pnow{font-size:28px;}
-  .ih-price .pnow em{font-size:22px;}
-  .intro-hero-html .ih-title{font-size:48px;letter-spacing:-2px;}
-  .ih-partlabel .lb{font-size:14px;}
-  .ih-combo .plus-ic{font-size:54px;}
-  .ih-combo .tcard .ic{font-size:34px;}
-  .ih-combo .tcard .n{font-size:16px;}
-  .ih-combo .tcard .hl{font-size:12px;}
-  .intro-hero-html .ih-stats .n{font-size:26px;}
-  .intro-hero-html .ih-stats .l{font-size:12px;}
-  .intro-hero-html .ih-brand{font-size:42px;}
-  .intro-hero-html .ih-brand-sub{font-size:14px;}
-  @keyframes hhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
-}
-
-/* ═══ 가격 블록 (할인 강조) ═══ */
-.price-block{padding:100px 64px;}
-.price-label{font-size:18px;font-weight:700;color:var(--gold);letter-spacing:4px;margin-bottom:18px;}
-.price-origin{
-  display:inline-block;background:rgba(153,153,153,0.1);border:1px solid #444;
-  border-radius:50px;padding:14px 36px;margin-bottom:28px;
-}
-.price-origin .lbl{font-size:20px;color:var(--t2);margin-right:12px;font-weight:700;}
-.price-origin .val{font-size:30px;color:var(--t2);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--acc);font-weight:700;}
-.price-now-wrap{margin-bottom:24px;}
-.price-now-wrap .arrow{font-size:42px;color:var(--green);margin-bottom:10px;}
-.price-now{font-size:88px;font-weight:900;color:var(--green);line-height:1;letter-spacing:-3px;text-shadow:0 0 30px rgba(63,185,80,0.3);}
-.price-now .cur{font-size:54px;margin-left:6px;}
-.discount-badge{
-  display:inline-block;background:linear-gradient(135deg,var(--acc),#ff6b3a);
-  color:#fff;font-size:30px;font-weight:900;letter-spacing:2px;
-  padding:16px 40px;border-radius:50px;margin-top:22px;
-  box-shadow:0 10px 30px rgba(229,57,53,0.4);
-  animation:pulse 2s ease-in-out infinite;
-}
-.discount-badge em{font-style:normal;font-size:44px;color:#ffd85e;}
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
-.price-sub{font-size:20px;color:var(--t2);margin-top:18px;line-height:1.6;}
-.price-sub b{color:var(--t1);}
-
 @media(max-width:480px){
-  .price-now{font-size:64px;}
-  .price-now .cur{font-size:38px;}
-  .discount-badge{font-size:22px;padding:12px 28px;}
-  .discount-badge em{font-size:32px;}
+  .pad{padding:32px 20px!important;}
+  .h1{font-size:28px!important;}
+  .h2{font-size:24px!important;}
+  .body{font-size:18px!important;}
+  .card-title,.cur-title{font-size:22px!important;}
+  .card-desc,.cur-desc{font-size:16px!important;}
+  .review-text{font-size:20px!important;}
+  .price-main{font-size:48px!important;}
+  .pain{font-size:22px!important;}
+  .stat-num{font-size:28px!important;}
 }
+
 </style>
 </head>
 <body>
 
-<!-- ═══ 0. 번들 히어로 (HTML 네이티브) ═══ -->
-<div class="intro-hero-html">
-  <div style="text-align:center;"><span class="ih-tag">🔥 BEST VALUE BUNDLE</span></div>
-  <p class="ih-pre">PT 잘 가르치는 사람은 많은데<br><b>왜 잘 버는 사람은 적을까?</b></p>
-  <div class="ih-num"><span class="big">4.4</span><span class="unit">억</span><span class="ex">!</span></div>
-  <p class="ih-sub">3년 누적 매출 — <b>그 격차의 정체</b></p>
-  <div class="ih-price">
-    <span class="pstrike">396,000원</span>
-    <span class="parrow">▶</span>
-    <span class="pnow"><em>단 88,000원</em> · 78% OFF</span>
+<!-- ═══ S1. 히어로 — GIF 배경 ═══ -->
+<div class="slide" style="position:relative;">
+  <img src="file:///C:/Users/qkrck/OneDrive/바탕 화면/전자책 GIF 자료/트레이너 좌절.png" style="width:860px;height:960px;object-fit:cover;display:block;filter:brightness(0.2);">
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:60px 56px;">
+    <p style="font-size:22px;font-weight:700;color:#3fb950;letter-spacing:4px;margin-bottom:20px;text-shadow:0 2px 10px rgba(0,0,0,0.8);">BEST VALUE BUNDLE</p>
+    <p style="font-size:48px;font-weight:900;color:#e8e8e8;line-height:1.3;margin-bottom:24px;text-shadow:0 3px 20px rgba(0,0,0,0.9);">시스템도 없고<br>도구도 없으면<br><span class="glow" style="color:#E53935;">뭘로 싸우실 건가요?</span></p>
+    <div class="spacer-sm"></div>
+    <p style="font-size:34px;font-weight:500;color:rgba(255,255,255,0.85);line-height:1.7;text-shadow:0 2px 16px rgba(0,0,0,0.9);">매출을 만드는 <span style="color:#FFD700;font-weight:900;">시스템</span><br>상담을 바꾸는 <span style="color:#FFD700;font-weight:900;">도구</span><br>둘 다 한번에 가져가세요.</p>
   </div>
-  <h1 class="ih-title">전자책 <b>+</b> 템플릿<br>올인원 풀패키지</h1>
-  <div class="ih-partlabel">
-    <span class="lb">📘 PART 1 · 전자책</span>
-    <span class="lb">📗 PART 2 · 도구 템플릿</span>
-  </div>
-  <div class="ih-combo">
-    <div class="book-side"><img src="img/template_v3/10_newbook.jpeg" alt="전자책"></div>
-    <div class="plus-ic">+</div>
-    <div class="tools-mini">
-      <div class="tcard"><div class="ic">📊</div><p class="n">세일즈북<span class="hl">등록률 급상승<br>상담 구조</span></p></div>
-      <div class="tcard"><div class="ic">📋</div><p class="n">회원관리<span class="hl">재등록률 90%<br>장기고객 전환</span></p></div>
-      <div class="tcard"><div class="ic">🎬</div><p class="n">교정운동 VOD<span class="hl">막힘 없는<br>수업 실력</span></p></div>
-      <div class="tcard"><div class="ic">🤖</div><p class="n">AI 치트키<span class="hl">PT 유입<br>컨텐츠 자동화</span></p></div>
-    </div>
-  </div>
-  <div class="ih-stats">
-    <div class="stat"><p class="n">434건</p><p class="l">누적 거래</p></div>
-    <div class="stat"><p class="n">4.88</p><p class="l">평균 평점</p></div>
-    <div class="stat"><p class="n">98%</p><p class="l">구매 만족도</p></div>
-    <div class="stat"><p class="n">219</p><p class="l">실사용 리뷰</p></div>
-  </div>
-  <p class="ih-brand">ZEROCOACH</p>
-  <p class="ih-brand-sub">시스템 + 도구 · 한번에 셋팅</p>
-</div>
-<div class="s spacer"></div>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     HP-PATCH v4 — 문제제기 섹션: 도파민 시대의 시스템
-     박창영 명령 2026-04-28: 4.4억 GIF 직후 · 짧고 강하게
-═══════════════════════════════════════════════════════════════ -->
-<style>
-.hp4-w{width:860px;max-width:100%;margin:0 auto;font-family:'Noto Sans KR',sans-serif;box-sizing:border-box}
-.hp4-prob{background:linear-gradient(180deg,#1a0815 0%,#2a0e14 50%,#1a0b1a 100%);padding:9% 7%;text-align:left;color:#fff;position:relative;overflow:hidden;border-top:1px solid rgba(255,216,94,.4);border-bottom:1px solid rgba(255,107,58,.3)}
-.hp4-prob::before{content:'';position:absolute;top:-40px;left:-40px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,107,58,.18) 0%,transparent 70%);pointer-events:none}
-.hp4-prob::after{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,216,94,.12) 0%,transparent 70%);pointer-events:none}
-.hp4-prob .label{display:inline-block;background:#FF6B3A;color:#fff;font-size:1.85vw;font-weight:900;padding:1.2% 3%;border-radius:6px;letter-spacing:2px;margin-bottom:4%;position:relative;z-index:2}
-.hp4-prob h2{font-size:6vw;font-weight:900;line-height:1.32;letter-spacing:-0.22vw;margin:0 0 5%;color:#fff;position:relative;z-index:2;word-break:keep-all}
-.hp4-prob h2 .strike{color:#888;text-decoration:line-through;text-decoration-color:#FF6B3A;text-decoration-thickness:0.3vw}
-.hp4-prob h2 .a{color:#FFD85E}
-.hp4-prob .body{font-size:2.9vw;color:#FFE8CC;line-height:1.7;margin:0 0 5%;word-break:keep-all;position:relative;z-index:2}
-.hp4-prob .body b{color:#FFD85E;font-weight:800}
-.hp4-prob .punch{display:inline-block;background:#FFD85E;color:#1a0815;padding:2.4% 4%;font-size:3.6vw;font-weight:900;border-radius:8px;margin:0;letter-spacing:-0.15vw;position:relative;z-index:2;line-height:1.3}
-.hp4-prob .punch b{color:#FF6B3A;font-weight:900}
-.hp4-prob .closer{font-size:2.4vw;color:#FFE8CC;line-height:1.55;margin-top:5%;position:relative;z-index:2;word-break:keep-all;opacity:.85}
-.hp4-prob .closer b{color:#fff;font-weight:800}
-@media(min-width:860px){
-  .hp4-prob{padding:60px 56px}
-  .hp4-prob .label{font-size:13px;letter-spacing:3px}
-  .hp4-prob h2{font-size:44px;letter-spacing:-1.5px}
-  .hp4-prob .body{font-size:20px}
-  .hp4-prob .punch{font-size:28px;padding:18px 30px;letter-spacing:-1px}
-  .hp4-prob .closer{font-size:17px}
-}
-@media(max-width:480px){
-  .hp4-prob{padding:36px 22px}
-  .hp4-prob h2{font-size:24px}
-  .hp4-prob .body{font-size:14.5px}
-  .hp4-prob .punch{font-size:17px;padding:13px 20px}
-  .hp4-prob .closer{font-size:13px}
-}
-</style>
-
-<div class="hp4-w hp4-prob">
-  <span class="label">◆ 도파민 시대의 진실</span>
-  <h2>요즘 시대엔<br><span class="strike">"말로는"</span> 안 통합니다.</h2>
-  <p class="body">사람들은 <b>도파민에 중독</b>됐어요.<br>그에 맞춰 <b>사고 싶게끔 설계</b>해야 합니다.</p>
-  <span class="punch">그게 바로 <b>시스템</b>입니다.</span>
-  <p class="closer">예전 발라드 시대 감성으론 <b>회원이 등록 안 합니다.</b><br>요즘 정서는 너무 다릅니다.</p>
-</div>
-<div class="s spacer"></div>
-<!-- ═══════════════════ HP-PATCH v4 끝 ═══════════════════ -->
-
-<!-- 번들 카피 히어로 -->
-<div class="s gap" style="padding:90px 64px;">
-  <p style="font-size:22px;font-weight:700;color:var(--green);letter-spacing:3px;margin-bottom:16px;">BEST VALUE BUNDLE</p>
-  <p style="font-size:46px;font-weight:900;color:var(--t1);line-height:1.3;">시스템도 없고 도구도 없으면<br><span style="color:var(--acc);">뭘로 싸우실 건가요?</span></p>
 </div>
 
-<!-- PART 1 — 전자책 -->
-<div class="s gap">
-  <p style="font-size:18px;font-weight:700;color:var(--mint);letter-spacing:3px;margin-bottom:8px;">PART 1 — THE SYSTEM</p>
-  <p style="font-size:34px;font-weight:900;color:var(--t1);">매출을 만드는 시스템</p>
+<!-- ═══ S2. 공감 페인포인트 ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:42px;font-weight:900;color:#e8e8e8;margin-bottom:28px;">혹시 이런 상황 아닌가요?</p>
+  <div class="pain">매달 1일마다 매출 0원. 이 공포 끝이 없음</div>
+  <div class="pain">OT 10번 잡아도 등록 1명</div>
+  <div class="pain">재등록은 항상 부탁하고 초라해짐</div>
+  <div class="pain">상담할 때 보여줄 게 아무것도 없음</div>
+  <div class="pain">통증 호소 회원한테 바로 대응 못 함</div>
+  <div class="pain">SNS 해야 하는 건 아는데 뭘 해야 할지 모름</div>
+  <div class="spacer"></div>
+  <p style="font-size:40px;font-weight:900;color:#e8e8e8;">열심히 하는 트레이너는 많은데<br><span style="color:#E53935;">잘 버는 트레이너</span>는 왜 없을까요.</p>
+  <div class="spacer-sm"></div>
+  <p style="font-size:32px;font-weight:500;color:#bbb;">단순히 실력 문제가 아닙니다.<br><span style="color:#e8e8e8;font-weight:900;">"시스템"과 "도구"</span>가 없는 겁니다.</p>
 </div>
 
-<div class="s"><img class="full" src="img/ebook_v2/1.gif"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/ebook_v2/4.gif"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/ebook_v2/9.gif"></div>
-<div class="s spacer"></div>
-<!-- 추가 5, 추가 6 — 템플릿 소개 직전 -->
-<div class="s"><img class="full" src="img/bundle_v3/추가5.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/추가6.jpg"></div>
-
-<!-- PART 2 — 템플릿 -->
-<div class="s gap">
-  <p style="font-size:18px;font-weight:700;color:var(--acc);letter-spacing:3px;margin-bottom:8px;">PART 2 — THE TOOLS</p>
-  <p style="font-size:34px;font-weight:900;color:var(--t1);">상담을 바꾸는 도구</p>
+<!-- ═══ S3. 스토리 GIF 3종 (전자책) ═══ -->
+<div class="slide">
+  <img class="full" src="file:///C:/Users/qkrck/OneDrive/바탕 화면/전자책 GIF 자료/6.gif" alt="불안해서 배우러 다녔습니다">
 </div>
 
-<div class="s"><img class="full" src="img/template_v2/1.gif"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/template_v2/3.gif"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/template_v2/4.gif"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/template_v2/5.gif"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/template_v2/6.gif"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/template_v2/7.gif"></div>
+<!-- ═══ S4. 전자책 소개 + 커리큘럼 ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:22px;font-weight:700;color:#FFD700;letter-spacing:3px;margin-bottom:12px;">📘 THE SYSTEM</p>
+  <p style="font-size:44px;font-weight:900;color:#e8e8e8;line-height:1.3;margin-bottom:12px;">트레이너 월 1,000만원<br><span class="shimmer" style="font-size:48px;">매출 자동화 시스템</span></p>
+  <p style="font-size:26px;font-weight:500;color:#888;margin-bottom:36px;">수백 명 트레이너의 월급 앞자리를 바꿔놓은<br>그 전자책입니다.</p>
 
-<!-- ═══ 가격 · 할인 강조 ═══ -->
-<div class="s gap price-block">
-  <p class="price-label">★ BUNDLE PROMOTION ★</p>
-  <div class="price-origin">
-    <span class="lbl">따로 사면 정상가</span>
-    <span class="val">396,000원</span>
+  <div class="card">
+    <div class="card-num">1장</div>
+    <div class="card-title">OT → 등록률 급상승</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">"생각해볼게요" 그 자리에서 등록하게 만드는 설계.</div>
   </div>
-  <div class="price-now-wrap">
-    <p class="arrow">▼</p>
-    <p class="price-now">88,000<span class="cur">원</span></p>
+  <div class="card">
+    <div class="card-num">2장</div>
+    <div class="card-title">재등록 → 장기회원 전환</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">회원이 알아서 다시 등록하는 구조.</div>
   </div>
-  <div class="discount-badge">
-    <em>78%</em> OFF · 무려 308,000원 할인
+  <div class="card">
+    <div class="card-num">3장</div>
+    <div class="card-title">소개가 끊이지 않는 셋팅</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">회원이 자발적으로 주변 사람을 데려오는 시스템.</div>
   </div>
-  <p class="price-sub"><b>시스템 + 도구</b>를 한 번에 · 번들 전용 특가</p>
+  <div class="card">
+    <div class="card-num">4장</div>
+    <div class="card-title">SNS 자동 유입 (AI 활용)</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">블로그 상위노출, 인스타 300만 조회, 당근, 다짐 유입.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">5장</div>
+    <div class="card-title">매출 1,000만원 자동화 시스템</div>
+    <div class="card-arrow">→</div>
+    <div class="card-desc">한 번 잡아놓으면 수업만 해도 굴러가는 구조.</div>
+  </div>
 </div>
 
-<!-- ═══ EXTRA: 번들 상품 설명 (9섹션) ═══ -->
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_01.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_02.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_03.jpg"></div>
-<div class="s spacer"></div>
+<!-- ═══ S5. 템플릿 GIF (사용자 제작) ═══ -->
+<div class="slide">
+  <img class="full" src="file:///C:/Users/qkrck/OneDrive/바탕 화면/새 폴더/1.gif" alt="히어로 GIF">
+</div>
 
-<!-- ═══ REVIEW SECTION: 구성품 페이지 직후 삽입 (200+ 생생 후기) ═══ -->
-<div class="s"><img class="full" src="img/ebook_v3/review_01.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/ebook_v3/review_02.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/ebook_v3/review_03.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/ebook_v3/review_04.jpg"></div>
-<div class="s spacer"></div>
+<!-- ═══ S6. 템플릿 구성 + 교정영상 ═══ -->
+<div class="slide bg-black pad">
+  <p style="font-size:22px;font-weight:700;color:#E53935;letter-spacing:3px;margin-bottom:12px;">📋 THE TOOLS</p>
+  <p style="font-size:44px;font-weight:900;color:#e8e8e8;line-height:1.3;margin-bottom:32px;">상위 트레이너들의 도구<br><span class="shimmer" style="font-size:48px;">템플릿 패키지</span></p>
 
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_04.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_05.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_06.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_07.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_08.jpg"></div>
-<div class="s spacer"></div>
-<div class="s"><img class="full" src="img/bundle_v3/bundle_extra_09.jpg"></div>
-<div class="s spacer"></div>
-
-<!-- ═══ ACTUAL FILES REVEAL (FINAL CTA 바로 앞) ═══ -->
-<style>
-.s.actual-files{
-  padding:7% 5.5% 8%;color:#fff;box-sizing:border-box;
-  background:linear-gradient(180deg,#1a0b15 0%,#2a0e14 50%,#1a0815 100%);
-  position:relative;overflow:hidden;
-}
-/* 최신화 뱃지 */
-.af-version-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:linear-gradient(90deg,#FF6B3A 0%,#FFD85E 100%);
-  color:#1a0815;font-weight:900;padding:1.2% 3.2%;
-  border-radius:40px;font-size:1.9vw;letter-spacing:1.5px;
-  box-shadow:0 8px 24px rgba(255,107,58,0.35);
-  margin-bottom:3.5%;
-}
-.af-head{text-align:center;margin-bottom:5%;}
-.af-head .af-tag{
-  display:inline-block;background:#FFD85E;color:#1a0815;
-  font-size:1.8vw;font-weight:900;padding:1% 3%;border-radius:30px;
-  letter-spacing:2.5px;margin-bottom:2.5%;
-}
-.af-head h2{
-  font-size:6.2vw;font-weight:900;color:#fff;line-height:1.2;
-  letter-spacing:-0.25vw;margin-bottom:3%;
-}
-.af-head h2 b{color:#FFD85E;}
-.af-head .af-sub{
-  font-size:2.1vw;color:#FFE9AA;font-weight:700;line-height:1.55;
-}
-
-/* ── 시각적 이미지 카드 ── */
-.af-cards{display:flex;flex-direction:column;gap:4%;margin:5% 0;}
-.af-imgcard{
-  background:linear-gradient(160deg,#2e1612 0%,#1a0d0b 100%);
-  border:2px solid rgba(255,216,94,0.3);border-radius:20px;
-  overflow:hidden;position:relative;
-  box-shadow:0 20px 50px rgba(0,0,0,0.45);
-}
-.af-imgcard .card-top{
-  background:rgba(255,216,94,0.1);
-  border-bottom:1.5px solid rgba(255,216,94,0.25);
-  padding:3% 4%;display:flex;align-items:center;gap:2.5%;
-}
-.af-imgcard .card-top .ic{
-  font-size:4.5vw;background:rgba(255,216,94,0.2);
-  width:9%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;
-  border-radius:14px;flex-shrink:0;
-}
-.af-imgcard .card-top .txt{flex:1;}
-.af-imgcard .card-top .name{font-size:2.8vw;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1.2;}
-.af-imgcard .card-top .fmt{
-  display:inline-block;background:#FFD85E;color:#1a0815;
-  font-size:1.3vw;font-weight:900;letter-spacing:1.5px;
-  padding:0.5% 1.6%;border-radius:6px;margin-top:1%;
-}
-.af-imgcard .card-top .tagline{
-  font-size:1.7vw;color:#FFE9AA;font-weight:700;margin-top:1.2%;line-height:1.45;
-}
-.af-imgcard .card-preview{padding:3% 4% 4%;}
-.af-imgcard .card-preview img{
-  width:100%;border-radius:12px;display:block;
-  box-shadow:0 12px 32px rgba(0,0,0,0.45);
-  border:1px solid rgba(255,216,94,0.2);
-}
-.af-imgcard .card-reaction{
-  background:linear-gradient(90deg,rgba(255,216,94,0.12) 0%,rgba(255,216,94,0.04) 100%);
-  padding:3% 4% 3.5%;border-top:1px solid rgba(255,216,94,0.2);
-  display:flex;align-items:flex-start;gap:2%;
-}
-.af-imgcard .card-reaction .quote-ic{font-size:2.8vw;color:#FF6B3A;flex-shrink:0;line-height:1;}
-.af-imgcard .card-reaction .quote{
-  font-size:1.9vw;font-weight:900;color:#fff;line-height:1.45;letter-spacing:-0.3px;
-}
-.af-imgcard .card-reaction .quote b{color:#FFD85E;}
-
-/* ── 인쇄 강조 배너 ── */
-.af-print-banner{
-  background:linear-gradient(135deg,#FF6B3A 0%,#E94B1E 100%);
-  border-radius:22px;padding:5% 5%;margin:5% 0;
-  box-shadow:0 16px 40px rgba(233,75,30,0.5);position:relative;overflow:hidden;
-}
-.af-print-banner::before{
-  content:'🖨️';position:absolute;top:-15%;right:-4%;font-size:22vw;
-  opacity:0.12;transform:rotate(-12deg);
-}
-.af-print-banner .pb-tag{
-  display:inline-block;background:#1a0815;color:#FFD85E;
-  font-size:1.5vw;font-weight:900;padding:0.7% 2%;border-radius:20px;
-  letter-spacing:2px;margin-bottom:2%;
-}
-.af-print-banner h3{
-  font-size:4.4vw;font-weight:900;color:#fff;line-height:1.4;
-  letter-spacing:-0.2vw;margin-bottom:2.8%;position:relative;z-index:1;
-}
-.af-print-banner h3 .pb-line{
-  display:block;white-space:nowrap;margin-bottom:2.2%;
-}
-.af-print-banner h3 .pb-line:last-child{margin-bottom:0;}
-.af-print-banner h3 b{
-  display:inline-block;white-space:nowrap;
-  background:#FFD85E;color:#E94B1E;padding:0 2%;border-radius:6px;
-}
-.af-print-banner .pb-body{
-  font-size:2vw;color:#fff;font-weight:700;line-height:1.6;position:relative;z-index:1;
-}
-.af-print-banner .pb-body b{color:#FFD85E;}
-
-/* ── 커뮤니티 업데이트 ── */
-.af-community{
-  background:linear-gradient(135deg,#0f0a2f 0%,#1e1458 100%);
-  border:2px solid rgba(255,216,94,0.5);border-radius:22px;
-  padding:5% 5%;margin-top:5%;position:relative;overflow:hidden;
-}
-.af-community::before{
-  content:'💬';position:absolute;top:-8%;left:-4%;font-size:20vw;
-  opacity:0.08;transform:rotate(-15deg);
-}
-.af-community .cm-tag{
-  display:inline-block;background:#FFD85E;color:#0f0a2f;
-  font-size:1.5vw;font-weight:900;padding:0.7% 2%;border-radius:20px;
-  letter-spacing:2px;margin-bottom:2%;
-}
-.af-community h3{
-  font-size:4.8vw;font-weight:900;color:#fff;line-height:1.25;
-  letter-spacing:-0.2vw;margin-bottom:3%;position:relative;z-index:1;
-}
-.af-community h3 b{color:#FFD85E;}
-.af-community .cm-body{
-  font-size:1.85vw;color:#E8DAFF;font-weight:700;line-height:1.65;
-  position:relative;z-index:1;
-}
-.af-community .cm-body strong{color:#FFD85E;}
-.af-community .cm-cond{
-  background:rgba(0,0,0,0.35);border-left:4px solid #FFD85E;
-  border-radius:12px;padding:2.5% 3%;margin-top:3%;
-  font-size:1.55vw;color:#cab8f0;line-height:1.7;
-}
-
-/* ── 하이라이트 박스 ── */
-.af-highlight{
-  background:rgba(255,216,94,0.1);border:2px dashed #FFD85E;
-  border-radius:18px;padding:4% 5%;display:flex;align-items:center;gap:3.5%;
-  margin-top:5%;
-}
-.af-highlight .ah-icon{font-size:5.5vw;flex-shrink:0;}
-.af-highlight .ah-title{
-  font-size:2.8vw;font-weight:900;color:#FFD85E;margin-bottom:1.2%;line-height:1.3;
-}
-.af-highlight .ah-sub{
-  font-size:1.8vw;color:#F4DFB4;font-weight:700;line-height:1.55;
-}
-
-@media(min-width:860px){
-  .s.actual-files .af-version-badge{font-size:16px;}
-  .s.actual-files .af-head .af-tag{font-size:15px;}
-  .s.actual-files .af-head h2{font-size:52px;letter-spacing:-2px;}
-  .s.actual-files .af-head .af-sub{font-size:18px;}
-  .s.actual-files .af-imgcard .card-top .ic{font-size:38px;}
-  .s.actual-files .af-imgcard .card-top .name{font-size:24px;}
-  .s.actual-files .af-imgcard .card-top .fmt{font-size:11px;}
-  .s.actual-files .af-imgcard .card-top .tagline{font-size:14.5px;}
-  .s.actual-files .af-imgcard .card-reaction .quote-ic{font-size:24px;}
-  .s.actual-files .af-imgcard .card-reaction .quote{font-size:16px;}
-  .s.actual-files .af-print-banner .pb-tag{font-size:13px;}
-  .s.actual-files .af-print-banner h3{font-size:38px;letter-spacing:-1.5px;}
-  .s.actual-files .af-print-banner .pb-body{font-size:17px;}
-  .s.actual-files .af-community .cm-tag{font-size:13px;}
-  .s.actual-files .af-community h3{font-size:40px;letter-spacing:-1.5px;}
-  .s.actual-files .af-community .cm-body{font-size:16px;}
-  .s.actual-files .af-community .cm-cond{font-size:13.5px;}
-  .s.actual-files .af-highlight .ah-icon{font-size:46px;}
-  .s.actual-files .af-highlight .ah-title{font-size:24px;}
-  .s.actual-files .af-highlight .ah-sub{font-size:15px;}
-}
-</style>
-<div class="s actual-files">
-  <!-- 최신화 뱃지 -->
-  <div style="text-align:center;">
-    <span class="af-version-badge">🆕 26년 4월 최신화 완료 버전</span>
+  <div class="card">
+    <div class="card-num">01</div>
+    <div class="card-title">PT 세일즈북 템플릿</div>
+    <div class="card-desc">영업 못해도 넘기면서 따라가면 상담이 됩니다.</div>
   </div>
-
-  <!-- 헤더 -->
-  <div class="af-head">
-    <span class="af-tag">📂 FULL REVEAL · 번들 전체 공개</span>
-    <h2>88,000원에<br><b>이 전부</b>가 들어있습니다</h2>
-    <p class="af-sub">설명만이 아니라 <b style="color:#FFD85E;">실제 화면</b>을 보여드립니다.<br>이거 쓰면 <b style="color:#FF9A3C;">상담 등록률이 얼마나 쉬워질지</b> 한눈에.</p>
+  <div class="card">
+    <div class="card-num">02</div>
+    <div class="card-title">세일즈북 활용 예시 (PDF)</div>
+    <div class="card-desc">실제로 어떻게 쓰는지 정리. 그냥 따라하세요.</div>
   </div>
+  <div class="card">
+    <div class="card-num">03</div>
+    <div class="card-title">회원관리파일 템플릿</div>
+    <div class="card-desc">관리받는 느낌 들면 회원이 알아서 재등록해요.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">04</div>
+    <div class="card-title">트레이너 AI 프롬프트 모음</div>
+    <div class="card-desc">릴스·블로그·쓰레드·이미지·영상 자동 생성 가이드.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">05~09</div>
+    <div class="card-title">교정운동 영상 5편 (VOD)</div>
+    <div class="card-desc">거북목/골반/무릎/어깨/허리 — 통증 호소 즉시 대응.</div>
+  </div>
+</div>
 
-  <div class="af-cards">
-    <!-- 1. OT용 관리파일 -->
-    <div class="af-imgcard">
-      <div class="card-top">
-        <div class="ic">📋</div>
-        <div class="txt">
-          <div class="name">OT용 회원관리파일</div>
-          <span class="fmt">HTML</span>
-          <div class="tagline">OT2 시작 10분 전 브리핑용 · 체형분석·근기능테스트·맞춤운동 7개 슬라이드</div>
-        </div>
-      </div>
-      <div class="card-preview">
-        <img src="img/file_reveal/preview_ot.jpg" alt="OT용 회원관리파일 미리보기">
-      </div>
-      <div class="card-reaction">
-        <span class="quote-ic">💬</span>
-        <p class="quote">"와 이런 분석을 회원님 한 명만을 위해 만들었다고요?" <b>→ 신뢰 확보 끝. 가격 얘기 꺼내기 전에 이미 회원은 결제를 원하고 있음.</b></p>
-      </div>
+<!-- ═══ S7. Before / After ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:42px;font-weight:900;color:#e8e8e8;text-align:center;margin-bottom:32px;">이 세트 하나면 뭐가 달라지는데?</p>
+  <div style="display:flex;gap:20px;margin-bottom:24px;">
+    <div style="flex:1;background:#1a0000;border:2px solid #E53935;border-radius:14px;padding:28px;">
+      <p style="font-size:24px;font-weight:900;color:#E53935;margin-bottom:14px;">BEFORE</p>
+      <p style="font-size:22px;color:#888;line-height:2;">
+        매달 1일 매출 0원 시작<br>
+        OT 잡아도 등록 안 됨<br>
+        재등록 부탁하기 초라함<br>
+        상담할 때 보여줄 게 없음<br>
+        SNS 뭘 해야 하는지 모름<br>
+        통증 회원한테 막힘
+      </p>
     </div>
-
-    <!-- 2. 재등록용 관리파일 -->
-    <div class="af-imgcard">
-      <div class="card-top">
-        <div class="ic">🔄</div>
-        <div class="txt">
-          <div class="name">재등록용 관리파일</div>
-          <span class="fmt">HTML</span>
-          <div class="tagline">Before/After · 체중·골격근량 그래프 · 30회 로드맵 · 재등록 확정 리포트</div>
-        </div>
-      </div>
-      <div class="card-preview">
-        <img src="img/file_reveal/preview_renew.jpg" alt="재등록용 관리파일 미리보기">
-      </div>
-      <div class="card-reaction">
-        <span class="quote-ic">💬</span>
-        <p class="quote">체중·근육량 변화 그래프까지 <b>숫자로 증명</b>. "이 정도면 계속 해야죠" 소리 절로 나옴.</p>
-      </div>
-    </div>
-
-    <!-- 3. 수업 복습 양식 -->
-    <div class="af-imgcard">
-      <div class="card-top">
-        <div class="ic">📝</div>
-        <div class="txt">
-          <div class="name">수업 복습 양식</div>
-          <span class="fmt">HTML</span>
-          <div class="tagline">매 수업 직후 회원에게 전달 · 운동 기록·자세·컨디션·다음 수업 예고</div>
-        </div>
-      </div>
-      <div class="card-preview">
-        <img src="img/file_reveal/preview_review.jpg" alt="수업 복습 양식 미리보기">
-      </div>
-      <div class="card-reaction">
-        <span class="quote-ic">💬</span>
-        <p class="quote">매 수업마다 이 자료 받는 회원은 <b>장기고객 전환율이 다릅니다.</b> 꼼꼼함의 증거.</p>
-      </div>
-    </div>
-
-    <!-- 4. 세일즈북 활용 예시 -->
-    <div class="af-imgcard">
-      <div class="card-top">
-        <div class="ic">💼</div>
-        <div class="txt">
-          <div class="name">세일즈북 + 활용 예시</div>
-          <span class="fmt">PPTX + PDF</span>
-          <div class="tagline">OT2 운동 종료 직후 결제 유도용 · 가격·커리큘럼·환불정책 완성본 + 실제 말하기 대본</div>
-        </div>
-      </div>
-      <div class="card-preview">
-        <img src="img/file_reveal/preview_salesbook.jpg" alt="세일즈북 활용 예시 미리보기">
-      </div>
-      <div class="card-reaction">
-        <span class="quote-ic">💬</span>
-        <p class="quote">"이 구조면 <b>회원님 눈빛이 빛나서 계약서 달라고 하고있음.</b>" 활용 예시 PDF에 실제 말하기 대본까지 공개.</p>
-      </div>
-    </div>
-
-    <!-- 5. 시작하기 안내서 -->
-    <div class="af-imgcard">
-      <div class="card-top">
-        <div class="ic">📕</div>
-        <div class="txt">
-          <div class="name">시작하기 안내서</div>
-          <span class="fmt">PDF</span>
-          <div class="tagline">파일 여는 법부터 OT1 → OT2 → 세일즈 → 재등록까지 전체 플로우를 초등학생도 이해하게 정리</div>
-        </div>
-      </div>
-      <div class="card-preview">
-        <img src="img/file_reveal/preview_guide.jpg" alt="시작하기 안내서 미리보기">
-      </div>
-      <div class="card-reaction">
-        <span class="quote-ic">💬</span>
-        <p class="quote">"이거 그냥 따라만 하면 되네?" <b>실수 없이 바로 실전 투입 가능</b>한 매뉴얼.</p>
-      </div>
+    <div style="flex:1;background:#001a00;border:2px solid #3fb950;border-radius:14px;padding:28px;">
+      <p style="font-size:24px;font-weight:900;color:#3fb950;margin-bottom:14px;">AFTER</p>
+      <p style="font-size:22px;color:#ccc;line-height:2;">
+        이미 굴러가는 매출에 올라탐<br>
+        OT 전환율 2배 이상<br>
+        회원이 알아서 재등록<br>
+        세일즈북 넘기면 상담 완료<br>
+        SNS에서 매달 신규 유입<br>
+        교정영상으로 즉시 대응
+      </p>
     </div>
   </div>
+  <p style="font-size:32px;font-weight:900;color:#e8e8e8;text-align:center;">의지력의 차이가 아닙니다.<br><span style="color:#3fb950;">시스템과 도구를 가졌느냐의 차이.</span></p>
+</div>
 
-  <!-- ═══ 케이스별 솔루션 PDF 6종 (NEW) ═══ -->
-  <style>
-  .af-cases-header{text-align:center;margin:8% 0 5%;}
-  .af-cases-header .case-tag{
-    display:inline-block;background:#FF6B3A;color:#fff;
-    font-size:1.8vw;font-weight:900;padding:1% 3%;border-radius:30px;
-    letter-spacing:2px;margin-bottom:2.5%;
-  }
-  .af-cases-header h3{
-    font-size:5.5vw;font-weight:900;color:#fff;line-height:1.25;
-    letter-spacing:-0.25vw;margin-bottom:2.5%;
-  }
-  .af-cases-header h3 b{color:#FFD85E;}
-  .af-cases-header .case-sub{
-    font-size:2vw;color:#AEDDFF;font-weight:700;line-height:1.55;
-  }
-  .af-cases-header .case-sub b{color:#5BEAD6;}
-  .af-cases-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:3%;margin-bottom:5%;
-  }
-  .case-card{
-    background:linear-gradient(160deg,#1a2855 0%,#0c1432 100%);
-    border:2px solid rgba(255,107,58,0.35);border-radius:18px;
-    overflow:hidden;position:relative;
-    box-shadow:0 16px 40px rgba(0,0,0,0.45);
-    display:flex;flex-direction:column;
-  }
-  .case-card::before{
-    content:'';position:absolute;top:0;left:0;width:100%;height:5px;
-    background:linear-gradient(90deg,#FF6B3A,#FFD85E);
-  }
-  .case-card .case-num{
-    position:absolute;top:3%;right:4%;
-    background:#FF6B3A;color:#fff;font-size:1.4vw;font-weight:900;
-    padding:0.6% 1.4%;border-radius:6px;letter-spacing:1px;z-index:2;
-  }
-  .case-card .case-img{
-    width:100%;aspect-ratio:1.79/1;
-    background:#000;display:flex;align-items:center;justify-content:center;
-    overflow:hidden;border-bottom:2px solid rgba(255,107,58,0.25);
-  }
-  .case-card .case-img img{width:100%;height:100%;object-fit:cover;display:block;}
-  .case-card .case-body{padding:5% 6% 6%;flex:1;display:flex;flex-direction:column;}
-  .case-card .case-name{
-    font-size:3vw;font-weight:900;color:#fff;letter-spacing:-0.5px;
-    line-height:1.2;margin-bottom:3%;
-  }
-  .case-card .case-name b{color:#FFD85E;}
-  .case-card .case-tagline{
-    font-size:1.7vw;color:#AEDDFF;font-weight:700;line-height:1.5;
-    margin-bottom:auto;padding-bottom:4%;
-  }
-  .case-card .case-tagline b{color:#5BEAD6;}
-  .case-card .case-fmt{
-    display:inline-flex;align-items:center;gap:1.5%;
-    background:rgba(255,107,58,0.15);border:1px solid rgba(255,107,58,0.45);
-    color:#FF6B3A;font-size:1.4vw;font-weight:900;letter-spacing:1.5px;
-    padding:1.2% 2.5%;border-radius:6px;align-self:flex-start;
-  }
-  .case-card .case-fmt::before{content:'📄';font-size:1.6vw;}
+<!-- ═══ S8. 사회적 증거 ═══ -->
+<div class="slide bg-black pad">
+  <p style="font-size:42px;font-weight:900;color:#e8e8e8;text-align:center;margin-bottom:28px;">이미 수백 명이 증명했습니다</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">434건+</div><div class="stat-label">누적 거래</div></div>
+    <div class="stat"><div class="stat-num">4.88★</div><div class="stat-label">평균 평점</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">만족도</div></div>
+  </div>
+  <div class="review">
+    <div class="review-stars">★★★★★</div>
+    <div class="review-text">"3년차인데 월 300이 한계였어요.<br>이거 읽고 구조 바꿨더니 3개월 만에 1000 넘었습니다."</div>
+    <div class="review-author">— PT 3년차 위탁 트레이너</div>
+  </div>
+  <div class="review">
+    <div class="review-stars">★★★★★</div>
+    <div class="review-text">"세일즈북 넘기면서 상담하니까<br>회원님 눈빛이 달라져요. OT 등록수가 확 올랐습니다."</div>
+    <div class="review-author">— PT 5년차 관리자</div>
+  </div>
+  <div class="review">
+    <div class="review-stars">★★★★★</div>
+    <div class="review-text">"교정운동 영상 보고 바로 수업에 적용했는데<br>회원님께 제가 신이 됬어요 ㅋㅋㅋ"</div>
+    <div class="review-author">— 위탁 트레이너</div>
+  </div>
+  <div class="review">
+    <div class="review-stars">★★★★★</div>
+    <div class="review-text">"솔직히 이 가격에 이 구성이요?<br>세미나 한 번 갈 돈이면 다 받는 건데 안 살 이유가 없죠."</div>
+    <div class="review-author">— 신규 트레이너</div>
+  </div>
+</div>
 
-  .af-cases-bottom{
-    background:linear-gradient(135deg,#FF6B3A 0%,#FFD85E 100%);
-    color:#0a1328;border-radius:18px;padding:4% 5%;text-align:center;
-    margin-top:4%;
-  }
-  .af-cases-bottom h4{
-    font-size:3.5vw;font-weight:900;letter-spacing:-0.2vw;line-height:1.3;margin-bottom:1.5%;
-  }
-  .af-cases-bottom p{font-size:1.7vw;font-weight:700;line-height:1.5;}
-  .af-cases-bottom p b{background:#0a1328;color:#FFD85E;padding:0 2%;border-radius:4px;}
+<!-- ═══ S9. 가격 앵커링 + 후기이벤트 + CTA ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:42px;font-weight:900;color:#e8e8e8;text-align:center;margin-bottom:28px;">따로 사면 이만큼 듭니다</p>
 
-  @media(min-width:860px){
-    .s.actual-files .af-cases-header .case-tag{font-size:14px;}
-    .s.actual-files .af-cases-header h3{font-size:46px;letter-spacing:-2px;}
-    .s.actual-files .af-cases-header .case-sub{font-size:17px;}
-    .s.actual-files .case-card .case-num{font-size:11px;}
-    .s.actual-files .case-card .case-name{font-size:24px;}
-    .s.actual-files .case-card .case-tagline{font-size:14.5px;}
-    .s.actual-files .case-card .case-fmt{font-size:11px;}
-    .s.actual-files .case-card .case-fmt::before{font-size:13px;}
-    .s.actual-files .af-cases-bottom h4{font-size:30px;letter-spacing:-1.5px;}
-    .s.actual-files .af-cases-bottom p{font-size:14.5px;}
-  }
-  @media(max-width:600px){
-    .af-cases-grid{grid-template-columns:1fr;gap:5%;}
-  }
-  </style>
+  <div class="compare-row"><span class="compare-name">전자책 (매출 자동화 시스템)</span><span class="compare-price">198,000원</span></div>
+  <div class="compare-row"><span class="compare-name">템플릿 풀패키지</span><span class="compare-price">198,000원</span></div>
+  <div class="compare-row" style="border-bottom:3px solid #E53935;"><span class="compare-name" style="color:#e8e8e8;font-size:30px;">정가 합계</span><span class="compare-price" style="font-size:30px;">396,000원</span></div>
 
-  <div class="af-cases-header">
-    <span class="case-tag">📚 BONUS · 케이스별 솔루션 PDF 6종</span>
-    <h3>회원 통증·고민 들어오면<br><b>바로 꺼내 쓰는</b> 솔루션 PDF</h3>
-    <p class="case-sub">"이 회원 거북목인데…" → 거기서 끝.<br>바로 <b>케이스 PDF 꺼내서 보여주며 짚어주면</b> 신뢰 폭발 + 등록률 ↑</p>
+  <div class="spacer"></div>
+
+  <div class="price-box pulse">
+    <p style="font-size:28px;color:rgba(255,255,255,0.8);margin-bottom:8px;">올인원 번들 세트</p>
+    <p style="font-size:72px;font-weight:900;color:#e8e8e8;">69,000원</p>
+    <p style="font-size:32px;color:rgba(255,255,255,0.7);text-decoration:line-through;margin-top:4px;">정가 396,000원</p>
+    <p style="font-size:28px;color:rgba(255,255,255,0.9);font-weight:700;margin-top:8px;">78% 할인 · 시스템 + 도구 한번에</p>
   </div>
 
-  <div class="af-cases-grid">
-    <div class="case-card">
-      <span class="case-num">CASE 01</span>
-      <div class="case-img"><img src="img/file_reveal/preview_case_neck.jpg" alt="거북목 케이스 PDF"></div>
-      <div class="case-body">
-        <p class="case-name">거북목 / <b>일자목</b> 케이스</p>
-        <p class="case-tagline">하루 8시간 책상 앞 회원 → <b>3주 이내 자세 변화</b> 만들어내는 단계별 솔루션</p>
-        <span class="case-fmt">PDF · 솔루션 시트</span>
-      </div>
-    </div>
-    <div class="case-card">
-      <span class="case-num">CASE 02</span>
-      <div class="case-img"><img src="img/file_reveal/preview_case_shoulder.jpg" alt="어깨통증 케이스 PDF"></div>
-      <div class="case-body">
-        <p class="case-name">어깨 / <b>회전근개</b> 통증</p>
-        <p class="case-tagline">"오십견인가요?" 묻는 회원 즉시 안심 + <b>맞춤 운동 처방</b>으로 PT 신뢰 형성</p>
-        <span class="case-fmt">PDF · 솔루션 시트</span>
-      </div>
-    </div>
-    <div class="case-card">
-      <span class="case-num">CASE 03</span>
-      <div class="case-img"><img src="img/file_reveal/preview_case_back.jpg" alt="허리통증 케이스 PDF"></div>
-      <div class="case-body">
-        <p class="case-name">허리 / <b>디스크·요추</b> 통증</p>
-        <p class="case-tagline">디스크 의심 회원 — <b>안전한 운동 가이드</b> + 병원 연계 시점까지 명확하게 안내</p>
-        <span class="case-fmt">PDF · 솔루션 시트</span>
-      </div>
-    </div>
-    <div class="case-card">
-      <span class="case-num">CASE 04</span>
-      <div class="case-img"><img src="img/file_reveal/preview_case_yoyo.jpg" alt="요요 케이스 PDF"></div>
-      <div class="case-body">
-        <p class="case-name">요요 / <b>위고비 후</b> 케어</p>
-        <p class="case-tagline">감량 후 처진살·근손실 회원 → <b>탄력 회복 + 체력 재구축</b> 12주 로드맵</p>
-        <span class="case-fmt">PDF · 솔루션 시트</span>
-      </div>
-    </div>
-    <div class="case-card">
-      <span class="case-num">CASE 05</span>
-      <div class="case-img"><img src="img/file_reveal/preview_case_muscle.jpg" alt="근육량 증가 케이스 PDF"></div>
-      <div class="case-body">
-        <p class="case-name">근육량 증가 / <b>벌크업</b></p>
-        <p class="case-tagline">마른 체형 회원 → <b>주차별 부피 변화 만드는</b> 분할 + 영양 가이드</p>
-        <span class="case-fmt">PDF · 솔루션 시트</span>
-      </div>
-    </div>
-    <div class="case-card">
-      <span class="case-num">CASE 06</span>
-      <div class="case-img"><img src="img/file_reveal/preview_case_diet.jpg" alt="다이어트 케이스 PDF"></div>
-      <div class="case-body">
-        <p class="case-name">다이어트 / <b>체지방 감량</b></p>
-        <p class="case-tagline">"진짜 빠질까요?" 의심하는 회원 → <b>주차별 변화 예측</b> + 식단 처방까지 한 장에</p>
-        <span class="case-fmt">PDF · 솔루션 시트</span>
-      </div>
-    </div>
-  </div>
+  <div class="spacer"></div>
 
-  <div class="af-cases-bottom">
-    <h4>OT 상담 때 이거 한 장 펼치면<br>등록 안 할 수가 없습니다</h4>
-    <p>"제 통증/고민에 <b>이미 답이 있구나</b>" → 가격 안 묻고 시작합니다.</p>
-  </div>
-
-  <!-- ── 인쇄 강조 배너 ── -->
-  <div class="af-print-banner">
-    <span class="pb-tag">🖨️ NO iPAD? NO PROBLEM!</span>
-    <h3>
-      <span class="pb-line">태블릿·아이패드 <b>없어도 전혀 OK!</b></span>
-      <span class="pb-line">오히려 <b>인쇄해서 쓰는 게 더 좋을 수도</b></span>
-    </h3>
-    <p class="pb-body">
-      A4 <b>가로</b>로 인쇄해서 회원님 앞에서 <b>실제 종이</b>로 짚어가며 설명 → 디지털보다 더 고급스러운 느낌!<br>
-      수업 복습 양식도 <b>인쇄해서 손에 직접 쥐여주기</b> → "우리 선생님 진짜 꼼꼼하다" 느낌 배가.<br>
-      재등록 리포트도 종이로 마주앉아 하나씩 짚어주면 <b>결정률 확 상승</b>.
+  <div class="event-box">
+    <div class="event-badge">🎁 후기 이벤트</div>
+    <p style="font-size:34px;font-weight:900;color:#e8e8e8;margin-bottom:12px;">별 ★5개 + 300자 이상 후기 남기면</p>
+    <p style="font-size:24px;color:#aaa;line-height:1.8;">
+      「상위 1% 트레이너 성장 커뮤니티」톡방 초대<br>
+      후기 캡처 → 인스타 DM → <span style="color:#e8e8e8;font-weight:700;">@pt_zerocoach7</span>
     </p>
   </div>
 
-  <!-- ── 후기 이벤트 · 커뮤니티 업데이트 ── -->
-  <div class="af-community">
-    <span class="cm-tag">💬 REVIEW EVENT · LIVE UPDATE</span>
-    <h3>후기 남기면 <b>상위 1% 톡방 초대</b><br>원하는 툴은 <b>최신화해서 재제공</b></h3>
-    <p class="cm-body">
-      후기 이벤트 참여시 <strong>상위 1% 트레이너 비공개 톡방</strong>에 초대됩니다.<br>
-      톡방에서 "이런 도구도 필요해요" <strong>요청하시면 반영</strong>해서 <strong>최신화 버전을 재제공</strong>해드립니다.<br>
-      <strong>평생 같이 업그레이드</strong>되는 상품입니다.
-    </p>
-    <div class="cm-cond">
-      ✅ 참여 조건 (동일) : 자사몰 ⭐5개 + 300자 이상 성과 후기 + 인스타 스토리 @zerocoach7 태그<br>
-      🎁 번들 특전 : 상위 1% 톡방 초대 + 제로코치 피드백 무제한 + 톡방 요청 툴 업데이트 평생<br>
-      ⏰ 선착순 20명 한정!
-    </div>
+  <div class="spacer"></div>
+
+  <p style="font-size:44px;font-weight:900;color:#e8e8e8;text-align:center;line-height:1.35;">매달 1일,<br>또 0원에서 시작하실 건가요?</p>
+  <div class="spacer-sm"></div>
+  <p style="font-size:30px;font-weight:500;color:#bbb;text-align:center;line-height:1.7;">옆 센터 트레이너는 시스템 돌리고<br>세일즈북 들고 상담하고 있어요.</p>
+  <div class="spacer-sm"></div>
+  <p style="font-size:36px;font-weight:900;color:#e8e8e8;text-align:center;">당신만 아직 맨주먹이에요.</p>
+
+  <div class="spacer"></div>
+
+  <div class="cta pulse">
+    <p style="font-size:44px;font-weight:900;color:#e8e8e8;line-height:1.4;margin-bottom:16px;">시스템 + 도구<br>둘 다 가져가세요</p>
+    <p class="shimmer" style="font-size:56px;font-weight:900;margin:16px 0;">69,000원</p>
+    <p style="font-size:32px;font-weight:900;color:#FFD700;margin-top:12px;">PT 2회도 안 되는 가격으로<br>매출 구조가 바뀝니다.</p>
+  </div>
+  <div style="font-size:28px;color:#E53935;text-align:center;margin-top:24px;font-weight:900;">⚠ 얼리버드 종료 후 정가로 올라갑니다</div>
+  <div class="spacer"></div>
+  <p style="font-size:20px;color:#555;text-align:center;">인스타 문의: @pt_zerocoach7</p>
+</div>
+
+<!-- ═══ S10. 케이스별 솔루션 PDF 6편 (NEW · 추가 자료) ═══ -->
+<div class="slide bg-black pad">
+  <p style="font-size:22px;font-weight:700;color:#FFD700;letter-spacing:3px;margin-bottom:12px;">+ ADD-ON · NEW</p>
+  <p style="font-size:44px;font-weight:900;color:#e8e8e8;line-height:1.3;margin-bottom:14px;">케이스별 솔루션 PDF 6편</p>
+  <p style="font-size:24px;color:#888;line-height:1.7;margin-bottom:32px;">회원이 어떤 상태로 와도 막히지 않습니다.<br>상황별 진단·처방 가이드 — 그대로 따라하세요.</p>
+
+  <div class="card">
+    <div class="card-num">CASE 01</div>
+    <div class="card-title">거북목 케이스</div>
+    <div class="card-desc">상부교차증후군 완벽 교정 가이드 — 무너진 인체 설계도 재건.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">CASE 02</div>
+    <div class="card-title">어깨통증 케이스</div>
+    <div class="card-desc">라운드숄더·충돌증후군 진단부터 처방까지.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">CASE 03</div>
+    <div class="card-title">허리통증 케이스</div>
+    <div class="card-desc">디스크·협착증 안전 루틴과 회복 시퀀스.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">CASE 04</div>
+    <div class="card-title">요요 / 다이어트 케이스</div>
+    <div class="card-desc">대사 재건 청사진 — 고장난 인체 엔진 수리법.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">CASE 05</div>
+    <div class="card-title">근육량증가 케이스</div>
+    <div class="card-desc">정체기 돌파, 효율적 벌크업 시스템 정리.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">CASE 06</div>
+    <div class="card-title">다이어트 케이스</div>
+    <div class="card-desc">근손실 없는 과학적 다이어트 — 체지방만 깎는 법.</div>
   </div>
 
-  <!-- ── 하이라이트 ── -->
-  <div class="af-highlight">
-    <div class="ah-icon">✨</div>
-    <div>
-      <p class="ah-title">OT1에서 사진 몇 장만 찍어 놓으면,</p>
-      <p class="ah-sub">나머지는 이 파일 안에서 전부 해결됩니다. 포토샵 · 일러스트 <b>필요 없음</b>.</p>
-    </div>
+  <div class="spacer"></div>
+  <p style="font-size:28px;color:#bbb;text-align:center;line-height:1.7;"><span style="color:#e8e8e8;font-weight:900;">상담실로 들어오는 회원의 95%</span>는 이 6가지 중 하나.</p>
+</div>
+
+<!-- ═══ S11. 트레이너 전략 PDF + 인스타 그래픽 11장 (NEW) ═══ -->
+<div class="slide bg-dark pad">
+  <p style="font-size:22px;font-weight:700;color:#FFD700;letter-spacing:3px;margin-bottom:12px;">+ ADD-ON · NEW</p>
+  <p style="font-size:44px;font-weight:900;color:#e8e8e8;line-height:1.3;margin-bottom:14px;">트레이너 전략 가이드<br>+ 인스타 그래픽 11장</p>
+  <p style="font-size:24px;color:#888;line-height:1.7;margin-bottom:32px;">매출 상위권 트레이너 운영 전략 + 바로 게시 가능한 SNS 콘텐츠 11장.</p>
+
+  <div class="card">
+    <div class="card-num">+1</div>
+    <div class="card-title">트레이너 전략 PDF</div>
+    <div class="card-desc">매출 상위권 트레이너가 어떻게 회원·시간·매출을 다루는지 정리한 운영 전략집.</div>
+  </div>
+  <div class="card">
+    <div class="card-num">+2~12</div>
+    <div class="card-title">인스타 그래픽 11장</div>
+    <div class="card-desc">바로 업로드 가능한 SNS 콘텐츠 카드뉴스 11장.<br>그대로 게시하면 SNS 유입이 시작됩니다.</div>
   </div>
 </div>
-<div class="s spacer"></div>
 
-<!-- ═══ FINAL CTA (가장 마지막 · 깜빡이 GIF) ═══ -->
-<div class="s"><img class="full" src="img/cta_bundle.gif"></div>
+<!-- ═══ S12. 미친 가격 + 20명 한정 강조 (NEW) ═══ -->
+<div class="slide bg-black pad">
+  <p style="font-size:22px;font-weight:700;color:#E53935;letter-spacing:3px;text-align:center;margin-bottom:14px;">FINAL CHANCE</p>
+  <p style="font-size:52px;font-weight:900;color:#e8e8e8;text-align:center;line-height:1.3;margin-bottom:24px;">20개 넘는 템플릿 + 전자책이<br>8만 8천원?</p>
+  <div style="width:60px;height:4px;background:#E53935;margin:0 auto 28px;"></div>
+  <p style="font-size:40px;font-weight:900;color:#E53935;text-align:center;margin-bottom:16px;">그냥 미친 가격입니다.</p>
+  <p style="font-size:28px;color:#bbb;text-align:center;line-height:1.7;margin-bottom:36px;">선착순 <span style="color:#e8e8e8;font-weight:900;">20명까지만</span> 이 가격으로 풀고,<br>이후 바로 정가 <span style="color:#FFD700;font-weight:900;">396,000원</span>으로 올라갑니다.</p>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     HP-PATCH v3 — 100% 환불 보증 박스 (페이지 마지막 · 박창영 명령)
-═══════════════════════════════════════════════════════════════ -->
-<style>
-.hp3-w{width:860px;max-width:100%;margin:0 auto;font-family:'Noto Sans KR',sans-serif;box-sizing:border-box}
-.hp3-guar{background:linear-gradient(180deg,#1a0815 0%,#2a0e14 50%,#1a0b1a 100%);padding:9% 6% 8%;text-align:center;position:relative;border-top:2px solid #FFD85E;border-bottom:2px solid #FFD85E;box-sizing:border-box}
-.hp3-guar::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:80%;height:4px;background:linear-gradient(90deg,transparent,#FFD85E,transparent);pointer-events:none}
-.hp3-guar .seal{background:linear-gradient(135deg,#FFD85E 0%,#FF6B3A 100%);color:#1a0815;width:14vw;height:14vw;max-width:110px;max-height:110px;min-width:88px;min-height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.1vw;font-weight:900;line-height:1.2;text-align:center;margin:0 auto 4%;box-shadow:0 0 30px rgba(255,216,94,.4);animation:hp3Pulse 2.2s infinite}
-@keyframes hp3Pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.92}}
-.hp3-guar h3{font-size:5.4vw;font-weight:900;color:#fff;line-height:1.3;letter-spacing:-0.18vw;margin:0 0 4%;word-break:keep-all}
-.hp3-guar h3 .a{color:#FFD85E}
-.hp3-guar h3 .b{color:#FF9D3A}
-.hp3-guar .body{font-size:2.5vw;color:#FFE8CC;line-height:1.65;margin:0 0 4%;word-break:keep-all}
-.hp3-guar .body b{color:#FFD85E;font-weight:800}
-.hp3-guar .body .gold{color:#FF9D3A;font-weight:900}
-.hp3-guar .stamp{display:inline-block;background:rgba(255,216,94,.12);border:1.5px solid rgba(255,216,94,.45);border-radius:40px;padding:1.4% 4.5%;font-size:1.7vw;color:#FFD85E;font-weight:700;letter-spacing:0.5px}
-@media(min-width:860px){.hp3-guar{padding:64px 48px 56px}.hp3-guar .seal{font-size:17px;width:110px;height:110px}.hp3-guar h3{font-size:36px;letter-spacing:-1.2px}.hp3-guar .body{font-size:18px}.hp3-guar .stamp{font-size:14px;padding:11px 24px}}
-@media(max-width:480px){.hp3-guar{padding:44px 18px 36px}.hp3-guar h3{font-size:21px}.hp3-guar .body{font-size:13.5px}.hp3-guar .stamp{font-size:12px;padding:8px 16px}}
-</style>
-
-<div class="hp3-w hp3-guar">
-  <div class="seal">100%<br>환불<br>약속</div>
-  <h3><span class="a">이 시스템 적용하고도</span><br><span class="b">매출이 오르지 않는다면 100% 환불 약속</span></h3>
-  <p class="body">30일 안에 시스템 다 적용해보고 매출이 그대로면 <span class="gold">전액 환불</span>해드립니다.<br>219명이 검증한 시스템 — <b>매출 안 오르면 제가 손해 보겠습니다.</b></p>
-  <span class="stamp">📞 환불 요청 → 인스타 DM @zerocoach7 · 평균 응답 3시간</span>
+  <div class="price-box pulse">
+    <p style="font-size:28px;color:rgba(255,255,255,0.8);margin-bottom:8px;">선착순 20명 한정</p>
+    <p style="font-size:72px;font-weight:900;color:#e8e8e8;">69,000원</p>
+    <p style="font-size:32px;color:rgba(255,255,255,0.7);text-decoration:line-through;margin-top:4px;">정가 396,000원</p>
+    <p style="font-size:28px;color:rgba(255,255,255,0.9);font-weight:700;margin-top:8px;">20명 마감 후 즉시 정가 인상</p>
+  </div>
+  <div class="spacer"></div>
+  <p style="font-size:28px;color:#E53935;text-align:center;font-weight:900;">⚠ 마감되면 다시 이 가격으로 돌아오지 않습니다</p>
+  <div class="spacer"></div>
+  <p style="font-size:20px;color:#555;text-align:center;">인스타 문의: @pt_zerocoach7</p>
 </div>
-<div class="s spacer"></div>
-<!-- ═══════════════════ HP-PATCH v3 끝 ═══════════════════ -->
 
-<!-- ═══ 부모 iframe 자동 높이 조절 ═══ -->
 </body>
 </html>
