@@ -212,24 +212,55 @@ body{
 .link-basic:hover{border-color:#5CDAFF;transform:translateY(-2px);}
 .link-basic .desc{color:#8a9ec0;}
 
-/* 스피어핏 */
-.link-spearfit{
-  display:flex;align-items:center;gap:14px;text-align:left;padding:14px 18px;
-  background:linear-gradient(135deg,#0a1020,#1a1e3a);
-  border:1px solid rgba(255,255,255,0.1);color:#fff;
+/* 스피어핏 — 최상단 히어로 카드 */
+.link-spearfit-hero{
+  display:flex;align-items:center;gap:16px;padding:18px;
+  background:linear-gradient(135deg,#000000 0%,#0d0d0d 60%,#1a1a1a 100%);
+  border:2px solid #C8FF3A;
+  color:#fff;border-radius:16px;
+  box-shadow:
+    0 10px 30px rgba(200,255,58,0.28),
+    0 0 48px rgba(200,255,58,0.18),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  position:relative;overflow:hidden;
+  text-decoration:none;margin-bottom:12px;
+  transition:all 0.25s;
+  animation:spearPulse 2.8s ease-in-out infinite;
 }
-.link-spearfit:hover{border-color:#5CDAFF;transform:translateY(-2px);}
-.link-spearfit .logo{
-  width:48px;height:48px;border-radius:10px;
-  background:linear-gradient(135deg,#1a3a6e,#0a1f3e);
+@keyframes spearPulse{
+  0%,100%{box-shadow:0 10px 30px rgba(200,255,58,0.28),0 0 48px rgba(200,255,58,0.18),inset 0 0 0 1px rgba(255,255,255,0.04);}
+  50%{box-shadow:0 14px 40px rgba(200,255,58,0.45),0 0 72px rgba(200,255,58,0.35),inset 0 0 0 1px rgba(255,255,255,0.08);}
+}
+.link-spearfit-hero::before{
+  content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;
+  background:linear-gradient(110deg,transparent 0%,rgba(200,255,58,0.25) 50%,transparent 100%);
+  transform:skewX(-20deg);animation:shineSweep 3s infinite;
+  pointer-events:none;z-index:2;
+}
+.link-spearfit-hero:hover{transform:translateY(-4px);border-color:#fff;}
+.link-spearfit-hero .sf-logo{
+  width:78px;height:78px;border-radius:12px;overflow:hidden;
+  flex-shrink:0;background:#000;
   display:flex;align-items:center;justify-content:center;
-  font-size:22px;flex-shrink:0;color:#5CDAFF;
+  border:1px solid rgba(200,255,58,0.35);
 }
-.link-spearfit .info{flex:1;}
-.link-spearfit .title{margin-bottom:2px;font-size:16px;}
-.link-spearfit .soon-badge{
-  background:#FFD85E;color:#7a5a00;font-size:10px;font-weight:900;
-  padding:3px 8px;border-radius:20px;letter-spacing:0.5px;margin-left:6px;
+.link-spearfit-hero .sf-logo img{width:100%;height:100%;object-fit:cover;display:block;}
+.link-spearfit-hero .sf-info{flex:1;min-width:0;}
+.link-spearfit-hero .sf-brand{
+  font-size:11px;font-weight:900;color:#C8FF3A;
+  letter-spacing:3px;margin-bottom:2px;
+}
+.link-spearfit-hero .sf-title{
+  font-size:20px;font-weight:900;color:#fff;
+  letter-spacing:-0.3px;margin-bottom:6px;line-height:1.25;
+}
+.link-spearfit-hero .sf-desc{
+  font-size:12.5px;color:#cfcfcf;line-height:1.45;margin-bottom:10px;
+}
+.link-spearfit-hero .sf-cta{
+  font-size:12px;font-weight:900;color:#000;
+  background:#C8FF3A;display:inline-block;padding:6px 14px;
+  border-radius:20px;letter-spacing:0.3px;
 }
 
 /* SNS 아이콘 버튼 */
@@ -260,6 +291,20 @@ body{
     <div class="stat"><b>4.88★</b><span>평점</span></div>
     <div class="stat"><b>500명+</b><span>증명 후기</span></div>
   </div>
+
+  <!-- ═════ 짐웨어 섹션 ═════ -->
+  <p class="section-lbl">PREMIUM GYMWEAR</p>
+
+  <!-- 스피어핏 -->
+  <a class="link-spearfit-hero" href="https://spearfit.co.kr/" target="_blank">
+    <div class="sf-logo"><img src="img/spearfit_logo.jpg" alt="SPEAR FIT"></div>
+    <div class="sf-info">
+      <div class="sf-brand">SPEAR FIT</div>
+      <div class="sf-title">핏에 예민한 운동인들의 선택</div>
+      <div class="sf-desc">스피어핏 짐웨어 · 한계를 뚫는 창</div>
+      <span class="sf-cta">사이트 둘러보기 →</span>
+    </div>
+  </a>
 
   <!-- ═════ 상품 섹션 ═════ -->
   <p class="section-lbl">TRAINER SALES PRODUCTS</p>
