@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>재등록용 회원관리파일 템플릿 — PT 트레이너 전용</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;word-break:keep-all;
+     -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;}
+  body{
+    font-family:'Pretendard','Malgun Gothic','맑은 고딕',sans-serif;
+    background:#e9eef3;color:#1a2b4a;
+    padding:40px 0;
+  }
+  .wrap{max-width:1960px;margin:0 auto;padding:0 20px;}
+
+  /* ==================== 상단 툴바 ==================== */
+  .toolbar{
+    background:#063d32;color:#fff;padding:24px 32px;
+    border-radius:14px;margin-bottom:24px;
+    display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+    box-shadow:0 10px 30px rgba(6,61,50,0.2);
+  }
+  .toolbar label{font-size:15px;font-weight:700;}
+  .toolbar input[type="text"]{
+    background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);
+    color:#fff;padding:10px 16px;border-radius:8px;font-size:15px;width:260px;font-weight:600;
+  }
+  .toolbar input[type="text"]::placeholder{color:rgba(255,255,255,0.55);}
+  .toolbar .btn{
+    background:#5BEAD6;color:#063d32;border:none;padding:12px 22px;
+    border-radius:8px;font-weight:900;font-size:15px;cursor:pointer;transition:transform .2s;
+  }
+  .toolbar .btn:hover{transform:translateY(-2px);}
+  .toolbar .btn.print{background:#FFD85E;}
+  .toolbar .btn.mode{background:#5CDAFF;}
+  .toolbar .btn.save{background:#6DD4B0;}
+  .toolbar .btn.members{background:#B8F2E6;}
+  .toolbar .btn.backup{background:#FFB3D9;}
+  .toolbar .btn.restore{background:#FFD699;}
+  .toolbar .hint{font-size:13px;opacity:0.8;margin-left:auto;}
+
+  /* 자동 저장 토스트 활성화 */
+  #saveToast.show{opacity:1 !important;}
+
+  /* ==================== 트레이너 전용 안내 ==================== */
+  .trainer-only{
+    background:#fff5f5;border:4px solid #c0392b;padding:32px 40px;
+    border-radius:14px;margin-bottom:28px;color:#6d1f14;
+    box-shadow:0 8px 24px rgba(192,57,43,0.15);
+  }
+  .trainer-only h2{font-size:28px;font-weight:900;margin-bottom:14px;line-height:1.4;}
+  .trainer-only p{font-size:19px;line-height:1.75;}
+
+  /* ==================== 제품 히어로 ==================== */
+  .hero-guide{
+    background:linear-gradient(135deg,#0a5f4c 0%,#12876e 100%);
+    color:#fff;padding:48px 56px;border-radius:20px;
+    margin-bottom:40px;box-shadow:0 20px 60px rgba(10,95,76,0.25);
+  }
+  .hero-guide h1{font-size:42px;font-weight:900;margin-bottom:16px;}
+  .hero-guide .sub{font-size:20px;opacity:0.9;line-height:1.5;}
+  .hero-guide .tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;}
+  .hero-guide .tag{background:rgba(255,255,255,0.15);padding:8px 16px;border-radius:20px;font-size:14px;font-weight:700;}
+
+  .section-title{
+    font-size:28px;font-weight:900;color:#0a5f4c;
+    margin:40px 0 20px 8px;padding-left:16px;
+    border-left:6px solid #12876e;
+  }
+
+  /* ==================== 슬라이드 ==================== */
+  .slide{
+    width:1920px;height:1080px;
+    background:linear-gradient(135deg,#e8f4f7 0%,#c6e2ea 100%);
+    margin:30px auto;border-radius:12px;
+    box-shadow:0 12px 40px rgba(0,0,0,0.12);
+    position:relative;overflow:hidden;padding:80px;
+  }
+  /* 콘텐츠 많은 슬라이드는 세로 자동 확장 (텍스트 짤림 방지) */
+  .slide.log-slide,
+  .slide.ba-slide,
+  .slide.auto-slide{
+    height:auto;min-height:1080px;overflow:visible;
+  }
+  /* B/A 제거 버튼 (추가된 페이지에만 노출) */
+  .ba-remove-btn{
+    position:absolute;top:30px;right:30px;z-index:5;
+    background:#c0392b;color:#fff;border:none;
+    padding:10px 18px;border-radius:8px;
+    font-size:14px;font-weight:900;cursor:pointer;
+    box-shadow:0 4px 12px rgba(192,57,43,0.3);
+    transition:transform .2s;
+  }
+  .ba-remove-btn:hover{transform:scale(1.05);}
+
+  /* 🗑️ 공용 슬라이드 제거 버튼 (표지 제외 모든 페이지) */
+  .slide-remove-btn{
+    position:absolute;top:30px;right:30px;z-index:5;
+    background:#c0392b;color:#fff;border:none;
+    padding:10px 18px;border-radius:8px;
+    font-size:14px;font-weight:900;cursor:pointer;
+    box-shadow:0 4px 12px rgba(192,57,43,0.3);
+    transition:transform .2s;
+  }
+  .slide-remove-btn:hover{transform:scale(1.05);}
+
+  /* ✏️ 텍스트 편집 플로팅 툴바 */
+  .text-toolbar{
+    position:absolute;z-index:9999;
+    background:#0a5f4c;padding:6px;border-radius:10px;
+    display:none;gap:4px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.35);
+    flex-wrap:wrap;max-width:340px;
+  }
+  .text-toolbar button{
+    width:34px;height:34px;border:none;border-radius:6px;
+    background:rgba(255,255,255,0.15);color:#fff;
+    font-size:13px;font-weight:900;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s,transform .1s;
+  }
+  .text-toolbar button:hover{background:#5CDAFF;color:#0a2558;transform:scale(1.08);}
+  .text-toolbar button.tt-sz-up{background:#6DD4B0;color:#0a2558;}
+  .text-toolbar button.tt-sz-dn{background:#ff9acc;color:#6d1f4a;}
+  .text-toolbar button.tt-bold{font-style:normal;font-weight:900;}
+  .text-toolbar button.tt-italic{font-style:italic;}
+  .text-toolbar .tt-color{width:24px;height:24px;padding:0;border-radius:50%;margin:5px 2px;}
+  .slide-number{
+    position:absolute;bottom:30px;right:40px;
+    font-size:22px;font-weight:700;color:rgba(10,95,76,0.5);z-index:3;
+  }
+
+  /* ==================== 워터마크 ==================== */
+  .slide::before{
+    content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+    background-image:repeating-linear-gradient(-30deg,transparent 0 160px,rgba(10,95,76,0.035) 160px 162px);
+  }
+  .slide-watermark{
+    position:absolute;inset:0;pointer-events:none;z-index:1;
+    display:grid;place-items:center;
+  }
+  .slide-watermark span{
+    font-size:110px;font-weight:900;color:rgba(10,95,76,0.05);
+    transform:rotate(-30deg);letter-spacing:10px;white-space:nowrap;user-select:none;
+  }
+  .slide-brandmark{
+    position:absolute;bottom:32px;left:40px;z-index:3;
+    font-size:16px;font-weight:800;color:rgba(10,95,76,0.45);letter-spacing:2px;
+  }
+
+  /* ==================== 편집 가능 텍스트 ==================== */
+  [contenteditable="true"]{transition:background .2s;}
+  [contenteditable="true"]:hover{background:rgba(91,234,214,0.15);}
+  [contenteditable="true"]:focus{outline:2px dashed #0a5f4c;outline-offset:4px;background:#fffbea;}
+
+  /* ==================== 이미지 업로드 ==================== */
+  .img-slot{
+    position:relative;background:#eef5f1;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    color:#8899aa;font-size:18px;font-weight:600;
+    cursor:pointer;overflow:hidden;
+    transition:border .2s;border:3px dashed transparent;z-index:2;
+    min-width:100px;min-height:100px;
+  }
+  /* 🖼️ 실제 업로드된 사진 (PDF 인쇄 보장 + 자유 위치/크기 조절) */
+  .img-slot .uploaded-img{
+    position:absolute;top:50%;left:50%;
+    width:100%;height:100%;
+    object-fit:cover;z-index:1;display:none;
+    transform:translate(-50%,-50%) scale(1);
+    transform-origin:center center;
+    cursor:move;user-select:none;-webkit-user-drag:none;
+    transition:transform 0s;
+  }
+  .img-slot.has-img .uploaded-img{display:block;}
+  .img-slot.has-img .uploaded-img.dragging{cursor:grabbing;}
+
+  .img-slot .img-placeholder{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:#8899aa;pointer-events:none;transition:opacity .2s;padding:20px;text-align:center;z-index:2;
+  }
+  .img-slot.has-img .img-placeholder{opacity:0;}
+  .img-slot.has-img:hover .img-placeholder{opacity:0;}
+  .img-slot.dragover{border-color:#0a5f4c;background:#d4ede5;}
+
+  /* 사진 컨트롤 패널 */
+  .img-controls{
+    position:absolute;top:8px;left:8px;z-index:6;
+    display:none;flex-direction:row;gap:4px;
+    background:rgba(10,95,76,0.85);padding:4px;border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  }
+  .img-slot.has-img .img-controls{display:flex;}
+  .img-ctrl{
+    width:28px;height:28px;border:none;border-radius:5px;
+    background:rgba(255,255,255,0.15);color:#fff;
+    font-size:14px;font-weight:900;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s;
+  }
+  .img-ctrl:hover{background:rgba(92,218,255,0.6);}
+
+  /* 사진 삭제 버튼 */
+  .img-delete-btn{
+    position:absolute;top:8px;right:8px;z-index:6;
+    width:34px;height:34px;border:none;border-radius:50%;
+    background:rgba(192,57,43,0.95);color:#fff;
+    font-size:16px;font-weight:900;cursor:pointer;
+    display:none;align-items:center;justify-content:center;
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    transition:transform .15s;
+  }
+  .img-delete-btn:hover{transform:scale(1.15);background:#c0392b;}
+  .img-slot.has-img .img-delete-btn{display:flex;}
+
+  /* ==================== 🎨 드로잉 캔버스 (사진 위) ==================== */
+  .img-slot .draw-canvas{
+    position:absolute;inset:0;z-index:3;
+    width:100%;height:100%;
+    pointer-events:none;display:none;
+  }
+  .img-slot.has-img .draw-canvas{display:block;}
+  .img-slot.draw-mode .draw-canvas{
+    pointer-events:auto;cursor:crosshair;
+    outline:3px dashed #ff6b35;outline-offset:-3px;
+  }
+  .img-slot.draw-mode .uploaded-img{pointer-events:none;cursor:default;}
+
+  .img-slot .draw-palette{
+    position:absolute;top:46px;left:8px;z-index:8;
+    display:none;flex-direction:row;gap:4px;flex-wrap:wrap;max-width:260px;
+    background:rgba(10,95,76,0.92);padding:5px;border-radius:8px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.4);
+  }
+  .img-slot.draw-mode .draw-palette{display:flex;}
+  .d-tool{
+    width:32px;height:32px;border:2px solid transparent;border-radius:6px;
+    font-size:14px;font-weight:900;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .1s,border-color .1s;
+  }
+  .d-tool:hover{transform:scale(1.1);}
+  .d-tool.active{border-color:#5CDAFF;box-shadow:0 0 0 2px rgba(92,218,255,0.4);}
+
+  /* 박스(슬롯) 크기 조절 손잡이 — 직접 드래그 */
+  .img-resize-handle{
+    position:absolute;bottom:0;right:0;z-index:7;
+    width:26px;height:26px;
+    background:rgba(10,95,76,0.85);color:#fff;
+    font-size:13px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;
+    cursor:nwse-resize;
+    border-top-left-radius:6px;
+    transition:background .15s,transform .15s;
+    user-select:none;
+  }
+  .img-resize-handle:hover{
+    background:rgba(92,218,255,0.95);color:#0a5f4c;transform:scale(1.15);
+  }
+
+  /* 🔒 고정 저작권 워터마크 (제거 불가) */
+  .zero-copyright{
+    position:absolute;top:14px;left:40px;z-index:3;
+    font-size:13px;font-weight:700;
+    color:rgba(10,95,76,0.4);letter-spacing:0.5px;
+    user-select:none;pointer-events:none;
+    font-family:'Pretendard','Malgun Gothic',sans-serif;
+  }
+  .zero-copyright::before{content:'© Template by ';}
+  .zero-copyright::after{content:' · zerocoach7';}
+
+  /* ==================== 표지 ==================== */
+  .cover-bg{
+    position:absolute;inset:0;z-index:0;
+    background-size:cover;background-position:center;
+    background-image:linear-gradient(rgba(6,61,50,0.45),rgba(6,61,50,0.45)),
+      url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1920&q=80');
+  }
+  .cover-title{
+    position:relative;z-index:3;background:#fff;padding:28px 72px;border-radius:16px;
+    font-size:80px;font-weight:900;color:#0a5f4c;display:inline-block;
+    margin-top:160px;margin-left:360px;box-shadow:0 16px 40px rgba(0,0,0,0.2);
+  }
+  .cover-subtitle{
+    position:relative;z-index:3;color:#fff;font-size:36px;font-weight:700;
+    margin-top:40px;margin-left:380px;text-shadow:0 4px 16px rgba(0,0,0,0.6);
+  }
+  .cover-period{
+    position:absolute;bottom:80px;right:80px;z-index:3;color:#fff;text-align:right;
+    font-size:28px;line-height:1.6;text-shadow:0 4px 16px rgba(0,0,0,0.6);
+  }
+  .cover-change-bg{
+    position:absolute;top:30px;right:30px;z-index:5;background:rgba(255,255,255,0.92);
+    color:#0a5f4c;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;border:none;
+  }
+
+  /* ==================== 섹션 타이틀 ==================== */
+  .title-bar{
+    font-size:48px;font-weight:900;color:#0a5f4c;
+    margin-bottom:26px;padding-bottom:14px;border-bottom:5px solid #12876e;
+    position:relative;z-index:2;
+  }
+
+  /* ==================== 초기 상태 ==================== */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:26px;position:relative;z-index:2;}
+  .info-box{background:#fff;border-radius:16px;padding:26px;box-shadow:0 8px 24px rgba(0,0,0,0.08);}
+  .info-label{font-size:24px;font-weight:900;color:#0a5f4c;margin-bottom:14px;padding-bottom:10px;border-bottom:3px solid #12876e;}
+  .info-body{font-size:22px;line-height:1.7;color:#333;}
+
+  /* ==================== 매회 수업 일지 ==================== */
+  .log-wrapper{
+    background:#fff;border-radius:14px;overflow:hidden;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);position:relative;z-index:2;
+  }
+  table.session-log{width:100%;border-collapse:collapse;font-size:17px;table-layout:fixed;}
+  .session-log th{background:#0a5f4c;color:#fff;padding:12px 6px;font-weight:900;font-size:16px;border:1px solid #0a5f4c;line-height:1.3;}
+  .session-log td{padding:14px 10px;border:1px solid #d9e2ea;vertical-align:top;text-align:center;line-height:1.6;min-height:100px;}
+  .session-log td.date{background:#d4ede5;font-weight:900;color:#0a5f4c;vertical-align:middle;font-size:20px;}
+  .session-log td[contenteditable="true"]:focus{outline:2px dashed #12876e;background:#f4faf7;}
+  .session-log td.ex-cell{
+    text-align:left;line-height:1.9;font-size:16px;
+    padding:10px 12px;background:#fbfdfc;
+  }
+  .session-log td.ex-cell:focus{background:#fffbea;}
+  .session-log td.feedback{
+    text-align:left;font-size:16px;font-style:italic;
+    color:#1a4f3f;background:#eef9f4;line-height:1.5;
+  }
+
+  /* ==================== 월간 기록 ==================== */
+  table.monthly{
+    width:100%;border-collapse:collapse;background:#fff;font-size:21px;
+    border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    position:relative;z-index:2;
+  }
+  .monthly th{background:#0a5f4c;color:#fff;padding:16px;font-size:20px;font-weight:800;}
+  .monthly td{padding:16px;border:1px solid #d9e2ea;text-align:center;}
+  .monthly td.cat{background:#c6e8dc;font-weight:900;color:#0a5f4c;text-align:left;padding-left:22px;}
+  .chart-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;position:relative;z-index:2;}
+  .chart-box{background:#fff;padding:26px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.08);}
+  .chart-title{font-size:22px;font-weight:900;color:#0a5f4c;text-align:center;margin-bottom:12px;}
+
+  /* 📊 차트 입력 표 (값·라벨 수정 시 즉시 반영) */
+  .chart-inputs{
+    width:100%;border-collapse:collapse;margin-top:14px;
+    background:#f4f8fb;border-radius:8px;overflow:hidden;
+  }
+  .chart-inputs th{
+    background:#0a5f4c;color:#fff;padding:8px 10px;font-size:13px;font-weight:800;text-align:center;
+    width:92px;
+  }
+  .chart-inputs td{padding:5px;border:1px solid #ddeae2;background:#fff;}
+  .chart-inputs input{
+    width:100%;border:none;padding:7px 5px;text-align:center;
+    font-size:14px;font-weight:700;color:#0a2558;
+    background:transparent;font-family:inherit;outline:none;
+  }
+  .chart-inputs input:focus{background:#fffbea;outline:2px dashed #0a5f4c;outline-offset:-2px;}
+  .chart-inputs .val-row input{color:#0a5f4c;font-size:15px;}
+  .chart-range{
+    margin-top:10px;padding:10px 14px;background:#e8f5f1;border-radius:8px;
+    font-size:13px;font-weight:700;color:#0a3b2e;text-align:center;
+  }
+  .chart-range input{
+    width:64px;padding:5px 7px;border:2px solid #0a5f4c;border-radius:5px;
+    font-size:13px;font-weight:700;color:#0a2558;text-align:center;margin:0 4px;
+    font-family:inherit;outline:none;
+  }
+  .chart-range input:focus{background:#fffbea;}
+
+  /* ==================== Before/After ==================== */
+  .ba-grid{display:grid;grid-template-columns:1fr 100px 1fr;gap:30px;align-items:center;margin-top:24px;position:relative;z-index:2;}
+  .ba-card{background:#fff;border-radius:16px;padding:32px;box-shadow:0 12px 30px rgba(0,0,0,0.1);text-align:center;}
+  .ba-date{background:#0a5f4c;color:#fff;display:inline-block;padding:12px 28px;border-radius:8px;font-size:26px;font-weight:900;margin-bottom:18px;}
+  .ba-date.after{background:#12876e;}
+  .ba-card .img-slot{width:100%;height:660px;margin-bottom:18px;}
+  .ba-metric{font-size:26px;font-weight:800;color:#0a2558;line-height:1.6;}
+  .ba-arrow{font-size:90px;color:#0a5f4c;text-align:center;font-weight:900;}
+
+  /* ==================== 재등록 제안 ==================== */
+  .proposal-box{
+    background:#fff;padding:50px;border-radius:20px;
+    box-shadow:0 16px 40px rgba(10,95,76,0.15);
+    margin-top:20px;position:relative;z-index:2;
+  }
+  .proposal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .ach-block{background:#d4ede5;padding:22px 26px;border-radius:12px;border-left:6px solid #12876e;}
+  .ach-block h3{font-size:24px;font-weight:900;color:#0a5f4c;margin-bottom:10px;}
+  .ach-block p{font-size:20px;line-height:1.6;color:#1a3b2e;}
+  .next-block{background:#fff7d4;padding:22px 26px;border-radius:12px;border-left:6px solid #d4a93a;}
+  .next-block h3{font-size:24px;font-weight:900;color:#8a6814;margin-bottom:10px;}
+  .next-block p{font-size:20px;line-height:1.6;color:#3a2f0e;}
+
+  /* ==================== 가이드 경계 ==================== */
+  .guide-border{
+    border:4px dashed #c0392b;border-radius:20px;
+    padding:40px;margin:60px 0;background:#fff8f6;
+  }
+  .guide-border-title{
+    background:#c0392b;color:#fff;display:inline-block;
+    padding:12px 28px;border-radius:10px;font-size:22px;font-weight:900;margin-bottom:30px;
+  }
+  .guide-section{
+    background:#fff;padding:50px 48px;border-radius:16px;
+    margin:30px 0;box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  }
+  .guide-section h2{
+    font-size:32px;font-weight:900;color:#0a5f4c;
+    margin-bottom:20px;padding-bottom:14px;border-bottom:4px solid #12876e;
+  }
+  .guide-step{background:#f4f8fb;padding:24px 28px;border-radius:14px;margin-bottom:16px;border-left:6px solid #0a5f4c;}
+  .guide-step h3{font-size:22px;font-weight:900;color:#0a3b2e;margin-bottom:8px;}
+  .guide-step p{font-size:17px;line-height:1.7;color:#333;}
+  .highlight{background:#fff3cd;padding:2px 8px;border-radius:4px;font-weight:700;}
+
+  /* ==================== 프레젠테이션 모드 ==================== */
+  body.presentation-mode .hero-guide,
+  body.presentation-mode .section-title,
+  body.presentation-mode .guide-border,
+  body.presentation-mode .trainer-only,
+  body.presentation-mode .cover-change-bg{display:none!important;}
+  body.presentation-mode .toolbar{position:fixed;top:10px;left:10px;right:10px;z-index:9999;padding:10px 16px;}
+  body.presentation-mode .wrap{padding-top:80px;}
+
+  /* ==================== 인쇄 / PDF 저장 (A4 가로 기준) ==================== */
+  @media print{
+    @page{
+      size:A4 landscape;
+      margin:0;
+    }
+    html,body{background:#fff;padding:0;margin:0;width:297mm;}
+    .wrap{max-width:none;padding:0;margin:0;width:297mm;}
+    .toolbar,.hero-guide,.guide-border,.trainer-only,.section-title,
+    .cover-change-bg,.ba-remove-btn,.img-delete-btn,#baAnchor,#logAnchor,
+    #saveToast,#memberModal,.month-ctrl-bar{
+      display:none!important;
+    }
+    .slide{
+      width:1920px !important;
+      height:1080px !important;
+      margin:0 !important;
+      padding:80px !important;
+      border-radius:0 !important;
+      box-shadow:none !important;
+      overflow:hidden !important;
+      page-break-after:always;
+      break-after:page;
+      zoom:0.5845;  /* A4 가로 폭(1122px)에 1920px 슬라이드를 정비율 축소 */
+    }
+    .slide.log-slide{
+      height:auto !important;
+      min-height:auto !important;
+      page-break-inside:auto;
+    }
+    .slide.log-slide tr{page-break-inside:avoid;}
+    .img-slot::before{display:none !important;}
+    .img-resize-handle,.img-controls,.img-delete-btn,.draw-palette,.body-remove-btn,.ba-remove-btn,.slide-remove-btn,.text-toolbar,.chart-inputs,.chart-range{display:none !important;}
+    .img-slot .draw-canvas{display:block !important;pointer-events:none !important;outline:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ====================== 상단 툴바 ====================== -->
+<div class="toolbar">
+  <label>🏷️ 워터마크 문구</label>
+  <input type="text" id="wmInput" value="@zerocoach7 · RE-SIGN" placeholder="예: @my_brand · PT">
+  <label>✏️ 회원명</label>
+  <input type="text" id="memberInput" placeholder="예: 김지영" oninput="document.querySelectorAll('.js-member').forEach(e=>e.textContent=this.value||'OOO');onMemberChanged();">
+  <button class="btn save" onclick="manualSave()" title="현재 회원 데이터를 이 컴퓨터에 저장">💾 저장</button>
+  <button class="btn members" onclick="openMemberList()" title="저장된 회원 목록 열기">👥 회원 목록</button>
+  <button class="btn backup" onclick="downloadBackup()" title="회원 데이터를 JSON 파일로 백업 (사진 포함)">⬇️ 백업</button>
+  <button class="btn restore" onclick="document.getElementById('restoreInput').click()" title="JSON 백업 파일에서 복원">⬆️ 복원</button>
+  <input type="file" id="restoreInput" accept=".json,application/json" style="display:none" onchange="uploadBackup(event)">
+  <button class="btn print" onclick="window.print()">🖨️ 인쇄 / PDF 저장</button>
+  <button class="btn mode" onclick="document.body.classList.toggle('presentation-mode')">👤 회원 제공용 모드 ON/OFF</button>
+  <button class="btn" onclick="window.scrollTo({top:document.querySelector('.slide').offsetTop-40,behavior:'smooth'})">↓ 첫 슬라이드로</button>
+  <button class="btn" id="undoDeleteBtn" onclick="undoLastDelete()" style="display:none;background:#FFB3D9;" title="가장 최근에 삭제한 페이지를 되살립니다">↺ 삭제 페이지 복구</button>
+  <div class="hint" id="saveStatus">※ 회원명 입력하면 자동 저장됩니다 (5초 간격)</div>
+</div>
+
+<!-- ====================== 자동 저장 상태 표시 (플로팅) ====================== -->
+<div id="saveToast" style="position:fixed;bottom:30px;right:30px;z-index:99999;
+  background:rgba(10,95,76,0.95);color:#fff;padding:14px 22px;border-radius:10px;
+  font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,0.3);
+  opacity:0;transition:opacity .3s;pointer-events:none;">💾 저장됨</div>
+
+<!-- ====================== 회원 목록 모달 ====================== -->
+<div id="memberModal" style="display:none;position:fixed;inset:0;z-index:99998;
+  background:rgba(0,0,0,0.5);justify-content:center;align-items:center;padding:20px;">
+  <div style="background:#fff;border-radius:16px;padding:32px;max-width:560px;width:100%;
+    max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;
+      margin-bottom:20px;padding-bottom:14px;border-bottom:3px solid #12876e;">
+      <h2 style="font-size:22px;font-weight:900;color:#0a5f4c;">👥 저장된 회원 목록</h2>
+      <button onclick="document.getElementById('memberModal').style.display='none'"
+        style="background:#c0392b;color:#fff;border:none;width:36px;height:36px;border-radius:50%;
+        font-size:18px;font-weight:900;cursor:pointer;">✕</button>
+    </div>
+    <div id="memberListBody" style="font-size:15px;"></div>
+    <div style="margin-top:20px;padding-top:14px;border-top:2px dashed #d9e2ea;
+      font-size:13px;color:#667788;line-height:1.6;">
+      <b>📌 사용법</b><br>
+      • <b>불러오기</b> : 회원 데이터를 화면에 복원 (현재 작업 내용은 자동 저장됨)<br>
+      • <b>삭제</b> : 이 컴퓨터에서 해당 회원 데이터 영구 삭제 (백업 파일은 안전)<br>
+      • 다른 PC로 옮기려면 <b>⬇️ 백업</b> → 그 PC에서 <b>⬆️ 복원</b>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== 트레이너 전용 안내 ====================== -->
+<div class="trainer-only">
+  <h2>⚠️ 회원 제공 시 주의 — 이 페이지는 트레이너 전용 화면입니다</h2>
+  <p>회원에게 전달할 때는 <b>"👤 회원 제공용 모드 ON/OFF"</b> → <b>"🖨️ 인쇄 / PDF 저장"</b> 순서로 진행하세요.<br>
+  → 슬라이드 8장만 PDF로 저장되고, 가이드·활용예시는 함께 저장되지 않습니다. (가이드는 @media print 및 프레젠테이션 모드에서 자동 숨김)</p>
+</div>
+
+<!-- ====================== 제품 히어로 ====================== -->
+<div class="hero-guide">
+  <h1>🔄 재등록용 회원관리파일 템플릿</h1>
+  <div class="sub">
+    매 수업마다 회원의 <strong>컨디션 · 운동기록 · 복습여부 · 체성분 변화</strong>를 누적 기록 →<br>
+    회원권 만료 2~3주 전 제시하여 재등록 전환율을 끌어올리는 데이터형 자료.
+  </div>
+  <div class="tags">
+    <span class="tag">✓ 9장 + 무제한 B/A 페이지</span>
+    <span class="tag">✓ 수업 일지 30회 · 5종목</span>
+    <span class="tag">✓ 회원 소감 칸 포함</span>
+    <span class="tag">✓ Before/After 페이지 추가 기능</span>
+    <span class="tag">✓ 환상지 한마디</span>
+    <span class="tag">✓ 워터마크 커스텀</span>
+    <span class="tag">✓ 회원 제공 모드</span>
+    <span class="tag">✓ PDF 출력</span>
+  </div>
+</div>
+
+<div class="section-title">📄 템플릿 본편 — 클릭해서 편집 · 사진은 드래그로 업로드</div>
+
+<!-- ====================== 슬라이드 1: 표지 ====================== -->
+<div class="slide">
+  <div class="cover-bg" id="coverBg"></div>
+  <button class="cover-change-bg" onclick="document.getElementById('coverBgInput').click()">🖼️ 표지 배경 교체</button>
+  <input type="file" id="coverBgInput" accept="image/*" style="display:none" onchange="handleCoverBg(event)">
+  <div class="cover-title"><span class="js-member" contenteditable="true">OOO</span> 회원님 성과 리포트</div>
+  <div class="cover-subtitle" contenteditable="true">30회 트레이닝 결과 · 다음 시즌 제안서</div>
+  <div class="cover-period" contenteditable="true">
+    기간 : YYYY.MM ~ YYYY.MM<br>
+    담당 트레이너 : OOO
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number">01</div>
+</div>
+
+<!-- ====================== 슬라이드 2: 초기 상태 ====================== -->
+<div class="slide auto-slide">
+  <div class="title-bar">📋 시작 당시 회원 상태 & 목표</div>
+  <div class="two-col">
+    <div class="info-box">
+      <div class="info-label">초기 상태 (OT 당시)</div>
+      <div class="info-body" contenteditable="true">
+        • 체중 / 체지방률 / 골격근량 : <br>
+        • 주 호소 (Chief Complaint) : <br>
+        • 자세 · 체형 문제 : <br>
+        • 운동 경험 / 수준 : <br>
+        • 생활 패턴 (수면·식습관·스트레스) :
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="info-label">시즌 목표 (당시 설정)</div>
+      <div class="info-body" contenteditable="true">
+        • 체성분 목표 : <br>
+        • 자세 · 통증 개선 : <br>
+        • 운동 수행 능력 : <br>
+        • 생활 습관 : <br>
+        • 기타 회원 개인 목표 :
+      </div>
+    </div>
+  </div>
+  <div class="info-box" style="margin-top:26px;position:relative;z-index:2;">
+    <div class="info-label">담당 트레이너 초기 진단 & 플랜 요약</div>
+    <div class="info-body" contenteditable="true" style="min-height:160px;">
+      예) 1~10회는 교정기, 11~20회는 적응기, 21~30회는 성장기로 구성하여 …
+    </div>
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number">02</div>
+</div>
+
+<!-- ====================== 슬라이드 3: 매회 수업 일지 1~10 ====================== -->
+<div class="slide log-slide">
+  <div class="title-bar">📆 매회 수업 일지 (1 ~ 10회)</div>
+  <div class="log-wrapper">
+    <table class="session-log">
+      <colgroup>
+        <col style="width:3%"><col style="width:7%"><col style="width:6%">
+        <col style="width:26%"><col style="width:5%"><col style="width:6%">
+        <col style="width:9%"><col style="width:13%"><col style="width:12%"><col style="width:13%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th contenteditable="true">#</th>
+          <th contenteditable="true">일자</th>
+          <th contenteditable="true">컨디션<br>(1~10)</th>
+          <th contenteditable="true">운동 5종목<br>(종목 · 세트 × 회 · 무게)</th>
+          <th contenteditable="true">RPE</th>
+          <th contenteditable="true">복습<br>(O/X)</th>
+          <th contenteditable="true">통증 ·<br>특이사항</th>
+          <th contenteditable="true">회원 소감<br>한마디</th>
+          <th contenteditable="true">트레이너<br>메모</th>
+          <th contenteditable="true">다음 수업<br>과제</th>
+        </tr>
+      </thead>
+      <tbody id="session-body-1"></tbody>
+    </table>
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number">03</div>
+</div>
+
+<!-- ====================== 슬라이드 4: 매회 수업 일지 11~20 ====================== -->
+<div class="slide log-slide">
+  <div class="title-bar">📆 매회 수업 일지 (11 ~ 20회)</div>
+  <div class="log-wrapper">
+    <table class="session-log">
+      <colgroup>
+        <col style="width:3%"><col style="width:7%"><col style="width:6%">
+        <col style="width:26%"><col style="width:5%"><col style="width:6%">
+        <col style="width:9%"><col style="width:13%"><col style="width:12%"><col style="width:13%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th contenteditable="true">#</th>
+          <th contenteditable="true">일자</th>
+          <th contenteditable="true">컨디션<br>(1~10)</th>
+          <th contenteditable="true">운동 5종목<br>(종목 · 세트 × 회 · 무게)</th>
+          <th contenteditable="true">RPE</th>
+          <th contenteditable="true">복습<br>(O/X)</th>
+          <th contenteditable="true">통증 ·<br>특이사항</th>
+          <th contenteditable="true">회원 소감<br>한마디</th>
+          <th contenteditable="true">트레이너<br>메모</th>
+          <th contenteditable="true">다음 수업<br>과제</th>
+        </tr>
+      </thead>
+      <tbody id="session-body-2"></tbody>
+    </table>
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number">04</div>
+</div>
+
+<!-- ====================== 슬라이드 5: 매회 수업 일지 21~30 ====================== -->
+<div class="slide log-slide">
+  <div class="title-bar">📆 매회 수업 일지 (21 ~ 30회)</div>
+  <div class="log-wrapper">
+    <table class="session-log">
+      <colgroup>
+        <col style="width:3%"><col style="width:7%"><col style="width:6%">
+        <col style="width:26%"><col style="width:5%"><col style="width:6%">
+        <col style="width:9%"><col style="width:13%"><col style="width:12%"><col style="width:13%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th contenteditable="true">#</th>
+          <th contenteditable="true">일자</th>
+          <th contenteditable="true">컨디션<br>(1~10)</th>
+          <th contenteditable="true">운동 5종목<br>(종목 · 세트 × 회 · 무게)</th>
+          <th contenteditable="true">RPE</th>
+          <th contenteditable="true">복습<br>(O/X)</th>
+          <th contenteditable="true">통증 ·<br>특이사항</th>
+          <th contenteditable="true">회원 소감<br>한마디</th>
+          <th contenteditable="true">트레이너<br>메모</th>
+          <th contenteditable="true">다음 수업<br>과제</th>
+        </tr>
+      </thead>
+      <tbody id="session-body-3"></tbody>
+    </table>
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number">05</div>
+</div>
+
+<!-- ====================== 수업 일지 페이지 추가/제거 버튼 ====================== -->
+<div id="logAnchor" style="text-align:center;margin:20px 0;">
+  <div style="background:#fff;display:inline-block;padding:18px 26px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.08);margin-bottom:16px;">
+    <b style="font-size:16px;color:#0a5f4c;">🎯 회원 총 세션수</b>
+    <select id="sessionCountSel" style="font-size:16px;font-weight:800;color:#0a2558;padding:8px 12px;border:2px solid #0a5f4c;border-radius:8px;margin:0 8px;">
+      <option value="10">10회</option><option value="20">20회</option><option value="30" selected>30회 (기본)</option>
+      <option value="40">40회</option><option value="50">50회</option><option value="60">60회</option>
+      <option value="70">70회</option><option value="80">80회</option><option value="90">90회</option><option value="100">100회</option>
+    </select>
+    <button onclick="applySessionCount()" style="background:#5BEAD6;color:#063d32;border:none;padding:10px 20px;border-radius:8px;font-weight:900;font-size:15px;cursor:pointer;">적용하기</button>
+    <div style="font-size:13px;color:#667788;margin-top:8px;">10회 회원님은 10회, 60회 회원님은 60회 선택 후 적용 — 자동으로 페이지가 맞춰집니다.</div>
+  </div>
+  <br>
+  <button onclick="addLogPage()" style="
+    background:#0a5f4c;color:#fff;border:none;padding:16px 32px;
+    border-radius:12px;font-size:18px;font-weight:900;cursor:pointer;
+    box-shadow:0 8px 20px rgba(10,95,76,0.3);transition:transform .2s;margin:0 6px;"
+    onmouseover="this.style.transform='translateY(-3px)'"
+    onmouseout="this.style.transform='translateY(0)'">
+    ➕ 수업 일지 10회 추가
+  </button>
+  <button onclick="removeLastAnyLogSlide(true)" style="
+    background:#c0392b;color:#fff;border:none;padding:16px 32px;
+    border-radius:12px;font-size:18px;font-weight:900;cursor:pointer;
+    box-shadow:0 8px 20px rgba(192,57,43,0.3);transition:transform .2s;margin:0 6px;"
+    onmouseover="this.style.transform='translateY(-3px)'"
+    onmouseout="this.style.transform='translateY(0)'">
+    ➖ 마지막 수업일지 페이지 제거
+  </button>
+  <div style="font-size:14px;color:#667788;margin-top:10px;line-height:1.6;">
+    ※ <b>40회 / 50회 / 60회</b> 회원님은 위 ➕ 버튼으로 10회씩(예: 31~40, 41~50…) 추가하세요.<br>
+    ➖ 버튼은 <b>기본 페이지 포함 가장 마지막 수업일지 페이지</b>를 제거합니다 (10회 회원님 등 세션이 적은 회원님께 사용). 각 페이지 우측 상단 ✕로 개별 삭제도 가능합니다.<br>
+    실수로 삭제해도 상단 <b>↺ 삭제 페이지 복구</b> 버튼으로 되살릴 수 있어요.
+  </div>
+</div>
+
+<!-- ====================== 슬라이드 6: 월간 기록 + 차트 ====================== -->
+<div class="slide auto-slide">
+  <div class="title-bar">📊 월간 운동·식단 기록 + 체성분 변화</div>
+  <div class="month-ctrl-bar" style="background:#f4f8fb;border-radius:12px;padding:16px 20px;margin-bottom:18px;position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+    <b style="color:#0a5f4c;font-size:15px;">🗓️ 시작월</b>
+    <select id="startMonthSel" style="font-size:14px;font-weight:700;padding:6px 10px;border:2px solid #0a5f4c;border-radius:6px;">
+      <option value="1">1월</option><option value="2">2월</option><option value="3">3월</option><option value="4">4월</option>
+      <option value="5">5월</option><option value="6">6월</option><option value="7">7월</option><option value="8" selected>8월</option>
+      <option value="9">9월</option><option value="10">10월</option><option value="11">11월</option><option value="12">12월</option>
+    </select>
+    <button onclick="applyStartMonth()" style="background:#5CDAFF;color:#0a2558;border:none;padding:8px 16px;border-radius:8px;font-weight:900;font-size:14px;cursor:pointer;">시작월 적용</button>
+    <span style="width:1px;height:24px;background:#d9e2ea;"></span>
+    <button onclick="addMonthColumn()" style="background:#0a5f4c;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:900;font-size:14px;cursor:pointer;">➕ 월 추가</button>
+    <button onclick="removeMonthColumn()" style="background:#c0392b;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:900;font-size:14px;cursor:pointer;">➖ 마지막 월 삭제</button>
+    <span style="font-size:12.5px;color:#667788;">※ 이 월 표는 아래 두 그래프와 자동 연동됩니다.</span>
+  </div>
+  <table class="monthly" id="monthlyMain">
+    <thead>
+      <tr>
+        <th style="width:18%">운동 / 식단</th>
+        <th contenteditable="true">1월</th><th contenteditable="true">2월</th><th contenteditable="true">3월</th><th contenteditable="true">4월</th>
+        <th contenteditable="true">5월</th><th contenteditable="true">6월</th><th contenteditable="true">7월</th><th contenteditable="true">8월</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="cat">PT 수업 (회)</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+      <tr><td class="cat">개인운동·복습 (회)</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+      <tr><td class="cat">유산소 (회)</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+      <tr><td class="cat">다이어트 식단 (일)</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+      <tr><td class="cat">치팅 / 음주 (회)</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+    </tbody>
+  </table>
+  <div class="chart-row">
+    <div class="chart-box">
+      <div class="chart-title">⚖️ 체중 변화 (kg)</div>
+      <canvas id="weightChart" width="850" height="260"></canvas>
+      <table class="chart-inputs" data-chart="weight">
+        <tr class="val-row"><th>체중(kg)</th>
+          <td><input type="number" step="0.1" value="70"></td><td><input type="number" step="0.1" value="68"></td>
+          <td><input type="number" step="0.1" value="66"></td><td><input type="number" step="0.1" value="64"></td>
+          <td><input type="number" step="0.1" value=""></td><td><input type="number" step="0.1" value=""></td>
+          <td><input type="number" step="0.1" value=""></td><td><input type="number" step="0.1" value=""></td>
+        </tr>
+      </table>
+      <div class="chart-range">
+        Y축 범위: 최소 <input type="number" class="y-min" step="0.1" value="40"> ~ 최대 <input type="number" class="y-max" step="0.1" value="100">
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">💪 골격근량 변화 (kg)</div>
+      <canvas id="muscleChart" width="850" height="260"></canvas>
+      <table class="chart-inputs" data-chart="muscle">
+        <tr class="val-row"><th>근육량(kg)</th>
+          <td><input type="number" step="0.1" value="22"></td><td><input type="number" step="0.1" value="22.5"></td>
+          <td><input type="number" step="0.1" value="23"></td><td><input type="number" step="0.1" value="23.2"></td>
+          <td><input type="number" step="0.1" value=""></td><td><input type="number" step="0.1" value=""></td>
+          <td><input type="number" step="0.1" value=""></td><td><input type="number" step="0.1" value=""></td>
+        </tr>
+      </table>
+      <div class="chart-range">
+        Y축 범위: 최소 <input type="number" class="y-min" step="0.1" value="15"> ~ 최대 <input type="number" class="y-max" step="0.1" value="50">
+      </div>
+    </div>
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number">06</div>
+</div>
+
+<!-- ====================== 슬라이드 7: 다음 시즌 기록표 + 30회 로드맵 ====================== -->
+<div class="slide auto-slide">
+  <div class="title-bar">📋 다음 시즌 기록표 (빈 양식)</div>
+  <table class="monthly">
+    <thead>
+      <tr>
+        <th style="width:18%">운동 / 식단</th>
+        <th contenteditable="true">월</th><th contenteditable="true">월</th><th contenteditable="true">월</th><th contenteditable="true">월</th>
+        <th contenteditable="true">월</th><th contenteditable="true">월</th><th contenteditable="true">월</th><th contenteditable="true">월</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="cat">PT 수업 (회)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="cat">개인운동·복습 (회)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="cat">유산소 (회)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="cat">다이어트 식단 (일)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="cat">치팅 / 음주 (회)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="info-box" style="margin-top:24px;position:relative;z-index:2;">
+    <div class="info-label">📌 다음 시즌 30회 목표 (함께 작성)</div>
+    <div class="info-body" contenteditable="true" style="min-height:120px;">
+      • 체성분 목표 : <br>
+      • 운동 수행 목표 : <br>
+      • 생활 습관 목표 : <br>
+      • 회원이 직접 적는 각오 한 줄 :
+    </div>
+  </div>
+  <!-- 환상지 한마디 (Vision Hook) -->
+  <div class="vision-hook" style="margin-top:22px;padding:26px 32px;border-radius:14px;
+    background:linear-gradient(135deg,#fff7d4 0%,#ffe8a8 100%);
+    border-left:6px solid #d4a93a;position:relative;z-index:2;
+    box-shadow:0 8px 24px rgba(212,169,58,0.15);">
+    <div style="font-size:20px;font-weight:900;color:#8a6814;margin-bottom:10px;">🌅 30회 이후, 회원님이 맞이할 아침</div>
+    <div style="font-size:21px;line-height:1.6;color:#3a2f0e;font-style:italic;" contenteditable="true">
+      "거울 앞에 서서 몸을 보고 '아, 이게 나구나' 미소 짓게 되실 거예요.<br>
+      계단 오르는 게 가볍고, 친구들이 '무슨 일 있었어?' 물어보고,<br>
+      평소 입고 싶었던 옷을 망설임 없이 입으시는 그 순간 —<br>
+      그 아침을 회원님께 선물해드리고 싶습니다."
+    </div>
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number">07</div>
+</div>
+
+<!-- ====================== 슬라이드 8: Before/After (복제 가능) ====================== -->
+<div class="slide ba-slide" data-ba-idx="1">
+  <div class="title-bar">🔄 Before & After <span class="ba-label" contenteditable="true" style="font-size:28px;color:#12876e;">— 최종 (30회 완료)</span></div>
+  <div class="ba-grid">
+    <div class="ba-card">
+      <div class="ba-date">BEFORE</div>
+      <div class="img-slot" data-slot="before">시작 당시 사진 업로드</div>
+      <div class="ba-metric" contenteditable="true">
+        YYYY.MM.DD<br>
+        체중 : __ kg<br>
+        체지방률 : __ %<br>
+        골격근량 : __ kg
+      </div>
+    </div>
+    <div class="ba-arrow">›</div>
+    <div class="ba-card">
+      <div class="ba-date after">AFTER</div>
+      <div class="img-slot" data-slot="after">현재 사진 업로드</div>
+      <div class="ba-metric" contenteditable="true">
+        YYYY.MM.DD<br>
+        체중 : __ kg (▼ __)<br>
+        체지방률 : __ % (▼ __)<br>
+        골격근량 : __ kg (▲ __)
+      </div>
+    </div>
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number ba-num">08</div>
+</div>
+
+<!-- ====================== Before/After 페이지 추가/제거 버튼 ====================== -->
+<div id="baAnchor" style="text-align:center;margin:20px 0;">
+  <button onclick="addBAPage()" style="
+    background:#12876e;color:#fff;border:none;padding:16px 32px;
+    border-radius:12px;font-size:18px;font-weight:900;cursor:pointer;
+    box-shadow:0 8px 20px rgba(18,135,110,0.3);transition:transform .2s;margin:0 6px;"
+    onmouseover="this.style.transform='translateY(-3px)'"
+    onmouseout="this.style.transform='translateY(0)'">
+    ➕ Before/After 페이지 추가
+  </button>
+  <button onclick="removeLastBAPage()" style="
+    background:#c0392b;color:#fff;border:none;padding:16px 32px;
+    border-radius:12px;font-size:18px;font-weight:900;cursor:pointer;
+    box-shadow:0 8px 20px rgba(192,57,43,0.3);transition:transform .2s;margin:0 6px;"
+    onmouseover="this.style.transform='translateY(-3px)'"
+    onmouseout="this.style.transform='translateY(0)'">
+    ➖ 마지막 B/A 페이지 제거
+  </button>
+  <div style="font-size:14px;color:#667788;margin-top:10px;">
+    ※ 클릭할 때마다 빈 Before/After 슬라이드가 추가됩니다. 추가된 슬라이드에는 각각 ✕ 제거 버튼이 붙어 개별 삭제도 가능합니다.
+  </div>
+</div>
+
+<!-- ====================== 슬라이드 9: 재등록 제안 ====================== -->
+<div class="slide auto-slide">
+  <div class="title-bar">🎯 달성도 · 남은 목표 · 다음 시즌 제안</div>
+  <div class="proposal-box">
+    <div class="proposal-grid">
+      <div class="ach-block">
+        <h3>✅ 이번 시즌 달성한 것</h3>
+        <p contenteditable="true">1. <br>2. <br>3.</p>
+      </div>
+      <div class="next-block">
+        <h3>🚀 아직 남은 숙제</h3>
+        <p contenteditable="true">1. <br>2. <br>3.</p>
+      </div>
+      <div class="ach-block" style="background:#c6e2ea;border-left-color:#10367D;">
+        <h3 style="color:#10367D;">🗓️ 다음 시즌 30회 제안</h3>
+        <p contenteditable="true">• 기간 (주 1/2/3회 선택) : <br>• 중점 : <br>• 예상 변화 :</p>
+      </div>
+      <div class="next-block" style="background:#fce8e0;border-left-color:#c0392b;">
+        <h3 style="color:#c0392b;">⚠️ 멈출 때 예상 리스크</h3>
+        <p contenteditable="true">• 근손실 / 자세 되돌림 / 습관 리바운드<br>• 예상 회복 기간 :</p>
+      </div>
+    </div>
+    <div style="background:#0a5f4c;color:#fff;padding:28px 36px;border-radius:14px;margin-top:28px;text-align:center;">
+      <div style="font-size:24px;font-weight:700;opacity:0.9;margin-bottom:12px;">회원님께 드리는 메시지</div>
+      <div style="font-size:30px;font-weight:900;line-height:1.5;" contenteditable="true">
+        "여기서 멈추면 지금까지 쌓은 30회가 가장 아깝습니다.<br>
+        다음 30회, 제가 책임지고 한 번 더 가겠습니다."
+      </div>
+    </div>
+  </div>
+  <div class="slide-watermark"><span class="wm-text">@zerocoach7</span></div>
+  <div class="slide-brandmark wm-text">@zerocoach7</div>
+  <div class="slide-number">09</div>
+</div>
+
+<!-- ====================== 가이드 경계 시작 ====================== -->
+<div class="guide-border">
+  <div class="guide-border-title">🚨 여기서부터는 트레이너 전용 가이드 — 회원에게 전달하지 마세요</div>
+  <div style="font-size:17px;color:#6d1f14;margin-bottom:28px;line-height:1.7;">
+    아래 섹션(활용예시 · 사용 가이드)은 트레이너 본인을 위한 자료입니다.<br>
+    <b>회원에게 PDF로 전달하거나 인쇄할 때는 반드시 아래 중 한 가지 방법으로 제외해 주세요 :</b>
+    <ol style="margin:12px 0 0 24px;">
+      <li>상단 툴바의 <b>"👤 회원 제공용 모드 ON"</b> 버튼을 누른 뒤 <b>"🖨️ 인쇄 / PDF 저장"</b> 클릭</li>
+      <li>인쇄 미리보기에서 페이지 범위를 <b>슬라이드 영역까지만</b> 지정 (가이드 경계 직전)</li>
+      <li>PDF 저장 후 가이드 페이지를 수동 삭제</li>
+    </ol>
+  </div>
+
+<div class="guide-section">
+  <h2>💡 활용 예시 — 실제 케이스</h2>
+  <div class="guide-step">
+    <h3>예시 — 김지영 님 (34세, 직장인, 30회 주 2회 PT)</h3>
+    <p>• 체중 72.4kg / 체지방률 34% / 골격근량 22kg<br>
+    • 주호소 : 무릎 통증으로 스쿼트 불가, 출산 후 복부 비만<br>
+    • 목표 : 30회 안에 체지방 -6%, 무릎 통증 없이 스쿼트 80% 가동</p>
+  </div>
+  <div class="guide-step">
+    <h3>매회 수업 일지 작성 예시 (1회차)</h3>
+    <p><span class="highlight">컨디션</span> 6/10 (출근 후 피로) | <span class="highlight">운동</span> 머신 스쿼트 20kg×12×3, 랫풀다운 25kg×12×3, 플랭크 30초×3 | <span class="highlight">RPE</span> 7 | <span class="highlight">복습</span> X | <span class="highlight">통증</span> 무릎 후면 약간 뻐근 | <span class="highlight">메모</span> 스쿼트 무릎 정렬 지속 피드백 필요 | <span class="highlight">과제</span> 영상 자료 보고 데일리 스트레칭 3종</p>
+  </div>
+  <div class="guide-step">
+    <h3>Before / After 작성 예시</h3>
+    <p><b>BEFORE (2026.01.15)</b> 72.4kg / 34% / 22kg<br>
+    <b>AFTER (2026.04.15, 30회 완료)</b> 64.8kg (▼7.6) / 26% (▼8%) / 23.2kg (▲1.2)</p>
+  </div>
+  <div class="guide-step">
+    <h3>재등록 제안 멘트 예시</h3>
+    <p>"지영님, 지난 30회 동안 체지방만 8% 줄이셨어요. 이제 근육량 본격 증가 구간 들어갑니다. 여기서 멈추면 체지방은 2~3주 안에 다시 돌아와요. 다음 30회는 근성장 + 리바운드 방지가 핵심이에요. 주 1회도 좋고 주 2회도 좋아요. 총 30회 기준으로 패키지 적용해서 이어가시죠."</p>
+  </div>
+</div>
+
+<div class="guide-section">
+  <h2>📖 사용 가이드 — 언제, 어떻게 쓰나요?</h2>
+  <div class="guide-step">
+    <h3>STEP 1. 수업 종료 직후 3분 — 매회 수업 일지 작성 (필수)</h3>
+    <p>수업이 끝나고 회원이 나간 뒤 즉시 기록. 미루면 디테일이 날아갑니다. 컨디션·운동·RPE·복습·통증·메모·과제 순으로 한 줄씩.</p>
+  </div>
+  <div class="guide-step">
+    <h3>STEP 2. 매주 1회 — 월간 표에 주간 합계 입력</h3>
+    <p>일요일 저녁, 월간 기록표에 그 주의 PT횟수·개인운동·유산소·식단일수·치팅을 합계로 입력. 회원에게 카톡으로 "이번 주 운동 X회, 식단 X일 수행하셨어요" 요약 전송.</p>
+  </div>
+  <div class="guide-step">
+    <h3>STEP 3. 매월 1회 — 체성분 측정 후 차트 업데이트</h3>
+    <p>인바디 측정일 저녁, 차트 값을 갱신. 회원에게 변화 그래프 캡처를 전송하여 <b>시각적 성취감</b> 자극.</p>
+  </div>
+  <div class="guide-step">
+    <h3>STEP 4. 30회차 3주 전 — Before/After 촬영 + 차트 완성</h3>
+    <p>시즌 종료 3주 전 Before 사진과 <b>동일한 조명·각도·복장</b>으로 After 촬영. 슬라이드 7에 사진 업로드 완료.</p>
+  </div>
+  <div class="guide-step">
+    <h3>STEP 5. 30회차 2주 전 — 재등록 미팅 (이 파일로 설명)</h3>
+    <p>수업의 마지막 5분 또는 별도 티타임. 태블릿/노트북으로 1~8번 슬라이드 순서대로 보여주며 스토리텔링. "시작할 때 이런 상태였고 → 이 플랜으로 → 이 기록이 쌓였고 → 이 결과 → 여기서 멈추면 이게 아까움 → 다음 시즌 30회".</p>
+  </div>
+</div>
+
+<div class="guide-section">
+  <h2>✍️ 사진 업로드 · 편집 방법</h2>
+  <div class="guide-step">
+    <h3>사진 첨부 — 깨짐 없는 2가지 방법</h3>
+    <p>① <b>클릭 업로드</b> : Before/After 영역(📷) 클릭 → 파일 선택 → 자동으로 영역에 맞춰 채워집니다 (object-fit : cover 적용)<br>
+    ② <b>드래그앤드롭</b> : 바탕화면에서 이미지 파일을 슬롯 위로 끌어다 놓기 → 즉시 업로드<br>
+    ※ 사진은 HTML 안에 base64로 저장되어 파일만 전달해도 이미지가 함께 갑니다.</p>
+  </div>
+  <div class="guide-step">
+    <h3>수업 일지 — 손글씨 워크플로 추천</h3>
+    <p>일지 슬라이드(3,4)만 <b>인쇄해서 수업 직후 손글씨로 즉시 기록</b> → 월말에 디지털로 옮겨 적기. 수업 직후 기록 누락을 방지합니다.</p>
+  </div>
+  <div class="guide-step">
+    <h3>워터마크 커스텀 — 상단 툴바에서 즉시 반영</h3>
+    <p>상단 "🏷️ 워터마크 문구" 입력창에 본인 인스타 핸들·브랜드명을 입력하면 8장 모든 슬라이드에 동시 반영됩니다.</p>
+  </div>
+</div>
+
+<div class="guide-section">
+  <h2>🧠 전문가 팁 — 재등록률을 끌어올리는 5가지</h2>
+  <div class="guide-step">
+    <h3>① 데이터는 감정을 이긴다</h3>
+    <p>"수고 많으셨어요"보다 <b>"30회 동안 체지방 1.8kg 감소, 근육량 0.4kg 증가"</b>가 10배 강합니다. 월간 표가 바로 그 역할.</p>
+  </div>
+  <div class="guide-step">
+    <h3>② "멈추면 잃는다"를 시각화</h3>
+    <p>8번 슬라이드 <span class="highlight">"멈출 때 예상 리스크"</span> 칸은 반드시 채우세요. 손실 회피 편향 — 사람은 얻는 것보다 잃는 것에 2배 민감합니다.</p>
+  </div>
+  <div class="guide-step">
+    <h3>③ 회원의 첫 마디를 그대로 기록</h3>
+    <p>초기 상태 슬라이드에 회원이 처음 한 말을 <b>큰따옴표로 그대로</b> 적어두세요. "허리가 너무 아파서 아이 안아줄 때 힘들어요." 30회 뒤 그 문장을 읽어드리면 회원은 운다.</p>
+  </div>
+  <div class="guide-step">
+    <h3>④ 일지는 회원의 자존감</h3>
+    <p>회원에게 일지 요약본을 보여주세요. "지난 3개월 동안 30회 운동하셨어요" 이 숫자 자체가 회원에게 자부심을 줍니다. 자부심 → 소속감 → 재등록.</p>
+  </div>
+  <div class="guide-step">
+    <h3>⑤ Before/After는 "동일 조건"이 생명</h3>
+    <p>같은 장소·시간대·옷·포즈·조명. 조건이 다르면 비교 신뢰도가 0입니다. 첫 촬영 시 "30회 뒤 같은 조건으로 찍을게요" 미리 예고하기.</p>
+  </div>
+</div>
+</div><!-- /.guide-border -->
+
+<div class="hero-guide" style="background:linear-gradient(135deg,#063d32 0%,#0a5f4c 100%);margin-top:60px;">
+  <h1>💼 제작자 : 제로코치 박창영 · @zerocoach7</h1>
+  <div class="sub">본 템플릿은 현직 PT 트레이너 누구나 본인 브랜드에 맞게 수정하여 사용할 수 있습니다.<br>
+  재판매 · 수강생 교육 자료 활용 시 출처 표기 부탁드립니다.</div>
+</div>
+
+</div>
+
+<!-- ====================== JavaScript ====================== -->
+<script>
+// ================== 워터마크 실시간 반영 ==================
+(function(){
+  var wmInput=document.getElementById('wmInput');
+  function apply(){
+    var v=wmInput.value || '@zerocoach7';
+    document.querySelectorAll('.wm-text').forEach(function(el){el.textContent=v;});
+  }
+  wmInput.addEventListener('input',apply);
+  apply();
+})();
+
+// ================== 수업 일지 한 줄 생성 (글로벌) ==================
+// 주의: td.date에도 contenteditable="true"를 명시 부여 — Observer가 비동기로 붙이기 전
+//      복원 시 인덱스 어긋남을 방지하기 위함
+function buildLogRow(idx){
+  // 운동 5종목 셀은 번호로 pre-fill
+  var exDefault='1. <br>2. <br>3. <br>4. <br>5. ';
+  return '<tr>'+
+    '<td class="date" contenteditable="true">'+idx+'</td>'+
+    '<td contenteditable="true"></td>'+                                // 일자
+    '<td contenteditable="true"></td>'+                                // 컨디션
+    '<td class="ex-cell" contenteditable="true">'+exDefault+'</td>'+   // 운동 5종목
+    '<td contenteditable="true"></td>'+                                // RPE
+    '<td contenteditable="true"></td>'+                                // 복습
+    '<td contenteditable="true" style="text-align:left;"></td>'+       // 통증
+    '<td class="feedback" contenteditable="true"></td>'+               // 회원 소감
+    '<td contenteditable="true" style="text-align:left;"></td>'+       // 트레이너 메모
+    '<td contenteditable="true" style="text-align:left;"></td>'+       // 다음 과제
+  '</tr>';
+}
+
+// ================== 수업 일지 30회 자동 생성 (10 × 3 슬라이드) ==================
+(function(){
+  var b1=document.getElementById('session-body-1');
+  var b2=document.getElementById('session-body-2');
+  var b3=document.getElementById('session-body-3');
+  for(var i=1;i<=10;i++) b1.insertAdjacentHTML('beforeend',buildLogRow(i));
+  for(var i=11;i<=20;i++) b2.insertAdjacentHTML('beforeend',buildLogRow(i));
+  for(var i=21;i<=30;i++) b3.insertAdjacentHTML('beforeend',buildLogRow(i));
+})();
+
+// ================== ↺ 삭제 페이지 복구 (Undo) — 슬라이드 DOM 노드를 그대로 보관 ==================
+// .remove()는 DOM 트리에서만 떼어낼 뿐 노드 자체(이벤트·캔버스 내용 포함)는 살아있으므로
+// 참조를 스택에 쥐고 있다가 그대로 다시 꽂으면 완전 복구됩니다.
+var deletedSlidesStack = [];
+function recordDeletion(slideEl){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var idx = slides.indexOf(slideEl);
+  deletedSlidesStack.push({ el: slideEl, idx: idx });
+  updateUndoButton();
+}
+function undoLastDelete(){
+  var item = deletedSlidesStack.pop();
+  if(!item){ showToast('복구할 삭제 내역이 없습니다'); updateUndoButton(); return; }
+  var slides = document.querySelectorAll('.slide');
+  if(slides[item.idx]) slides[item.idx].insertAdjacentElement('beforebegin', item.el);
+  else if(slides.length) slides[slides.length-1].insertAdjacentElement('afterend', item.el);
+  else document.querySelector('.wrap').appendChild(item.el);
+  renumberSlides();
+  if(typeof renumberBALabels==='function') renumberBALabels();
+  scheduleAutoSave();
+  showToast('↺ 페이지가 복구되었습니다');
+  updateUndoButton();
+}
+function updateUndoButton(){
+  var btn = document.getElementById('undoDeleteBtn');
+  if(!btn) return;
+  btn.style.display = deletedSlidesStack.length ? 'inline-block' : 'none';
+  btn.textContent = '↺ 삭제 페이지 복구 ('+deletedSlidesStack.length+')';
+}
+
+// ================== 수업 일지 10회 추가 (40회/50회/60회권 대응) ==================
+function addLogPage(){
+  var logs = document.querySelectorAll('.log-slide');
+  var lastLog = logs[logs.length - 1];
+  var startNum = logs.length * 10 + 1;
+  var endNum = startNum + 9;
+
+  // 첫 log-slide 구조를 템플릿으로 복제
+  var template = logs[0];
+  var clone = template.cloneNode(true);
+  clone.classList.add('log-added');
+
+  // 제목 갱신
+  var title = clone.querySelector('.title-bar');
+  if(title) title.innerHTML = '📆 매회 수업 일지 ('+startNum+' ~ '+endNum+'회)';
+
+  // tbody 새 ID + 빈 상태로 → 10회 행 채우기
+  var tbody = clone.querySelector('tbody');
+  var newId = 'session-body-' + (logs.length + 1);
+  tbody.id = newId;
+  tbody.innerHTML = '';
+  for(var i=startNum; i<=endNum; i++){
+    tbody.insertAdjacentHTML('beforeend', buildLogRow(i));
+  }
+
+  // 기존 slide-remove-btn 있으면 제거 (MutationObserver가 다시 붙임)
+  var oldRm = clone.querySelector('.slide-remove-btn,.ba-remove-btn');
+  if(oldRm) oldRm.remove();
+
+  // 마지막 log-slide 뒤에 삽입
+  lastLog.insertAdjacentElement('afterend', clone);
+
+  renumberSlides();
+  scheduleAutoSave();
+  showToast('➕ '+startNum+'~'+endNum+'회 페이지가 추가되었습니다');
+}
+
+// 기본 30회 슬라이드 포함, 가장 마지막 수업일지 페이지를 제거 (10회 회원님 등 세션이 적은 경우 사용)
+// silent=true면 확인창 없이 조용히 제거 (세션수 일괄 적용용)
+function removeLastAnyLogSlide(withConfirm){
+  var logs = document.querySelectorAll('.log-slide');
+  if(logs.length <= 1){
+    if(withConfirm) alert('최소 1개의 수업 일지 페이지는 유지해야 합니다.');
+    return false;
+  }
+  var last = logs[logs.length - 1];
+  if(withConfirm && !confirm('마지막 수업 일지 페이지를 삭제하시겠어요? 입력하신 내용도 함께 사라집니다.\n(실수하면 상단 ↺ 삭제 페이지 복구 버튼으로 되살릴 수 있어요)')){
+    return false;
+  }
+  recordDeletion(last);
+  last.remove();
+  renumberSlides();
+  scheduleAutoSave();
+  if(withConfirm) showToast('➖ 마지막 수업일지 페이지가 제거되었습니다');
+  return true;
+}
+// 회원 총 세션수를 드롭다운으로 한 번에 맞추기 (부족하면 추가, 넘치면 마지막부터 제거)
+function applySessionCount(){
+  var sel = document.getElementById('sessionCountSel');
+  var target = parseInt(sel.value, 10) || 30;
+  var wantSlides = Math.max(1, Math.round(target / 10));
+  var curSlides = document.querySelectorAll('.log-slide').length;
+  if(wantSlides === curSlides){ showToast('이미 '+target+'회로 설정되어 있습니다'); return; }
+  if(wantSlides > curSlides){
+    for(var i = curSlides; i < wantSlides; i++) addLogPage();
+    showToast('✅ 세션 '+target+'회로 확장되었습니다');
+  } else {
+    var removeCount = curSlides - wantSlides;
+    if(!confirm(removeCount*10+'회 분량의 수업 일지 페이지가 삭제됩니다.\n(↺ 상단 "삭제 페이지 복구" 버튼으로 되살릴 수 있어요) 계속할까요?')) return;
+    for(var j = 0; j < removeCount; j++) removeLastAnyLogSlide(false);
+    scheduleAutoSave();
+    showToast('✅ 세션 '+target+'회로 축소되었습니다');
+  }
+}
+
+// ================== Before/After 페이지 추가 ==================
+function addBAPage(){
+  var slides=document.querySelectorAll('.ba-slide');
+  var template=slides[0];              // 첫 번째 ba-slide를 템플릿으로 (추가된 슬라이드는 제거)
+  var clone=template.cloneNode(true);
+
+  // 인덱스 증가
+  var idx=slides.length+1;
+  clone.dataset.baIdx=idx;
+  clone.classList.add('ba-added');
+
+  // 이미지 초기화
+  clone.querySelectorAll('.img-slot').forEach(function(s){
+    s.style.backgroundImage='';
+    s.classList.remove('has-img');
+    var slot=s.dataset.slot;
+    s.textContent= slot==='before' ? '시작 당시 사진 업로드' : '현재 사진 업로드';
+  });
+  // 메트릭 텍스트 초기화
+  clone.querySelectorAll('.ba-metric').forEach(function(m,i){
+    if(i===0){
+      m.innerHTML='YYYY.MM.DD<br>체중 : __ kg<br>체지방률 : __ %<br>골격근량 : __ kg';
+    }else{
+      m.innerHTML='YYYY.MM.DD<br>체중 : __ kg (▼ __)<br>체지방률 : __ % (▼ __)<br>골격근량 : __ kg (▲ __)';
+    }
+  });
+  // 라벨 변경 (N차 중간 점검)
+  var label=clone.querySelector('.ba-label');
+  if(label) label.textContent='— '+idx+'차 중간 점검 (클릭해서 수정)';
+
+  // ✕ 제거 버튼 추가 (추가된 슬라이드에만)
+  var removeBtn=document.createElement('button');
+  removeBtn.className='ba-remove-btn';
+  removeBtn.textContent='✕ 이 페이지 삭제';
+  removeBtn.onclick=function(){
+    if(confirm('이 Before/After 페이지를 삭제하시겠어요?\n(실수하면 상단 ↺ 삭제 페이지 복구 버튼으로 되살릴 수 있어요)')){
+      recordDeletion(clone);
+      clone.remove();
+      renumberBALabels();
+      renumberSlides();
+      scheduleAutoSave();
+    }
+  };
+  clone.appendChild(removeBtn);
+
+  var anchor=document.getElementById('baAnchor');
+  anchor.insertAdjacentElement('beforebegin',clone);
+
+  // 이미지 업로드 바인딩
+  clone.querySelectorAll('.img-slot').forEach(bindImageSlot);
+
+  // 전체 슬라이드 번호 재계산
+  renumberSlides();
+}
+
+// ================== 마지막 B/A 페이지 제거 ==================
+function removeLastBAPage(){
+  var added=document.querySelectorAll('.ba-slide.ba-added');
+  if(added.length===0){
+    alert('제거할 추가 B/A 페이지가 없습니다. (원본 B/A 슬라이드를 지우려면 그 페이지 우측 상단 ✕ 버튼을 사용하세요 — 실수해도 ↺ 복구 가능합니다)');
+    return;
+  }
+  var last=added[added.length-1];
+  if(confirm('마지막에 추가된 B/A 페이지를 삭제하시겠어요?\n(실수하면 상단 ↺ 삭제 페이지 복구 버튼으로 되살릴 수 있어요)')){
+    recordDeletion(last);
+    last.remove();
+    renumberBALabels();
+    renumberSlides();
+    scheduleAutoSave();
+  }
+}
+
+// B/A 라벨 재번호 ("N차 중간 점검" 정렬)
+function renumberBALabels(){
+  var added=document.querySelectorAll('.ba-slide.ba-added');
+  added.forEach(function(s,i){
+    var label=s.querySelector('.ba-label');
+    if(label) label.textContent='— '+(i+2)+'차 중간 점검 (클릭해서 수정)';
+    s.dataset.baIdx=i+2;
+  });
+}
+
+function bindImageSlot(slot){
+  if(!slot.dataset.origLabel){
+    slot.dataset.origLabel = slot.textContent.trim() || '📷 클릭 · 또는 드래그';
+  }
+  if(!slot.querySelector('.uploaded-img')){
+    slot.innerHTML = '';
+
+    var imgEl = document.createElement('img');
+    imgEl.className = 'uploaded-img';
+    imgEl.alt = '';
+    imgEl.draggable = false;
+    slot.appendChild(imgEl);
+
+    var ph = document.createElement('span');
+    ph.className = 'img-placeholder';
+    ph.textContent = slot.dataset.origLabel;
+    slot.appendChild(ph);
+
+    var controls = document.createElement('div');
+    controls.className = 'img-controls';
+    controls.innerHTML = [
+      '<button type="button" class="img-ctrl" data-action="zoom-in" title="확대">＋</button>',
+      '<button type="button" class="img-ctrl" data-action="zoom-out" title="축소">−</button>',
+      '<button type="button" class="img-ctrl" data-action="reset" title="원위치·원크기">↺</button>',
+      '<button type="button" class="img-ctrl" data-action="fit" title="전체표시 / 가득채움 전환">⤢</button>'
+    ].join('');
+    slot.appendChild(controls);
+
+    var delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.className = 'img-delete-btn';
+    delBtn.innerHTML = '✕';
+    delBtn.title = '사진 삭제';
+    slot.appendChild(delBtn);
+
+    // 📦 박스 크기 조절 손잡이 — 드래그
+    var resizeHandle = document.createElement('div');
+    resizeHandle.className = 'img-resize-handle';
+    resizeHandle.innerHTML = '↘';
+    resizeHandle.title = '박스 크기 조절 (드래그)';
+    slot.appendChild(resizeHandle);
+
+    var rz = { on:false, w0:0, h0:0, x0:0, y0:0 };
+    resizeHandle.addEventListener('mousedown', function(e){
+      e.preventDefault(); e.stopPropagation();
+      rz.on = true;
+      rz.x0 = e.clientX; rz.y0 = e.clientY;
+      rz.w0 = slot.offsetWidth; rz.h0 = slot.offsetHeight;
+      document.body.style.cursor = 'nwse-resize';
+    });
+    window.addEventListener('mousemove', function(e){
+      if(!rz.on) return;
+      var newW = Math.max(100, rz.w0 + (e.clientX - rz.x0));
+      var newH = Math.max(100, rz.h0 + (e.clientY - rz.y0));
+      slot.style.width  = newW + 'px';
+      slot.style.height = newH + 'px';
+      slot.style.flex   = 'none';
+      slot.style.minHeight = 'unset';
+      slot.style.maxHeight = 'unset';
+    });
+    window.addEventListener('mouseup', function(){
+      if(rz.on){ rz.on = false; document.body.style.cursor = ''; }
+    });
+
+    var state = { scale:1, x:0, y:0, fit:'cover' };
+    function apply(){
+      imgEl.style.transform = 'translate(calc(-50% + '+state.x+'px), calc(-50% + '+state.y+'px)) scale('+state.scale+')';
+      imgEl.style.objectFit = state.fit;
+    }
+    slot._resetTransform = function(){
+      state.scale=1; state.x=0; state.y=0; state.fit='cover'; apply();
+    };
+
+    var dragging=false, lastX=0, lastY=0;
+    imgEl.addEventListener('mousedown', function(e){
+      if(!slot.classList.contains('has-img')) return;
+      e.preventDefault(); e.stopPropagation();
+      dragging=true; lastX=e.clientX; lastY=e.clientY;
+      imgEl.classList.add('dragging');
+    });
+    window.addEventListener('mousemove', function(e){
+      if(!dragging) return;
+      state.x += (e.clientX - lastX);
+      state.y += (e.clientY - lastY);
+      lastX=e.clientX; lastY=e.clientY;
+      apply();
+    });
+    window.addEventListener('mouseup', function(){
+      if(dragging){ dragging=false; imgEl.classList.remove('dragging'); }
+    });
+
+    imgEl.addEventListener('wheel', function(e){
+      if(!slot.classList.contains('has-img')) return;
+      e.preventDefault();
+      var delta = e.deltaY > 0 ? 0.9 : 1.1;
+      state.scale = Math.max(0.3, Math.min(6, state.scale * delta));
+      apply();
+    }, { passive:false });
+
+    controls.addEventListener('click', function(e){
+      var btn = e.target.closest('.img-ctrl');
+      if(!btn) return;
+      e.stopPropagation();
+      var action = btn.dataset.action;
+      if(action === 'zoom-in') state.scale = Math.min(6, state.scale * 1.2);
+      else if(action === 'zoom-out') state.scale = Math.max(0.3, state.scale * 0.83);
+      else if(action === 'reset') { state.scale=1; state.x=0; state.y=0; }
+      else if(action === 'fit') state.fit = (state.fit === 'cover') ? 'contain' : 'cover';
+      apply();
+    });
+
+    delBtn.onclick = function(e){
+      e.stopPropagation();
+      imgEl.src = '';
+      slot.classList.remove('has-img');
+      slot._resetTransform();
+    };
+  }
+
+  slot.addEventListener('click',function(e){
+    if(e.target.closest('.img-ctrl')) return;
+    if(e.target.classList.contains('img-delete-btn')) return;
+    if(e.target.classList.contains('uploaded-img') && slot.classList.contains('has-img')) return;
+    var input=document.createElement('input');
+    input.type='file'; input.accept='image/*';
+    input.onchange=function(ev){ readImage(ev.target.files[0], slot); };
+    input.click();
+  });
+  slot.addEventListener('dragover',function(e){e.preventDefault();slot.classList.add('dragover');});
+  slot.addEventListener('dragleave',function(){slot.classList.remove('dragover'); });
+  slot.addEventListener('drop',function(e){
+    e.preventDefault(); slot.classList.remove('dragover');
+    readImage(e.dataTransfer.files[0], slot);
+  });
+}
+
+function renumberSlides(){
+  document.querySelectorAll('.slide').forEach(function(s,i){
+    var n=s.querySelector('.slide-number');
+    if(n) n.textContent=String(i+1).padStart(2,'0');
+  });
+}
+
+// ================== 이미지 업로드 (<img> + 위치/크기 조절) ==================
+function readImage(file, target){
+  if(!file || !file.type.startsWith('image/')) return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    var img = target.querySelector('.uploaded-img');
+    if(img){
+      img.src = ev.target.result;
+      target.classList.add('has-img');
+      if(target._resetTransform) target._resetTransform();
+    }
+  };
+  reader.readAsDataURL(file);
+}
+document.querySelectorAll('.img-slot').forEach(bindImageSlot);
+
+// ================== 🔒 저작권 워터마크 자동 삽입 + 변조 감시 ==================
+(function protectCopyright(){
+  function ensureCopyright(){
+    document.querySelectorAll('.slide').forEach(function(slide){
+      if(!slide.querySelector('.zero-copyright')){
+        var cr = document.createElement('div');
+        cr.className = 'zero-copyright';
+        slide.appendChild(cr);
+      }
+    });
+  }
+  ensureCopyright();
+  var obs = new MutationObserver(function(){ ensureCopyright(); });
+  obs.observe(document.body, { childList:true, subtree:true });
+})();
+
+// ================== 🔓 모든 슬라이드 내 텍스트 편집 가능 (safety net) ==================
+(function makeAllTextEditable(){
+  var selectors = [
+    '.analysis-title','.col-label','.col-body','.test-title','.grid-title',
+    '.plan-title','.plan-subtitle','.promise-title','.row-label','.phase',
+    '.care-label','.ex-caption','.cover-title','.cover-subtitle','.cover-trainer',
+    '.cover-period','.note-bar','.ba-label','.next-block h3','.next-block p',
+    '.slide th','.slide td','.promise-list li',
+    '.slide h1','.slide h2','.slide h3','.slide p'
+  ];
+  var excludeSel = '.img-slot,.img-controls,.img-delete-btn,.img-resize-handle,.zero-copyright,.slide-watermark,.slide-brandmark,.slide-number,.toolbar,.trainer-only,.hero-guide,.guide-border,.section-title,.cover-change-bg,.body-remove-btn,.ba-remove-btn,#bodyAnchor,#baAnchor';
+  function applyAll(){
+    selectors.forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){
+        if(el.closest(excludeSel)) return;
+        if(el.hasAttribute('contenteditable')) return;
+        if(el.tagName === 'BUTTON' || el.tagName === 'INPUT' || el.tagName === 'A') return;
+        el.setAttribute('contenteditable','true');
+      });
+    });
+  }
+  applyAll();
+  var mo = new MutationObserver(function(){ applyAll(); });
+  mo.observe(document.body, { childList:true, subtree:true });
+})();
+
+// 로드 시 슬라이드 번호 초기 동기화
+window.addEventListener('load',function(){renumberSlides();});
+
+// ================== 🗑️ 표지 제외 전 페이지 삭제 버튼 자동 추가 ==================
+(function addSlideRemoveButtons(){
+  function addBtn(slide){
+    if(slide.querySelector('.slide-remove-btn,.ba-remove-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'slide-remove-btn';
+    btn.textContent = '✕ 이 페이지 삭제';
+    btn.onclick = function(){
+      if(confirm('이 페이지를 삭제하시겠어요?\n(실수하면 상단 ↺ 삭제 페이지 복구 버튼으로 바로 되살릴 수 있어요)')){
+        recordDeletion(slide);
+        slide.remove();
+        if(typeof renumberSlides === 'function') renumberSlides();
+        if(typeof renumberBALabels === 'function') renumberBALabels();
+        scheduleAutoSave();
+      }
+    };
+    slide.appendChild(btn);
+  }
+  function apply(){
+    var slides = document.querySelectorAll('.slide');
+    slides.forEach(function(s, i){
+      if(i === 0) return;  // 첫 번째(표지)는 제외
+      addBtn(s);
+    });
+  }
+  apply();
+  var mo = new MutationObserver(function(){ apply(); });
+  mo.observe(document.body, { childList:true, subtree:true });
+})();
+
+// ================== ✏️ 텍스트 편집 플로팅 툴바 (크기·스타일·색상) ==================
+(function setupTextToolbar(){
+  var toolbar = document.createElement('div');
+  toolbar.className = 'text-toolbar';
+  toolbar.innerHTML = [
+    '<button type="button" class="tt-sz-up"   title="글자 크게">A+</button>',
+    '<button type="button" class="tt-sz-dn"   title="글자 작게">A−</button>',
+    '<button type="button" class="tt-bold"    title="굵게">B</button>',
+    '<button type="button" class="tt-italic"  title="기울임">I</button>',
+    '<button type="button" class="tt-under"   title="밑줄" style="text-decoration:underline;">U</button>',
+    '<button type="button" class="tt-color"   data-color="#e53935" title="빨강"  style="background:#e53935;"></button>',
+    '<button type="button" class="tt-color"   data-color="#1e5fd0" title="파랑"  style="background:#1e5fd0;"></button>',
+    '<button type="button" class="tt-color"   data-color="#0a5f4c" title="초록"  style="background:#0a5f4c;"></button>',
+    '<button type="button" class="tt-color"   data-color="#1a2b4a" title="검정"  style="background:#1a2b4a;"></button>',
+    '<button type="button" class="tt-color"   data-color="#c08400" title="주황"  style="background:#ff9a3c;"></button>',
+    '<button type="button" class="tt-reset"   title="글자 스타일 리셋">↺</button>'
+  ].join('');
+  document.body.appendChild(toolbar);
+
+  var activeEl = null;
+
+  function isEditableInSlide(el){
+    if(!el || !el.getAttribute) return false;
+    if(el.getAttribute('contenteditable') !== 'true') return false;
+    if(el.closest('.toolbar,.img-slot,.img-controls,.draw-palette,.text-toolbar')) return false;
+    return !!(el.closest('.slide,.page'));
+  }
+
+  document.addEventListener('focusin', function(e){
+    if(isEditableInSlide(e.target)){
+      activeEl = e.target;
+      showToolbar(e.target);
+    }
+  });
+  document.addEventListener('click', function(e){
+    // 편집 요소가 아닌 곳 + 툴바가 아닌 곳 클릭 시 숨김
+    if(!isEditableInSlide(e.target) && !toolbar.contains(e.target)){
+      toolbar.style.display = 'none';
+      activeEl = null;
+    }
+  });
+
+  function showToolbar(el){
+    var rect = el.getBoundingClientRect();
+    toolbar.style.display = 'flex';
+    var top = window.scrollY + rect.top - 48;
+    if(top < window.scrollY + 10) top = window.scrollY + rect.bottom + 8;
+    toolbar.style.top  = top + 'px';
+    toolbar.style.left = Math.max(10, window.scrollX + rect.left) + 'px';
+  }
+
+  toolbar.addEventListener('mousedown', function(e){ e.preventDefault(); });  // 포커스 유지
+
+  toolbar.addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if(!btn || !activeEl) return;
+    e.preventDefault();
+    activeEl.focus();
+
+    if(btn.classList.contains('tt-sz-up')){
+      var cur = parseFloat(getComputedStyle(activeEl).fontSize);
+      activeEl.style.fontSize = Math.min(200, cur * 1.1) + 'px';
+    }
+    else if(btn.classList.contains('tt-sz-dn')){
+      var cur2 = parseFloat(getComputedStyle(activeEl).fontSize);
+      activeEl.style.fontSize = Math.max(8, cur2 * 0.9) + 'px';
+    }
+    else if(btn.classList.contains('tt-bold'))   { document.execCommand('bold', false); }
+    else if(btn.classList.contains('tt-italic')) { document.execCommand('italic', false); }
+    else if(btn.classList.contains('tt-under'))  { document.execCommand('underline', false); }
+    else if(btn.classList.contains('tt-color'))  { document.execCommand('foreColor', false, btn.dataset.color); }
+    else if(btn.classList.contains('tt-reset'))  {
+      activeEl.style.fontSize = '';
+      activeEl.style.fontWeight = '';
+      activeEl.style.fontStyle = '';
+      activeEl.style.textDecoration = '';
+      activeEl.style.color = '';
+    }
+    // 툴바 위치 재조정
+    showToolbar(activeEl);
+  });
+})();
+
+// ================== 🎨 사진 위 펜·형광펜 드로잉 ==================
+(function setupDrawingOnSlots(){
+  function addDrawingToSlot(slot){
+    if(slot._drawInit) return;
+    slot._drawInit = true;
+
+    var canvas = document.createElement('canvas');
+    canvas.className = 'draw-canvas';
+    canvas.width = 1600; canvas.height = 1200;
+    slot.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    var palette = document.createElement('div');
+    palette.className = 'draw-palette';
+    palette.innerHTML = [
+      '<button type="button" class="d-tool" data-tool="pen-red"    title="빨간 펜"    style="background:#e53935;">🖊️</button>',
+      '<button type="button" class="d-tool" data-tool="pen-blue"   title="파란 펜"    style="background:#1e5fd0;">🖊️</button>',
+      '<button type="button" class="d-tool" data-tool="pen-black"  title="검정 펜"    style="background:#222;">🖊️</button>',
+      '<button type="button" class="d-tool" data-tool="high-yellow" title="형광펜 노랑" style="background:#ffd85e;color:#6d4a00;">🖍️</button>',
+      '<button type="button" class="d-tool" data-tool="high-pink"   title="형광펜 분홍" style="background:#ff9acc;color:#6d1f4a;">🖍️</button>',
+      '<button type="button" class="d-tool" data-tool="eraser"     title="지우개"     style="background:#fff;color:#333;">🧽</button>',
+      '<button type="button" class="d-tool d-clear"                title="전체 지우기" style="background:#c0392b;">🗑️</button>',
+      '<button type="button" class="d-tool d-done"                 title="그리기 끝"  style="background:#6DD4B0;color:#0a2558;">✓</button>'
+    ].join('');
+    slot.appendChild(palette);
+
+    var controls = slot.querySelector('.img-controls');
+    if(controls){
+      var drawToggle = document.createElement('button');
+      drawToggle.type = 'button';
+      drawToggle.className = 'img-ctrl';
+      drawToggle.title = '펜·형광펜으로 사진에 표시';
+      drawToggle.innerHTML = '✏️';
+      controls.appendChild(drawToggle);
+      drawToggle.onclick = function(e){
+        e.stopPropagation();
+        slot.classList.toggle('draw-mode');
+      };
+    }
+
+    var currentTool = 'pen-red';
+    palette.addEventListener('click', function(e){
+      var btn = e.target.closest('.d-tool');
+      if(!btn) return;
+      e.stopPropagation();
+      if(btn.classList.contains('d-clear')){
+        ctx.clearRect(0, 0, canvas.width, canvas.height); return;
+      }
+      if(btn.classList.contains('d-done')){
+        slot.classList.remove('draw-mode'); return;
+      }
+      currentTool = btn.dataset.tool;
+      palette.querySelectorAll('.d-tool').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+    });
+
+    var drawing = false, lastX = 0, lastY = 0;
+    function getPos(e){
+      var rect = canvas.getBoundingClientRect();
+      return {
+        x: (e.clientX - rect.left) * (canvas.width / rect.width),
+        y: (e.clientY - rect.top)  * (canvas.height / rect.height)
+      };
+    }
+    function applyTool(){
+      var tools = {
+        'pen-red':    { color:'rgba(229,57,53,0.95)',  width:4,  op:'source-over' },
+        'pen-blue':   { color:'rgba(30,95,208,0.95)',  width:4,  op:'source-over' },
+        'pen-black':  { color:'rgba(30,30,30,0.95)',   width:4,  op:'source-over' },
+        'high-yellow':{ color:'rgba(255,230,70,0.45)', width:22, op:'multiply' },
+        'high-pink':  { color:'rgba(255,130,180,0.45)',width:22, op:'multiply' },
+        'eraser':     { color:'rgba(0,0,0,1)',         width:24, op:'destination-out' }
+      };
+      var t = tools[currentTool] || tools['pen-red'];
+      ctx.strokeStyle = t.color; ctx.lineWidth = t.width;
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.globalCompositeOperation = t.op;
+    }
+    canvas.addEventListener('mousedown', function(e){
+      if(!slot.classList.contains('draw-mode')) return;
+      e.preventDefault(); e.stopPropagation();
+      drawing = true;
+      var p = getPos(e); lastX = p.x; lastY = p.y;
+      applyTool();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, ctx.lineWidth/2, 0, Math.PI*2);
+      ctx.fillStyle = ctx.strokeStyle;
+      if(currentTool !== 'eraser') ctx.fill();
+    });
+    window.addEventListener('mousemove', function(e){
+      if(!drawing) return;
+      var p = getPos(e);
+      applyTool();
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY); ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      lastX = p.x; lastY = p.y;
+    });
+    window.addEventListener('mouseup', function(){ drawing = false; });
+  }
+
+  function applyAll(){
+    document.querySelectorAll('.img-slot').forEach(addDrawingToSlot);
+  }
+  applyAll();
+  var mo = new MutationObserver(function(){ applyAll(); });
+  mo.observe(document.body, { childList:true, subtree:true });
+})();
+
+// ================== 표지 배경 교체 ==================
+function handleCoverBg(e){
+  var file=e.target.files[0];
+  if(!file || !file.type.startsWith('image/')) return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    document.getElementById('coverBg').style.backgroundImage=
+      'linear-gradient(rgba(6,61,50,0.45),rgba(6,61,50,0.45)),url('+ev.target.result+')';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ================== 체중·골격근량 차트 ==================
+function drawChart(canvasId, data, labels, color, fillColor, yMin, yMax){
+  var c=document.getElementById(canvasId); if(!c) return;
+  var ctx=c.getContext('2d');
+  var W=c.width, H=c.height, pad=42;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='#ccd7e1'; ctx.lineWidth=1;
+  for(var i=0;i<=4;i++){
+    var y=pad+(H-pad*2)*i/4;
+    ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(W-pad,y); ctx.stroke();
+  }
+  ctx.fillStyle='#667788'; ctx.font='14px sans-serif'; ctx.textAlign='right';
+  for(var i=0;i<=4;i++){
+    var v=yMax-(yMax-yMin)*i/4;
+    ctx.fillText(v.toFixed(1), pad-6, pad+(H-pad*2)*i/4+4);
+  }
+  ctx.textAlign='center';
+  for(var i=0;i<labels.length;i++){
+    var x=pad+(W-pad*2)*i/(labels.length-1);
+    ctx.fillText(labels[i], x, H-12);
+  }
+  var points=data.map(function(v,i){
+    var x=pad+(W-pad*2)*i/(data.length-1);
+    var y=pad+(H-pad*2)*(1-(v-yMin)/(yMax-yMin));
+    return [x,y];
+  });
+  ctx.fillStyle=fillColor;
+  ctx.beginPath(); ctx.moveTo(points[0][0], H-pad);
+  points.forEach(function(p){ ctx.lineTo(p[0],p[1]); });
+  ctx.lineTo(points[points.length-1][0], H-pad);
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle=color; ctx.lineWidth=3;
+  ctx.beginPath();
+  points.forEach(function(p,i){ i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]); });
+  ctx.stroke();
+  ctx.fillStyle=color;
+  points.forEach(function(p,i){
+    ctx.beginPath(); ctx.arc(p[0],p[1],5,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#0a2558'; ctx.font='bold 16px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(data[i], p[0], p[1]-12);
+    ctx.fillStyle=color;
+  });
+}
+// ================== 📊 차트 실시간 편집 (월간표 헤더 = 라벨 공용, 값만 각 표에서) ==================
+// 월간표(운동/식단) 헤더 행이 두 그래프의 공통 라벨 소스입니다 (연동 보장 — 별도 라벨칸 없음)
+function monthHeaderCells(){
+  var ths = document.querySelectorAll('#monthlyMain thead tr th');
+  return Array.prototype.slice.call(ths).slice(1); // 첫 칸("운동/식단")은 제외
+}
+function monthlyDataRows(){
+  return Array.prototype.slice.call(document.querySelectorAll('#monthlyMain tbody tr'));
+}
+function chartValRow(key){
+  var t = document.querySelector('.chart-inputs[data-chart="'+key+'"]');
+  return t ? t.querySelector('.val-row') : null;
+}
+function readChartConfig(chartKey){
+  var box = document.querySelector('.chart-inputs[data-chart="'+chartKey+'"]').closest('.chart-box');
+  var valueInputs = box.querySelectorAll('.val-row input');
+  var labelCells = monthHeaderCells();
+  var labels=[], data=[];
+  for(var i=0; i<valueInputs.length; i++){
+    var v = parseFloat(valueInputs[i].value);
+    if(!isNaN(v)){
+      data.push(v);
+      var lc = labelCells[i];
+      labels.push((lc ? lc.textContent.trim() : '') || (i+1)+'회');
+    }
+  }
+  var yMin = parseFloat(box.querySelector('.y-min').value);
+  var yMax = parseFloat(box.querySelector('.y-max').value);
+  if(isNaN(yMin) || isNaN(yMax) || yMax <= yMin){ yMin = 0; yMax = 100; }
+  return { labels:labels, data:data, yMin:yMin, yMax:yMax };
+}
+
+// ================== 🗓️ 월 컬럼 관리 (월간표 + 두 그래프 동시 추가/삭제 — 항상 개수 일치) ==================
+function nextMonthLabelGuess(){
+  var cells = monthHeaderCells();
+  if(!cells.length) return '1월';
+  var last = cells[cells.length-1].textContent.trim();
+  var m = parseInt(last, 10);
+  if(isNaN(m)) return (cells.length+1)+'월';
+  m = m + 1; if(m > 12) m = 1;
+  return m + '월';
+}
+function addMonthColumn(){
+  var hdrRow = document.querySelector('.monthly thead tr');
+  var th = document.createElement('th');
+  th.setAttribute('contenteditable','true');
+  th.textContent = nextMonthLabelGuess();
+  hdrRow.appendChild(th);
+
+  monthlyDataRows().forEach(function(tr){
+    var td = document.createElement('td');
+    td.setAttribute('contenteditable','true');
+    tr.appendChild(td);
+  });
+
+  ['weight','muscle'].forEach(function(key){
+    var row = chartValRow(key);
+    if(!row) return;
+    var td = document.createElement('td');
+    var inp = document.createElement('input');
+    inp.type = 'number'; inp.step = '0.1'; inp.value = '';
+    td.appendChild(inp);
+    row.appendChild(td);
+  });
+
+  renderChart('weight'); renderChart('muscle');
+  scheduleAutoSave();
+  return th;
+}
+function removeMonthColumnRaw(){
+  var cells = monthHeaderCells();
+  if(cells.length <= 2) return false; // 최소 2개월 유지 (그래프 최소 요건)
+  cells[cells.length-1].remove();
+  monthlyDataRows().forEach(function(tr){
+    var tds = tr.querySelectorAll('td');
+    if(tds.length) tds[tds.length-1].remove();
+  });
+  ['weight','muscle'].forEach(function(key){
+    var row = chartValRow(key);
+    if(!row) return;
+    var tds = row.querySelectorAll('td');
+    if(tds.length) tds[tds.length-1].remove();
+  });
+  return true;
+}
+function removeMonthColumn(){
+  var cells = monthHeaderCells();
+  if(cells.length <= 2){ alert('최소 2개월은 유지해야 그래프가 그려집니다.'); return; }
+  if(!confirm('마지막 월 컬럼을 삭제하시겠어요? 해당 월의 운동·식단·체중·근육량 데이터가 함께 사라집니다.')) return;
+  removeMonthColumnRaw();
+  renderChart('weight'); renderChart('muscle');
+  scheduleAutoSave();
+  showToast('➖ 월 컬럼이 삭제되었습니다');
+}
+function applyStartMonth(){
+  var sel = document.getElementById('startMonthSel');
+  var start = parseInt(sel.value, 10) || 1;
+  var cells = monthHeaderCells();
+  cells.forEach(function(th, i){
+    var m = ((start - 1 + i) % 12) + 1;
+    th.textContent = m + '월';
+  });
+  renderChart('weight'); renderChart('muscle');
+  scheduleAutoSave();
+  showToast('🗓️ 시작월이 '+start+'월로 적용되었습니다');
+}
+
+function renderChart(chartKey){
+  var cfg = readChartConfig(chartKey);
+  if(cfg.data.length < 2){
+    // 데이터 1개 이하면 안내 메시지
+    var canvas = document.getElementById(chartKey+'Chart');
+    if(canvas){
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle='#ccc'; ctx.font='18px sans-serif'; ctx.textAlign='center';
+      ctx.fillText('📊 최소 2개 이상 값을 입력하세요', canvas.width/2, canvas.height/2);
+    }
+    return;
+  }
+  if(chartKey === 'weight'){
+    drawChart('weightChart', cfg.data, cfg.labels, '#12876e', 'rgba(18,135,110,0.2)', cfg.yMin, cfg.yMax);
+  } else if(chartKey === 'muscle'){
+    drawChart('muscleChart', cfg.data, cfg.labels, '#10367D', 'rgba(16,54,125,0.2)', cfg.yMin, cfg.yMax);
+  }
+}
+
+function setupChartInputs(){
+  ['weight','muscle'].forEach(function(key){
+    var box = document.querySelector('.chart-inputs[data-chart="'+key+'"]');
+    if(!box) return;
+    box.closest('.chart-box').addEventListener('input', function(){ renderChart(key); });
+  });
+}
+
+window.addEventListener('load',function(){
+  renderChart('weight');
+  renderChart('muscle');
+  setupChartInputs();
+});
+
+// ====================================================================
+// 💾💾💾 저장 시스템 (localStorage 자동저장 + JSON 백업/복원)
+// ====================================================================
+var STORAGE_PREFIX = 'zerocoach_resignFile_';
+var LAST_MEMBER_KEY = 'zerocoach_resignFile_lastMember';
+var autoSaveTimer = null;
+var SAVE_DEBOUNCE = 1500;       // 1.5초 멈춤 후 저장
+var TOAST_DURATION = 1500;
+
+function showToast(msg){
+  var t = document.getElementById('saveToast');
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._hideTimer);
+  t._hideTimer = setTimeout(function(){ t.classList.remove('show'); }, TOAST_DURATION);
+}
+
+function getCurrentMember(){
+  var v = (document.getElementById('memberInput').value || '').trim();
+  return v || '미입력회원';
+}
+
+// -------------------- 데이터 수집 (페이지 → JSON) --------------------
+function gatherSnapshot(includeImages){
+  // includeImages=true면 사진까지 모두 base64로 포함 (JSON 백업용)
+  // includeImages=false면 사진 src는 생략 (자동저장용 — 용량 초과 방지)
+  var slides = document.querySelectorAll('.slide');
+  var slideData = [];
+
+  slides.forEach(function(slide){
+    var ed = [];
+    slide.querySelectorAll('[contenteditable="true"]').forEach(function(el){
+      ed.push({
+        html: el.innerHTML,
+        fs: el.style.fontSize || '',
+        fw: el.style.fontWeight || '',
+        fst: el.style.fontStyle || '',
+        td: el.style.textDecoration || '',
+        co: el.style.color || ''
+      });
+    });
+    var imgs = [];
+    slide.querySelectorAll('.img-slot').forEach(function(slot){
+      var im = slot.querySelector('.uploaded-img');
+      imgs.push({
+        has: slot.classList.contains('has-img'),
+        src: (includeImages && im) ? (im.src || '') : '',
+        w: slot.style.width || '',
+        h: slot.style.height || '',
+        transform: im ? im.style.transform : '',
+        objectFit: im ? im.style.objectFit : ''
+      });
+    });
+    // 캔버스 (drawing)
+    var canvases = [];
+    if(includeImages){
+      slide.querySelectorAll('.draw-canvas').forEach(function(cv){
+        try { canvases.push(cv.toDataURL('image/png')); } catch(e){ canvases.push(''); }
+      });
+    }
+    var inputs = [];
+    slide.querySelectorAll('input').forEach(function(inp){
+      inputs.push(inp.value);
+    });
+    slideData.push({
+      classes: slide.className,
+      baIdx: slide.dataset.baIdx || '',
+      editables: ed,
+      images: imgs,
+      canvases: canvases,
+      inputs: inputs
+    });
+  });
+
+  return {
+    version: 1,
+    member: getCurrentMember(),
+    watermark: document.getElementById('wmInput').value || '',
+    coverBgImage: (function(){
+      var cb = document.getElementById('coverBg');
+      // includeImages=true일 때만 base64 코버 배경 보존
+      if(!cb) return '';
+      var bg = cb.style.backgroundImage || '';
+      // base64면 사진 포함 모드일 때만
+      if(bg.indexOf('data:') >= 0 && !includeImages) return '';
+      return bg;
+    })(),
+    extraLogPages: document.querySelectorAll('.log-slide.log-added').length,
+    extraBAPages: document.querySelectorAll('.ba-slide.ba-added').length,
+    logSlideTotal: document.querySelectorAll('.log-slide').length, // 세션수 축소(30회 미만)도 저장
+    extraMonthCols: Math.max(0, monthHeaderCells().length - 8),
+    slides: slideData,
+    savedAt: new Date().toISOString()
+  };
+}
+
+// -------------------- 데이터 적용 (JSON → 페이지) --------------------
+function applySnapshot(snap){
+  if(!snap) return;
+  document.getElementById('wmInput').value = snap.watermark || '@zerocoach7 · RE-SIGN';
+  document.getElementById('wmInput').dispatchEvent(new Event('input'));
+
+  // 1) 추가 슬라이드 수를 먼저 맞춤
+  // 기존 추가분 모두 제거
+  document.querySelectorAll('.log-slide.log-added').forEach(function(s){ s.remove(); });
+  document.querySelectorAll('.ba-slide.ba-added').forEach(function(s){ s.remove(); });
+
+  // log-added 다시 추가
+  var addLog = Math.max(0, snap.extraLogPages || 0);
+  for(var i=0; i<addLog; i++){ addLogPage(); }
+  // 세션수를 30회 미만으로 줄인 상태였다면 그만큼 뒤에서부터 다시 제거 (기본 3페이지 + addLog 재현 후 트림)
+  var wantLogTotal = snap.logSlideTotal;
+  if(typeof wantLogTotal === 'number'){
+    var guard1 = 0;
+    while(document.querySelectorAll('.log-slide').length > wantLogTotal && guard1 < 50){
+      if(!removeLastAnyLogSlide(false)) break;
+      guard1++;
+    }
+  }
+  // ba-added 다시 추가
+  var addBA = Math.max(0, snap.extraBAPages || 0);
+  for(var j=0; j<addBA; j++){ addBAPage(); }
+  // 월 컬럼 수 복원 (기본 8 + 추가분)
+  var wantMonths = 8 + Math.max(0, snap.extraMonthCols || 0);
+  var guard2 = 0;
+  while(monthHeaderCells().length < wantMonths && guard2 < 50){ addMonthColumn(); guard2++; }
+  var guard3 = 0;
+  while(monthHeaderCells().length > wantMonths && guard3 < 50){ if(!removeMonthColumnRaw()) break; guard3++; }
+
+  // 2) 표지 배경
+  if(snap.coverBgImage){
+    var cb = document.getElementById('coverBg');
+    if(cb) cb.style.backgroundImage = snap.coverBgImage;
+  }
+
+  // 3) 각 슬라이드 데이터 복원
+  var slides = document.querySelectorAll('.slide');
+  slides.forEach(function(slide, idx){
+    var data = snap.slides[idx];
+    if(!data) return;
+    // 편집 가능 텍스트
+    var eds = slide.querySelectorAll('[contenteditable="true"]');
+    (data.editables || []).forEach(function(e, k){
+      if(eds[k]){
+        eds[k].innerHTML = e.html || '';
+        if(e.fs)  eds[k].style.fontSize = e.fs;
+        if(e.fw)  eds[k].style.fontWeight = e.fw;
+        if(e.fst) eds[k].style.fontStyle = e.fst;
+        if(e.td)  eds[k].style.textDecoration = e.td;
+        if(e.co)  eds[k].style.color = e.co;
+      }
+    });
+    // 이미지 슬롯
+    var slots = slide.querySelectorAll('.img-slot');
+    (data.images || []).forEach(function(im, k){
+      if(!slots[k]) return;
+      if(im.w) slots[k].style.width  = im.w;
+      if(im.h) slots[k].style.height = im.h;
+      if(im.has && im.src){
+        var imgEl = slots[k].querySelector('.uploaded-img');
+        if(imgEl){
+          imgEl.src = im.src;
+          slots[k].classList.add('has-img');
+          if(im.transform)  imgEl.style.transform = im.transform;
+          if(im.objectFit)  imgEl.style.objectFit = im.objectFit;
+        }
+      }
+    });
+    // 캔버스 복원
+    var cvs = slide.querySelectorAll('.draw-canvas');
+    (data.canvases || []).forEach(function(dataUrl, k){
+      if(!dataUrl || !cvs[k]) return;
+      var img = new Image();
+      img.onload = function(){
+        var ctx = cvs[k].getContext('2d');
+        ctx.clearRect(0,0,cvs[k].width,cvs[k].height);
+        ctx.drawImage(img, 0, 0, cvs[k].width, cvs[k].height);
+      };
+      img.src = dataUrl;
+    });
+    // 입력값
+    var inputs = slide.querySelectorAll('input');
+    (data.inputs || []).forEach(function(v, k){
+      if(inputs[k]){
+        inputs[k].value = v || '';
+      }
+    });
+  });
+
+  // 4) 차트 다시 그림
+  try { renderChart('weight'); renderChart('muscle'); } catch(e){}
+  renumberSlides();
+}
+
+// -------------------- localStorage 자동 저장 --------------------
+function autoSaveNow(){
+  try {
+    var snap = gatherSnapshot(false);  // 사진 제외
+    var key = STORAGE_PREFIX + snap.member;
+    var json = JSON.stringify(snap);
+    // 크기 한계 5MB 정도 (브라우저별 차이) — 텍스트만이면 보통 OK
+    localStorage.setItem(key, json);
+    localStorage.setItem(LAST_MEMBER_KEY, snap.member);
+    updateSaveStatus('💾 자동 저장됨 · ' + new Date().toLocaleTimeString());
+  } catch(e){
+    updateSaveStatus('⚠️ 자동 저장 실패 (용량 초과 가능 — ⬇️ 백업 이용)');
+    console.error(e);
+  }
+}
+
+function scheduleAutoSave(){
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(autoSaveNow, SAVE_DEBOUNCE);
+}
+
+function updateSaveStatus(msg){
+  var s = document.getElementById('saveStatus');
+  if(s) s.textContent = msg;
+}
+
+function manualSave(){
+  autoSaveNow();
+  // 사진 포함 시도 (가능하면)
+  try {
+    var snap = gatherSnapshot(true);
+    var key = STORAGE_PREFIX + snap.member;
+    localStorage.setItem(key, JSON.stringify(snap));
+    showToast('💾 저장 완료 (사진 포함)');
+  } catch(e){
+    showToast('💾 텍스트만 저장됨 (사진은 ⬇️ 백업 이용)');
+  }
+}
+
+function onMemberChanged(){
+  // 회원명 바뀌면 → 이전 회원 자동 저장 한 번 더, 새 회원 데이터 자동 불러오기
+  clearTimeout(window._memberChangeTimer);
+  window._memberChangeTimer = setTimeout(function(){
+    var newMember = getCurrentMember();
+    var key = STORAGE_PREFIX + newMember;
+    var saved = localStorage.getItem(key);
+    if(saved){
+      if(confirm('🔄 저장된 "'+newMember+'" 회원 데이터가 있습니다. 불러올까요?\n(현재 화면 내용은 이전 회원으로 저장된 상태입니다)')){
+        try {
+          applySnapshot(JSON.parse(saved));
+          showToast('📂 ' + newMember + ' 회원 데이터 불러옴');
+        } catch(e){
+          alert('데이터 복원 실패: '+e.message);
+        }
+      }
+    }
+    localStorage.setItem(LAST_MEMBER_KEY, newMember);
+  }, 800);
+}
+
+// -------------------- JSON 백업 파일 다운로드 (사진 포함) --------------------
+function downloadBackup(){
+  var snap = gatherSnapshot(true);
+  var json = JSON.stringify(snap, null, 2);
+  var blob = new Blob([json], { type:'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  var dt = new Date();
+  var stamp = dt.getFullYear() + ('0'+(dt.getMonth()+1)).slice(-2) + ('0'+dt.getDate()).slice(-2);
+  a.download = '재등록_'+snap.member+'_'+stamp+'.json';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 200);
+  showToast('⬇️ 백업 파일 다운로드 시작');
+}
+
+// -------------------- JSON 백업 파일 업로드 --------------------
+function uploadBackup(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    try {
+      var snap = JSON.parse(ev.target.result);
+      if(!snap || !snap.slides){
+        alert('올바른 백업 파일이 아닙니다.');
+        return;
+      }
+      if(!confirm('"'+snap.member+'" 회원 데이터를 복원하시겠어요?\n(현재 화면 내용은 사라지지만, 저장된 다른 회원 데이터는 안전합니다)')){
+        return;
+      }
+      // 회원명 설정
+      document.getElementById('memberInput').value = snap.member || '';
+      document.querySelectorAll('.js-member').forEach(function(el){
+        el.textContent = snap.member || 'OOO';
+      });
+      applySnapshot(snap);
+      // localStorage에도 저장
+      try { localStorage.setItem(STORAGE_PREFIX + snap.member, JSON.stringify(snap)); } catch(_){}
+      localStorage.setItem(LAST_MEMBER_KEY, snap.member);
+      showToast('⬆️ ' + snap.member + ' 복원 완료');
+    } catch(err){
+      alert('파일 읽기 실패: '+err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';  // 같은 파일 재선택 가능
+}
+
+// -------------------- 회원 목록 모달 --------------------
+function openMemberList(){
+  var body = document.getElementById('memberListBody');
+  body.innerHTML = '';
+  var keys = [];
+  for(var i=0; i<localStorage.length; i++){
+    var k = localStorage.key(i);
+    if(k && k.indexOf(STORAGE_PREFIX) === 0 && k !== LAST_MEMBER_KEY){
+      keys.push(k);
+    }
+  }
+  if(keys.length === 0){
+    body.innerHTML = '<div style="text-align:center;padding:30px;color:#888;">저장된 회원이 없습니다.<br>회원명 입력 후 ✏️ 작성하시면 자동 저장됩니다.</div>';
+  } else {
+    keys.sort();
+    keys.forEach(function(k){
+      var name = k.replace(STORAGE_PREFIX, '');
+      var savedAt = '';
+      try {
+        var d = JSON.parse(localStorage.getItem(k));
+        if(d && d.savedAt){
+          var dt = new Date(d.savedAt);
+          savedAt = dt.toLocaleString();
+        }
+      } catch(_){}
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border:1px solid #d9e2ea;border-radius:10px;margin-bottom:10px;background:#f9fbfc;';
+      row.innerHTML =
+        '<div>'+
+          '<div style="font-size:17px;font-weight:900;color:#0a5f4c;">👤 '+name+'</div>'+
+          '<div style="font-size:12px;color:#888;margin-top:3px;">마지막 저장 : '+savedAt+'</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px;">'+
+          '<button class="btn-load-mem" data-name="'+name+'" style="background:#6DD4B0;color:#0a2558;border:none;padding:8px 14px;border-radius:6px;font-weight:900;font-size:13px;cursor:pointer;">📂 불러오기</button>'+
+          '<button class="btn-del-mem"  data-name="'+name+'" style="background:#c0392b;color:#fff;border:none;padding:8px 14px;border-radius:6px;font-weight:900;font-size:13px;cursor:pointer;">🗑️ 삭제</button>'+
+        '</div>';
+      body.appendChild(row);
+    });
+  }
+  body.onclick = function(e){
+    var loadBtn = e.target.closest('.btn-load-mem');
+    var delBtn  = e.target.closest('.btn-del-mem');
+    if(loadBtn){
+      var nm = loadBtn.dataset.name;
+      try {
+        // 현재 작업 한 번 저장
+        autoSaveNow();
+        var snap = JSON.parse(localStorage.getItem(STORAGE_PREFIX + nm));
+        document.getElementById('memberInput').value = nm;
+        document.querySelectorAll('.js-member').forEach(function(el){ el.textContent = nm; });
+        applySnapshot(snap);
+        localStorage.setItem(LAST_MEMBER_KEY, nm);
+        document.getElementById('memberModal').style.display = 'none';
+        showToast('📂 ' + nm + ' 회원 데이터 불러옴');
+      } catch(err){
+        alert('불러오기 실패: '+err.message);
+      }
+    }
+    if(delBtn){
+      var nm2 = delBtn.dataset.name;
+      if(confirm('정말로 "'+nm2+'" 회원 데이터를 이 컴퓨터에서 영구 삭제하시겠어요?\n(되돌릴 수 없습니다. 백업 파일이 있다면 안전합니다)')){
+        localStorage.removeItem(STORAGE_PREFIX + nm2);
+        openMemberList();  // 새로고침
+        showToast('🗑️ ' + nm2 + ' 삭제됨');
+      }
+    }
+  };
+  document.getElementById('memberModal').style.display = 'flex';
+}
+
+// -------------------- 자동 저장 트리거 (input/blur/change) --------------------
+(function setupAutoSaveListeners(){
+  document.addEventListener('input', function(e){
+    // 툴바 자체 입력은 별도 처리, 그 외 슬라이드 안 input/contenteditable에서 자동저장
+    if(e.target.closest('.toolbar')) return;
+    if(e.target.closest('.text-toolbar')) return;
+    if(e.target.closest('#memberModal')) return;
+    scheduleAutoSave();
+  });
+  document.addEventListener('focusout', function(e){
+    if(e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true'){
+      scheduleAutoSave();
+    }
+  });
+  // 워터마크 변경도 저장
+  var wm = document.getElementById('wmInput');
+  if(wm) wm.addEventListener('input', scheduleAutoSave);
+})();
+
+// -------------------- 페이지 떠나기 직전 한 번 더 저장 --------------------
+window.addEventListener('beforeunload', function(){
+  try { autoSaveNow(); } catch(e){}
+});
+
+// -------------------- 페이지 로드시 마지막 작업한 회원 자동 복원 --------------------
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var lastMember = localStorage.getItem(LAST_MEMBER_KEY);
+    if(!lastMember) return;
+    var saved = localStorage.getItem(STORAGE_PREFIX + lastMember);
+    if(!saved) return;
+    try {
+      var snap = JSON.parse(saved);
+      // 마지막 회원이 "미입력회원"이면 안내만, 데이터는 자동 복원하지 않음
+      if(snap.member === '미입력회원'){
+        updateSaveStatus('💡 마지막 작업한 익명 데이터가 있습니다. 회원명 입력 후 👥 목록에서 불러오세요.');
+        return;
+      }
+      // 자동 복원할지 물어봄
+      if(confirm('🔄 마지막 작업하신 "'+lastMember+'" 회원 데이터를 이어서 보시겠어요?\n\n[저장 시각 : '+new Date(snap.savedAt).toLocaleString()+']')){
+        document.getElementById('memberInput').value = lastMember;
+        document.querySelectorAll('.js-member').forEach(function(el){ el.textContent = lastMember; });
+        applySnapshot(snap);
+        showToast('🔄 ' + lastMember + ' 작업 이어서 시작');
+      }
+    } catch(e){ console.error(e); }
+  }, 500);
+});
+</script>
+</body>
+</html>
