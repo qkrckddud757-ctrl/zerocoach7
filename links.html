@@ -81,7 +81,7 @@ body{
 @keyframes shineSweep{
   0%{left:-60%;} 55%,100%{left:150%;}
 }
-.link-ebook::before,.link-template::before,.link-bundle::before{
+.link-claude::before,.link-ebook::before,.link-template::before,.link-bundle::before{
   content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;
   background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,0.25) 50%,transparent 100%);
   transform:skewX(-20deg);animation:shineSweep 3s infinite;
@@ -95,12 +95,25 @@ body{
     radial-gradient(circle at 20% 0%,rgba(94,234,212,0.32),transparent 55%),
     radial-gradient(circle at 85% 100%,rgba(56,189,248,0.30),transparent 55%),
     linear-gradient(135deg,#06322f 0%,#0d5b56 45%,#0f766e 100%);
-  border:1px solid rgba(94,234,212,0.45);
-  box-shadow:0 8px 26px rgba(13,91,86,0.40);
+  border:2px solid rgba(94,234,212,0.6);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 10px 30px rgba(13,91,86,0.5),0 0 48px rgba(94,234,212,0.35);
+  animation:claudePulse 2.8s ease-in-out infinite;
+}
+@keyframes claudePulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 10px 30px rgba(13,91,86,0.5),0 0 48px rgba(94,234,212,0.35);}
+  50%{box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset,0 14px 40px rgba(13,91,86,0.72),0 0 72px rgba(94,234,212,0.6);}
+}
+.link-claude::after{
+  content:'🔥 NEW · AI 수익화';
+  position:absolute;top:-1px;left:16px;
+  background:linear-gradient(135deg,#5eead4,#38bdf8);
+  color:#06322f;font-size:10.5px;font-weight:900;
+  padding:4px 14px;border-radius:0 0 10px 10px;letter-spacing:1.2px;
+  box-shadow:0 4px 12px rgba(94,234,212,0.5);z-index:3;
 }
 .link-claude .title,.link-claude .desc{color:#fff;}
 .link-claude .cta{color:#5eead4;}
-.link-claude:hover{transform:translateY(-3px);border-color:#5eead4;}
+.link-claude:hover{transform:translateY(-4px);border-color:#5eead4;}
 
 /* 준비중 카드 */
 .link-soon{
@@ -313,7 +326,7 @@ body{
 
   <!-- 실적 -->
   <div class="stats">
-    <div class="stat"><b>434건+</b><span>누적 거래</span></div>
+    <div class="stat"><b>434건+</b><span>거래 완료</span></div>
     <div class="stat"><b>4.88★</b><span>평점</span></div>
     <div class="stat"><b>500명+</b><span>증명 후기</span></div>
   </div>
@@ -322,41 +335,20 @@ body{
   <p class="section-lbl">AI 수익화</p>
 
   <!-- 1. 클로드코드 전자책 -->
-  <a class="link link-claude" href="https://zerocoach.co.kr/shop_view/?idx=83" target="_blank">
+  <a class="link link-claude" href="https://zerocoach.co.kr/shop_view?idx=83" target="_blank">
     <div class="title">🤖 클로드코드 완전정복 전자책</div>
     <div class="desc">코딩 몰라도 AI로 만들고 파는 법 · 실전 따라하기 A–Z</div>
     <span class="cta">바로가기 →</span>
   </a>
 
-  <!-- 2. 오프라인 강의 (준비중) -->
-  <div class="link link-soon">
-    <div class="title">🎓 AI 수익화 오프라인 원데이 클래스</div>
-    <div class="desc">직접 만들어 가는 소수정예 실습 워크숍</div>
-    <span class="cta soon-cta">신청 오픈 예정 · 곧 공개</span>
-  </div>
-
   <!-- ═════ 트레이너 매출 ═════ -->
   <p class="section-lbl">트레이너 매출</p>
 
   <!-- 3. 트레이너 매출 전자책 -->
-  <a class="link link-ebook" href="https://zerocoach.co.kr/shop_view/?idx=80" target="_blank">
+  <a class="link link-ebook" href="https://zerocoach.co.kr/shop_view?idx=80" target="_blank">
     <div class="title">📘 월 1000만 매출 자동화 시스템 전자책</div>
     <div class="desc">신규 OT · 소개 · 워크인 · 재등록 · OT 만들기 설계서</div>
     <span class="cta">바로가기 →</span>
-  </a>
-
-  <!-- 4. 템플릿 -->
-  <a class="link link-template" href="https://zerocoach.co.kr/shop_view/?idx=81" target="_blank">
-    <div class="title">🔧 트레이너 도구 템플릿 풀세트</div>
-    <div class="desc">세일즈북 · 회원관리 · 교정 VOD 5편</div>
-    <span class="cta">바로가기 →</span>
-  </a>
-
-  <!-- 5. 번들세트 -->
-  <a class="link link-bundle" href="https://zerocoach.co.kr/shop_view/?idx=82" target="_blank">
-    <div class="title">🎁 전자책 + 템플릿 풀세트</div>
-    <div class="desc">시스템 + 도구 올인원 패키지</div>
-    <span class="cta">최대할인 바로가기 →</span>
   </a>
 
   <!-- ═════ 짐웨어 ═════ -->
