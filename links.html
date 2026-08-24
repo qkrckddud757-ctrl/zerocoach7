@@ -87,7 +87,33 @@ body{
   transform:skewX(-20deg);animation:shineSweep 3s infinite;
   pointer-events:none;z-index:2;
 }
-.link-ebook,.link-template,.link-bundle{padding-top:28px;}
+.link-ebook,.link-template,.link-bundle,.link-claude{padding-top:28px;}
+
+/* 클로드코드 카드 — 딥틸/그린 (AI) */
+.link-claude{
+  background:
+    radial-gradient(circle at 20% 0%,rgba(94,234,212,0.32),transparent 55%),
+    radial-gradient(circle at 85% 100%,rgba(56,189,248,0.30),transparent 55%),
+    linear-gradient(135deg,#06322f 0%,#0d5b56 45%,#0f766e 100%);
+  border:1px solid rgba(94,234,212,0.45);
+  box-shadow:0 8px 26px rgba(13,91,86,0.40);
+}
+.link-claude .title,.link-claude .desc{color:#fff;}
+.link-claude .cta{color:#5eead4;}
+.link-claude:hover{transform:translateY(-3px);border-color:#5eead4;}
+
+/* 준비중 카드 */
+.link-soon{
+  display:block;border-radius:14px;padding:18px 22px 18px;margin-bottom:12px;
+  background:rgba(255,255,255,0.045);
+  border:1px dashed rgba(174,221,255,0.38);
+}
+.link-soon .title{font-size:17px;font-weight:900;color:#dbe9ff;margin-bottom:4px;letter-spacing:-0.3px;}
+.link-soon .desc{font-size:13px;line-height:1.5;color:#93a7c9;margin-bottom:12px;}
+.link-soon .soon-cta{
+  display:inline-block;font-size:12px;font-weight:800;color:#0a1328;
+  background:#AEDDFF;border-radius:20px;padding:5px 12px;letter-spacing:-0.2px;
+}
 
 /* 전자책 카드 — 블루 (시스템/지식) */
 .link-ebook{
@@ -282,7 +308,7 @@ body{
     <div class="avatar">ZC</div>
     <h1>제로코치</h1>
     <p class="handle">@zerocoach7</p>
-    <p>수백 명 트레이너의 월급을 바꿔준 <b>매출 자동화 시스템</b></p>
+    <p>트레이너 <b>매출 자동화</b> · <b>AI 수익화</b><br>필요한 걸 아래에서 선택하세요</p>
   </div>
 
   <!-- 실적 -->
@@ -292,42 +318,59 @@ body{
     <div class="stat"><b>500명+</b><span>증명 후기</span></div>
   </div>
 
-  <!-- ═════ 짐웨어 섹션 ═════ -->
+  <!-- ═════ AI 수익화 ═════ -->
+  <p class="section-lbl">AI 수익화</p>
+
+  <!-- 1. 클로드코드 전자책 -->
+  <a class="link link-claude" href="https://zerocoach.co.kr/shop_view/?idx=83" target="_blank">
+    <div class="title">🤖 클로드코드 완전정복 전자책</div>
+    <div class="desc">코딩 몰라도 AI로 만들고 파는 법 · 실전 따라하기 A–Z</div>
+    <span class="cta">바로가기 →</span>
+  </a>
+
+  <!-- 2. 오프라인 강의 (준비중) -->
+  <div class="link link-soon">
+    <div class="title">🎓 AI 수익화 오프라인 원데이 클래스</div>
+    <div class="desc">직접 만들어 가는 소수정예 실습 워크숍</div>
+    <span class="cta soon-cta">신청 오픈 예정 · 곧 공개</span>
+  </div>
+
+  <!-- ═════ 트레이너 매출 ═════ -->
+  <p class="section-lbl">트레이너 매출</p>
+
+  <!-- 3. 트레이너 매출 전자책 -->
+  <a class="link link-ebook" href="https://zerocoach.co.kr/shop_view/?idx=80" target="_blank">
+    <div class="title">📘 월 1000만 매출 자동화 시스템 전자책</div>
+    <div class="desc">신규 OT · 소개 · 워크인 · 재등록 · OT 만들기 설계서</div>
+    <span class="cta">바로가기 →</span>
+  </a>
+
+  <!-- 4. 템플릿 -->
+  <a class="link link-template" href="https://zerocoach.co.kr/shop_view/?idx=81" target="_blank">
+    <div class="title">🔧 트레이너 도구 템플릿 풀세트</div>
+    <div class="desc">세일즈북 · 회원관리 · 교정 VOD 5편</div>
+    <span class="cta">바로가기 →</span>
+  </a>
+
+  <!-- 5. 번들세트 -->
+  <a class="link link-bundle" href="https://zerocoach.co.kr/shop_view/?idx=82" target="_blank">
+    <div class="title">🎁 전자책 + 템플릿 풀세트</div>
+    <div class="desc">시스템 + 도구 올인원 패키지</div>
+    <span class="cta">최대할인 바로가기 →</span>
+  </a>
+
+  <!-- ═════ 짐웨어 ═════ -->
   <p class="section-lbl">PREMIUM GYMWEAR</p>
 
-  <!-- 스피어핏 -->
+  <!-- 6. 스피어핏 -->
   <a class="link-spearfit-hero" href="https://spearfit.co.kr/" target="_blank">
     <div class="sf-logo"><img src="img/spearfit_logo.jpg" alt="SPEAR FIT"></div>
     <div class="sf-info">
       <div class="sf-brand">SPEAR FIT</div>
       <div class="sf-title">핏에 예민한 운동인들의 선택</div>
       <div class="sf-desc">스피어핏 짐웨어 · 한계를 뚫는 창</div>
-      <span class="sf-cta">사이트 둘러보기 →</span>
+      <span class="sf-cta">쇼핑몰 바로가기 →</span>
     </div>
-  </a>
-
-  <!-- ═════ 상품 섹션 ═════ -->
-  <p class="section-lbl">TRAINER SALES PRODUCTS</p>
-
-  <!-- 1. 전자책 -->
-  <a class="link link-ebook" href="https://zerocoach.co.kr/shop_view/?idx=80" target="_blank">
-    <div class="title">📘 월 1000만 매출 자동화 시스템 전자책</div>
-    <div class="desc">OT전환 · 재등록 · 소개유도 · SNS유입 설계서</div>
-    <span class="cta">바로가기 →</span>
-  </a>
-
-  <!-- 2. 템플릿 -->
-  <a class="link link-template" href="https://zerocoach.co.kr/shop_view/?idx=81" target="_blank">
-    <div class="title">🔧 억대연봉 트레이너들의 도구 템플릿 풀세트</div>
-    <div class="desc">세일즈북 · 회원관리 · 교정 VOD 5편 · AI 프롬프트</div>
-    <span class="cta">바로가기 →</span>
-  </a>
-
-  <!-- 3. 번들세트 -->
-  <a class="link link-bundle" href="https://zerocoach.co.kr/shop_view/?idx=82" target="_blank">
-    <div class="title">🎁 전자책 + 템플릿 풀세트</div>
-    <div class="desc">시스템 + 도구 한번에 올인원 패키지</div>
-    <span class="cta">최대할인 바로가기 →</span>
   </a>
 
   <!-- ═════ SNS ═════ -->
@@ -342,8 +385,8 @@ body{
 
   <!-- 하단 -->
   <div class="footer">
-    <p>제로코치 세일즈랩 | 대표 박창영</p>
-    <p>@zerocoach7 · 스포짐 서교점</p>
+    <p>제로코치 세일즈랩</p>
+    <p>@zerocoach7 · SPOGYM 서교점</p>
   </div>
 </div>
 
