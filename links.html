@@ -115,6 +115,40 @@ body{
 .link-claude .cta{color:#ffb37a;}
 .link-claude:hover{transform:translateY(-4px);border-color:#ff9a4a;}
 
+/* 오프라인 원데이 클래스 카드 — 민트 (현장) */
+.link-onsite{
+  padding-top:28px;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(53,224,200,0.30),transparent 55%),
+    radial-gradient(circle at 88% 100%,rgba(0,140,255,0.26),transparent 55%),
+    linear-gradient(135deg,#04211f 0%,#0b4b46 45%,#0e6f63 100%);
+  border:2px solid rgba(53,224,200,0.62);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 10px 30px rgba(6,66,60,0.55),0 0 46px rgba(53,224,200,0.30);
+  animation:onsitePulse 2.8s ease-in-out infinite;
+}
+@keyframes onsitePulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 10px 30px rgba(6,66,60,0.55),0 0 46px rgba(53,224,200,0.30);}
+  50%{box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset,0 14px 40px rgba(6,66,60,0.75),0 0 70px rgba(53,224,200,0.55);}
+}
+.link-onsite::before{
+  content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;
+  background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,0.25) 50%,transparent 100%);
+  transform:skewX(-20deg);animation:shineSweep 3s infinite;
+  pointer-events:none;z-index:2;
+}
+.link-onsite::after{
+  content:'🙋 3기 모집중 · 오프라인';
+  position:absolute;top:-1px;left:16px;
+  background:linear-gradient(135deg,#35e0c8,#00a3ff);
+  color:#04211f;font-size:10.5px;font-weight:900;
+  padding:4px 14px;border-radius:0 0 10px 10px;letter-spacing:1.2px;
+  box-shadow:0 4px 12px rgba(53,224,200,0.5);z-index:3;
+}
+.link-onsite .title,.link-onsite .desc{color:#fff;}
+.link-onsite .desc{color:#bdf3ea;}
+.link-onsite .cta{color:#6ff0dc;}
+.link-onsite:hover{transform:translateY(-4px);border-color:#35e0c8;}
+
 /* 준비중 카드 */
 .link-soon{
   display:block;border-radius:14px;padding:18px 22px 18px;margin-bottom:12px;
@@ -327,7 +361,14 @@ body{
   <!-- ═════ AI 수익화 ═════ -->
   <p class="section-lbl">AI 수익화</p>
 
-  <!-- 0. 오프라인 원데이 클래스 (1·2기 모두 마감) -->
+  <!-- 0. 오프라인 원데이 클래스 3기 (모집중) -->
+  <a class="link link-onsite" href="oneday3.html" target="_blank">
+    <div class="title">🙋 AI 실전 활용 원데이 클래스 3기</div>
+    <div class="desc">10/3(토) 오후 2시 · 서울 가산 · 4시간<br>보고만 가는 게 아니라 <b>결과물 하나 완성해서</b> 나갑니다</div>
+    <span class="cta">신청하러 가기 →</span>
+  </a>
+
+  <!-- 0-1. 지난 기수 (2기 마감) -->
   <a class="link" href="oneday2.html" target="_blank" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)">
     <div class="title" style="color:#9aa4b2">[오프라인 2기] AI 실전 활용 원데이 클래스 <span style="display:inline-block;background:#4a5160;color:#d7dbe2;font-size:12px;font-weight:800;padding:2px 9px;border-radius:20px;margin-left:6px;vertical-align:middle">마감</span></div>
     <div class="desc" style="color:#7f8794">9/19(토) 서울 가산 · 모집이 마감되었습니다</div>
