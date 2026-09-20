@@ -38,6 +38,16 @@ h1 .o,h2 .o{color:var(--o);}
 .win .bar .u{flex:1;margin-left:10px;height:19px;border-radius:100px;background:#0f1a2b;}
 .win img{width:100%;display:block;height:auto;}
 
+/* 후기 영상 */
+.vid{margin-top:38px;border-radius:18px;overflow:hidden;border:1.5px solid var(--line);
+  background:#000;box-shadow:0 22px 60px rgba(0,0,0,.55);}
+.vid video{width:100%;display:block;}
+/* 후기 이미지 */
+.revs{display:flex;flex-direction:column;gap:16px;margin-top:36px;}
+.rv{border-radius:16px;overflow:hidden;border:1.5px solid var(--line);background:#12151d;
+  box-shadow:0 18px 44px rgba(0,0,0,.5);}
+.rv img{width:100%;display:block;}
+
 /* 폰 프레임 */
 .phone{margin:38px auto 0;width:262px;border-radius:28px;overflow:hidden;border:7px solid #1b2434;background:#000;box-shadow:0 22px 60px rgba(0,0,0,.6);}
 .phone img{width:100%;display:block;}
@@ -223,7 +233,7 @@ footer{padding:56px 0 40px;text-align:center;color:#5f6b80;font-size:14px;line-h
   <div class="wrap">
     <div class="eyebrow">🔥 이게 다릅니다</div>
     <h2>강의만 하는<br>사람 말고</h2>
-    <div class="sub"><b>지금도 현장에서 일하면서</b> 직접 만들어 쓰는 것들</div>
+    <div class="sub">현직 트레이너로 일하며 부업하는 제가<br><b>100% 실전용</b>으로 알려드립니다</div>
     <div class="works">
       <div class="work"><img loading="lazy" decoding="async" src="img/oneday/w_report.jpg" alt="매출 시각화 자료"></div>
       <div class="work"><img loading="lazy" decoding="async" src="img/oneday/w_card.jpg" alt="모집용 카드뉴스"></div>
@@ -254,6 +264,40 @@ footer{padding:56px 0 40px;text-align:center;color:#5f6b80;font-size:14px;line-h
       </div>
     </div>
     <div class="cap">본인 일에 제일 필요한 것으로 골라서</div>
+  </div>
+</section>
+
+<!-- 후기 영상 -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">🎬 1기 현장</div>
+    <h2>4시간 뒤,<br><span class="o">이렇게</span> 나갔습니다</h2>
+    <div class="vid">
+      <video src="vid/review2gi.mp4" poster="img/oneday/vposter.jpg" controls playsinline preload="none"></video>
+    </div>
+    <div class="cap">클로드코드 처음 써보신 분이 상세페이지·광고영상 만들고 가셨습니다</div>
+  </div>
+</section>
+
+<!-- 후기 -->
+<section class="dk">
+  <div class="wrap">
+    <div class="eyebrow">💬 다녀가신 분들</div>
+    <h2>수업 끝나고<br><span class="o">남겨주신 말</span></h2>
+    <div class="revs">
+      <div class="rv"><img loading="lazy" decoding="async" src="img/oneday/review1_b.jpg" alt="수강생 후기"></div>
+      <div class="rv"><img loading="lazy" decoding="async" src="img/oneday/review2_b.jpg" alt="수강생 후기"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 옆에서 해결 -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">🙌 정원을 줄인 이유</div>
+    <h2>막히면 옆에서<br><span class="o">직접</span> 해결해드립니다</h2>
+    <div class="shot"><img loading="lazy" decoding="async" src="img/oneday/help_side_b.jpg" alt="옆에서 직접 봐주는 모습"></div>
+    <div class="cap">화면 같이 보면서 손으로 짚어드립니다</div>
   </div>
 </section>
 
@@ -352,6 +396,16 @@ footer{padding:56px 0 40px;text-align:center;color:#5f6b80;font-size:14px;line-h
       <div class="r"><span class="k">🎒 준비물</span><span class="v">노트북 + 충전기</span></div>
       <div class="r"><span class="k">⚠️ 필수</span><span class="v">클로드코드 PRO 요금제 이상<br>(없으시면 가입 방법 안내드려요)</span></div>
     </div>
+  </div>
+</section>
+
+<!-- 수익화는 여러분이 -->
+<section class="dk">
+  <div class="wrap">
+    <div class="eyebrow">🎯 솔직하게</div>
+    <h2>수익화는 <span class="o">여러분이</span><br>하기 달렸습니다</h2>
+    <div class="shot"><img loading="lazy" decoding="async" src="img/oneday/sales_scroll.jpg" alt="실제 판매 내역"></div>
+    <div class="sub center">저는 그 <b>시작점</b>을 만들어드립니다</div>
   </div>
 </section>
 
