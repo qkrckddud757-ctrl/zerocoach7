@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>트레이너를 위한 AI 실전 활용 원데이 클래스</title>
+<meta property="og:title" content="트레이너를 위한 AI 실전 활용 원데이 클래스">
+<meta property="og:description" content="회원관리 · 매출관리 · 인스타를 AI로 직접 만듭니다 · 10/3(토) 서울 가산">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard','Malgun Gothic',-apple-system,sans-serif;word-break:keep-all;}
+:root{--bg:#0b0d12;--card:#161a24;--line:#2a3040;--ink:#eef1f6;--ink2:#c3cfe2;--ink3:#8791a3;--o:#ff8a52;--o2:#ff7a3d;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-size:17px;line-height:1.7;padding-bottom:96px;}
+.wrap{max-width:680px;margin:0 auto;padding:0 22px;}
+
+section{padding:120px 0;}
+section.dk{background:radial-gradient(120% 60% at 50% 0%,#1b2540 0%,#10131b 60%,#0b0d12 100%);}
+
+.eyebrow{display:inline-block;background:rgba(255,122,61,.15);border:1.5px solid rgba(255,122,61,.5);
+  color:#ffb389;font-size:14px;font-weight:800;padding:9px 20px;border-radius:100px;margin-bottom:24px;}
+h1{font-size:clamp(34px,8.4vw,50px);font-weight:900;line-height:1.2;letter-spacing:-.03em;}
+h2{font-size:clamp(29px,7vw,42px);font-weight:900;line-height:1.26;letter-spacing:-.028em;}
+h1 .o,h2 .o{color:var(--o);}
+.cap{font-size:16px;color:var(--ink3);font-weight:700;margin-top:20px;text-align:center;}
+.sub{font-size:clamp(17px,3.6vw,19px);color:var(--ink2);line-height:1.7;font-weight:500;margin-top:20px;}
+.sub b{color:#fff;font-weight:800;}
+.center{text-align:center;}
+
+/* 공통 이미지 프레임 */
+.shot{margin-top:38px;border-radius:18px;overflow:hidden;border:1.5px solid var(--line);
+  background:#12151d;box-shadow:0 22px 60px rgba(0,0,0,.55);}
+.shot img{width:100%;display:block;}
+
+/* 브라우저 창 */
+.win{margin-top:38px;border-radius:16px;overflow:hidden;border:1.5px solid #2a3a55;background:#0c1422;box-shadow:0 22px 60px rgba(0,0,0,.6);}
+.win .bar{height:40px;background:#182437;display:flex;align-items:center;gap:8px;padding:0 15px;}
+.win .bar i{width:10px;height:10px;border-radius:50%;background:#3b4a63;display:block;}
+.win .bar .u{flex:1;margin-left:10px;height:19px;border-radius:100px;background:#0f1a2b;}
+.win img{width:100%;display:block;height:auto;}
+
+/* 후기 영상 */
+.vid{margin-top:38px;border-radius:18px;overflow:hidden;border:1.5px solid var(--line);
+  background:#000;box-shadow:0 22px 60px rgba(0,0,0,.55);}
+.vid video{width:100%;display:block;}
+/* 후기 이미지 */
+.revs{display:flex;flex-direction:column;gap:16px;margin-top:36px;}
+.rv{border-radius:16px;overflow:hidden;border:1.5px solid var(--line);background:#12151d;
+  box-shadow:0 18px 44px rgba(0,0,0,.5);}
+.rv img{width:100%;display:block;}
+/* 교재 후기(텍스트) */
+.trv{display:flex;flex-direction:column;gap:14px;margin-top:34px;}
+.trv .t{background:#12151d;border:1.5px solid var(--line);border-radius:16px;padding:22px 20px;}
+.trv .t .st{font-size:14px;color:#ffc107;letter-spacing:3px;}
+.trv .t .b{margin-top:11px;font-size:16.5px;line-height:1.75;color:var(--ink2);font-weight:500;}
+.trv .t .b em{font-style:normal;color:#fff;font-weight:800;}
+.trv .t .n{margin-top:15px;font-size:13.5px;color:var(--ink3);font-weight:700;}
+.note{margin-top:20px;font-size:13.5px;color:var(--ink3);font-weight:600;text-align:center;line-height:1.65;}
+
+/* 폰 프레임 */
+.phone{margin:38px auto 0;width:262px;border-radius:28px;overflow:hidden;border:7px solid #1b2434;background:#000;box-shadow:0 22px 60px rgba(0,0,0,.6);}
+.phone img{width:100%;display:block;}
+
+/* 그리드 결과물 */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:34px;}
+.grid3 .c{aspect-ratio:4/5;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#12151d;}
+.grid3 .c img{width:100%;height:100%;object-fit:contain;display:block;}
+
+/* 고통 */
+.pains{display:flex;flex-direction:column;gap:13px;margin-top:36px;}
+.pain{display:flex;gap:15px;align-items:center;background:var(--card);border:1.5px solid var(--line);
+  border-left:5px solid #e0685e;border-radius:15px;padding:20px 22px;}
+.pain .i{font-size:28px;flex:0 0 auto;}
+.pain .t{font-size:17px;font-weight:700;color:#e7ecf5;line-height:1.5;}
+
+/* 터미널 에러 */
+.term{margin-top:38px;border-radius:14px;overflow:hidden;border:1.5px solid #3a2a2a;background:#0a0f16;box-shadow:0 22px 60px rgba(0,0,0,.6);}
+.term .bar{background:#182437;padding:11px 16px;display:flex;align-items:center;gap:8px;}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:#3b4a63;display:block;}
+.term .body{padding:22px 20px;font-family:Consolas,'D2Coding',monospace;font-size:15px;line-height:1.85;color:#cfe6dd;}
+.term .body .p{color:#5eead4;} .term .body .e{color:#ff8a72;font-weight:700;} .term .body .g{color:#5f6b80;}
+
+/* 만드는 것 카드(이미지+라벨) */
+.works{display:flex;flex-direction:column;gap:22px;margin-top:36px;}
+.work{background:#12151d;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;}
+.work img{width:100%;display:block;height:auto;}
+.work .lb{padding:18px 22px;}
+.work .lb .t{font-size:19px;font-weight:900;color:#fff;}
+.work .lb .d{font-size:15px;color:var(--ink3);font-weight:600;margin-top:5px;}
+
+/* 실습 3개 */
+.mk{margin-top:34px;display:flex;flex-direction:column;gap:26px;}
+.mk .m{background:#12151d;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;}
+.mk .m .hd{display:flex;align-items:center;gap:14px;padding:20px 22px;border-bottom:1px solid var(--line);}
+.mk .m .hd .n{width:40px;height:40px;border-radius:11px;background:linear-gradient(140deg,#ff9a5a,#ff7a3d);
+  color:#1a0f07;font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.mk .m .hd .t{font-size:19px;font-weight:900;color:#fff;}
+.mk .m img{width:100%;display:block;height:auto;}
+
+/* 문 두 개 */
+.doors{display:flex;gap:13px;margin-top:36px;}
+.doors .d{flex:1;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:30px 16px;text-align:center;}
+.doors .d.hi{border-color:var(--o2);background:linear-gradient(160deg,#2a2016,#161a24);}
+.doors .d .ic{font-size:38px;display:block;margin-bottom:13px;}
+.doors .d .t{font-size:18px;font-weight:900;color:#fff;line-height:1.4;}
+
+/* 대상 */
+.list{display:flex;flex-direction:column;gap:12px;margin-top:34px;}
+.li{display:flex;gap:15px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:15px;padding:19px 22px;}
+.li .e{font-size:27px;flex:0 0 auto;}
+.li .t{font-size:17.5px;font-weight:800;color:#fff;}
+.li .t small{display:block;font-size:14.5px;color:var(--ink3);font-weight:600;margin-top:3px;}
+
+.info{display:flex;flex-direction:column;gap:11px;margin-top:34px;}
+.info .r{display:flex;gap:13px;background:var(--card);border:1.5px solid var(--line);border-radius:13px;padding:17px 20px;font-size:16.5px;}
+.info .r .k{color:#ffb389;font-weight:800;flex:0 0 auto;width:84px;white-space:nowrap;}
+.info .r .v{font-weight:600;color:#e7ecf5;}
+
+.pricebox{background:linear-gradient(160deg,#212a40,#141822);border:2px solid var(--o2);border-radius:24px;padding:44px 26px;text-align:center;margin-top:34px;}
+.pricebox .now{font-size:clamp(48px,12vw,70px);font-weight:900;color:#fff;line-height:1;}
+.pricebox .gift{margin-top:24px;background:rgba(255,122,61,.13);border:1.5px solid rgba(255,122,61,.4);border-radius:15px;padding:19px 16px;}
+.pricebox .gift .l{font-size:14px;font-weight:800;color:#ffb389;}
+.pricebox .gift .v{font-size:19px;font-weight:900;color:#fff;margin-top:6px;}
+
+.honest{background:#12211a;border:1.5px solid #2c5540;border-radius:17px;padding:25px 22px;margin-top:30px;text-align:left;}
+.honest .h{font-size:17px;font-weight:900;color:#7fe0a8;margin-bottom:9px;}
+.honest .b{font-size:16px;color:#c9e6d5;line-height:1.65;font-weight:500;}
+.honest .b b{color:#fff;}
+
+/* 목차 */
+  .curri{display:flex;flex-direction:column;gap:12px;margin-top:34px;}
+  .cr{display:flex;gap:15px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:15px;padding:19px 21px;box-shadow:0 3px 14px rgba(0,0,0,.04);}
+  .dk .cr{background:#141c2b;border-color:#26344d;}
+  .cr .no{flex:0 0 auto;width:31px;height:31px;border-radius:10px;background:var(--o);color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .cr .tx{flex:1;}
+  .cr .tt{font-size:17.5px;font-weight:800;line-height:1.45;letter-spacing:-.02em;color:#12151d;}
+  .dk .cr .tt{color:#eef2f8;}
+  .cr .dd{font-size:14.5px;color:var(--ink3);margin-top:6px;line-height:1.6;font-weight:500;}
+  .cr .tt em{font-style:normal;color:var(--o);}
+  /* 수익 증명 */
+  .proof{margin-top:32px;display:flex;flex-direction:column;gap:16px;}
+  .pf{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.05);}
+  .dk .pf{background:#111926;border-color:#26344d;}
+  .pf img{width:100%;display:block;}
+  .pf .lb{padding:11px 16px;font-size:13.5px;font-weight:700;color:var(--ink3);border-top:1px solid var(--line);text-align:center;}
+  .dk .pf .lb{border-color:#26344d;color:#93a2bb;}
+  .pf .lb b{color:var(--o);}
+  .stamp{display:inline-block;background:var(--o);color:#fff;font-size:13px;font-weight:800;padding:7px 15px;border-radius:100px;margin-top:22px;}
+  /* 고민 Q&A */
+  .worry{display:flex;flex-direction:column;gap:14px;margin-top:32px;}
+  .wq{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 3px 14px rgba(0,0,0,.04);}
+  .dk .wq{background:#141c2b;border-color:#26344d;}
+  .wq .qq{font-size:16.5px;font-weight:800;color:#12151d;line-height:1.5;letter-spacing:-.02em;}
+  .dk .wq .qq{color:#eef2f8;}
+  .wq .qq::before{content:"“";color:var(--o);font-size:22px;font-weight:900;margin-right:2px;}
+  .wq .qq::after{content:"”";color:var(--o);font-size:22px;font-weight:900;}
+  .wq .aa{font-size:15.5px;color:var(--ink2);line-height:1.75;margin-top:11px;font-weight:500;}
+  .wq .aa b{color:#12151d;}
+  .dk .wq .aa b{color:#fff;}
+  .wq .aa .hl{color:var(--o);font-weight:800;}
+  .faq{display:flex;flex-direction:column;gap:11px;margin-top:32px;}
+.qa{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:21px 22px;}
+.qa .q{font-size:17px;font-weight:800;color:#fff;}
+.qa .a{font-size:15.5px;color:#aeb6c4;margin-top:7px;line-height:1.6;}
+
+.cta{display:block;text-align:center;background:linear-gradient(135deg,#ff9a5a,#ff7a3d);color:#12141c;
+  font-size:20px;font-weight:900;padding:22px 26px;border-radius:15px;text-decoration:none;
+  box-shadow:0 14px 40px rgba(255,122,61,.35);margin-top:34px;}
+.cta small{display:block;font-size:13.5px;font-weight:700;opacity:.75;margin-top:5px;}
+
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(11,13,18,.94);border-top:1px solid var(--line);backdrop-filter:blur(10px);padding:12px 0 14px;}
+.bar .in{max-width:680px;margin:0 auto;padding:0 18px;display:flex;align-items:center;gap:12px;}
+.bar .txt{flex:1;min-width:0;}
+.bar .txt .d{font-size:12.5px;color:#ffb389;font-weight:800;}
+.bar .txt .p{font-size:17px;color:#fff;font-weight:900;margin-top:2px;}
+.bar a{flex:0 0 auto;background:linear-gradient(135deg,#ff9a5a,#ff7a3d);color:#12141c;font-size:15.5px;font-weight:900;padding:14px 22px;border-radius:12px;text-decoration:none;}
+
+.hero{background:radial-gradient(120% 70% at 50% -10%,#26304a 0%,#12151d 62%,#0b0d12 100%);padding:88px 0 76px;border-bottom:1px solid var(--line);}
+.hero .name{font-size:13px;font-weight:800;letter-spacing:.16em;color:#9db4d8;margin-bottom:16px;}
+.hero .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;}
+.hero .facts span{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:100px;padding:8px 15px;font-size:14px;color:#dbe3ef;font-weight:600;}
+.hero .facts b{color:#fff;}
+
+footer{padding:56px 0 40px;text-align:center;color:#5f6b80;font-size:14px;line-height:1.7;}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="name">ZEROCOACH · 트레이너 전용</div>
+    <h1>회원관리 · 매출관리 · 인스타를<br><span class="o">AI로 직접</span> 만듭니다</h1>
+    <div class="facts">
+      <span>📅 <b>10/3(토) 오후 2시</b></span>
+      <span>📍 서울 가산</span>
+      <span>🏋️ 현직 트레이너가 직접</span>
+    </div>
+    <div class="grid3">
+      <div class="c"><img src="img/oneday/d_sheet.jpg" alt="회원관리 시트"></div>
+      <div class="c"><img src="img/oneday/w_report.jpg" alt="매출 리포트"></div>
+      <div class="c"><img src="img/oneday/w_card.jpg" alt="인스타 카드뉴스"></div>
+    </div>
+    <div class="cap">회원관리 시트 · 매출 리포트 · 인스타 콘텐츠<br>이 중 하나를 손에 들고 나갑니다</div>
+    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdt2K_MsikaOIIxiXc7slR_l923V3pEctkIQ6G274R1Sl82Pw/viewform" target="_blank">신청하고 자리 잡기<small>10월 3일 하루만 열어요</small></a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">🙋 혹시 이런 적</div>
+    <h2>수업은 잘하는데<br><span class="o">나머지가 다 일</span>이죠</h2>
+    <div class="pains">
+      <div class="pain"><span class="i">📋</span><span class="t">회원 명단·재등록일을 아직 손으로 적고 있다</span></div>
+      <div class="pain"><span class="i">😵</span><span class="t">만료 임박 회원을 놓쳐서 재등록을 그냥 날린 적 있다</span></div>
+      <div class="pain"><span class="i">🧮</span><span class="t">월말마다 매출 정리하느라 새벽까지 엑셀을 붙잡는다</span></div>
+      <div class="pain"><span class="i">📱</span><span class="t">인스타는 해야 하는 건 아는데 뭘 올릴지 모르겠다</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="dk">
+  <div class="wrap">
+    <h2>AI 쓰라는 말은<br><span class="o">많이 들었는데</span></h2>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body">
+        <div class="p">$ claude</div>
+        <div class="g">…</div>
+        <div class="e">Error: command not found</div>
+        <div class="g">└ 여기서 그냥 닫음</div>
+      </div>
+    </div>
+    <div class="sub">영상 강의에서는 에러가 안 납니다. <b>내 노트북에서만 납니다.</b><br>의지 문제가 아니라, 그 자리에서 물어볼 사람이 없는 겁니다.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">🔥 이게 다릅니다</div>
+    <h2>강사가 아니라<br><span class="o">같은 일 하는 사람</span></h2>
+    <div class="sub">저도 지금 현장에서 회원 수업하는 트레이너입니다.<br>제 회원관리도, 제 매출 정리도, 제 인스타도 <b>전부 이 방식으로 돌리고 있습니다.</b><br>강의용으로 만든 예제가 아니라 <b>제가 매일 쓰는 걸 그대로</b> 보여드립니다.</div>
+    <div class="shot"><img loading="lazy" decoding="async" src="img/oneday/w_report.jpg" alt="매출 리포트"></div>
+    <div class="cap">숫자를 넣으면 보고서가 나옵니다</div>
+  </div>
+</section>
+
+<section class="dk">
+  <div class="wrap">
+    <div class="eyebrow">✍️ 직접 만들어 가는 것</div>
+    <h2>이 셋 중 하나는<br><span class="o">완성해서</span> 갑니다</h2>
+    <div class="mk">
+      <div class="m">
+        <div class="hd"><span class="n">1</span><span class="t">회원관리 시트</span></div>
+        <img loading="lazy" decoding="async" src="img/oneday/d_sheet.jpg" alt="회원관리 시트">
+      </div>
+      <div class="m">
+        <div class="hd"><span class="n">2</span><span class="t">월 매출 리포트</span></div>
+        <img loading="lazy" decoding="async" src="img/oneday/w_report.jpg" alt="매출 리포트">
+      </div>
+      <div class="m">
+        <div class="hd"><span class="n">3</span><span class="t">인스타 카드뉴스</span></div>
+        <img loading="lazy" decoding="async" src="img/oneday/w_card.jpg" alt="인스타 카드뉴스">
+      </div>
+    </div>
+    <div class="cap">본인 일에 제일 필요한 것으로 골라서</div>
+    <div class="honest">
+      <div class="h">실습은 예시 데이터로 합니다</div>
+      <div class="b">회원 성함·연락처 같은 <b>실제 개인정보는 가져오지 않으셔도 됩니다.</b> 예시 데이터로 만들고, 완성한 틀만 가져가서 나중에 본인 자료를 넣으시면 됩니다.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">🎬 지난 기수 현장</div>
+    <h2>그날,<br><span class="o">이렇게</span> 나갔습니다</h2>
+    <div class="vid">
+      <video src="vid/review2gi.mp4" poster="img/oneday/vposter.jpg" controls playsinline preload="none"></video>
+    </div>
+    <div class="cap">클로드코드 처음 써보신 분이 상세페이지·광고영상 만들고 가셨습니다</div>
+  </div>
+</section>
+
+<section class="dk">
+  <div class="wrap">
+    <div class="eyebrow">💬 다녀가신 분들</div>
+    <h2>수업 끝나고<br><span class="o">남겨주신 말</span></h2>
+    <div class="revs">
+      <div class="rv"><img loading="lazy" decoding="async" src="img/oneday/review1_b.jpg" alt="참가자 후기"></div>
+      <div class="rv"><img loading="lazy" decoding="async" src="img/oneday/review2_b.jpg" alt="참가자 후기"></div>
+    </div>
+    <div class="note">지난 기수 참가자분들이 직접 올려주신 후기입니다<br>얼굴은 본인 요청으로 가렸습니다</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">🙌 오프라인으로만 하는 이유</div>
+    <h2>막히면 옆에서<br><span class="o">직접</span> 해결해드립니다</h2>
+    <div class="shot"><img loading="lazy" decoding="async" src="img/oneday/help_side_b.jpg" alt="옆에서 직접 봐주는 모습"></div>
+    <div class="cap">화면 같이 보면서 손으로 짚어드립니다</div>
+  </div>
+</section>
+
+<section class="dk">
+  <div class="wrap">
+    <div class="eyebrow">🗂️ 당일 커리큘럼</div>
+    <h2>이걸 배워서<br><span class="o">이걸</span> 만들어 갑니다</h2>
+    <div class="curri">
+      <div class="cr"><span class="no">1</span><div class="tx"><div class="tt">세팅부터 같이 — <em>설치에서 안 막히게</em></div><div class="dd">노트북 열고 처음부터 같이 깝니다. 윈도우·맥 상관없습니다</div></div></div>
+      <div class="cr"><span class="no">2</span><div class="tx"><div class="tt">회원관리 — <em>만료 임박이 저절로 뜨게</em></div><div class="dd">회원 명단에서 재등록 임박·이탈 위험을 자동으로 표시하는 시트</div></div></div>
+      <div class="cr"><span class="no">3</span><div class="tx"><div class="tt">매출관리 — <em>월말 정리를 10분으로</em></div><div class="dd">수업료·재등록·소개 건을 넣으면 월 매출 리포트가 나오게</div></div></div>
+      <div class="cr"><span class="no">4</span><div class="tx"><div class="tt">퍼스널 브랜딩 — <em>인스타에 올릴 것</em></div><div class="dd">내 전문 분야로 카드뉴스·릴스 대본 뽑는 법. 매번 뭘 올릴지 고민 안 하게</div></div></div>
+      <div class="cr"><span class="no">5</span><div class="tx"><div class="tt">집에서 혼자 이어가는 법</div><div class="dd">오늘 쓴 프롬프트와 체크리스트를 그대로 드립니다</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">📊 말로만 하는 게 아닙니다</div>
+    <h2>저는 제가 한 것만<br><span class="o">가르칩니다</span></h2>
+    <div class="proof">
+      <div class="pf"><img loading="lazy" decoding="async" src="img/oneday/sales_scroll.jpg" alt="실제 판매 내역"><div class="lb">AI로 만든 자료를 실제로 <b>팔아본 기록</b>입니다</div></div>
+    </div>
+    <div class="sub">트레이너가 AI를 쓰면 회원관리만 편해지는 게 아니라,<br><b>내 노하우를 팔 수 있는 형태로 만들 수 있습니다.</b> 그 방법도 같이 봅니다.</div>
+  </div>
+</section>
+
+<section class="dk">
+  <div class="wrap">
+    <div class="eyebrow">🤔 신청 전에 이게 걸리시죠</div>
+    <h2>솔직하게<br><span class="o">답해드립니다</span></h2>
+    <div class="worry">
+      <div class="wq"><div class="qq">컴퓨터를 잘 모르는데 괜찮을까요</div><div class="aa"><b>저도 코딩 지식이 0입니다.</b> 지금도요. 전부 <span class="hl">한글로 말해서 시키는 방식</span>이라 타자만 치시면 됩니다.</div></div>
+      <div class="wq"><div class="qq">회원 개인정보를 다뤄도 되나요</div><div class="aa"><b>실제 회원 정보는 안 가져오셔도 됩니다.</b> 예시 데이터로 틀을 만들고, 완성한 틀만 가져가서 나중에 본인 자료를 넣으시면 됩니다.</div></div>
+      <div class="wq"><div class="qq">따라가다 막히면 어떡하죠</div><div class="aa"><b>그러라고 오프라인으로 엽니다.</b> 영상 강의는 에러가 안 나는데 내 노트북에선 납니다. <span class="hl">그 자리에서 같이 봅니다.</span></div></div>
+      <div class="wq"><div class="qq">수업 시간 빼고 가야 하는데</div><div class="aa">토요일 오후입니다. 그날 <b>결과물 하나는 완성해서</b> 가십니다. 빈손으로 돌아가는 시간은 아닙니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">👥 이런 분께</div>
+    <h2>트레이너·필라테스<br><span class="o">현장에 계신 분</span></h2>
+    <div class="list">
+      <div class="li"><span class="e">📋</span><span class="t">회원관리를 아직 수기로 하는 분<small>엑셀도 손으로 채우고 있다면</small></span></div>
+      <div class="li"><span class="e">💸</span><span class="t">매출 정리에 시간을 뺏기는 분<small>월말마다 같은 작업을 반복한다면</small></span></div>
+      <div class="li"><span class="e">📱</span><span class="t">인스타를 시작하거나 다시 살리고 싶은 분<small>뭘 올릴지부터 막힌다면</small></span></div>
+      <div class="li"><span class="e">🚀</span><span class="t">내 노하우를 팔아보고 싶은 분<small>전자책·템플릿 같은 형태로</small></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="dk">
+  <div class="wrap">
+    <div class="eyebrow">📋 진행 정보</div>
+    <h2>이렇게 진행돼요</h2>
+    <div class="info">
+      <div class="r"><span class="k">🗓️ 일정</span><span class="v">10월 3일(토) 오후 2시 시작</span></div>
+      <div class="r"><span class="k">📍 장소</span><span class="v">서울 금천구 벚꽃로 244<br>벽산디지털밸리 5차 1414호 (가산디지털단지역)</span></div>
+      <div class="r"><span class="k">👥 대상</span><span class="v">트레이너 · 필라테스 강사 등 현장 종사자</span></div>
+      <div class="r"><span class="k">💻 준비물</span><span class="v">노트북 + 충전기 (필수)<br>클로드코드 PRO 요금제 이상 (없으면 가입 방법 안내드려요)</span></div>
+      <div class="r"><span class="k">🎁 후기</span><span class="v">현장에서 후기 작성 시 클로드코드 전자책 증정</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">💰 참가비</div>
+    <div class="pricebox">
+      <div class="now">10만원</div>
+      <div class="gift"><div class="l">🎁 현장에서 후기 작성 시</div><div class="v">클로드코드 전자책 증정</div></div>
+    </div>
+    <div class="honest">
+      <div class="h">솔직하게 말씀드립니다</div>
+      <div class="b">국비지원 온라인 강의가 이것보다 훨씬 쌉니다. 그건 맞습니다.<br><br>대신 온라인은 <b>다 듣고도 만든 게 0개</b>로 끝나는 일이 많습니다. 여기서는 막히는 자리마다 옆에서 직접 잡아드리고, 그날 <b>결과물 하나를 완성해서</b> 나가십니다.</div>
+    </div>
+    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdt2K_MsikaOIIxiXc7slR_l923V3pEctkIQ6G274R1Sl82Pw/viewform" target="_blank">신청서 작성하기<small>10월 3일 하루만 열어요</small></a>
+  </div>
+</section>
+
+<section class="dk">
+  <div class="wrap">
+    <h2>자주 묻는 질문</h2>
+    <div class="faq">
+      <div class="qa"><div class="q">완전 초보인데 따라갈 수 있나요?</div><div class="a">네. 설치부터 같이 합니다. 막히면 바로 손 드시면 됩니다.</div></div>
+      <div class="qa"><div class="q">코딩 몰라도 되나요?</div><div class="a">전혀 필요 없습니다. 전부 한글로 말해서 시키는 방식입니다.</div></div>
+      <div class="qa"><div class="q">클로드코드 PRO 꼭 있어야 하나요?</div><div class="a">네, 없으면 실습 도중에 막힙니다. 신청하시면 가입 방법 안내드릴게요.</div></div>
+      <div class="qa"><div class="q">노트북이 없는데요</div><div class="a">빌려서라도 꼭 가져오셔야 합니다. 직접 만드는 게 전부라서요.</div></div>
+      <div class="qa"><div class="q">회원 명단을 가져가야 하나요?</div><div class="a">아니요. 예시 데이터로 실습합니다. 실제 회원 정보는 안 가져오셔도 됩니다.</div></div>
+      <div class="qa"><div class="q">차 가져가도 되나요?</div><div class="a">주차 가능합니다. 건물 주차장은 유료입니다.</div></div>
+      <div class="qa"><div class="q">그날 못 끝내면요?</div><div class="a">집에서 이어갈 수 있게 프롬프트와 체크리스트를 드립니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap center">
+    <h2>수업은 잘하시잖아요.<br><span class="o">나머지를</span> 줄입시다</h2>
+    <div class="grid3">
+      <div class="c"><img loading="lazy" decoding="async" src="img/oneday/d_sheet.jpg" alt=""></div>
+      <div class="c"><img loading="lazy" decoding="async" src="img/oneday/w_report.jpg" alt=""></div>
+      <div class="c"><img loading="lazy" decoding="async" src="img/oneday/w_card.jpg" alt=""></div>
+    </div>
+    <div class="cap">10월 3일, 하루입니다</div>
+    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdt2K_MsikaOIIxiXc7slR_l923V3pEctkIQ6G274R1Sl82Pw/viewform" target="_blank">신청서 작성하기</a>
+  </div>
+</section>
+
+<footer>
+  제로코치 · @zerocoach7<br>문의는 인스타 DM으로 편하게 주세요
+</footer>
+
+<div class="bar">
+  <div class="in">
+    <div class="txt"><div class="d">10/3(토) · 서울 가산 · 트레이너 전용</div><div class="p">10만원</div></div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdt2K_MsikaOIIxiXc7slR_l923V3pEctkIQ6G274R1Sl82Pw/viewform" target="_blank">신청하기</a>
+  </div>
+</div>
+
+</body>
+</html>
