@@ -81,13 +81,13 @@ body{
 @keyframes shineSweep{
   0%{left:-60%;} 55%,100%{left:150%;}
 }
-.link-claude::before,.link-ebook::before,.link-template::before,.link-bundle::before{
+.link-claude::before,.link-sidejob::before,.link-ebook::before,.link-template::before,.link-bundle::before{
   content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;
   background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,0.25) 50%,transparent 100%);
   transform:skewX(-20deg);animation:shineSweep 3s infinite;
   pointer-events:none;z-index:2;
 }
-.link-ebook,.link-template,.link-bundle,.link-claude{padding-top:28px;}
+.link-ebook,.link-template,.link-bundle,.link-claude,.link-sidejob{padding-top:28px;}
 
 /* 클로드코드 카드 — 오렌지 (AI 수익화) */
 .link-claude{
@@ -114,6 +114,32 @@ body{
 .link-claude .title,.link-claude .desc{color:#fff;}
 .link-claude .cta{color:#ffb37a;}
 .link-claude:hover{transform:translateY(-4px);border-color:#ff9a4a;}
+
+/* 전자책 부업 카드 — 네이비·골드 (자면서도 팔린다) */
+.link-sidejob{
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,214,102,0.30),transparent 55%),
+    radial-gradient(circle at 85% 100%,rgba(92,120,255,0.30),transparent 55%),
+    linear-gradient(135deg,#0d1437 0%,#1a2a6c 50%,#2b3fa0 100%);
+  border:2px solid rgba(255,214,102,0.7);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 10px 30px rgba(13,20,55,0.6),0 0 48px rgba(255,214,102,0.3);
+  animation:sidejobPulse 2.8s ease-in-out infinite;
+}
+@keyframes sidejobPulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 10px 30px rgba(13,20,55,0.6),0 0 48px rgba(255,214,102,0.3);}
+  50%{box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset,0 14px 40px rgba(13,20,55,0.8),0 0 72px rgba(255,214,102,0.55);}
+}
+.link-sidejob::after{
+  content:'🔥 NEW · 얼리버드 59% OFF';
+  position:absolute;top:-1px;left:16px;
+  background:linear-gradient(135deg,#ffd666,#ff9a4a);
+  color:#1a1206;font-size:10.5px;font-weight:900;
+  padding:4px 14px;border-radius:0 0 10px 10px;letter-spacing:1.2px;
+  box-shadow:0 4px 12px rgba(255,214,102,0.5);z-index:3;
+}
+.link-sidejob .title,.link-sidejob .desc{color:#fff;}
+.link-sidejob .cta{color:#ffe08a;}
+.link-sidejob:hover{transform:translateY(-4px);border-color:#ffd666;}
 
 /* 오프라인 원데이 클래스 카드 — 민트 (현장) */
 .link-onsite{
@@ -360,6 +386,13 @@ body{
 
   <!-- ═════ AI 수익화 ═════ -->
   <p class="section-lbl">AI 수익화</p>
+
+  <!-- 0-0. 전자책 부업 자동화 가이드 (판매중) -->
+  <a class="link link-sidejob" href="https://zerocoach.co.kr/shop_view?idx=85" target="_blank">
+    <div class="title">🌙 자면서도 팔리는 전자책 부업 자동화 가이드</div>
+    <div class="desc">퇴근 후 두 시간 · AI로 전자책 만들어 자동으로 파는 법</div>
+    <span class="cta">바로가기 →</span>
+  </a>
 
   <!-- 0. 오프라인 원데이 클래스 3기 (모집중) -->
   <a class="link" href="oneday_trainer.html" target="_blank" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)">
