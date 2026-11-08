@@ -42,11 +42,26 @@ for (const rel of [...new Set(used)]) {
   }
 }
 
+// 인스타 프로필 링크가 http:// 로 저장돼 있어도 https 로 넘긴다
+fs.mkdirSync(path.join(BUILD, 'src'), { recursive: true });
+fs.writeFileSync(path.join(BUILD, 'src', 'index.js'), `export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    if (url.protocol === 'http:') {
+      url.protocol = 'https:';
+      return Response.redirect(url.toString(), 301);
+    }
+    return env.ASSETS.fetch(request);
+  },
+};
+`, 'utf8');
+
 fs.writeFileSync(path.join(BUILD, 'wrangler.jsonc'), JSON.stringify({
   name: 'zerocoach-links',
+  main: 'src/index.js',
   compatibility_date: '2026-11-04',
   observability: { enabled: true },
-  assets: { directory: './public' },
+  assets: { directory: './public', binding: 'ASSETS', run_worker_first: true },
   routes: [{ pattern: 'lab.goodcoach.kr', custom_domain: true }],
 }, null, 2), 'utf8');
 
