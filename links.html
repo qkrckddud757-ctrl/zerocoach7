@@ -304,6 +304,44 @@ body{
   box-shadow:0 4px 14px rgba(255,216,94,0.65);
 }
 
+/* 굿코치 앱 카드 — 네이비·오렌지 (트레이너 앱) */
+.link-goodcoach{
+  padding-top:28px;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,138,60,0.32),transparent 55%),
+    radial-gradient(circle at 88% 100%,rgba(92,150,255,0.26),transparent 55%),
+    linear-gradient(135deg,#0c1527 0%,#1B2B4B 45%,#27406e 100%);
+  border:2px solid rgba(255,138,60,0.62);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 10px 30px rgba(12,21,39,0.6),0 0 46px rgba(255,138,60,0.28);
+  animation:gcPulse 2.8s ease-in-out infinite;
+  animation-delay:0.45s;
+}
+@keyframes gcPulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 10px 30px rgba(12,21,39,0.6),0 0 46px rgba(255,138,60,0.28);}
+  50%{box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset,0 14px 40px rgba(12,21,39,0.8),0 0 70px rgba(255,138,60,0.55);}
+}
+.link-goodcoach::before{
+  content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;
+  background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,0.25) 50%,transparent 100%);
+  transform:skewX(-20deg);animation:shineSweep 3s infinite;
+  pointer-events:none;z-index:2;
+}
+.link-goodcoach::after{
+  content:'📱 APP · 무료로 써 보기';
+  position:absolute;top:-1px;left:16px;
+  background:linear-gradient(135deg,#FF8A3C,#FF5E2C);
+  color:#241003;font-size:10.5px;font-weight:900;
+  padding:4px 14px;border-radius:0 0 10px 10px;letter-spacing:1.2px;
+  box-shadow:0 4px 12px rgba(255,138,60,0.5);z-index:3;
+}
+.link-goodcoach .title,.link-goodcoach .desc{color:#fff;}
+.link-goodcoach .desc{color:#cfe0ff;}
+.link-goodcoach .cta{
+  background:linear-gradient(135deg,#FF8A3C,#FFA862);color:#241003;
+  box-shadow:0 4px 14px rgba(255,138,60,0.5);
+}
+.link-goodcoach:hover{transform:translateY(-4px);border-color:#FF8A3C;}
+
 /* 기본 링크 */
 .link-basic{
   background:#161b22;border:1px solid #30363d;color:#fff;
@@ -384,30 +422,37 @@ body{
     <p>트레이너 <b>매출 자동화</b> · <b>AI 수익화</b><br>필요한 걸 아래에서 선택하세요</p>
   </div>
 
-  <!-- ═════ AI 수익화 ═════ -->
-  <p class="section-lbl">AI 수익화</p>
+  <!-- ═════ 트레이너 매출 ═════ -->
+  <p class="section-lbl">트레이너 매출</p>
 
-  <!-- 0-0. 전자책 부업 자동화 가이드 (판매중) -->
-  <a class="link link-sidejob" href="https://zerocoach.co.kr/shop_view?idx=85" target="_blank">
-    <div class="title">🌙 자면서도 팔리는 전자책 부업 자동화 가이드</div>
-    <div class="desc">퇴근 후 두 시간 · AI로 전자책 만들어 자동으로 파는 법</div>
+  <!-- 1. 트레이너 매출 전자책 -->
+  <a class="link link-ebook" href="https://zerocoach.co.kr/shop_view?idx=80" target="_blank">
+    <div class="title">📘 월 1000만 매출 자동화 시스템 전자책</div>
+    <div class="desc">신규 OT · 소개 · 워크인 · 재등록 · OT 만들기 설계서</div>
     <span class="cta">바로가기 →</span>
   </a>
 
-  <!-- 1. 클로드코드 전자책 -->
+  <!-- 2. 굿코치 앱 -->
+  <a class="link link-goodcoach" href="https://goodcoach.kr" target="_blank">
+    <div class="title">📊 굿코치 — 트레이너 수업기록 앱</div>
+    <div class="desc">수업 끝나고 10초, 그날 기록이 회원 카톡으로 · 재등록 멘트도 숫자로 준비</div>
+    <span class="cta">무료로 써 보기 →</span>
+  </a>
+
+  <!-- ═════ AI 수익화 ═════ -->
+  <p class="section-lbl">AI 수익화</p>
+
+  <!-- 3. 클로드코드 전자책 -->
   <a class="link link-claude" href="https://zerocoach.co.kr/shop_view?idx=83" target="_blank">
     <div class="title">🤖 클로드코드 완전정복 전자책</div>
     <div class="desc">코딩 몰라도 AI로 만들고 파는 법 · 실전 따라하기 A–Z</div>
     <span class="cta">바로가기 →</span>
   </a>
 
-  <!-- ═════ 트레이너 매출 ═════ -->
-  <p class="section-lbl">트레이너 매출</p>
-
-  <!-- 3. 트레이너 매출 전자책 -->
-  <a class="link link-ebook" href="https://zerocoach.co.kr/shop_view?idx=80" target="_blank">
-    <div class="title">📘 월 1000만 매출 자동화 시스템 전자책</div>
-    <div class="desc">신규 OT · 소개 · 워크인 · 재등록 · OT 만들기 설계서</div>
+  <!-- 4. 전자책 부업 자동화 가이드 -->
+  <a class="link link-sidejob" href="https://zerocoach.co.kr/shop_view?idx=85" target="_blank">
+    <div class="title">💻 노트북 하나로 수익 자동화, 디지털 노마드</div>
+    <div class="desc">퇴근 후 두 시간 · AI로 전자책 만들어 자동으로 파는 법</div>
     <span class="cta">바로가기 →</span>
   </a>
 
